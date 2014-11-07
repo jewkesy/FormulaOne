@@ -1,0 +1,15 @@
+<table class="table drivertable">
+  <tr>
+    <td><h3>Driver Standings</h3></td>
+    <td></td>
+  </tr>
+  <tr ng-repeat="driver in driverStandings">
+    <td>{{driver.position}}</td>
+    <td>{{driver.givenName}} {{driver.familyName}}</td>
+    <td>{{driver.points}}</td>
+    <td>{{driver.wins}}</td>
+    <td>
+      <a class="btn btn-primary" ui-sref="viewDriver({id:driver.Driver.driverId})">View</a>
+    </td>
+  </tr>
+</table>
