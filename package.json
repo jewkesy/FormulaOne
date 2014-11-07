@@ -1,0 +1,19 @@
+{
+  "name": "FormulaOne",
+  "version": "1.0.0",
+  "description": "Web application rendering stats from Formula 1",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jewkesy/FormulaOne.git"
+  },
+  "author": "Daryl Jewkes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jewkesy/FormulaOne/issues"
+  },
+  "homepage": "https://github.com/jewkesy/FormulaOne"
+}
