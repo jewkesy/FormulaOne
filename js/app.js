@@ -6,10 +6,10 @@ angular.module('formulaOneApp').config(function($stateProvider) {
     templateUrl: 'partials/drivers.html',
     controller: 'DriverListController'
   }).state('viewDriver', { //state for showing single driver
-    url: '/driver/:id.json',
+    url: '/driver.json/:id',
     templateUrl: 'partials/driver-view.html',
     controller: 'DriverViewController'
   });
 }).run(function($state) {
-  $state.go('drivers'); //make a transition to movies state when app starts
+  $state.go('drivers'); //make a transition to drivers state when app starts
 });
