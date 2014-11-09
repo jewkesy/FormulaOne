@@ -1,6 +1,6 @@
 <table class="table drivertable">
   <tr>
-    <td><h3>Details for {{driver.Driver.givenName}} {{driver.familyName}}</h3></td>
+    <td><h3>Details for {{driver.givenName}} {{driver.familyName}}</h3></td>
     <td></td>
   </tr>
   <tr>
@@ -17,7 +17,7 @@
   </tr>
   <tr>
     <td>Wiki Link</td>
-    <td>{{driver.url}}</td>
+    <td><a target="_blank" ng-href="{{driver.url}}"/>{{driver.url}}</td>
   </tr>
 </table>
 <div>
