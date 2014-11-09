@@ -3,5 +3,6 @@ FormulaOne
 
 Web application rendering stats from Formula 1
 
+http://jewkesy.github.io/FormulaOne/
 
-http://www.sitepoint.com/creating-crud-app-minutes-angulars-resource/
+Uses http://ergast.com/mrd/ as a data source

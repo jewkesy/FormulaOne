@@ -6,7 +6,7 @@ angular.module('formulaOneApp').config(function($stateProvider) {
     templateUrl: 'partials/drivers.html',
     controller: 'DriverListController'
   }).state('viewDriver', { //state for showing single driver
-    url: '/driver.json/:id',
+    url: '/driver/:id',
     templateUrl: 'partials/driver-view.html',
     controller: 'DriverViewController'
   });
