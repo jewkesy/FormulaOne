@@ -9,8 +9,7 @@ angular.module('formulaOneApp.controllers', [])
 }).controller('DriverViewController', function($scope, $stateParams, Driver) {
   $scope.data = Driver.driver.get({ id: $stateParams.id }, function(){
     $scope.loaded = true;
-    var retVal = $scope.data.MRData.DriverTable.Drivers[0]
-    console.log(retVal);
+    var retVal = $scope.data.MRData.DriverTable.Drivers[0];
     $scope.driver = retVal
   }); //Get a single driver. Issues a GET to /api/driver/:id
 });
