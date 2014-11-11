@@ -6,6 +6,7 @@
     <th>Position</th>
     <th>Name</th>
     <th>Points</th>
+    <th>Team</th>
     <th colspan="2">Wins</th>
   </tr>
   <tr ng-repeat="driver in drivers">
@@ -13,6 +14,7 @@
     <td><img src="http://jewkesy.github.io/colloquial/images/flags/{{driver.Driver.nationality}}.png" /> {{driver.Driver.givenName}} {{driver.Driver.familyName}}</td>
     <td>{{driver.points}}</td>
     <td>{{driver.wins}}</td>
+    <td><a target="_blank" ng-href="{{driver.Constructors[0].url}}"/>{{driver.Constructors[0].name}}</td>
     <td>
       <a class="btn btn-primary" ui-sref="viewDriver({id:driver.Driver.driverId})">View</a>
     </td>
