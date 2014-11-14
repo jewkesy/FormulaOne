@@ -10,6 +10,12 @@ angular.module('formulaOneApp.controllers', [])
   $scope.data = Driver.driver.get({ id: $stateParams.id, series: 'f1' }, function(){
     $scope.loaded = true;
     var retVal = $scope.data.MRData.DriverTable.Drivers[0];
+
+    var ageDifMs = Date.now() - new Date(retVal.dateOfBirth);
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+
+    retVal.Age = Math.abs(ageDate.getUTCFullYear() - 1970);
+
     $scope.driver = retVal
   }); //Get a single driver. Issues a GET to /api/driver/:id
 });
