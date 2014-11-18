@@ -1,6 +1,11 @@
 angular.module('formulaOneApp.controllers', [])
-.controller('DriverListController', function($scope, $state, $window, Driver) {
-  $scope.data = Driver.standings.get({season: 2014, series: 'f1' }, function(){
+.controller('DriverListController', function($scope, $stateParams, $window, Driver) {
+  $scope.data = Driver.standings.get({season: $stateParams.season, series: 'f1' }, function(){
+    if (!$stateParams.season) {
+      console.log('no season')
+      return;
+      }
+      console.log($stateParams.season)
     $scope.loaded = true;
     var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0].DriverStandings
     $scope.drivers = retVal
