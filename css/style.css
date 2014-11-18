@@ -6,3 +6,9 @@ body {
   font-family: 'Roboto', sans-serif,  Arial, "Helvetica Condensed", Helvetica, sans-serif;
   background-color: #F8F8F8;
 }
+
+span.divider {
+  color: #d3d;
+  padding-left: 10px;
+  padding-right: 10px;
+}
