@@ -1,6 +1,6 @@
 <table class="table drivertable">
   <tr>
-    <td colspan="5"><h3>Formula 1<span class="divider">.:.</span>2014<span class="divider">.:.</span>Driver Standings</h3></td>
+    <td colspan="5"><h3>Formula 1<span class="divider">.:.</span>{{ season }}<span class="divider">.:.</span>Driver Standings</h3></td>
   </tr>
   <tr>
     <th>Position</th>
@@ -9,7 +9,7 @@
     <th>Team</th>
     <th>Wins</th>
   </tr>
-  <tr ng-repeat="driver in drivers">
+  <tr ng-repeat="driver in drivers.DriverStandings">
     <td>{{driver.position}}</td>
     <td><img ng-src="http://jewkesy.github.io/colloquial/images/flags/{{driver.Driver.nationality}}.png" /> <a ui-sref="viewDriver({id:driver.Driver.driverId})">{{driver.Driver.givenName}} {{driver.Driver.familyName}}</a></td>
     <td>{{driver.points}}</td>

@@ -1,14 +1,11 @@
 angular.module('formulaOneApp.controllers', [])
 .controller('DriverListController', function($scope, $stateParams, $window, Driver) {
+  if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
   $scope.data = Driver.standings.get({season: $stateParams.season, series: 'f1' }, function(){
-    if (!$stateParams.season) {
-      console.log('no season')
-      return;
-      }
-      console.log($stateParams.season)
     $scope.loaded = true;
-    var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0].DriverStandings
+    var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
     $scope.drivers = retVal
+    $scope.season = $stateParams.season
   }); //fetch all drivers. Issues a GET to /api/drivers
 
 }).controller('DriverViewController', function($scope, $stateParams, Driver) {
