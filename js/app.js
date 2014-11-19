@@ -11,6 +11,5 @@ angular.module('formulaOneApp').config(function($stateProvider) {
     controller: 'DriverViewController'
   });
 }).run(function($state) {
-  var currentYear = new Date().getFullYear();
-  $state.go('drivers', {'season': currentYear}); //make a transition to drivers state when app starts
+  $state.go('drivers', {'season': $state.season}); //make a transition to drivers state when app starts
 });
