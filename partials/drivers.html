@@ -1,21 +1,15 @@
 <table class="table drivertable">
   <tr>
-    <td colspan="5"><h3>Formula 1<span class="divider">.:.</span>{{ season }}<span class="divider">.:.</span>Driver Standings</h3>
-
-
-    <bs-dropdown data-menu-type="button" select-val="season = selectedVal"
-preselected-item="season" data-dropdown-data="years"></bs-dropdown>
-
-
-    <div class="dropdown">
-      <a class="btn btn-default" data-toggle="dropdown" href="#">{{ year }} <b class="caret"></b></a>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownYear">
-      <li ng-repeat="year in years">
-        <a ng-click="$parent.season = year">{{year}}</a>
-      </li>
-    </ul>
-  </div>
-
+    <td colspan="5"><h3>Formula 1<span class="divider">.:.</span>
+      <span class="dropdown">
+        <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownYear">
+          <li ng-repeat="year in years">
+            <a ng-click="$parent.season = year">{{year}}</a>
+          </li>
+        </ul>
+      </span>
+      <span class="divider">.:.</span>Driver Standings</h3>
     </td>
   </tr>
   <tr>
