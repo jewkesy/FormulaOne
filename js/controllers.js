@@ -6,6 +6,17 @@ angular.module('formulaOneApp.controllers', [])
     var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
     $scope.drivers = retVal
     $scope.season = $stateParams.season
+
+    var startYear = 1950;
+    var endYear = new Date().getFullYear();
+    var dateRange = [];
+
+    while(startYear <= endYear) {
+        dateRange.push(startYear);
+        startYear += 1
+    }
+    $scope.year = "Select season"
+    $scope.years = dateRange;
   }); //fetch all drivers. Issues a GET to /api/drivers
 
 }).controller('DriverViewController', function($scope, $stateParams, Driver) {
