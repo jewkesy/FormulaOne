@@ -19,6 +19,20 @@ angular.module('formulaOneApp.controllers', [])
     $scope.years = dateRange;
   }); //fetch all drivers. Issues a GET to /api/drivers
 
+  //
+  // $scope.$watch(
+  //   "seasonSelection",
+  //   function( value ) {
+  //     console.log(value);
+  //     $scope.season = $scope.seasonSelection;
+  //
+  //   }
+  // );
+  //
+  // function updatePage($scope, $http) {
+  //   console.log('updating')
+  // }
+
 }).controller('DriverViewController', function($scope, $stateParams, Driver) {
   $scope.data = Driver.driver.get({ id: $stateParams.id, series: 'f1' }, function(){
     $scope.loaded = true;
