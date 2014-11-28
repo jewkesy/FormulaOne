@@ -2,18 +2,18 @@
   <tr>
     <td colspan="5"><h3>Formula 1<span class="divider">.:.</span>
       <span class="dropdown">
-        <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
+        <!-- <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
 
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownYear">
+        <ul  ng-model="seasonSelection"  class="dropdown-menu" role="menu" aria-labelledby="dropdownYear">
           <li ng-repeat="year in years">
             <a ng-click="$parent.season = year">{{year}}</a>
           </li>
-        </ul>
+        </ul> -->
 
-        <!-- <select ng-change="updatePage()" data-ng-model="seasonSelection"
+        <select ng-model="seasonSelection"
              data-ng-options="year for year in years">
              <option value="{{season}}" selected>{{season}}</option>
-       </select> -->
+       </select>
       </span>
       <span class="divider">.:.</span>Driver Standings</h3>
     </td>
