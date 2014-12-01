@@ -20,23 +20,53 @@ angular.module('formulaOneApp.controllers', [])
     $scope.years = dateRange;
   }); //fetch all drivers. Issues a GET to /api/drivers
 
-
   $scope.$watch("season", function( value ) {
       if (value >= 1950) {
         $state.go('drivers', {'season': value});
       }
-    });
+  });
 
-}).controller('DriverViewController', function($scope, $stateParams, Driver) {
+}).controller('DriverViewController', function($http, $scope, $timeout, $stateParams, Driver) {
   $scope.data = Driver.driver.get({ id: $stateParams.id, series: 'f1' }, function(){
     $scope.loaded = true;
-    var retVal = $scope.data.MRData.DriverTable.Drivers[0];
 
+    var retVal = $scope.data.MRData.DriverTable.Drivers[0];
     var ageDifMs = Date.now() - new Date(retVal.dateOfBirth);
     var ageDate = new Date(ageDifMs); // miliseconds from epoch
 
     retVal.Age = Math.abs(ageDate.getUTCFullYear() - 1970);
 
+    retVal.flagUrl = "http://jewkesy.github.io/colloquial/images/flags/" + retVal.nationality + ".png"
+
+    var wikiUrl = retVal.url.split("/");
+    wikiUrl = wikiUrl[wikiUrl.length - 1];
+
+    retVal.wikiName = wikiUrl;
+
     $scope.driver = retVal
   }); //Get a single driver. Issues a GET to /api/driver/:id
+
+  $scope.getProfilePic = function(title) {
+    if (title == undefined) return;
+
+    // return $http.jsonp("http://en.wikipedia.org/w/api.php?action=query&titles=Lewis_Hamilton&prop=pageimages&format=json&pithumbsize=100").then(function(res){
+    //   console.log('here I am')
+    // })
+    //
+    //
+    // return "http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Lewis_Hamilton_October_2014.jpg/143px-Lewis_Hamilton_October_2014.jpg"
+    // $.getJSON("http://en.wikipedia.org/w/api.php?callback=?",
+    // {
+    //     action: "query",
+    //     titles: title,
+    //     prop: "pageimages",
+    //     format: "json",
+    //     pithumbsize: "200"
+    // }, function(data) {
+    //     $.each(data.query.pages, function(i,item){
+    //       console.log(item.thumbnail.source)
+    //         return item.thumbnail.source;
+    //     });
+    // });
+  }
 });
