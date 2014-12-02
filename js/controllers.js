@@ -39,34 +39,55 @@ angular.module('formulaOneApp.controllers', [])
 
     retVal.wikiName = wikiUrl;
 
-    $scope.getProfilePic(wikiUrl).then(function (url) {
-      console.log(url)
-      retVal.imageUrl = url;
+    $scope.getProfilePic(wikiUrl).then(function (imgUrl) {
+      console.log(imgUrl)
+      // $.each(data.query.pages, function(i,item){
+      //   console.log('')
+      //   //return "http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Lewis_Hamilton_October_2014.jpg/72px-Lewis_Hamilton_October_2014.jpg"
+      //   //retVal.imageUrl = item.thumbnail.source;
+      // });
+
+     retVal.imageUrl = imgUrl;
+     //retVal.imageUrl = imgUrl.query.pages[0].thumbnail.source;
+
     });
 
     $scope.driver = retVal
   }); //Get a single driver. Issues a GET to /api/driver/:id
 
   $scope.getProfilePic = function(driverName) {
-      console.log(driverName)
-      return $http.get("http://en.wikipedia.org/w/api.php?callback=?", {
-          action: "query",
-          titles: driverName,
-          prop: "pageimages",
-          format: "json",
-          pithumbsize: "200"
-      }, function (data) {
-          // ... get the image URL from the data and return it
-          $.each(data.query.pages, function(i,item){
-              return item.thumbnail.source;
-          });
-      });
+  //  console.log(driverName)
+    var url = "http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&action=query&titles=" + driverName + "&prop=pageimages&format=json&pithumbsize=200";
+
+    return $http.jsonp(url)
+    .success(function(data){
+        $.each(data.query.pages, function(i,item){
+          //return "http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Lewis_Hamilton_October_2014.jpg/72px-Lewis_Hamilton_October_2014.jpg"
+          console.log(item.thumbnail.source)
+          return item.thumbnail.source;
+        });
+    });
+
+
+      // return $http.jsonp("http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK", {
+      //     action: "query",
+      //     titles: driverName,
+      //     prop: "pageimages",
+      //     format: "json",
+      //     pithumbsize: "200"
+      // }, function (data) {
+      //     // ... get the image URL from the data and return it
+      //     console.log(data)
+      //     $.each(data.query.pages, function(i,item){
+      //         return item.thumbnail.source;
+      //     });
+      // });
   };
 
   // $scope.getProfilePic = function(title) {
   //   if (title == undefined) return;
   //   console.log(title)
-  //   $.getJSON("http://en.wikipedia.org/w/api.php?callback=?&action=query&titles=Lewis_Hamilton&prop=pageimages&format=json&pithumbsize=100", function(data) {
+  //   $.getJSON("http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&action=query&titles=Lewis_Hamilton&prop=pageimages&format=json&pithumbsize=100", function(data) {
   //     console.log(data)
   //     return "http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Lewis_Hamilton_October_2014.jpg/72px-Lewis_Hamilton_October_2014.jpg"
   //   });
