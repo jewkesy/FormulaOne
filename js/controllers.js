@@ -5,7 +5,6 @@ angular.module('formulaOneApp.controllers', [])
   $scope.season = $stateParams.season;
   $scope.year = "Select season";
   $scope.data = Driver.standings.get({season: $stateParams.season, series: 'f1' }, function(){
-    $scope.loaded = true;
     var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
     $scope.drivers = retVal
 
@@ -26,16 +25,13 @@ angular.module('formulaOneApp.controllers', [])
       }
   });
 
-}).controller('DriverViewController', function($http, $scope, $timeout, $stateParams, Driver) {
+}).controller('DriverViewController', function($scope, $http, $timeout, $stateParams, Driver) {
   $scope.data = Driver.driver.get({ id: $stateParams.id, series: 'f1' }, function(){
-    $scope.loaded = true;
-
     var retVal = $scope.data.MRData.DriverTable.Drivers[0];
     var ageDifMs = Date.now() - new Date(retVal.dateOfBirth);
     var ageDate = new Date(ageDifMs); // miliseconds from epoch
 
     retVal.Age = Math.abs(ageDate.getUTCFullYear() - 1970);
-
     retVal.flagUrl = "http://jewkesy.github.io/colloquial/images/flags/" + retVal.nationality + ".png"
 
     var wikiUrl = retVal.url.split("/");
@@ -43,18 +39,40 @@ angular.module('formulaOneApp.controllers', [])
 
     retVal.wikiName = wikiUrl;
 
+    $scope.getProfilePic(wikiUrl).then(function (url) {
+      console.log(url)
+      retVal.imageUrl = url;
+    });
+
     $scope.driver = retVal
   }); //Get a single driver. Issues a GET to /api/driver/:id
 
-  $scope.getProfilePic = function(title) {
-    if (title == undefined) return;
+  $scope.getProfilePic = function(driverName) {
+      console.log(driverName)
+      return $http.get("http://en.wikipedia.org/w/api.php?callback=?", {
+          action: "query",
+          titles: driverName,
+          prop: "pageimages",
+          format: "json",
+          pithumbsize: "200"
+      }, function (data) {
+          // ... get the image URL from the data and return it
+          $.each(data.query.pages, function(i,item){
+              return item.thumbnail.source;
+          });
+      });
+  };
 
-    // return $http.jsonp("http://en.wikipedia.org/w/api.php?action=query&titles=Lewis_Hamilton&prop=pageimages&format=json&pithumbsize=100").then(function(res){
-    //   console.log('here I am')
-    // })
-    //
-    //
-    // return "http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Lewis_Hamilton_October_2014.jpg/143px-Lewis_Hamilton_October_2014.jpg"
+  // $scope.getProfilePic = function(title) {
+  //   if (title == undefined) return;
+  //   console.log(title)
+  //   $.getJSON("http://en.wikipedia.org/w/api.php?callback=?&action=query&titles=Lewis_Hamilton&prop=pageimages&format=json&pithumbsize=100", function(data) {
+  //     console.log(data)
+  //     return "http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Lewis_Hamilton_October_2014.jpg/72px-Lewis_Hamilton_October_2014.jpg"
+  //   });
+
+
+//    return "http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Lewis_Hamilton_October_2014.jpg/143px-Lewis_Hamilton_October_2014.jpg"
     // $.getJSON("http://en.wikipedia.org/w/api.php?callback=?",
     // {
     //     action: "query",
@@ -64,9 +82,8 @@ angular.module('formulaOneApp.controllers', [])
     //     pithumbsize: "200"
     // }, function(data) {
     //     $.each(data.query.pages, function(i,item){
-    //       console.log(item.thumbnail.source)
     //         return item.thumbnail.source;
     //     });
     // });
-  }
+//  }
 });
