@@ -26,41 +26,6 @@ angular.module('formulaOneApp.controllers', [])
   });
 
 }).controller('DriverViewController', function($scope, $http, $timeout, $stateParams, Driver) {
-
-
-
-  // function getDriver(driverId) {
-  //   console.log('getting driver ' + driverId)
-  //   return Driver.driver.get({id: driverId, series: 'f1' });
-  // }
-  // function getDriverImageUrl (driverName) {
-  //   console.log('getting driver image ' + driverName)
-  //   var url = "http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&action=query&titles=" + driverName + "&prop=pageimages&format=json&pithumbsize=200";
-  //
-  //   return $http.jsonp(url)
-  //   .success(function(data){
-  //       $.each(data.query.pages, function(i,item){
-  //         //return "http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Lewis_Hamilton_October_2014.jpg/72px-Lewis_Hamilton_October_2014.jpg"
-  //         return item.thumbnail.source;
-  //       });
-  //   });
-  // }
-  //
-  // console.log(Driver)
-  // console.log($stateParams.id)
-  // $scope.data = getDriver($stateParams.id)
-  //   .then(function (driver) {
-  //     console.log(driver)
-  //     $scope.driver = driver;
-  //   })
-    // .then(function(){
-    //   return getDriverImageUrl($scope.driver.wikiName);
-    // })
-    // .then(function (url) {
-    //   $scope.driver.imageUrl = url;
-    // });
-
-
   $scope.data = Driver.driver.get({ id: $stateParams.id, series: 'f1' }, function(){
     var retVal = $scope.data.MRData.DriverTable.Drivers[0];
     var ageDifMs = Date.now() - new Date(retVal.dateOfBirth);
@@ -74,17 +39,7 @@ angular.module('formulaOneApp.controllers', [])
 
     retVal.wikiName = wikiUrl;
 
-    $scope.getProfilePic(wikiUrl).then(function (data) {
-      // $.each(data.query.pages, function(i,item){
-      //   console.log(item)
-      //   //return "http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Lewis_Hamilton_October_2014.jpg/72px-Lewis_Hamilton_October_2014.jpg"
-      //   retVal.imageUrl = item.thumbnail.source;
-      // });
-
-     //$scope.driver.imageUrl = imgUrl;
-     //retVal.imageUrl = imgUrl.query.pages[0].thumbnail.source;
-
-    });
+    $scope.getProfilePic(wikiUrl);
 
     $scope.driver = retVal
   }); //Get a single driver. Issues a GET to /api/driver/:id
@@ -98,33 +53,8 @@ angular.module('formulaOneApp.controllers', [])
         $.each(data.query.pages, function(i,item){
           //return "http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Lewis_Hamilton_October_2014.jpg/72px-Lewis_Hamilton_October_2014.jpg"
           $scope.driver.imageUrl = item.thumbnail.source;
-          return item.thumbnail.source;
+          return;
         });
     });
   };
 });
-
-
-  // $scope.getProfilePic = function(title) {
-  //   if (title == undefined) return;
-  //   console.log(title)
-  //   $.getJSON("http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&action=query&titles=Lewis_Hamilton&prop=pageimages&format=json&pithumbsize=100", function(data) {
-  //     console.log(data)
-  //     return "http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Lewis_Hamilton_October_2014.jpg/72px-Lewis_Hamilton_October_2014.jpg"
-  //   });
-
-
-//    return "http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Lewis_Hamilton_October_2014.jpg/143px-Lewis_Hamilton_October_2014.jpg"
-    // $.getJSON("http://en.wikipedia.org/w/api.php?callback=?",
-    // {
-    //     action: "query",
-    //     titles: title,
-    //     prop: "pageimages",
-    //     format: "json",
-    //     pithumbsize: "200"
-    // }, function(data) {
-    //     $.each(data.query.pages, function(i,item){
-    //         return item.thumbnail.source;
-    //     });
-    // });
-//  }
