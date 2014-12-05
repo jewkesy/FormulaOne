@@ -7,4 +7,13 @@ angular.module('formulaOneApp.services', ['ngResource']).factory('Driver', funct
         'get': { method:'GET', cache: true, isArray:true }
       })
     };
+}).factory('Circuits', function($resource) {
+    return {
+      circuits: $resource('http://ergast.com/api/:series/:season/circuits.json', {
+        'get': { method:'GET', cache: true, isArray:true }
+      }),
+      circuit: $resource('http://ergast.com/api/:series/circuits/:id.json', {
+        'get': { method:'GET', cache: true, isArray:true }
+      })
+    };
 });
