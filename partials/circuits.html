@@ -1,0 +1,26 @@
+<table class="table circuittable">
+  <tr>
+    <td colspan="5"><h3>Formula 1<span class="divider">.:.</span>
+      <span class="dropdown">
+        <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
+        <ul ng-model="seasonSelection" class="dropdown-menu" role="menu" aria-labelledby="dropdownYear">
+          <li ng-repeat="year in years">
+            <a ng-click="$parent.season = year">{{year}}</a>
+          </li>
+        </ul>
+      </span>
+      <span class="divider">.:.</span>Circuits</h3>
+    </td>
+  </tr>
+  <tr>
+    <th>Name</th>
+    <th>Country</th>
+    <th>Link</th>
+  </tr>
+  <tr ng-repeat="circuit in circuits.Circuits">
+    <td>{{circuit.circuitName}}</td>
+    <!-- <td><img ng-src="http://jewkesy.github.io/colloquial/images/flags/{{driver.Driver.nationality}}.png" /> <a ui-sref="viewDriver({id:driver.Driver.driverId})">{{driver.Driver.givenName}} {{driver.Driver.familyName}}</a></td> -->
+    <td>{{circuit.Location.locality}}, {{circuit.Location.country}}</td>
+    <td><a target="_blank" ng-href="{{circuit.url}}"/>{{circuit.url}}</td>
+  </tr>
+</table>
