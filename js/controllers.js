@@ -1,4 +1,4 @@
-var wikiApi = "http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&format=json&action=query";
+var wikiApi = "http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&format=json&action=query&redirects";
 
 angular.module('formulaOneApp.controllers', [])
 .controller('DriverListController', function($scope, $state, $stateParams, $window, $location, Driver) {
@@ -89,7 +89,7 @@ angular.module('formulaOneApp.controllers', [])
 
   $scope.getCircuitPic = function(circuitName) {
     var url = wikiApi + "&titles=" + circuitName + "&prop=pageimages&pithumbsize=400";
-
+    console.log(url)
     return $http.jsonp(url)
     .success(function(data){
         $.each(data.query.pages, function(i,item){
