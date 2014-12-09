@@ -1,10 +1,8 @@
 angular.module('formulaOneApp.controllers', [])
-.controller('DriverListController', function($scope, $state, $stateParams, $window, Driver) {
+.controller('DriverListController', function($scope, $state, $stateParams, $window, $location, Driver) {
   if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
 
   $scope.season = $stateParams.season;
-
-
   $scope.years = getYearRange();
 
   $scope.data = Driver.standings.get({season: $stateParams.season, series: 'f1' }, function(){
@@ -17,7 +15,7 @@ angular.module('formulaOneApp.controllers', [])
         $state.go('drivers', {'season': value});
       }
   });
-
+  $location.path('/' + $stateParams.season + '/drivers');
 }).controller('DriverViewController', function($scope, $http, $timeout, $stateParams, Driver) {
   $scope.data = Driver.driver.get({ id: $stateParams.id, series: 'f1' }, function(){
     var retVal = $scope.data.MRData.DriverTable.Drivers[0];
@@ -38,19 +36,17 @@ angular.module('formulaOneApp.controllers', [])
   }); //Get a single driver. Issues a GET to /api/driver/:id
 
   $scope.getProfilePic = function(driverName) {
-  //  console.log(driverName)
     var url = "http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&action=query&titles=" + driverName + "&prop=pageimages&format=json&pithumbsize=200";
 
     return $http.jsonp(url)
     .success(function(data){
         $.each(data.query.pages, function(i,item){
-          //return "http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Lewis_Hamilton_October_2014.jpg/72px-Lewis_Hamilton_October_2014.jpg"
           $scope.driver.imageUrl = item.thumbnail.source;
           return;
         });
     });
   };
-}).controller('CircuitListController', function($scope, $state, $stateParams, $window, Circuits) {
+}).controller('CircuitListController', function($scope, $state, $stateParams, $window, $location, Circuits) {
   if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
@@ -65,6 +61,7 @@ angular.module('formulaOneApp.controllers', [])
         $state.go('circuits', {'season': value});
       }
   });
+  $location.path('/' + $stateParams.season + '/circuits');
 });
 
 function getYearRange() {
