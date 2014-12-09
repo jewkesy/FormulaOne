@@ -1,3 +1,5 @@
+var wikiApi = "http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&format=json&action=query";
+
 angular.module('formulaOneApp.controllers', [])
 .controller('DriverListController', function($scope, $state, $stateParams, $window, $location, Driver) {
   if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
@@ -16,6 +18,8 @@ angular.module('formulaOneApp.controllers', [])
       }
   });
   $location.path('/' + $stateParams.season + '/drivers');
+
+
 }).controller('DriverViewController', function($scope, $http, $timeout, $stateParams, Driver) {
   $scope.data = Driver.driver.get({ id: $stateParams.id, series: 'f1' }, function(){
     var retVal = $scope.data.MRData.DriverTable.Drivers[0];
@@ -36,7 +40,7 @@ angular.module('formulaOneApp.controllers', [])
   }); //Get a single driver. Issues a GET to /api/driver/:id
 
   $scope.getProfilePic = function(driverName) {
-    var url = "http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&action=query&titles=" + driverName + "&prop=pageimages&format=json&pithumbsize=200";
+    var url = wikiApi + "&titles=" + driverName + "&prop=pageimages&pithumbsize=200";
 
     return $http.jsonp(url)
     .success(function(data){
@@ -46,13 +50,16 @@ angular.module('formulaOneApp.controllers', [])
         });
     });
   };
-}).controller('CircuitListController', function($scope, $state, $stateParams, $window, $location, Circuits) {
+
+
+}).controller('CircuitListController', function($scope, $state, $stateParams, $window, $location, Circuit) {
   if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
 
-  $scope.data = Circuits.circuits.get({season: $stateParams.season, series: 'f1' }, function(){
+  $scope.data = Circuit.circuits.get({season: $stateParams.season, series: 'f1' }, function(){
     var retVal = $scope.data.MRData.CircuitTable
+    console.log(retVal)
     $scope.circuits = retVal
   });
 
@@ -62,6 +69,35 @@ angular.module('formulaOneApp.controllers', [])
       }
   });
   $location.path('/' + $stateParams.season + '/circuits');
+
+
+}).controller('CircuitViewController', function($scope, $http, $timeout, $stateParams, Circuit) {
+  $scope.data = Circuit.circuit.get({ id: $stateParams.id, series: 'f1' }, function(){
+    console.log($scope.data)
+    var retVal = $scope.data.MRData.CircuitTable.Circuits[0];
+    $scope.gMapUrl = "https://www.google.co.uk/maps/@52.7055818,-1.7753949,15z";
+
+    var wikiUrl = retVal.url.split("/");
+    wikiUrl = wikiUrl[wikiUrl.length - 1];
+
+    retVal.wikiName = wikiUrl;
+
+    $scope.getCircuitPic(wikiUrl);
+
+    $scope.circuit = retVal
+  }); //Get a single driver. Issues a GET to /api/driver/:id
+
+  $scope.getCircuitPic = function(circuitName) {
+    var url = wikiApi + "&titles=" + circuitName + "&prop=pageimages&pithumbsize=400";
+
+    return $http.jsonp(url)
+    .success(function(data){
+        $.each(data.query.pages, function(i,item){
+          $scope.circuit.imageUrl = item.thumbnail.source;
+          return;
+        });
+    });
+  };
 });
 
 function getYearRange() {

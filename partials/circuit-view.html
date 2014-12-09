@@ -1,0 +1,18 @@
+<table class="table circuitable">
+  <tr>
+    <td colspan="2"><h3>Details for {{circuit.circuitName}}</h3></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img ng-src="{{circuit.imageUrl}}" />
+    </td>
+  </tr>
+  <tr>
+    <td>Location</td>
+    <td>{{circuit.Location.locality}}, {{circuit.Location.country}}</td>
+  </tr>
+  <tr>
+    <td>Wiki Link</td>
+    <td><a target="_blank" ng-href="{{circuit.url}}"/>{{circuit.url}}</td>
+  </tr>
+</table>

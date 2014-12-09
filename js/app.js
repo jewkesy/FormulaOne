@@ -13,6 +13,10 @@ angular.module('formulaOneApp').config(function($stateProvider) {
     url: '/:season/circuits',
     templateUrl: 'partials/circuits.html',
     controller: 'CircuitListController'
+  }).state('viewCircuit', {
+    url: '/circuit/:id',
+    templateUrl: 'partials/circuit-view.html',
+    controller: 'CircuitViewController'
   });
 }).run(function($state) {
   if (!$state.season) $state.season = new Date().getFullYear();

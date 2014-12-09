@@ -1,4 +1,5 @@
-angular.module('formulaOneApp.services', ['ngResource']).factory('Driver', function($resource) {
+angular.module('formulaOneApp.services', ['ngResource'])
+  .factory('Driver', function($resource) {
     return {
       standings: $resource('http://ergast.com/api/:series/:season/driverStandings.json', {
         'get': { method:'GET', cache: true, isArray:true }
@@ -7,9 +8,12 @@ angular.module('formulaOneApp.services', ['ngResource']).factory('Driver', funct
         'get': { method:'GET', cache: true, isArray:true }
       })
     };
-  }).factory('Circuits', function($resource) {
+  }).factory('Circuit', function($resource) {
     return {
       circuits: $resource('http://ergast.com/api/:series/:season/circuits.json', {
+        'get': { method:'GET', cache: true, isArray:true }
+      }),
+      circuit: $resource('http://ergast.com/api/:series/circuits/:id.json', {
         'get': { method:'GET', cache: true, isArray:true }
       })
     };
