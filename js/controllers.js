@@ -1,24 +1,14 @@
 angular.module('formulaOneApp.controllers', [])
 .controller('DriverListController', function($scope, $state, $stateParams, $window, Driver) {
-
   if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
 
-  //console.log($stateParams.season)
   $scope.season = $stateParams.season;
 
-  var startYear = new Date().getFullYear();
-  var endYear = 1950;
-  var dateRange = [];
 
-  while(endYear <= startYear) {
-      dateRange.push(startYear);
-      startYear -= 1
-  }
-  $scope.years = dateRange;
+  $scope.years = getYearRange();
 
   $scope.data = Driver.standings.get({season: $stateParams.season, series: 'f1' }, function(){
     var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
-    console.log(retVal)
     $scope.drivers = retVal
   }); //fetch all drivers. Issues a GET to /api/drivers
 
@@ -61,11 +51,30 @@ angular.module('formulaOneApp.controllers', [])
     });
   };
 }).controller('CircuitListController', function($scope, $state, $stateParams, $window, Circuits) {
-  console.log('getting circuits')
   if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
+  $scope.season = $stateParams.season;
+  $scope.years = getYearRange();
+
   $scope.data = Circuits.circuits.get({season: $stateParams.season, series: 'f1' }, function(){
     var retVal = $scope.data.MRData.CircuitTable
-    console.log(retVal)
     $scope.circuits = retVal
   });
+
+  $scope.$watch("season", function( value ) {
+      if (value >= 1950) {
+        $state.go('circuits', {'season': value});
+      }
+  });
 });
+
+function getYearRange() {
+  var startYear = new Date().getFullYear();
+  var endYear = 1950;
+  var dateRange = [];
+
+  while(endYear <= startYear) {
+      dateRange.push(startYear);
+      startYear -= 1
+  }
+  return dateRange;
+}
