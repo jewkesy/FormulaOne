@@ -117,6 +117,32 @@ angular.module('formulaOneApp.controllers', [])
   });
   $location.path('/' + $stateParams.season + '/constructors');
 
+}).controller('ConstructorViewController', function($scope, $http, $timeout, $stateParams, Constructor) {
+  $scope.data = Constructor.constructor.get({ id: $stateParams.id, series: 'f1' }, function(){
+
+    var retVal = $scope.data.MRData.StandingsTable;
+    console.log(retVal)
+    var wikiUrl = retVal.StandingsLists[0].ConstructorStandings[0].Constructor.url.split("/");
+    wikiUrl = wikiUrl[wikiUrl.length - 1];
+
+    retVal.wikiName = wikiUrl;
+
+    $scope.getConstructorPic(wikiUrl);
+
+    $scope.team = retVal
+  });
+
+  $scope.getConstructorPic = function(constructorName) {
+    var url = wikiApi + "&titles=" + constructorName + "&prop=pageimages&pithumbsize=400";
+    console.log(url)
+    return $http.jsonp(url)
+    .success(function(data){
+        $.each(data.query.pages, function(i,item){
+          $scope.team.imageUrl = item.thumbnail.source;
+          return;
+        });
+    });
+  };
 });
 
 function getYearRange() {

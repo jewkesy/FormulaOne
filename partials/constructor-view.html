@@ -1,0 +1,28 @@
+<table class="table constructorable">
+  <tr>
+    <td colspan="2"><h3>Details for {{team.StandingsLists[0].ConstructorStandings[0].Constructor.name}}</h3></td>
+  </tr>
+  <tr>
+    <td colspan="2"><img ng-src="{{team.imageUrl}}" /></td>
+  </tr>
+  <tr>
+    <td>Wiki Link</td>
+    <td><a target="_blank" ng-href="{{team.StandingsLists[0].ConstructorStandings[0].Constructor.url}}"/>{{team.StandingsLists[0].ConstructorStandings[0].Constructor.url}}</td>
+  </tr>
+</table>
+<table class="table constructorable">
+  <tr>
+    <th>Season</th>
+    <th>Rounds</th>
+    <th>Position</th>
+    <th>Points</th>
+    <th>Wins</th>
+  </tr>
+  <tr ng-repeat="result in team.StandingsLists">
+    <td>{{result.season}}</td>
+    <td>{{result.round}}</td>
+    <td>{{result.ConstructorStandings[0].position}}</td>
+    <td>{{result.ConstructorStandings[0].points}}</td>
+    <td>{{result.ConstructorStandings[0].wins}}</td>
+  </tr>
+</table>
