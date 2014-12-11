@@ -85,7 +85,7 @@ angular.module('formulaOneApp.controllers', [])
     $scope.getCircuitPic(wikiUrl);
 
     $scope.circuit = retVal
-  }); //Get a single driver. Issues a GET to /api/driver/:id
+  });
 
   $scope.getCircuitPic = function(circuitName) {
     var url = wikiApi + "&titles=" + circuitName + "&prop=pageimages&pithumbsize=400";
@@ -98,6 +98,25 @@ angular.module('formulaOneApp.controllers', [])
         });
     });
   };
+}).controller('ConstructorListController', function($scope, $state, $stateParams, $window, $location, Constructor) {
+  if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
+
+  $scope.season = $stateParams.season;
+  $scope.years = getYearRange();
+
+  $scope.data = Constructor.standings.get({season: $stateParams.season, series: 'f1' }, function(){
+    var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
+    console.log(retVal)
+    $scope.teams = retVal //NOTE constructor is a reserved AngularJs name!
+  });
+
+  $scope.$watch("season", function( value ) {
+      if (value >= 1950) {
+        $state.go('constructors', {'season': value});
+      }
+  });
+  $location.path('/' + $stateParams.season + '/constructors');
+
 });
 
 function getYearRange() {

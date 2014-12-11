@@ -6,6 +6,9 @@ angular.module('formulaOneApp.services', ['ngResource'])
       }),
       driver: $resource('http://ergast.com/api/:series/drivers/:id.json', {
         'get': { method:'GET', cache: true, isArray:true }
+      }),
+      driverStandings: $resource('http://ergast.com/api/:series/drivers/:id/driverStandings.json', {
+        'get': { method:'GET', cache: true, isArray:true }
       })
     };
   }).factory('Circuit', function($resource) {
@@ -17,9 +20,12 @@ angular.module('formulaOneApp.services', ['ngResource'])
         'get': { method:'GET', cache: true, isArray:true }
       })
     };
-  }).factory('Constructors', function($resources) {
+  }).factory('Constructor', function($resource) {
     return {
-      constructors: $resource('http://ergast.com/api/:series/:season/constructors.json', {
+      standings: $resource('http://ergast.com/api/:series/:season/constructorStandings.json', {
+        'get': { method:'GET', cache: true, isArray:true }
+      }),
+      constructor: $resource('http://ergast.com/api/:series/constructors/:id/constructorStandings.json', {
         'get': { method:'GET', cache: true, isArray:true }
       })
     }

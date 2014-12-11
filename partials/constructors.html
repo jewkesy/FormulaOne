@@ -1,0 +1,27 @@
+<table class="table drivertable">
+  <tr>
+    <td colspan="5"><h3>Formula 1<span class="divider">.:.</span>
+      <span class="dropdown">
+        <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
+        <ul ng-model="seasonSelection" class="dropdown-menu" role="menu" aria-labelledby="dropdownYear">
+          <li ng-repeat="year in years">
+            <a ng-click="$parent.season = year">{{year}}</a>
+          </li>
+        </ul>
+      </span>
+      <span class="divider">.:.</span>Constructor Standings</h3>
+    </td>
+  </tr>
+  <tr>
+    <th>Position</th>
+    <th>Name</th>
+    <th>Points</th>
+    <th>Wins</th>
+  </tr>
+  <tr ng-repeat="team in teams.ConstructorStandings">
+    <td>{{team.position}}</td>
+    <td><img ng-src="http://jewkesy.github.io/colloquial/images/flags/{{team.Constructor.nationality}}.png" /> <a ui-sref="viewConstructor({id:team.Constructor.constructorId})">{{team.Constructor.name}}</a></td>
+    <td>{{team.points}}</td>
+    <td>{{team.wins}}</td>
+  </tr>
+</table>
