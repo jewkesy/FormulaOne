@@ -156,3 +156,11 @@ function getYearRange() {
   }
   return dateRange;
 }
+
+function headerController($scope, $location) {
+  $scope.isActive = function (viewLocation) {
+    path = $location.path().split("/")
+    path = '/' + path[path.length - 1];
+    return viewLocation === path;
+  };
+}
