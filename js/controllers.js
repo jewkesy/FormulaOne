@@ -59,7 +59,7 @@ angular.module('formulaOneApp.controllers', [])
 
   $scope.data = Circuit.circuits.get({season: $stateParams.season, series: 'f1' }, function(){
     var retVal = $scope.data.MRData.CircuitTable
-    console.log(retVal)
+    //console.log(retVal)
     $scope.circuits = retVal
   });
 
@@ -73,7 +73,7 @@ angular.module('formulaOneApp.controllers', [])
 
 }).controller('CircuitViewController', function($scope, $http, $timeout, $stateParams, Circuit) {
   $scope.data = Circuit.circuit.get({ id: $stateParams.id, series: 'f1' }, function(){
-    console.log($scope.data)
+    //console.log($scope.data)
     var retVal = $scope.data.MRData.CircuitTable.Circuits[0];
     $scope.gMapUrl = "https://www.google.co.uk/maps/@52.7055818,-1.7753949,15z";
 
@@ -89,7 +89,7 @@ angular.module('formulaOneApp.controllers', [])
 
   $scope.getCircuitPic = function(circuitName) {
     var url = wikiApi + "&titles=" + circuitName + "&prop=pageimages&pithumbsize=400";
-    console.log(url)
+    //console.log(url)
     return $http.jsonp(url)
     .success(function(data){
         $.each(data.query.pages, function(i,item){
@@ -106,7 +106,7 @@ angular.module('formulaOneApp.controllers', [])
 
   $scope.data = Constructor.standings.get({season: $stateParams.season, series: 'f1' }, function(){
     var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
-    console.log(retVal)
+    //console.log(retVal)
     $scope.teams = retVal //NOTE constructor is a reserved AngularJs name!
   });
 
@@ -121,7 +121,7 @@ angular.module('formulaOneApp.controllers', [])
   $scope.data = Constructor.constructor.get({ id: $stateParams.id, series: 'f1' }, function(){
 
     var retVal = $scope.data.MRData.StandingsTable;
-    console.log(retVal)
+    //console.log(retVal)
     var wikiUrl = retVal.StandingsLists[0].ConstructorStandings[0].Constructor.url.split("/");
     wikiUrl = wikiUrl[wikiUrl.length - 1];
 
@@ -134,7 +134,7 @@ angular.module('formulaOneApp.controllers', [])
 
   $scope.getConstructorPic = function(constructorName) {
     var url = wikiApi + "&titles=" + constructorName + "&prop=pageimages&pithumbsize=400";
-    console.log(url)
+    //console.log(url)
     return $http.jsonp(url)
     .success(function(data){
         $.each(data.query.pages, function(i,item){
@@ -159,8 +159,13 @@ function getYearRange() {
 
 function headerController($scope, $location) {
   $scope.isActive = function (viewLocation) {
+
+    //console.log(viewLocation + ' - ' + $location.path())
+
     path = $location.path().split("/")
     path = '/' + path[path.length - 1];
+    //path = '/' + path[1];
+    console.log(viewLocation + ' - ' + path)
     return viewLocation === path;
   };
 }

@@ -7,7 +7,7 @@ angular.module('formulaOneApp').config(function($stateProvider) {
     templateUrl: 'partials/drivers.html',
     controller: 'DriverListController'
   }).state('viewDriver', { //state for showing single driver
-    url: '/driver/:id',
+    url: '/drivers/:id',
     templateUrl: 'partials/driver-view.html',
     controller: 'DriverViewController'
   }).state('circuits', {
@@ -15,7 +15,7 @@ angular.module('formulaOneApp').config(function($stateProvider) {
     templateUrl: 'partials/circuits.html',
     controller: 'CircuitListController'
   }).state('viewCircuit', {
-    url: '/circuit/:id',
+    url: '/circuits/:id',
     templateUrl: 'partials/circuit-view.html',
     controller: 'CircuitViewController'
   }).state('constructors', {
@@ -23,7 +23,7 @@ angular.module('formulaOneApp').config(function($stateProvider) {
     templateUrl: 'partials/constructors.html',
     controller: 'ConstructorListController'
   }).state('viewConstructor', {
-    url: '/constructor/:id',
+    url: '/constructors/:id',
     templateUrl: 'partials/constructor-view.html',
     controller: 'ConstructorViewController'
   });
