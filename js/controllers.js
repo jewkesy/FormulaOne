@@ -159,9 +159,6 @@ function getYearRange() {
 
 function headerController($scope, $location) {
   $scope.isActive = function (viewLocation) {
-
-    //console.log(viewLocation + ' - ' + $location.path())
-
     path = $location.path().split("/")
     path = '/' + path[path.length - 1];
     //path = '/' + path[1];
