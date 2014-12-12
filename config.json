@@ -1,0 +1,10 @@
+{
+	"mongo": {
+		"host": "ds061370.mongolab.com",
+ 		"port": "61370",
+  	"database": "formulaonestats",
+  	"user": "formulaoneapp",
+ 		"password": "formulaoneapp"
+	}
+}
+//mongodb://<dbuser>:<dbpassword>@ds061370.mongolab.com:61370/formulaonestats
