@@ -141,6 +141,41 @@ angular.module('formulaOneApp.controllers', [])
         });
     });
   };
+}).controller('ResultController', function($scope, $state, $stateParams, $window, $location, Result) {
+  if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
+  $scope.season = $stateParams.season;
+  $scope.years = getYearRange();
+
+  $scope.data = Result.round.get({season: $stateParams.season, series: 'f1', round: '1' }, function(){
+    var retVal = $scope.data.MRData.RaceTable
+    console.log(retVal)
+    $scope.circuits = retVal
+  });
+
+  $scope.$watch("season", function( value ) {
+      if (value >= 1950) {
+        $state.go('circuits', {'season': value});
+      }
+  });
+  $location.path('/' + $stateParams.season + '/circuits');
+}).controller('ScheduleListController', function($scope, $state, $stateParams, $window, $location, Schedule) {
+  if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
+  $scope.season = $stateParams.season;
+  $scope.years = getYearRange();
+
+  $scope.data = Schedule.schedule.get({season: $stateParams.season, series: 'f1' }, function(){
+    var retVal = $scope.data.MRData.RaceTable
+    console.log(retVal)
+    $scope.schedule = retVal
+  });
+
+  $scope.$watch("season", function( value ) {
+      if (value >= 1950) {
+        $state.go('results', {'season': value});
+      }
+  });
+  $location.path('/' + $stateParams.season + '/results');
+
 });
 
 function getYearRange() {

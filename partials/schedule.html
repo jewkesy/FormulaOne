@@ -1,0 +1,29 @@
+<table class="table scheduletable">
+  <tr>
+    <td colspan="5"><h3>Formula 1<span class="divider">.:.</span>
+      <span class="dropdown">
+        <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
+        <ul ng-model="seasonSelection" class="dropdown-menu" role="menu" aria-labelledby="dropdownYear">
+          <li ng-repeat="year in years">
+            <a ng-click="$parent.season = year">{{year}}</a>
+          </li>
+        </ul>
+      </span>
+      <span class="divider">.:.</span>Schedule</h3>
+    </td>
+  </tr>
+  <tr>
+    <th>Round</th>
+    <th>Name</th>
+    <th>Circuit</th>
+    <th>Date</th>
+    <th>Details</th>
+  </tr>
+  <tr ng-repeat="race in schedule.Races">
+    <td>{{race.round}}</td>
+    <td>{{race.raceName}}</td>
+    <td><a ng-href="#/circuits/{{race.Circuit.circuitId}}"/>{{race.Circuit.circuitName}}</td>
+    <td>{{race.date}}</td>
+    <td><a target="_blank" ng-href="{{race.url}}"/>Wiki Link</td>
+  </tr>
+</table>

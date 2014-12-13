@@ -26,6 +26,10 @@ angular.module('formulaOneApp').config(function($stateProvider) {
     url: '/constructors/:id',
     templateUrl: 'partials/constructor-view.html',
     controller: 'ConstructorViewController'
+  }).state('results', {
+    url: '/:season/results',
+    templateUrl: 'partials/schedule.html',
+    controller: 'ScheduleListController'
   });
 }).run(function($state) {
   // console.log('going default')

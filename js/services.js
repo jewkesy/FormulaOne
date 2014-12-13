@@ -28,5 +28,17 @@ angular.module('formulaOneApp.services', ['ngResource'])
       constructor: $resource(config.api + ':series/constructors/:id/constructorStandings.json', {
         'get': { method:'GET', cache: true, isArray:true }
       })
-    }
+    };
+  }).factory('Result', function($resource) {
+    return {
+      round: $resource(config.api + ':series/:season/:round/results.json', {
+        'get': { method:'GET', cache: true, isArray:true }
+      })
+    };
+  }).factory('Schedule', function($resource) {
+    return {
+      schedule: $resource(config.api + ':series/:season.json', {
+        'get': { method:'GET', cache: true, isArray:true }
+      })
+    };
 });
