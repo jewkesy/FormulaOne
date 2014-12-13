@@ -1,4 +1,3 @@
-
 angular.module('formulaOneApp.controllers', [])
 .controller('DriverListController', function($scope, $state, $stateParams, $window, $location, Driver) {
   if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
@@ -69,7 +68,6 @@ angular.module('formulaOneApp.controllers', [])
   });
   $location.path('/' + $stateParams.season + '/circuits');
 
-
 }).controller('CircuitViewController', function($scope, $http, $timeout, $stateParams, Circuit) {
   $scope.data = Circuit.circuit.get({ id: $stateParams.id, series: 'f1' }, function(){
     //console.log($scope.data)
@@ -97,6 +95,7 @@ angular.module('formulaOneApp.controllers', [])
         });
     });
   };
+
 }).controller('ConstructorListController', function($scope, $state, $stateParams, $window, $location, Constructor) {
   if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
 
@@ -158,13 +157,6 @@ function getYearRange() {
 
 function headerController($scope, $location) {
   $scope.isActive = function (viewLocation) {
-    // path = $location.path().split("/")
-    // path = '/' + path[path.length - 1];
-    // //path = '/' + path[1];
-    // console.log(viewLocation + ' - ' + path)
-    // return viewLocation === path;
-    //
-    //
-    return $location.path().indexOf(viewLocation) == 0;
+    return $location.path().indexOf(viewLocation) >= 0;
   };
 }
