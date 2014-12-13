@@ -1,4 +1,3 @@
-var wikiApi = "http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&format=json&action=query&redirects";
 
 angular.module('formulaOneApp.controllers', [])
 .controller('DriverListController', function($scope, $state, $stateParams, $window, $location, Driver) {
@@ -40,7 +39,7 @@ angular.module('formulaOneApp.controllers', [])
   }); //Get a single driver. Issues a GET to /api/driver/:id
 
   $scope.getProfilePic = function(driverName) {
-    var url = wikiApi + "&titles=" + driverName + "&prop=pageimages&pithumbsize=200";
+    var url = config.wikiApi + "&titles=" + driverName + "&prop=pageimages&pithumbsize=200";
 
     return $http.jsonp(url)
     .success(function(data){
@@ -88,7 +87,7 @@ angular.module('formulaOneApp.controllers', [])
   });
 
   $scope.getCircuitPic = function(circuitName) {
-    var url = wikiApi + "&titles=" + circuitName + "&prop=pageimages&pithumbsize=400";
+    var url = config.wikiApi + "&titles=" + circuitName + "&prop=pageimages&pithumbsize=400";
     //console.log(url)
     return $http.jsonp(url)
     .success(function(data){
@@ -133,7 +132,7 @@ angular.module('formulaOneApp.controllers', [])
   });
 
   $scope.getConstructorPic = function(constructorName) {
-    var url = wikiApi + "&titles=" + constructorName + "&prop=pageimages&pithumbsize=400";
+    var url = config.wikiApi + "&titles=" + constructorName + "&prop=pageimages&pithumbsize=400";
     //console.log(url)
     return $http.jsonp(url)
     .success(function(data){

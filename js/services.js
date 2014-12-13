@@ -1,5 +1,5 @@
-var config = require('../config');
-
+// var config = require('../config');
+console.log(config)
 angular.module('formulaOneApp.services', ['ngResource'])
   .factory('Driver', function($resource) {
     return {
