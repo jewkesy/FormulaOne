@@ -141,23 +141,25 @@ angular.module('formulaOneApp.controllers', [])
         });
     });
   };
-}).controller('ResultController', function($scope, $state, $stateParams, $window, $location, Result) {
+}).controller('ResultViewController', function($scope, $state, $stateParams, $window, $location, Result) {
   if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
+  console.log($stateParams)
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
 
-  $scope.data = Result.round.get({season: $stateParams.season, series: 'f1', round: '1' }, function(){
+  $scope.data = Result.round.get({season: $stateParams.season, series: 'f1', round: $stateParams.round }, function(){
     var retVal = $scope.data.MRData.RaceTable
     console.log(retVal)
-    $scope.circuits = retVal
+    $scope.results = retVal
   });
+  //
+  // $scope.$watch("season", function( value ) {
+  //     if (value >= 1950) {
+  //       $state.go('results', {'season': value});
+  //     }
+  // });
+  $location.path('/' + $stateParams.season + '/results/' +  $stateParams.id);
 
-  $scope.$watch("season", function( value ) {
-      if (value >= 1950) {
-        $state.go('circuits', {'season': value});
-      }
-  });
-  $location.path('/' + $stateParams.season + '/circuits');
 }).controller('ScheduleListController', function($scope, $state, $stateParams, $window, $location, Schedule) {
   if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
   $scope.season = $stateParams.season;
