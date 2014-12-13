@@ -31,7 +31,7 @@ angular.module('formulaOneApp.services', ['ngResource'])
     };
   }).factory('Result', function($resource) {
     return {
-      round: $resource(config.api + ':series/:season/:round/results.json', {
+      round: $resource(config.api + ':series/:season/:id/results.json', {
         'get': { method:'GET', cache: true, isArray:true }
       })
     };
