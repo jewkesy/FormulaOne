@@ -158,10 +158,13 @@ function getYearRange() {
 
 function headerController($scope, $location) {
   $scope.isActive = function (viewLocation) {
-    path = $location.path().split("/")
-    path = '/' + path[path.length - 1];
-    //path = '/' + path[1];
-    console.log(viewLocation + ' - ' + path)
-    return viewLocation === path;
+    // path = $location.path().split("/")
+    // path = '/' + path[path.length - 1];
+    // //path = '/' + path[1];
+    // console.log(viewLocation + ' - ' + path)
+    // return viewLocation === path;
+    //
+    //
+    return $location.path().indexOf(viewLocation) == 0;
   };
 }
