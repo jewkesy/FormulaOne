@@ -21,16 +21,22 @@
       <span class="divider">.:.</span> Results</h3>
     </td>
   </tr>
-  <tr>
-    <th>Position</th>
-    <th>Name</th>
-    <th>Status</th>
-    <th>Time</th>
-  </tr>
-  <tr ng-repeat="race in results.Races[0].Results">
-    <td>{{race.position}}</td>
-    <td>{{race.Driver.driverId}}</td>
-    <td>{{race.status}}</td>
-    <td>{{race.Time.time}}</td>
-  </tr>
 </table>
+
+<!-- <div class="sort-by button-group js-radio-button-group">
+  <button class="button is-checked" data-sort-by="position">Race Results</button>
+  <button class="button" data-sort-by="grid">Starting Grid</button>
+  <button class="button" data-sort-by="practice">Qualifier</button>
+  <button class="button" data-sort-by="number">Practice</button>
+</div> -->
+
+<div id="isotopeContainer" ng-repeat="race in results.Races[0].Results">
+  <div class="item">
+    <h3 class="position">{{race.position}}</h3>
+    <h2 class="grid">{{race.Driver.familyName}}</h2>
+    <p>{{race.Driver.givenName}}</p>
+    <img width="50px" src="./images/helmet-icon.png" />
+    <p>{{race.status}}</p>
+    <p>{{race.Time.time}}</p>
+  </div>
+</div>

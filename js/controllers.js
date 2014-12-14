@@ -38,7 +38,7 @@ angular.module('formulaOneApp.controllers', [])
   }); //Get a single driver. Issues a GET to /api/driver/:id
 
   $scope.getProfilePic = function(driverName) {
-    var url = config.wikiApi + "&titles=" + driverName + "&prop=pageimages&pithumbsize=200";
+    var url = config.wikiApi + "&titles=" + driverName + "&prop=pageimages&pithumbsize=" + config.picNarrowSize;
 
     return $http.jsonp(url)
     .success(function(data){
@@ -48,7 +48,6 @@ angular.module('formulaOneApp.controllers', [])
         });
     });
   };
-
 
 }).controller('CircuitListController', function($scope, $state, $stateParams, $window, $location, Circuit) {
   if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
@@ -85,7 +84,7 @@ angular.module('formulaOneApp.controllers', [])
   });
 
   $scope.getCircuitPic = function(circuitName) {
-    var url = config.wikiApi + "&titles=" + circuitName + "&prop=pageimages&pithumbsize=400";
+    var url = config.wikiApi + "&titles=" + circuitName + "&prop=pageimages&pithumbsize=" + config.picWideSize;
     //console.log(url)
     return $http.jsonp(url)
     .success(function(data){
@@ -131,7 +130,7 @@ angular.module('formulaOneApp.controllers', [])
   });
 
   $scope.getConstructorPic = function(constructorName) {
-    var url = config.wikiApi + "&titles=" + constructorName + "&prop=pageimages&pithumbsize=400";
+    var url = config.wikiApi + "&titles=" + constructorName + "&prop=pageimages&pithumbsize=" + config.picWideSize;
     //console.log(url)
     return $http.jsonp(url)
     .success(function(data){
@@ -141,7 +140,7 @@ angular.module('formulaOneApp.controllers', [])
         });
     });
   };
-}).controller('ResultViewController', function($scope, $state, $stateParams, $window, $location, Result) {
+}).controller('ResultViewController', function($scope, $http, $state, $stateParams, $window, $location, Result) {
   if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
@@ -155,10 +154,8 @@ angular.module('formulaOneApp.controllers', [])
       $state.go('viewResult', {'season': $scope.season, 'round': '1'});
     }
     $scope.rounds = (getRoundRange($scope.data.MRData.total));
-    // console.log($scope.data.MRData.total)
-    // console.log($scope.noRounds + ' vs ' + $scope.round)
+
     $scope.results = retVal
-    //console.log($scope)
   });
 
   $scope.$watch("season", function( value ) {
@@ -169,7 +166,6 @@ angular.module('formulaOneApp.controllers', [])
 
   $scope.$watch("round", function( value ) {
       if (value > 0) {
-
         $state.go('viewResult', {'season': $scope.season, 'round': $scope.round});
       }
   })
