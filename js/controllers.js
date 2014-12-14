@@ -198,7 +198,7 @@ angular.module('formulaOneApp.controllers', [])
           return retVal;
       };
   }
-]);;
+]);
 
 function getYearRange() {
   var startYear = new Date().getFullYear();
