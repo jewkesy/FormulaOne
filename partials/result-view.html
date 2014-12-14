@@ -1,15 +1,22 @@
 <table class="table scheduletable">
   <tr>
-    <td colspan="5"><h3>Formula 1<span class="divider">.:.</span> {{season}}
-      <!-- <span class="dropdown">
+    <td colspan="5"><h3>Formula 1<span class="divider">.:.</span>
+      <span class="dropdown">
         <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
         <ul ng-model="seasonSelection" class="dropdown-menu" role="menu" aria-labelledby="dropdownYear">
           <li ng-repeat="year in years">
             <a ng-click="$parent.season = year">{{year}}</a>
           </li>
         </ul>
-      </span> -->
-      <span class="divider">.:.</span> Round {{ results.round }}
+      </span>
+      <span class="divider">.:.</span> Round <span class="dropdown">
+        <a class="btn btn-default" data-toggle="dropdown" href="#">{{ results.round }} <b class="caret"></b></a>
+        <ul ng-model="roundSelection" class="dropdown-menu" role="menu" aria-labelledby="dropdownRound">
+          <li ng-repeat="round in rounds">
+            <a ng-click="$parent.round = round">{{round}}</a>
+          </li>
+        </ul>
+      </span>
       <span class="divider">.:.</span> {{ results.Races[0].raceName }}
       <span class="divider">.:.</span> Results</h3>
     </td>
