@@ -151,8 +151,12 @@ angular.module('formulaOneApp.controllers', [])
   $scope.data = Result.round.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function(){
     var retVal = $scope.data.MRData.RaceTable
     $scope.noRounds = $scope.data.MRData.total;
+    if ($scope.noRounds == 0) {
+      $state.go('viewResult', {'season': $scope.season, 'round': '1'});
+    }
     $scope.rounds = (getRoundRange($scope.data.MRData.total));
-    //console.log($scope.noRounds + ' vs ' + $scope.round)
+    // console.log($scope.data.MRData.total)
+    // console.log($scope.noRounds + ' vs ' + $scope.round)
     $scope.results = retVal
     //console.log($scope)
   });
@@ -160,15 +164,13 @@ angular.module('formulaOneApp.controllers', [])
   $scope.$watch("season", function( value ) {
       if (value >= 1950) {
         $state.go('viewResult', {'season': $scope.season, 'round': $scope.round});
-        //$location.path('/' + value + '/results/' + $scope.noRounds);
       }
   });
 
   $scope.$watch("round", function( value ) {
       if (value > 0) {
-        console.log($scope.round)
+
         $state.go('viewResult', {'season': $scope.season, 'round': $scope.round});
-        //$location.path('/' + value + '/results/' + $scope.noRounds);
       }
   })
 
@@ -189,9 +191,18 @@ angular.module('formulaOneApp.controllers', [])
         $state.go('results', {'season': value});
       }
   });
+
   $location.path('/' + $stateParams.season + '/results');
 
-});
+}).filter('formatDateTime', [
+  '$filter', function($filter) {
+      return function(inputData) {
+          //console.log(inputData.date)
+          var retVal = new Date(inputData.date + 'T' + inputData.time).toUTCString();
+          return retVal;
+      };
+  }
+]);;
 
 function getYearRange() {
   var startYear = new Date().getFullYear();

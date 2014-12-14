@@ -23,7 +23,7 @@
     <td>{{race.round}}</td>
     <td>{{race.raceName}}</td>
     <td><a ui-sref="viewCircuit({id: race.Circuit.circuitId})">{{race.Circuit.circuitName}}</td>
-    <td>{{race.date}} {{race.time}}</td>
+    <td>{{race | formatDateTime}}</td>
     <td><a target="_blank" ng-href="{{race.url}}"/>Wiki Link</td>
     <td><a ui-sref="viewResult({season: season, round: race.round})">Result</td>
   </tr>
