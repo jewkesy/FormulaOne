@@ -3,6 +3,7 @@ angular.module('formulaOneApp', ['ui.router', 'ngResource', 'formulaOneApp.contr
 angular.module('formulaOneApp').config(function($stateProvider) {
   $stateProvider
     .state('drivers', { // state for showing all drivers
+    title: 'Drivers',
     url: '/:season/drivers',
     templateUrl: 'partials/drivers.html',
     controller: 'DriverListController'
@@ -36,7 +37,6 @@ angular.module('formulaOneApp').config(function($stateProvider) {
     controller: 'ResultViewController'
   });
 }).run(function($state) {
-  // console.log('going default')
-  // if (!$state.season) $state.season = new Date().getFullYear();
-  // $state.go('drivers', {'season': $state.season}); //make a transition to drivers state when app starts
+  if (!$state.season) $state.season = new Date().getFullYear();
+  $state.go('drivers', {'season': $state.season}); //make a transition to drivers state when app starts
 });

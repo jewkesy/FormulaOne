@@ -1,7 +1,7 @@
 angular.module('formulaOneApp.controllers', [])
-.controller('DriverListController', function($scope, $state, $stateParams, $window, $location, Driver) {
+.controller('DriverListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Driver) {
   if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
-
+  $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Driver Standings";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
 
@@ -17,15 +17,18 @@ angular.module('formulaOneApp.controllers', [])
   });
   $location.path('/' + $stateParams.season + '/drivers');
 
-
-}).controller('DriverViewController', function($scope, $http, $timeout, $stateParams, Driver) {
+}).controller('DriverViewController', function($scope, $rootScope, $http, $timeout, $stateParams, Driver) {
   $scope.data = Driver.driver.get({ id: $stateParams.id, series: 'f1' }, function(){
+
     var retVal = $scope.data.MRData.DriverTable.Drivers[0];
+
+    $rootScope.title = " .:. FormulaOne Stats .:. Driver .:. " + retVal.givenName + ' ' + retVal.familyName;
+
     var ageDifMs = Date.now() - new Date(retVal.dateOfBirth);
     var ageDate = new Date(ageDifMs); // miliseconds from epoch
 
     retVal.Age = Math.abs(ageDate.getUTCFullYear() - 1970);
-    retVal.flagUrl = "http://jewkesy.github.io/colloquial/images/flags/" + retVal.nationality + ".png"
+    retVal.flagUrl = config.flagsUrl + retVal.nationality + ".png"
 
     var wikiUrl = retVal.url.split("/");
     wikiUrl = wikiUrl[wikiUrl.length - 1];
@@ -38,7 +41,7 @@ angular.module('formulaOneApp.controllers', [])
   }); //Get a single driver. Issues a GET to /api/driver/:id
 
   $scope.getProfilePic = function(driverName) {
-    var url = config.wikiApi + "&titles=" + driverName + "&prop=pageimages&pithumbsize=" + config.picNarrowSize;
+    var url = config.wikiApi + driverName + "&pithumbsize=" + config.picNarrowSize;
 
     return $http.jsonp(url)
     .success(function(data){
@@ -49,8 +52,9 @@ angular.module('formulaOneApp.controllers', [])
     });
   };
 
-}).controller('CircuitListController', function($scope, $state, $stateParams, $window, $location, Circuit) {
+}).controller('CircuitListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Circuit) {
   if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
+  $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Circuits";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
 
@@ -67,10 +71,11 @@ angular.module('formulaOneApp.controllers', [])
   });
   $location.path('/' + $stateParams.season + '/circuits');
 
-}).controller('CircuitViewController', function($scope, $http, $timeout, $stateParams, Circuit) {
+}).controller('CircuitViewController', function($scope, $rootScope, $http, $timeout, $stateParams, Circuit) {
   $scope.data = Circuit.circuit.get({ id: $stateParams.id, series: 'f1' }, function(){
     //console.log($scope.data)
     var retVal = $scope.data.MRData.CircuitTable.Circuits[0];
+    $rootScope.title = " .:. FormulaOne Stats .:. Circuits .:. " + retVal.circuitName;
     $scope.gMapUrl = "https://www.google.co.uk/maps/@52.7055818,-1.7753949,15z";
 
     var wikiUrl = retVal.url.split("/");
@@ -84,7 +89,7 @@ angular.module('formulaOneApp.controllers', [])
   });
 
   $scope.getCircuitPic = function(circuitName) {
-    var url = config.wikiApi + "&titles=" + circuitName + "&prop=pageimages&pithumbsize=" + config.picWideSize;
+    var url = config.wikiApi + circuitName + "&pithumbsize=" + config.picWideSize;
     //console.log(url)
     return $http.jsonp(url)
     .success(function(data){
@@ -95,9 +100,9 @@ angular.module('formulaOneApp.controllers', [])
     });
   };
 
-}).controller('ConstructorListController', function($scope, $state, $stateParams, $window, $location, Constructor) {
+}).controller('ConstructorListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Constructor) {
   if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
-
+  $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Constructor Standings";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
 
@@ -114,10 +119,11 @@ angular.module('formulaOneApp.controllers', [])
   });
   $location.path('/' + $stateParams.season + '/constructors');
 
-}).controller('ConstructorViewController', function($scope, $http, $timeout, $stateParams, Constructor) {
+}).controller('ConstructorViewController', function($scope, $rootScope, $http, $timeout, $stateParams, Constructor) {
   $scope.data = Constructor.constructor.get({ id: $stateParams.id, series: 'f1' }, function(){
 
     var retVal = $scope.data.MRData.StandingsTable;
+    $rootScope.title = " .:. FormulaOne Stats .:. Constructors .:. " + retVal.StandingsLists[0].ConstructorStandings[0].Constructor.name;
     //console.log(retVal)
     var wikiUrl = retVal.StandingsLists[0].ConstructorStandings[0].Constructor.url.split("/");
     wikiUrl = wikiUrl[wikiUrl.length - 1];
@@ -130,7 +136,7 @@ angular.module('formulaOneApp.controllers', [])
   });
 
   $scope.getConstructorPic = function(constructorName) {
-    var url = config.wikiApi + "&titles=" + constructorName + "&prop=pageimages&pithumbsize=" + config.picWideSize;
+    var url = config.wikiApi + constructorName + "&pithumbsize=" + config.picWideSize;
     //console.log(url)
     return $http.jsonp(url)
     .success(function(data){
@@ -156,7 +162,7 @@ angular.module('formulaOneApp.controllers', [])
     $scope.rounds = (getRoundRange($scope.data.MRData.total));
 
     $scope.results = retVal
-    console.log(retVal)
+    //console.log(retVal)
   });
 
   $scope.$watch("season", function( value ) {

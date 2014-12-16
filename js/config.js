@@ -2,7 +2,8 @@ var config = {
     api: 'http://ergast.com/api/',
     defaultResponseRows: 200,
     maxResponseRows: 1000,
-    wikiApi: "http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&format=json&action=query&redirects",
+    flagsUrl: "http://jewkesy.github.io/colloquial/images/flags/",
+    wikiApi: "http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&format=json&action=query&redirects&prop=pageimages&titles=",
     picNarrowSize: 200,
     picThumbSize: 50,
     picWideSize: 400

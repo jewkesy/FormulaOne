@@ -43,7 +43,7 @@
   <div ng-repeat="race in results.Races[0].Results">
     <div class="item">
       <h3 class="position">{{race.position}}</h3>
-      <h2 class="grid">{{race.Driver.familyName}}</h2>
+      <h2 class="grid"><a ui-sref="viewDriver({id:race.Driver.driverId})">{{race.Driver.familyName}}</a></h2>
       <p>{{race.Driver.givenName}}</p>
       <img width="50px" src="./images/helmet-icon.png" />
       <p>{{race.status}}</p>
