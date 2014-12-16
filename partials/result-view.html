@@ -23,20 +23,31 @@
   </tr>
 </table>
 
-<div class="sort-by button-group js-radio-button-group">
-  <button class="button is-checked" data-sort-by="position">Race Results</button>
-  <button class="button" data-sort-by="grid">Starting Grid</button>
-  <button class="button" data-sort-by="practice">Qualifier</button>
-  <button class="button" data-sort-by="number">Practice</button>
+<div class="btn-group" opt-kind ok-key="sortBy">
+  <button type="button" class="btn btn-default active" ok-sel="[position]">Race Results</button>
+  <button type="button" class="btn btn-default" ok-sel="[grid]" ok-type="integer">Starting Grid</button>
+  <button type="button" class="btn btn-default" ok-sel="[practice]" ok-type="integer">Qualifier</button>
+  <button type="button" class="btn btn-default" ok-sel="[number]" ok-type="integer">Practice</button>
 </div>
 
-<div id="isotopeContainer" ng-repeat="race in results.Races[0].Results">
-  <div class="item">
-    <h3 class="position">{{race.position}}</h3>
-    <h2 class="grid">{{race.Driver.familyName}}</h2>
-    <p>{{race.Driver.givenName}}</p>
-    <img width="50px" src="./images/helmet-icon.png" />
-    <p>{{race.status}}</p>
-    <p>{{race.Time.time}}</p>
+        <!-- <div class="row">
+          <ul id="isotopeContainer" isotope-container ng-cloak class="ng-cloak">
+            <li ng-repeat="race in results.Races[0].Results" isotope-item class="item" onClick="removeItem(this)">
+               <div class="position" position="{{race.position}}">Position: {{race.position}}</div>
+               <div class="grid" grid="{{race.grid}}">Grid: {{race.grid}}</div>
+               <div class="number">{{race.Driver.familyName}}</div>
+            </li>
+        </div> -->
+
+<div  id="isotopeContainer" isotope-container>
+  <div ng-repeat="race in results.Races[0].Results">
+    <div class="item">
+      <h3 class="position">{{race.position}}</h3>
+      <h2 class="grid">{{race.Driver.familyName}}</h2>
+      <p>{{race.Driver.givenName}}</p>
+      <img width="50px" src="./images/helmet-icon.png" />
+      <p>{{race.status}}</p>
+      <p>{{race.Time.time}}</p>
+    </div>
   </div>
 </div>

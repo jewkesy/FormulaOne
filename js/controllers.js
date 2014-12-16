@@ -156,6 +156,7 @@ angular.module('formulaOneApp.controllers', [])
     $scope.rounds = (getRoundRange($scope.data.MRData.total));
 
     $scope.results = retVal
+    console.log(retVal)
   });
 
   $scope.$watch("season", function( value ) {
