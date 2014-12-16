@@ -1,5 +1,4 @@
 body {
-  font-size: 1em;
   font-family: 'Roboto', sans-serif,  Arial, "Helvetica Condensed", Helvetica, sans-serif;
 }
 
@@ -7,4 +6,8 @@ body {
   border: 1px red solid;
   float: left;
   margin: 10px
+}
+
+.position {
+  font-size: 8em;
 }
