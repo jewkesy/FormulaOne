@@ -146,8 +146,9 @@ angular.module('formulaOneApp.controllers', [])
         });
     });
   };
-}).controller('ResultViewController', function($scope, $http, $state, $stateParams, $window, $location, Result) {
+}).controller('ResultViewController', function($scope, $rootScope, $http, $state, $stateParams, $window, $location, Result) {
   if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
+
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
   $scope.round = $stateParams.round
@@ -155,6 +156,7 @@ angular.module('formulaOneApp.controllers', [])
 
   $scope.data = Result.round.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function(){
     var retVal = $scope.data.MRData.RaceTable
+
     $scope.noRounds = $scope.data.MRData.total;
     if ($scope.noRounds == 0) {
       $state.go('viewResult', {'season': $scope.season, 'round': '1'});
@@ -162,6 +164,7 @@ angular.module('formulaOneApp.controllers', [])
     $scope.rounds = (getRoundRange($scope.data.MRData.total));
 
     $scope.results = retVal
+    $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Round " + retVal.round + " .:. " + retVal.Races[0].raceName;
     //console.log(retVal)
   });
 
@@ -179,8 +182,9 @@ angular.module('formulaOneApp.controllers', [])
 
   $location.path('/' + $stateParams.season + '/results/' +  $stateParams.round);
 
-}).controller('ScheduleListController', function($scope, $state, $stateParams, $window, $location, Schedule) {
+}).controller('ScheduleListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Schedule) {
   if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
+  $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Race Schedule";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
 
