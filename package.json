@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/jewkesy/FormulaOne/issues"
   },
-  "homepage": "https://github.com/jewkesy/FormulaOne"
+  "homepage": "https://github.com/jewkesy/FormulaOne",
+  "dependencies": {
+    "request": "^2.51.0"
+  }
 }
