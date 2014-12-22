@@ -42,11 +42,10 @@
   <div ng-repeat="race in results.Races[0].Results">
     <div class="item">
       <span class="position">{{race.position}}</span>
-      <h2><a ui-sref="viewDriver({id:race.Driver.driverId})">{{race.Driver.familyName}}</a></h2>
-      <p>{{race.Driver.givenName}}</p>
-      <img width="50px" src="./images/helmet-icon.png" />
-      <p>{{race.status}}</p>
-      <p>{{race.Time.time}}</p>
+      <p class="lastName"><a ui-sref="viewDriver({id:race.Driver.driverId})">{{race.Driver.familyName}}</a></p>
+      <p class="firstName">{{race.Driver.givenName}}</p>
+      <p class="status">{{race.status}}</p>
+      <p class="raceTime">{{race.Time.time}}</p>
     </div>
   </div>
 </div>
