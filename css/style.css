@@ -3,10 +3,11 @@ body {
 }
 
 .item {
+  line-height: 1;
   border: 1px  #8585AD solid;
   float: left;
-  padding: 10px;
-  margin: 10px;
+  padding: 5px;
+  margin: 5px;
   border-radius: 25px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -16,32 +17,32 @@ body {
 }
 
 .item .position {
-  font-size: 10em;
+  font-size: 8em;
   font-weight: bold;
   color: #8585AD;
   width: 100%;
   display: inline-block;
   margin: 0px;
-  height: 170px;
+  height: 100px;
 }
 
 .item .lastName {
-  font-size: 3em;
+  font-size: 2.5em;
   margin: 0px;
+  text-align: right;
 }
 
 .item .firstName {
   font-size: 1.2em;
   font-style: italic;
   text-align: left;
-  margin-top:-10px;
 }
 
 .item .status {
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-weight: bold;
 }
 
 .item .raceTime {
-
+  font-size: 1.2em;
 }
