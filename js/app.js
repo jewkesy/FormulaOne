@@ -40,3 +40,7 @@ angular.module('formulaOneApp').config(function($stateProvider) {
   if (!$state.season) $state.season = new Date().getFullYear();
   $state.go('drivers', {'season': $state.season}); //make a transition to drivers state when app starts
 });
+
+$('.navbar-collapse').click(function() {
+  $('.navbar-collapse').collapse('hide');
+});

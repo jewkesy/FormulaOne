@@ -205,7 +205,11 @@ angular.module('formulaOneApp.controllers', [])
   '$filter', function($filter) {
       return function(inputData) {
           //console.log(inputData.date)
-          var retVal = new Date(inputData.date + 'T' + inputData.time).toUTCString();
+          var raceDate = new Date(inputData.date + 'T' + inputData.time);
+
+
+          var retVal = raceDate.toUTCString(); //.replace(raceDate.getFullYear(), raceDate.getFullYear() + "<br/>");
+
           return retVal;
       };
   }
