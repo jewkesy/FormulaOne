@@ -47,7 +47,7 @@
   <body>
     <header class="navbar-inverse" role="banner">
       <div class="container">
-        <nav role="navigation"  ng-controller="headerController">
+        <nav role="navigation" ng-controller="headerController">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
@@ -84,9 +84,9 @@
       </div>
     </div>
 
-    <div class="footer navbar-fixed-bottom">
+    <div class="footer navbar-fixed-bottom" ng-controller="footerController">
       <div class="container">
-        <p class="text-muted credit">Created by <a target="_blank" href="http://www.daryljewkes.com">Daryl Jewkes</a> .:. Formula One data from <a target="_blank" href="http://ergast.com/mrd/">Ergast</a></p>
+        <p class="text-muted credit">Created by <a target="_blank" href="http://www.daryljewkes.com">Daryl Jewkes</a> .:. Formula One data from <a target="_blank" href="http://ergast.com/mrd/">Ergast</a> .:. Copyright &copy; {{currentDate | date:'yyyy'}}</p>
       </div>
     </div>
 

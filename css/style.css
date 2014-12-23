@@ -65,3 +65,12 @@ body {
     max-height: 300px;
     overflow-x: hidden;
 }
+
+.footer {
+  background-color: #333;
+  height: 40px;
+}
+
+.footer a {
+  color: white;
+}

@@ -250,3 +250,8 @@ function headerController($scope, $location) {
     return $location.path().indexOf(viewLocation) >= 0;
   };
 }
+
+function footerController($scope)
+{
+    $scope.currentDate = new Date();
+}
