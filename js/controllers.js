@@ -18,8 +18,8 @@ angular.module('formulaOneApp.controllers', [])
   $location.path('/' + $stateParams.season + '/drivers');
 
 }).controller('DriverViewController', function($scope, $rootScope, $http, $timeout, $stateParams, Driver) {
+  console.log($stateParams)
   $scope.data = Driver.driver.get({ id: $stateParams.id, series: 'f1' }, function(){
-
     var retVal = $scope.data.MRData.DriverTable.Drivers[0];
 
     $rootScope.title = " .:. FormulaOne Stats .:. Driver .:. " + retVal.givenName + ' ' + retVal.familyName;

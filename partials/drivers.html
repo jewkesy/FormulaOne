@@ -18,12 +18,11 @@
     <th>Wins</th>
     <th>Constructor</th>
   </tr>
-  <tr ng-repeat="driver in drivers.DriverStandings" ng-class-odd="'odd'" ng-class-even="'even'">
+  <tr ng-repeat="driver in drivers.DriverStandings">
     <td>{{driver.position}}</td>
-    <td><img ng-src="http://jewkesy.github.io/colloquial/images/flags/{{driver.Driver.nationality}}.png" /> <a ui-sref="viewDriver({id:driver.Driver.driverId})">{{driver.Driver.givenName}} {{driver.Driver.familyName}}</a></td>
+    <td><img ng-src="http://jewkesy.github.io/colloquial/images/flags/{{driver.Driver.nationality}}.png" /> <a ui-sref="viewDriver({id:driver.Driver.driverId, points:driver.points})">{{driver.Driver.givenName}} {{driver.Driver.familyName}}</a></td>
     <td>{{driver.points}}</td>
     <td>{{driver.wins}}</td>
     <td><a ui-sref="viewConstructor({id:driver.Constructors[0].constructorId})">{{driver.Constructors[0].name}}</td>
-    <!-- <td><a target="_blank" ng-href="{{driver.Constructors[0].url}}"/>{{driver.Constructors[0].name}}</td> -->
   </tr>
 </table>
