@@ -1,17 +1,15 @@
-<table class="table circuittable">
-  <tr>
-    <td colspan="5"><h3>Formula 1<span class="divider"> .:. </span>
-      <span class="dropdown">
-        <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
-        <ul ng-model="seasonSelection" class="dropdown-menu" role="menu" aria-labelledby="dropdownYear">
-          <li ng-repeat="year in years">
-            <a ng-click="$parent.season = year">{{year}}</a>
-          </li>
-        </ul>
-      </span>
-      <span class="divider"> .:. </span>Circuits</h3>
-    </td>
-  </tr>
+<h3>Formula 1<span class="divider"> .:. </span>
+  <span class="dropdown">
+    <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
+    <ul ng-model="seasonSelection" class="dropdown-menu" role="menu" aria-labelledby="dropdownYear">
+      <li ng-repeat="year in years">
+        <a ng-click="$parent.season = year">{{year}}</a>
+      </li>
+    </ul>
+  </span>
+  <span class="divider"> .:. </span>Circuits</h3>
+
+  <table class="table table-striped table-bordered table-hover table-condensed">
   <tr>
     <th>Name</th>
     <th>Country</th>

@@ -1,13 +1,12 @@
 <table class="table constructorable">
   <tr>
-    <td colspan="2"><h3>Details for {{team.StandingsLists[0].ConstructorStandings[0].Constructor.name}}</h3></td>
+    <td colspan="2"><h3>{{team.StandingsLists[0].ConstructorStandings[0].Constructor.name}}</h3></td>
   </tr>
   <tr>
-    <td colspan="2"><img ng-src="{{team.imageUrl}}" /></td>
+    <td class="mainPic" colspan="2"><img ng-src="{{team.imageUrl}}" /></td>
   </tr>
   <tr>
-    <td>Wiki Link</td>
-    <td><a target="_blank" ng-href="{{team.StandingsLists[0].ConstructorStandings[0].Constructor.url}}"/>{{team.StandingsLists[0].ConstructorStandings[0].Constructor.url}}</td>
+    <td colspan="2"><a target="_blank" ng-href="{{team.StandingsLists[0].ConstructorStandings[0].Constructor.url}}"/>Wiki Link</td>
   </tr>
 </table>
 <table class="table constructorable">
@@ -18,7 +17,7 @@
     <th>Points</th>
     <th>Wins</th>
   </tr>
-  <tr ng-repeat="result in team.StandingsLists">
+  <tr ng-repeat="result in team.StandingsLists" ng-class-odd="'odd'" ng-class-even="'even'">
     <td>{{result.season}}</td>
     <td>{{result.round}}</td>
     <td>{{result.ConstructorStandings[0].position}}</td>

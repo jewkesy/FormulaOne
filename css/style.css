@@ -46,3 +46,11 @@ body {
 .item .raceTime {
   font-size: 1.2em;
 }
+
+.mainPic {
+  text-align: center;
+}
+
+.mainPic img {
+  border: 1px  #8585AD solid;
+}

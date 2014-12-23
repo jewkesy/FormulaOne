@@ -1,6 +1,5 @@
-<table class="table drivertable">
-  <tr>
-    <td colspan="5"><h3>Formula 1<span class="divider"> .:. </span>
+
+  <h3>Formula 1<span class="divider"> .:. </span>
       <span class="dropdown">
         <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
         <ul ng-model="seasonSelection" class="dropdown-menu" role="menu" aria-labelledby="dropdownYear">
@@ -10,8 +9,8 @@
         </ul>
       </span>
       <span class="divider"> .:. </span>Driver Standings</h3>
-    </td>
-  </tr>
+
+  <table class="table table-striped table-bordered table-hover table-condensed">
   <tr>
     <th>Position</th>
     <th>Name</th>
@@ -19,7 +18,7 @@
     <th>Wins</th>
     <th>Constructor</th>
   </tr>
-  <tr ng-repeat="driver in drivers.DriverStandings">
+  <tr ng-repeat="driver in drivers.DriverStandings" ng-class-odd="'odd'" ng-class-even="'even'">
     <td>{{driver.position}}</td>
     <td><img ng-src="http://jewkesy.github.io/colloquial/images/flags/{{driver.Driver.nationality}}.png" /> <a ui-sref="viewDriver({id:driver.Driver.driverId})">{{driver.Driver.givenName}} {{driver.Driver.familyName}}</a></td>
     <td>{{driver.points}}</td>

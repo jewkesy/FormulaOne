@@ -89,7 +89,7 @@ angular.module('formulaOneApp.controllers', [])
   });
 
   $scope.getCircuitPic = function(circuitName) {
-    var url = config.wikiApi + circuitName + "&pithumbsize=" + config.picWideSize;
+    var url = config.wikiApi + circuitName + "&pithumbsize=" + getImageWidth();
     //console.log(url)
     return $http.jsonp(url)
     .success(function(data){
@@ -136,7 +136,7 @@ angular.module('formulaOneApp.controllers', [])
   });
 
   $scope.getConstructorPic = function(constructorName) {
-    var url = config.wikiApi + constructorName + "&pithumbsize=" + config.picWideSize;
+    var url = config.wikiApi + constructorName + "&pithumbsize=" + getImageWidth();
     //console.log(url)
     return $http.jsonp(url)
     .success(function(data){
@@ -214,6 +214,13 @@ angular.module('formulaOneApp.controllers', [])
       };
   }
 ]);
+
+function getImageWidth() {
+  console.log($(window).width())
+
+  if ($(window).width() < config.picWideSize) return config.picNarrowSize
+  return config.picWideSize;
+}
 
 function getYearRange() {
   var startYear = new Date().getFullYear();

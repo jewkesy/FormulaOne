@@ -4,7 +4,7 @@ var config = {
     maxResponseRows: 1000,
     flagsUrl: "http://jewkesy.github.io/colloquial/images/flags/",
     wikiApi: "http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&format=json&action=query&redirects&prop=pageimages&titles=",
-    picNarrowSize: 200,
+    picNarrowSize: 320,
     picThumbSize: 50,
-    picWideSize: 400
+    picWideSize: 640
 };

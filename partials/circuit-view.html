@@ -1,9 +1,9 @@
 <table class="table circuitable">
   <tr>
-    <td colspan="2"><h3>Details for {{circuit.circuitName}}</h3></td>
+    <td colspan="2"><h3>{{circuit.circuitName}}</h3></td>
   </tr>
   <tr>
-    <td colspan="2">
+    <td class="mainPic" colspan="2">
       <img ng-src="{{circuit.imageUrl}}" />
     </td>
   </tr>
@@ -12,7 +12,6 @@
     <td>{{circuit.Location.locality}}, {{circuit.Location.country}}</td>
   </tr>
   <tr>
-    <td>Wiki Link</td>
-    <td><a target="_blank" ng-href="{{circuit.url}}"/>{{circuit.url}}</td>
+    <td colspan="2"><a target="_blank" ng-href="{{circuit.url}}"/>Wiki Link</td>
   </tr>
 </table>
