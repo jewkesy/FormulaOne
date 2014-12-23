@@ -217,6 +217,7 @@ angular.module('formulaOneApp.controllers', [])
 
 function getImageWidth() {
   console.log($(window).width())
+  if ($(window).width() < config.picNarrowSize) return $(window).width()
 
   if ($(window).width() < config.picWideSize) return config.picNarrowSize
   return config.picWideSize;
