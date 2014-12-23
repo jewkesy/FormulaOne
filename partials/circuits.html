@@ -1,7 +1,7 @@
 <h3>Circuits<span class="divider"> .:. </span>
   <span class="dropdown">
     <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
-    <ul ng-model="seasonSelection" class="dropdown-menu" role="menu" aria-labelledby="dropdownYear">
+    <ul ng-model="seasonSelection" class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownYear">
       <li ng-repeat="year in years">
         <a ng-click="$parent.season = year">{{year}}</a>
       </li>
