@@ -1,4 +1,4 @@
-<h3>Formula 1<span class="divider"> .:. </span>
+<h3>Circuits<span class="divider"> .:. </span>
   <span class="dropdown">
     <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
     <ul ng-model="seasonSelection" class="dropdown-menu" role="menu" aria-labelledby="dropdownYear">
@@ -6,14 +6,13 @@
         <a ng-click="$parent.season = year">{{year}}</a>
       </li>
     </ul>
-  </span>
-  <span class="divider"> .:. </span>Circuits</h3>
+  </span></h3>
 
   <table class="table table-striped table-bordered table-hover table-condensed">
   <tr>
     <th>Name</th>
     <th>Country</th>
-    <th>Link</th>
+    <th>Details</th>
   </tr>
   <tr ng-repeat="circuit in circuits.Circuits">
     <td><a ui-sref="viewCircuit({id: circuit.circuitId})">{{circuit.circuitName}}</a></td>

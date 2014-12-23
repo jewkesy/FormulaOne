@@ -1,4 +1,4 @@
-<h3>Formula 1<span class="divider"> .:. </span>
+<h3>Results / Race Schedule<span class="divider"> .:. </span>
       <span class="dropdown">
         <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
         <ul ng-model="seasonSelection" class="dropdown-menu" role="menu" aria-labelledby="dropdownYear">
@@ -6,22 +6,17 @@
             <a ng-click="$parent.season = year">{{year}}</a>
           </li>
         </ul>
-      </span>
-      <span class="divider"> .:. </span>Race Schedule</h3>
+      </span></h3>
 
   <table class="table table-striped table-bordered table-hover table-condensed">
   <tr>
     <th>Round</th>
-    <th>Name</th>
-    <th>Circuit</th>
-    <th>Date</th>
+    <th>Name / Circuit / Date</th>
     <th colspan="2">Details</th>
   </tr>
   <tr ng-repeat="race in schedule.Races">
     <td>{{race.round}}</td>
-    <td>{{race.raceName}}</td>
-    <td><a ui-sref="viewCircuit({id: race.Circuit.circuitId})">{{race.Circuit.circuitName}}</td>
-    <td>{{race | formatDateTime}}</td>
+    <td>{{race.raceName}}<br/><a ui-sref="viewCircuit({id: race.Circuit.circuitId})">{{race.Circuit.circuitName}}</a><br/>{{race | formatDateTime}}</td>
     <td><a target="_blank" ng-href="{{race.url}}"/>Wiki Link</td>
     <td><a ui-sref="viewResult({season: season, round: race.round})">Result</td>
   </tr>
