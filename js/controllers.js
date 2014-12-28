@@ -84,7 +84,7 @@ angular.module('formulaOneApp.controllers', [])
     retVal.wikiName = wikiUrl;
 
     $scope.getCircuitPic(wikiUrl);
-
+    $scope.getCircuitDetails(wikiUrl);
     $scope.circuit = retVal
   });
 
@@ -94,9 +94,24 @@ angular.module('formulaOneApp.controllers', [])
     return $http.jsonp(url)
     .success(function(data){
         $.each(data.query.pages, function(i,item){
+          //console.log(item)
           $scope.circuit.imageUrl = item.thumbnail.source;
           return;
         });
+    });
+  };
+
+  $scope.getCircuitDetails = function(circuitName) {
+    var url = config.wikiApi + circuitName + "&prop=revisions&rvprop=content&rvsection=0";
+    //console.log(url)
+    return $http.jsonp(url)
+    .success(function(data){
+      //console.log(data);
+      $.each(data.query.pages, function(i,item){
+        console.log(item.revisions[0]["*"])
+        $scope.circuit.details = item.revisions.contentmodel;
+        return;
+      });
     });
   };
 
@@ -216,7 +231,7 @@ angular.module('formulaOneApp.controllers', [])
 ]);
 
 function getImageWidth() {
-  console.log($(window).width())
+  //console.log($(window).width())
   if ($(window).width() < config.picNarrowSize) return $(window).width()
 
   if ($(window).width() < config.picWideSize) return config.picNarrowSize
