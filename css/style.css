@@ -2,6 +2,10 @@ body {
   font-family: 'Roboto', sans-serif,  Arial, "Helvetica Condensed", Helvetica, sans-serif;
 }
 
+.container {
+  margin-bottom: 40px;
+}
+
 .item {
   line-height: 1;
   border: 1px  #8585AD solid;

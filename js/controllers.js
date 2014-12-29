@@ -71,7 +71,7 @@ angular.module('formulaOneApp.controllers', [])
   });
   $location.path('/' + $stateParams.season + '/circuits');
 
-}).controller('CircuitViewController', function($scope, $rootScope, $http, $timeout, $stateParams, Circuit) {
+}).controller('CircuitViewController', function($scope, $rootScope, $http, $sce, $timeout, $stateParams, Circuit) {
   $scope.data = Circuit.circuit.get({ id: $stateParams.id, series: 'f1' }, function(){
     //console.log($scope.data)
     var retVal = $scope.data.MRData.CircuitTable.Circuits[0];
@@ -102,14 +102,14 @@ angular.module('formulaOneApp.controllers', [])
   };
 
   $scope.getCircuitDetails = function(circuitName) {
-    var url = config.wikiApi + circuitName + "&prop=revisions&rvprop=content&rvsection=0";
+    var url = "http://en.wikipedia.org/w/api.php?action=parse&prop=text&section=0&format=json&callback=JSON_CALLBACK&page=" + circuitName;
     //console.log(url)
     return $http.jsonp(url)
     .success(function(data){
-      //console.log(data);
-      $.each(data.query.pages, function(i,item){
-        console.log(item.revisions[0]["*"])
-        $scope.circuit.details = item.revisions.contentmodel;
+      //console.log(data.parse.text);
+      $.each(data.parse.text, function(i,item){
+        console.log(item)
+        $scope.circuit.details = $sce.trustAsHtml(parseXWiki(item));
         return;
       });
     });
@@ -229,6 +229,35 @@ angular.module('formulaOneApp.controllers', [])
       };
   }
 ]);
+
+// function toObject(arr) {
+//   var rv = {};
+//   for (var i = 0; i < arr.length; ++i)
+//     rv[i] = arr[i];
+//   return rv;
+// }
+//
+// function toOtherObject(arr) {
+//   return arr.reduce(function(o, v, i) {
+//   o[i] = v;
+//   return o;
+// }, {});
+// }
+
+function parseXWiki(text) {
+  return text;
+  var retVal = text.split('|');
+  //console.log(retVal[1])
+
+  console.log(retVal)
+
+  var tempRetVal = {
+    trackLength: 56.332,
+    turns: 33
+  }
+
+  return tempRetVal;
+}
 
 function getImageWidth() {
   //console.log($(window).width())
