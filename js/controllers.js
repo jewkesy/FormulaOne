@@ -268,7 +268,9 @@ function getImageWidth() {
 }
 
 function getYearRange() {
-  var startYear = new Date().getFullYear();
+  //var startYear = new Date().getFullYear();
+  //TODO: have holding page till 2015 data is available
+  var startYear = 2014;
   var endYear = 1950;
   var dateRange = [];
 
