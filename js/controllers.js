@@ -1,11 +1,12 @@
 angular.module('formulaOneApp.controllers', [])
 .controller('DriverListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Driver) {
-  if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
+  if (!$stateParams.season) $stateParams.season = config.defaultYear;
   $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Driver Standings";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
 
   $scope.data = Driver.standings.get({season: $stateParams.season, series: 'f1' }, function(){
+    $scope.content_loaded = true;
     var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
     $scope.drivers = retVal
   }); //fetch all drivers. Issues a GET to /api/drivers
@@ -18,8 +19,9 @@ angular.module('formulaOneApp.controllers', [])
   $location.path('/' + $stateParams.season + '/drivers');
 
 }).controller('DriverViewController', function($scope, $rootScope, $http, $timeout, $stateParams, Driver) {
-  console.log($stateParams)
+  //console.log($stateParams)
   $scope.data = Driver.driver.get({ id: $stateParams.id, series: 'f1' }, function(){
+    $scope.content_loaded = true;
     var retVal = $scope.data.MRData.DriverTable.Drivers[0];
 
     $rootScope.title = " .:. FormulaOne Stats .:. Driver .:. " + retVal.givenName + ' ' + retVal.familyName;
@@ -53,12 +55,13 @@ angular.module('formulaOneApp.controllers', [])
   };
 
 }).controller('CircuitListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Circuit) {
-  if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
+  if (!$stateParams.season) $stateParams.season = config.defaultYear;
   $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Circuits";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
 
   $scope.data = Circuit.circuits.get({season: $stateParams.season, series: 'f1' }, function(){
+    $scope.content_loaded = true;
     var retVal = $scope.data.MRData.CircuitTable
     //console.log(retVal)
     $scope.circuits = retVal
@@ -73,7 +76,7 @@ angular.module('formulaOneApp.controllers', [])
 
 }).controller('CircuitViewController', function($scope, $rootScope, $http, $sce, $timeout, $stateParams, Circuit) {
   $scope.data = Circuit.circuit.get({ id: $stateParams.id, series: 'f1' }, function(){
-    //console.log($scope.data)
+    $scope.content_loaded = true;
     var retVal = $scope.data.MRData.CircuitTable.Circuits[0];
     $rootScope.title = " .:. FormulaOne Stats .:. Circuits .:. " + retVal.circuitName;
     $scope.gMapUrl = "https://www.google.co.uk/maps/@52.7055818,-1.7753949,15z";
@@ -116,12 +119,13 @@ angular.module('formulaOneApp.controllers', [])
   };
 
 }).controller('ConstructorListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Constructor) {
-  if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
+  if (!$stateParams.season) $stateParams.season = config.defaultYear;
   $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Constructor Standings";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
 
   $scope.data = Constructor.standings.get({season: $stateParams.season, series: 'f1' }, function(){
+    $scope.content_loaded = true;
     var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
     //console.log(retVal)
     $scope.teams = retVal //NOTE constructor is a reserved AngularJs name!
@@ -136,7 +140,7 @@ angular.module('formulaOneApp.controllers', [])
 
 }).controller('ConstructorViewController', function($scope, $rootScope, $http, $timeout, $stateParams, Constructor) {
   $scope.data = Constructor.constructor.get({ id: $stateParams.id, series: 'f1' }, function(){
-
+    $scope.content_loaded = true;
     var retVal = $scope.data.MRData.StandingsTable;
     $rootScope.title = " .:. FormulaOne Stats .:. Constructors .:. " + retVal.StandingsLists[0].ConstructorStandings[0].Constructor.name;
     //console.log(retVal)
@@ -162,7 +166,7 @@ angular.module('formulaOneApp.controllers', [])
     });
   };
 }).controller('ResultViewController', function($scope, $rootScope, $http, $state, $stateParams, $window, $location, Result) {
-  if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
+  if (!$stateParams.season) $stateParams.season = config.defaultYear;
 
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
@@ -170,6 +174,7 @@ angular.module('formulaOneApp.controllers', [])
   $scope.noRounds = 1;
 
   $scope.data = Result.round.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function(){
+    $scope.content_loaded = true;
     var retVal = $scope.data.MRData.RaceTable
 
     $scope.noRounds = $scope.data.MRData.total;
@@ -198,12 +203,13 @@ angular.module('formulaOneApp.controllers', [])
   $location.path('/' + $stateParams.season + '/results/' +  $stateParams.round);
 
 }).controller('ScheduleListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Schedule) {
-  if (!$stateParams.season) $stateParams.season = new Date().getFullYear();
+  if (!$stateParams.season) $stateParams.season = config.defaultYear;
   $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Race Schedule";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
 
   $scope.data = Schedule.schedule.get({season: $stateParams.season, series: 'f1' }, function(){
+    $scope.content_loaded = true;
     var retVal = $scope.data.MRData.RaceTable
     $scope.schedule = retVal
   });
@@ -270,7 +276,7 @@ function getImageWidth() {
 function getYearRange() {
   //var startYear = new Date().getFullYear();
   //TODO: have holding page till 2015 data is available
-  var startYear = 2014;
+  var startYear = config.defaultYear;
   var endYear = 1950;
   var dateRange = [];
 

@@ -1,27 +1,32 @@
-<table class="table constructorable">
-  <tr>
-    <td colspan="2"><h3>{{team.StandingsLists[0].ConstructorStandings[0].Constructor.name}}</h3></td>
-  </tr>
-  <tr>
-    <td class="mainPic" colspan="2"><img ng-src="{{team.imageUrl}}" /></td>
-  </tr>
-  <tr>
-    <td colspan="2"><a target="_blank" ng-href="{{team.StandingsLists[0].ConstructorStandings[0].Constructor.url}}"/>Wiki Link</td>
-  </tr>
-</table>
-<table class="table constructorable">
-  <tr>
-    <th>Season</th>
-    <th>Rounds</th>
-    <th>Position</th>
-    <th>Points</th>
-    <th>Wins</th>
-  </tr>
-  <tr ng-repeat="result in team.StandingsLists" ng-class-odd="'odd'" ng-class-even="'even'">
-    <td>{{result.season}}</td>
-    <td>{{result.round}}</td>
-    <td>{{result.ConstructorStandings[0].position}}</td>
-    <td>{{result.ConstructorStandings[0].points}}</td>
-    <td>{{result.ConstructorStandings[0].wins}}</td>
-  </tr>
-</table>
+<div ng-hide="content_loaded">
+  Just grabbing your data...
+</div>
+<div ng-show="content_loaded">
+  <table class="table constructorable">
+    <tr>
+      <td colspan="2"><h3>{{team.StandingsLists[0].ConstructorStandings[0].Constructor.name}}</h3></td>
+    </tr>
+    <tr>
+      <td class="mainPic" colspan="2"><img ng-src="{{team.imageUrl}}" /></td>
+    </tr>
+    <tr>
+      <td colspan="2"><a target="_blank" ng-href="{{team.StandingsLists[0].ConstructorStandings[0].Constructor.url}}"/>Wiki Link</td>
+    </tr>
+  </table>
+  <table class="table constructorable">
+    <tr>
+      <th>Season</th>
+      <th>Rounds</th>
+      <th>Position</th>
+      <th>Points</th>
+      <th>Wins</th>
+    </tr>
+    <tr ng-repeat="result in team.StandingsLists" ng-class-odd="'odd'" ng-class-even="'even'">
+      <td>{{result.season}}</td>
+      <td>{{result.round}}</td>
+      <td>{{result.ConstructorStandings[0].position}}</td>
+      <td>{{result.ConstructorStandings[0].points}}</td>
+      <td>{{result.ConstructorStandings[0].wins}}</td>
+    </tr>
+  </table>
+</div>

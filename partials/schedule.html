@@ -1,4 +1,8 @@
-<h3>Results / Race Schedule<span class="divider"> .:. </span>
+<div ng-hide="content_loaded">
+  Just grabbing your data...
+</div>
+<div ng-show="content_loaded">
+  <h3>Results / Race Schedule<span class="divider"> .:. </span>
       <span class="dropdown">
         <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
         <ul ng-model="seasonSelection" class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownYear">
@@ -9,15 +13,16 @@
       </span></h3>
 
   <table class="table table-striped table-bordered table-hover table-condensed">
-  <tr>
-    <th>Round</th>
-    <th>Name / Circuit / Date</th>
-    <th colspan="2">Details</th>
-  </tr>
-  <tr ng-repeat="race in schedule.Races">
-    <td>{{race.round}}</td>
-    <td>{{race.raceName}}<br/><a ui-sref="viewCircuit({id: race.Circuit.circuitId})">{{race.Circuit.circuitName}}</a><br/>{{race | formatDateTime}}</td>
-    <td><a target="_blank" ng-href="{{race.url}}"/>Wiki Link</td>
-    <td><a ui-sref="viewResult({season: season, round: race.round})">Result</td>
-  </tr>
-</table>
+    <tr>
+      <th>Round</th>
+      <th>Name / Circuit / Date</th>
+      <th colspan="2">Details</th>
+    </tr>
+    <tr ng-repeat="race in schedule.Races">
+      <td>{{race.round}}</td>
+      <td>{{race.raceName}}<br/><a ui-sref="viewCircuit({id: race.Circuit.circuitId})">{{race.Circuit.circuitName}}</a><br/>{{race | formatDateTime}}</td>
+      <td><a target="_blank" ng-href="{{race.url}}"/>Wiki Link</td>
+      <td><a ui-sref="viewResult({season: season, round: race.round})">Result</td>
+    </tr>
+  </table>
+</div>

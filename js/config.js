@@ -6,5 +6,6 @@ var config = {
     wikiApi: "http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&format=json&action=query&redirects&prop=pageimages&titles=",
     picNarrowSize: 320,
     picThumbSize: 50,
-    picWideSize: 640
+    picWideSize: 640,
+    defaultYear: 2014
 };

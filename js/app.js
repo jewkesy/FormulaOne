@@ -37,7 +37,9 @@ angular.module('formulaOneApp').config(function($stateProvider) {
     controller: 'ResultViewController'
   });
 }).run(function($state) {
-  if (!$state.season) $state.season = new Date().getFullYear();
+  //TODO: handle empty year data
+  // if (!$state.season) $state.season = new Date().getFullYear();
+  if (!$state.season) $state.season = config.defaultYear;
   $state.go('drivers', {'season': $state.season}); //make a transition to drivers state when app starts
 });
 

@@ -1,4 +1,8 @@
-<h3>Circuits<span class="divider"> .:. </span>
+<div ng-hide="content_loaded">
+  Just grabbing your data...
+</div>
+<div ng-show="content_loaded">
+  <h3>Circuits<span class="divider"> .:. </span>
   <span class="dropdown">
     <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
     <ul ng-model="seasonSelection" class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownYear">
@@ -9,14 +13,15 @@
   </span></h3>
 
   <table class="table table-striped table-bordered table-hover table-condensed">
-  <tr>
-    <th>Name</th>
-    <th>Country</th>
-    <th>Details</th>
-  </tr>
-  <tr ng-repeat="circuit in circuits.Circuits">
-    <td><a ui-sref="viewCircuit({id: circuit.circuitId})">{{circuit.circuitName}}</a></td>
-    <td>{{circuit.Location.locality}}, {{circuit.Location.country}}</td>
-    <td><a target="_blank" ng-href="{{circuit.url}}"/>Wiki Link</td>
-  </tr>
-</table>
+    <tr>
+      <th>Name</th>
+      <th>Country</th>
+      <th>Details</th>
+    </tr>
+    <tr ng-repeat="circuit in circuits.Circuits">
+      <td><a ui-sref="viewCircuit({id: circuit.circuitId})">{{circuit.circuitName}}</a></td>
+      <td>{{circuit.Location.locality}}, {{circuit.Location.country}}</td>
+      <td><a target="_blank" ng-href="{{circuit.url}}"/>Wiki Link</td>
+    </tr>
+  </table>
+</div>
