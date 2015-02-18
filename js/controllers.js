@@ -176,7 +176,7 @@ angular.module('formulaOneApp.controllers', [])
   $scope.data = Result.round.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function(){
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.RaceTable
-
+console.log(retVal)
     $scope.noRounds = $scope.data.MRData.total;
     if ($scope.noRounds == 0) {
       $state.go('viewResult', {'season': $scope.season, 'round': '1'});
@@ -184,6 +184,9 @@ angular.module('formulaOneApp.controllers', [])
     $scope.rounds = (getRoundRange($scope.data.MRData.total));
 
     $scope.results = retVal
+    if (retVal.Races.length == 0) {
+      retVal.Races = [{raceName : "TBA"}];
+    }
     $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Round " + retVal.round + " .:. " + retVal.Races[0].raceName;
     //console.log(retVal)
   });
@@ -226,7 +229,7 @@ angular.module('formulaOneApp.controllers', [])
 }).filter('formatDateTime', [
   '$filter', function($filter) {
       return function(inputData) {
-          console.log(inputData)
+          //console.log(inputData)
           var raceDate;
           if (inputData.time) {
             raceDate = new Date(inputData.date + 'T' + inputData.time);
