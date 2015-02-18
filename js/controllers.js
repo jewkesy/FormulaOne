@@ -211,6 +211,7 @@ angular.module('formulaOneApp.controllers', [])
   $scope.data = Schedule.schedule.get({season: $stateParams.season, series: 'f1' }, function(){
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.RaceTable
+    console.log(retVal)
     $scope.schedule = retVal
   });
 
@@ -225,9 +226,15 @@ angular.module('formulaOneApp.controllers', [])
 }).filter('formatDateTime', [
   '$filter', function($filter) {
       return function(inputData) {
-          //console.log(inputData.date)
-          var raceDate = new Date(inputData.date + 'T' + inputData.time);
-
+          console.log(inputData)
+          var raceDate;
+          if (inputData.time) {
+            raceDate = new Date(inputData.date + 'T' + inputData.time);
+          }
+          else
+          {
+            raceDate = new Date(inputData.date);
+          }
 
           var retVal = raceDate.toUTCString(); //.replace(raceDate.getFullYear(), raceDate.getFullYear() + "<br/>");
 
