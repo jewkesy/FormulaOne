@@ -176,7 +176,7 @@ angular.module('formulaOneApp.controllers', [])
   $scope.data = Result.round.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function(){
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.RaceTable
-console.log(retVal)
+    //console.log(retVal)
     $scope.noRounds = $scope.data.MRData.total;
     if ($scope.noRounds == 0) {
       $state.go('viewResult', {'season': $scope.season, 'round': '1'});
@@ -214,7 +214,7 @@ console.log(retVal)
   $scope.data = Schedule.schedule.get({season: $stateParams.season, series: 'f1' }, function(){
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.RaceTable
-    console.log(retVal)
+    //console.log(retVal)
     $scope.schedule = retVal
   });
 
@@ -286,7 +286,8 @@ function getImageWidth() {
 function getYearRange() {
   //var startYear = new Date().getFullYear();
   //TODO: have holding page till 2015 data is available
-  var startYear = config.defaultYear;
+  //var startYear = config.defaultYear;
+  var startYear = new Date().getFullYear();
   var endYear = 1950;
   var dateRange = [];
 
