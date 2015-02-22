@@ -140,11 +140,12 @@ angular.module('formulaOneApp.controllers', [])
 
 }).controller('ConstructorViewController', function($scope, $rootScope, $http, $timeout, $stateParams, Constructor) {
 
-  $scope.data = Constructor.cache.get({ id: $stateParams.id, series: 'f1' }, function(){
-    console.log($scope.data)
-  })
+  // $scope.data = Constructor.cache.get({ id: $stateParams.id, series: 'f1' }, function(){
+  //   console.log($scope.data)
+  // })
 
   $scope.data = Constructor.cache.get({ id: $stateParams.id, series: 'f1' }, function(){
+    console.log('loaded from cache')
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.StandingsTable;
     $rootScope.title = " .:. FormulaOne Stats .:. Constructors .:. " + retVal.StandingsLists[0].ConstructorStandings[0].Constructor.name;
