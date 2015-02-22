@@ -144,8 +144,20 @@ angular.module('formulaOneApp.controllers', [])
   //   console.log($scope.data)
   // })
 
-  $scope.data = Constructor.cache.get({ id: $stateParams.id, series: 'f1' }, function(){
-    console.log('loaded from cache')
+  $scope.data = Constructor.cache.get({ id: $stateParams.id, series: 'f1' }, buildConstructor, function(response){
+    if(response.status === 404) {
+      console.log('could not find cache for ' + $stateParams.id)
+      $scope.data = Constructor.constructor.get({ id: $stateParams.id, series: 'f1' }, buildConstructor, function(response){
+        if(response.status === 404) {
+          console.log('could not find constructor for ' + $stateParams.id)
+        }
+      });
+    }
+  });
+
+  function buildConstructor() {
+    console.log('building constructor')
+
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.StandingsTable;
     $rootScope.title = " .:. FormulaOne Stats .:. Constructors .:. " + retVal.StandingsLists[0].ConstructorStandings[0].Constructor.name;
@@ -158,11 +170,7 @@ angular.module('formulaOneApp.controllers', [])
     $scope.getConstructorPic(wikiUrl);
 
     $scope.team = retVal
-  }, function(response){
-    if(response.status === 404) {
-      console.log('could not find ' + $stateParams.id)
-    }
-  });
+  }
 
   $scope.getConstructorPic = function(constructorName) {
     var url = config.wikiApi + constructorName + "&pithumbsize=" + getImageWidth();
