@@ -158,6 +158,10 @@ angular.module('formulaOneApp.controllers', [])
     $scope.getConstructorPic(wikiUrl);
 
     $scope.team = retVal
+  }, function(response){
+    if(response.status === 404) {
+      console.log('could not find ' + $stateParams.id)
+    }
   });
 
   $scope.getConstructorPic = function(constructorName) {
