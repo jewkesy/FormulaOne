@@ -8,3 +8,4 @@
 	}
 }
 //mongodb://<dbuser>:<dbpassword>@ds061370.mongolab.com:61370/formulaonestats
+// mongoimport -h  ds061370.mongolab.com:61370 -d formulaonestats -u <dbuser> -p <dbpassword> -c constructors --file filename.json
