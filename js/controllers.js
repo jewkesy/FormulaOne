@@ -144,7 +144,7 @@ angular.module('formulaOneApp.controllers', [])
     console.log($scope.data)
   })
 
-  $scope.data = Constructor.constructor.get({ id: $stateParams.id, series: 'f1' }, function(){
+  $scope.data = Constructor.cache.get({ id: $stateParams.id, series: 'f1' }, function(){
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.StandingsTable;
     $rootScope.title = " .:. FormulaOne Stats .:. Constructors .:. " + retVal.StandingsLists[0].ConstructorStandings[0].Constructor.name;
