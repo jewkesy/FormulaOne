@@ -28,7 +28,7 @@ angular.module('formulaOneApp.services', ['ngResource'])
       constructor: $resource(config.api + ':series/constructors/:id/constructorStandings.json', {
         'get': { method:'GET', cache: true, isArray:true }
       }),
-      cache: $resource('http://jewkesy.github.io/FormulaOne/db/cache/constructors/:id.json', {
+      cache: $resource('db/cache/constructors/:id.json', {
         'get': { method:'GET', cache: true, isArray:true }
       })
     };

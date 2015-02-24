@@ -47,12 +47,22 @@ function processDriverPics(url) { request({ url: url, json: true }, function (er
 })
 }
 
+function buildConstructorCache(url) {
+  request({ url: url, json: true }, function (error, response, body) {
+    fs.writeFile('db/cache/constructors.json', JSON.stringify(body, null, 4), function (err) {
+      if (err) return console.log(err);
+      console.log('done? > db/cache/constructors.json');
+    });
+  });
+}
+
 // driver profile pics
 
 // get list of drivers
 // http://ergast.com/api/f1/drivers.json?limit=1000
-processDriverPics("http://ergast.com/api/f1/drivers.json?limit=1000")
+// processDriverPics("http://ergast.com/api/f1/drivers.json?limit=1000")
 
 // circuits
 
 // constructors
+buildConstructorCache("http://ergast.com/api/f1/constructors.json?limit=1000")

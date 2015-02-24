@@ -156,8 +156,6 @@ angular.module('formulaOneApp.controllers', [])
   });
 
   function buildConstructor() {
-    console.log('building constructor')
-
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.StandingsTable;
     $rootScope.title = " .:. FormulaOne Stats .:. Constructors .:. " + retVal.StandingsLists[0].ConstructorStandings[0].Constructor.name;
