@@ -48,7 +48,7 @@ function processDriverPics(url) { request({ url: url, json: true }, function (er
 }
 
 
-function buildConstructorCache(url) {
+function buildConstructorCache(url, startFrom) {
   request({ url: url + 'constructors.json?limit=1000', json: true }, function (error, response, body) {
     fs.writeFile('db/cache/constructors.json', JSON.stringify(body, null, 4), function (err) {
       if (err) return console.log(err);
@@ -57,10 +57,17 @@ function buildConstructorCache(url) {
 
     var constructors = body.MRData.ConstructorTable.Constructors;
     //console.log(constructors)
+    var letsGo = false;
     for (var idx in constructors) {
+      if (startFrom == constructors[idx].constructorId) {
+        letsGo = true;
+      }
+      if (!letsGo) continue;
+
       consUrl = url + 'constructors/' + constructors[idx].constructorId + '/constructorStandings.json'
 
       console.log('Requesting ' + consUrl)
+
       request({ url: consUrl, json: true }, function (error, response, body) {
         if(error) return console.log(error)
 
@@ -84,4 +91,4 @@ function buildConstructorCache(url) {
 // circuits
 
 // constructors
-buildConstructorCache("http://ergast.com/api/f1/")
+buildConstructorCache("http://ergast.com/api/f1/", "hill")

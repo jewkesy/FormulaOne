@@ -1,0 +1,33 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/constructors/lec/constructorstandings.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "StandingsTable": {
+            "constructorId": "lec",
+            "StandingsLists": [
+                {
+                    "season": "1977",
+                    "round": "17",
+                    "ConstructorStandings": [
+                        {
+                            "position": "16",
+                            "positionText": "16",
+                            "points": "0",
+                            "wins": "0",
+                            "Constructor": {
+                                "constructorId": "lec",
+                                "url": "http://en.wikipedia.org/wiki/LEC_(Formula_One)",
+                                "name": "LEC",
+                                "nationality": "British"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

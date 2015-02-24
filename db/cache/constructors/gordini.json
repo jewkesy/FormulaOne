@@ -1,0 +1,14 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/constructors/gordini/constructorstandings.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "0",
+        "StandingsTable": {
+            "constructorId": "gordini",
+            "StandingsLists": []
+        }
+    }
+}
