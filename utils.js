@@ -47,12 +47,31 @@ function processDriverPics(url) { request({ url: url, json: true }, function (er
 })
 }
 
+
 function buildConstructorCache(url) {
-  request({ url: url, json: true }, function (error, response, body) {
+  request({ url: url + 'constructors.json?limit=1000', json: true }, function (error, response, body) {
     fs.writeFile('db/cache/constructors.json', JSON.stringify(body, null, 4), function (err) {
       if (err) return console.log(err);
-      console.log('done? > db/cache/constructors.json');
+      console.log('done > db/cache/constructors.json');
     });
+
+    var constructors = body.MRData.ConstructorTable.Constructors;
+    //console.log(constructors)
+    for (var idx in constructors) {
+      consUrl = url + 'constructors/' + constructors[idx].constructorId + '/constructorStandings.json'
+
+      console.log('Requesting ' + consUrl)
+      request({ url: consUrl, json: true }, function (error, response, body) {
+        if(error) return console.log(error)
+
+        var localPath = body.MRData.url.replace(url, 'db/cache/').replace('/constructorstandings.json', '.json');
+
+        fs.writeFile(localPath, JSON.stringify(body, null, 4), function (err) {
+          if (err) return console.log(err);
+          console.log('done > ' + localPath)
+        });
+      });
+    }
   });
 }
 
@@ -65,4 +84,4 @@ function buildConstructorCache(url) {
 // circuits
 
 // constructors
-buildConstructorCache("http://ergast.com/api/f1/constructors.json?limit=1000")
+buildConstructorCache("http://ergast.com/api/f1/")
