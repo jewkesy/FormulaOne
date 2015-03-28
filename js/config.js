@@ -7,5 +7,5 @@ var config = {
     picNarrowSize: 320,
     picThumbSize: 50,
     picWideSize: 640,
-    defaultYear: 2014
+    defaultYear: 2015
 };
