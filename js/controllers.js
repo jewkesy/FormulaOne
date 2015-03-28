@@ -226,11 +226,18 @@ angular.module('formulaOneApp.controllers', [])
   $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Race Schedule";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
+  var d = new Date();
+  $scope.currentDate = d.getFullYear() + '-' + ('0' + (d.getMonth()+1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2) ;
+
+
 
   $scope.data = Schedule.schedule.get({season: $stateParams.season, series: 'f1' }, function(){
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.RaceTable
-    //console.log(retVal)
+// console.log(retVal)
+    var tmpDate = new Date();
+    raceDate = tmpDate.getFullYear() + ('0' + (tmpDate.getMonth()+1)).slice(-2)+ ('0' + tmpDate.getDate()).slice(-2)
+
     $scope.schedule = retVal
   });
 
@@ -245,36 +252,31 @@ angular.module('formulaOneApp.controllers', [])
 }).filter('formatDateTime', [
   '$filter', function($filter) {
       return function(inputData) {
-          //console.log(inputData)
           var raceDate;
           if (inputData.time) {
             raceDate = new Date(inputData.date + 'T' + inputData.time);
           }
-          else
-          {
+          else {
             raceDate = new Date(inputData.date);
           }
 
-          var retVal = raceDate.toUTCString(); //.replace(raceDate.getFullYear(), raceDate.getFullYear() + "<br/>");
+          var retVal = raceDate.toUTCString();
 
           return retVal;
       };
   }
-]);
+]).filter('getSimpleDate', [
+  '$filter', function($filter) {
+      return function(inputData) {
+          var raceDate = new Date(inputData.date);
 
-// function toObject(arr) {
-//   var rv = {};
-//   for (var i = 0; i < arr.length; ++i)
-//     rv[i] = arr[i];
-//   return rv;
-// }
-//
-// function toOtherObject(arr) {
-//   return arr.reduce(function(o, v, i) {
-//   o[i] = v;
-//   return o;
-// }, {});
-// }
+          var retVal = raceDate.getFullYear() + ('0' + (raceDate.getMonth()+1)).slice(-2)+ ('0' + raceDate.getDate()).slice(-2);
+         
+console.log(retVal)
+          return retVal;
+      };
+  }
+]);
 
 function parseXWiki(text) {
   return text;
