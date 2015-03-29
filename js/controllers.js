@@ -189,10 +189,10 @@ angular.module('formulaOneApp.controllers', [])
   $scope.round = $stateParams.round
   $scope.noRounds = 1;
 
-  $scope.data = Result.round.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function(){
+  $scope.data = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function(){
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.RaceTable
-    console.log(retVal)
+    //console.log($scope.data)
     $scope.noRounds = $scope.data.MRData.total;
     if ($scope.noRounds == 0) {
       $state.go('viewResult', {'season': $scope.season, 'round': '1'});
