@@ -70,6 +70,22 @@ body {
     overflow-x: hidden;
 }
 
+.pole {
+  background-image: url("../images/flag_opac.jpg");
+  color: #fff;
+  text-shadow: 0 0 2px #000, 0 0 2px #000;
+}
+
+.pole .position {
+  color: #fff;
+  text-shadow: 0 0 2px #000, 0 0 2px #000;
+}
+
+.pole .lastName a {
+  color: #fff;
+  text-shadow: 0 0 2px #000, 0 0 2px #000;
+}
+
 .footer {
   background-color: #333;
   height: 40px;
