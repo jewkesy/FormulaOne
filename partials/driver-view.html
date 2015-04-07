@@ -4,7 +4,7 @@
 <div ng-show="content_loaded">
   <table class="table drivertable">
     <tr>
-      <td><h3>{{driver.givenName}} {{driver.familyName}}</h3>{{driver.Age}} years old {{driver.points}}</td>
+      <td><h3>{{driver.givenName}}</h3><h1>{{driver.familyName}}</h1>{{driver.Age}} years old {{driver.points}}</td>
       <td><img ng-src="{{ driver.imageUrl }}" /></td>
     </tr>
     <tr>
@@ -13,7 +13,7 @@
     </tr>
     <tr>
       <td>Nationality</td>
-      <td><img ng-src="{{driver.flagUrl}}" /> {{driver.nationality}}</td>
+      <td><img ng-src="{{driver.flagUrl}}" /><br/> {{driver.nationality}}</td>
     </tr>
     <tr>
       <td>Number</td>
