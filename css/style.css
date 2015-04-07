@@ -20,7 +20,7 @@ body {
   opacity : 0.2;*/
 }
 
-.item .position {
+.position {
   font-size: 8em;
   font-weight: bold;
   color: #8585AD;
@@ -30,16 +30,29 @@ body {
   height: 100px;
 }
 
-.item .lastName {
+.lastName {
   font-size: 2.5em;
   margin: 0px;
   text-align: right;
 }
 
-.item .firstName {
+.firstName {
   font-size: 1.2em;
   font-style: italic;
   text-align: left;
+}
+
+.driverNo {
+  font-size: 4em;
+  font-weight: bold;
+  width: 100%;
+
+  margin: 0px;
+  height: 100px;
+}
+
+.centerMe {
+  text-align: center;
 }
 
 .item .status {

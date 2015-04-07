@@ -2,25 +2,18 @@
   Just grabbing your data...
 </div>
 <div ng-show="content_loaded">
-  <table class="table drivertable">
+  <table class="table drivertable table-striped table-bordered table-hover table-condensed">
     <tr>
-      <td><h3>{{driver.givenName}}</h3><h1>{{driver.familyName}}</h1>{{driver.Age}} years old {{driver.points}}</td>
-      <td><img ng-src="{{ driver.imageUrl }}" /></td>
+      <td><h2><span class="lastName">{{driver.familyName}}</span><br/>
+        <span class="firstName">{{driver.givenName}}&nbsp;&nbsp;<img ng-src="{{driver.flagUrl}}" alt="{{driver.nationality}}" /></span></h2></td>
+      <td rowspan="4" class="centerMe"><img ng-src="{{ driver.imageUrl }}" /></td>
+    </tr>
+    <tr><td>{{driver.Age}} years old<br/>{{driver.dateOfBirth | date:'MMM d, y'}}</td></tr>
+    <tr>
+      <td>Driver Number<span class="driverNo">{{driver.permanentNumber}}</span></td>
     </tr>
     <tr>
-      <td>DOB</td>
-      <td>{{driver.dateOfBirth | date:'MMM d, y'}}</td>
-    </tr>
-    <tr>
-      <td>Nationality</td>
-      <td><img ng-src="{{driver.flagUrl}}" /><br/> {{driver.nationality}}</td>
-    </tr>
-    <tr>
-      <td>Number</td>
-      <td>{{driver.permanentNumber}}</td>
-    </tr>
-    <tr>
-      <td colspan=2><a target="_blank" ng-href="{{driver.url}}"/>Wiki Link</td>
+      <td><a target="_blank" ng-href="{{driver.url}}"/>Wiki Link</td>
     </tr>
   </table>
 </div>
