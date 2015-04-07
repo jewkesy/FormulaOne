@@ -4,16 +4,16 @@
 <div ng-show="content_loaded">
   <table class="table constructorable table-striped table-bordered table-hover table-condensed">
     <tr>
-      <td colspan="2"><h3>{{team.StandingsLists[0].ConstructorStandings[0].Constructor.name}}</h3></td>
+      <td><h2><span class="consName">{{team.StandingsLists[0].ConstructorStandings[0].Constructor.name}}</span></h2></td>
     </tr>
     <tr>
-      <td class="mainPic" colspan="2"><img ng-src="{{team.imageUrl}}" /></td>
+      <td><img class="img-responsive center-block img-thumbnail" ng-src="{{team.imageUrl}}" /></td>
     </tr>
     <tr>
-      <td colspan="2"><a target="_blank" ng-href="{{team.StandingsLists[0].ConstructorStandings[0].Constructor.url}}"/>Wiki Link</td>
+      <td><a target="_blank" ng-href="{{team.StandingsLists[0].ConstructorStandings[0].Constructor.url}}"/>Wiki Link</td>
     </tr>
   </table>
-  <table class="table constructorable">
+  <table class="table constructorable table-striped table-bordered table-hover table-condensed">
     <tr>
       <th>Season</th>
       <th>Rounds</th>

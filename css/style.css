@@ -30,6 +30,12 @@ body {
   height: 100px;
 }
 
+.consName{
+  font-size: 2.5em;
+  margin: 0px;
+  text-align: right;
+}
+
 .lastName {
   font-size: 2.5em;
   margin: 0px;
