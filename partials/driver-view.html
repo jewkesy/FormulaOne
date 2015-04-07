@@ -6,9 +6,9 @@
     <tr>
       <td><h2><span class="lastName">{{driver.familyName}}</span><br/>
         <span class="firstName">{{driver.givenName}}&nbsp;&nbsp;<img ng-src="{{driver.flagUrl}}" alt="{{driver.nationality}}" /></span></h2></td>
-      <td rowspan="4" class="centerMe"><img ng-src="{{ driver.imageUrl }}" /></td>
     </tr>
-    <tr><td>{{driver.Age}} years old<br/>{{driver.dateOfBirth | date:'MMM d, y'}}</td></tr>
+    <tr><td><img class="img-responsive center-block img-thumbnail" ng-src="{{ driver.imageUrl }}" /></td></tr>
+    <tr><td>{{driver.Age}} years old .:. {{driver.dateOfBirth | date:'MMM d, y'}}</td></tr>
     <tr>
       <td>Driver Number<span class="driverNo">{{driver.permanentNumber}}</span></td>
     </tr>
