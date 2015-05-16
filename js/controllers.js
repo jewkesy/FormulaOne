@@ -111,7 +111,7 @@ angular.module('formulaOneApp.controllers', [])
     .success(function(data){
       //console.log(data.parse.text);
       $.each(data.parse.text, function(i,item){
-        console.log(item)
+        // console.log(item)
         $scope.circuit.details = $sce.trustAsHtml(parseXWiki(item));
         return;
       });
@@ -229,8 +229,6 @@ angular.module('formulaOneApp.controllers', [])
   var d = new Date();
   $scope.currentDate = d.getFullYear() + '-' + ('0' + (d.getMonth()+1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2) ;
 
-
-
   $scope.data = Schedule.schedule.get({season: $stateParams.season, series: 'f1' }, function(){
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.RaceTable
@@ -272,59 +270,10 @@ angular.module('formulaOneApp.controllers', [])
 
           var retVal = raceDate.getFullYear() + ('0' + (raceDate.getMonth()+1)).slice(-2)+ ('0' + raceDate.getDate()).slice(-2);
          
-console.log(retVal)
           return retVal;
       };
   }
 ]);
-
-function parseXWiki(text) {
-  return text;
-  var retVal = text.split('|');
-  //console.log(retVal[1])
-
-  console.log(retVal)
-
-  var tempRetVal = {
-    trackLength: 56.332,
-    turns: 33
-  }
-
-  return tempRetVal;
-}
-
-function getImageWidth() {
-  //console.log($(window).width())
-  if ($(window).width() < config.picNarrowSize) return $(window).width()
-
-  if ($(window).width() < config.picWideSize) return config.picNarrowSize
-  return config.picWideSize;
-}
-
-function getYearRange() {
-  //var startYear = new Date().getFullYear();
-  //TODO: have holding page till 2015 data is available
-  //var startYear = config.defaultYear;
-  var startYear = new Date().getFullYear();
-  var endYear = 1950;
-  var dateRange = [];
-
-  while(endYear <= startYear) {
-      dateRange.push(startYear);
-      startYear -= 1
-  }
-  return dateRange;
-}
-
-function getRoundRange(noRounds) {
-  var roundRange = [];
-
-  for (i = 1; i <= noRounds; i++) {
-      roundRange.push(i);
-  }
-
-  return roundRange;
-}
 
 function headerController($scope, $location) {
   $scope.isActive = function (viewLocation) {
