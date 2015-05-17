@@ -6,9 +6,7 @@ Live version is here: - http://jewkesy.github.io/FormulaOne/
 
 The stats come from http://ergast.com/mrd/ as the intial data source.  
 
-Surplus information is extracted from Wikipedia where suitable.
-
-[![Screenshot](https://github.com/jewkesy/jewkesy.github.io/blob/master/images/f1_5.png?raw=ture)]
+Additional information and pictures are extracted from Wikipedia where possible.
 
 ## Technologies Used
 [AngularJS with UI Router](https://angularjs.org/) is the primary technology used.  [Bootstrap and Bootstrap UI](http://getbootstrap.com/) is used for styling the application to work on multiple devices.
@@ -24,3 +22,7 @@ MongoDB can used to store cached versions of data.  I've hosted my queries on Mo
 ## Misc.
 
 I've used flags that are hosted on another project, [Colloquail](https://github.com/jewkesy/colloquial).  This project is a dumping ground for reusable content that I use in several other projects.  Feel free to use it or grab your own copies.
+
+## Screenshots
+
+![Screenshot](https://github.com/jewkesy/jewkesy.github.io/blob/master/images/f1_5.png?raw=ture)]
