@@ -35,6 +35,10 @@ angular.module('formulaOneApp').config(function($stateProvider) {
     url: '/:season/results/:round',
     templateUrl: 'partials/result-view.html',
     controller: 'ResultViewController'
+  }).state('news', {
+    url: '/news',
+    templateUrl: 'partials/news.html',
+    controller: 'NewsController'
   });
 }).run(function($state) {
   //TODO: handle empty year data

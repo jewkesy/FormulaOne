@@ -1,5 +1,15 @@
 angular.module('formulaOneApp.controllers', [])
-.controller('DriverListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Driver) {
+.controller('NewsController', function($scope, $rootScope, $state, $stateParams, $window, $location, News) {
+  $scope.data = News.latestNews.get({series: 'f1' }, function(){
+    $scope.content_loaded = true;
+    console.log($scope.data);
+    var retVal = $scope.data.responseData.results
+    console.log(retVal)
+    $scope.results = retVal
+    });
+  $location.path('/news');
+
+}).controller('DriverListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Driver) {
   if (!$stateParams.season) $stateParams.season = config.defaultYear;
   $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Driver Standings";
   $scope.season = $stateParams.season;

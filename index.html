@@ -62,6 +62,7 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
+                <li ng-class="{ active: isActive('/news')}"><a ui-sref="news({season:season})">News</a></li>
                 <li ng-class="{ active: isActive('/drivers')}"><a ui-sref="drivers({season:season})">Drivers</a></li>
                 <li ng-class="{ active: isActive('/circuits')}"><a ui-sref="circuits({season:season})">Circuits</a></li>
                 <li ng-class="{ active: isActive('/constructors')}"><a ui-sref="constructors({season:season})">Constructors</a></li>
