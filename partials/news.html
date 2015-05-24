@@ -5,12 +5,11 @@
 <div ng-show="content_loaded">
   <h3>Latest News</h3>
 
-  <table class="table table-striped table-bordered table-hover table-condensed">
-    <tr ng-repeat="article in results">
-      <td>{{article.titleNoFormatting}}</td>
-      <td>{{article.publishedDate}}</td>
-      <td>{{article.content}}</td>
-      <td><a target="_blank" ng-href="{{article.unescapedUrl}}"/>{{article.publisher}}</td>
-    </tr>
-  </table>
+    <div ng-repeat="article in results" >
+      <h4>{{article.titleNoFormatting}}</h4>
+      <span>{{article.content}}</span>
+      <p><a target="_blank" ng-href="{{article.unescapedUrl}}"/>{{article.publisher}} <i>{{article.publishedDate}}</i></p>
+      <hr/>
+    </div>
+
 </div>

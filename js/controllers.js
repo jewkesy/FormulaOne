@@ -11,8 +11,9 @@ angular.module('formulaOneApp.controllers', [])
     .success(function(data){
       $scope.content_loaded = true;
       
-      var retVal = data.responseData.results
+      var retVal = stripStuff(data.responseData.results);
 
+      console.log(retVal)
       $scope.results = retVal
     });
 

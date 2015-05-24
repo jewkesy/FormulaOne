@@ -1,3 +1,13 @@
+function stripStuff(content) {
+
+
+  //remove html
+  //content.replace("<b>", "");
+  //retVal = retVal.replace("</b>", "");
+
+  return content
+}
+
 
 function getImageWidth() {
   //console.log($(window).width())
