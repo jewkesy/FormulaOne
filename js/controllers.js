@@ -5,14 +5,17 @@ angular.module('formulaOneApp.controllers', [])
   };
 }).controller('FooterController', function($scope) {
   $scope.currentDate = new Date();
-}).controller('NewsController', function($scope, $location, News) {
-  $scope.data = News.latestNews.get({}, function(){
-    $scope.content_loaded = true;
-    console.log($scope.data);
-    var retVal = $scope.data.responseData.results
-    console.log(retVal)
-    $scope.results = retVal
+}).controller('NewsController', function($scope, $location, $http, News) {
+
+  $http.jsonp(config.googleNews)
+    .success(function(data){
+      $scope.content_loaded = true;
+      
+      var retVal = data.responseData.results
+
+      $scope.results = retVal
     });
+
   $location.path('/news');
 
 }).controller('DriverListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Driver) {
