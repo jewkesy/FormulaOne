@@ -1,5 +1,11 @@
 angular.module('formulaOneApp.controllers', [])
-.controller('NewsController', function($scope, $rootScope, $state, $stateParams, $window, $location, News) {
+.controller('HeaderController', function($scope, $location) {
+  $scope.isActive = function (viewLocation) {
+    return $location.path().indexOf(viewLocation) >= 0;
+  };
+}).controller('FooterController', function($scope) {
+  $scope.currentDate = new Date();
+}).controller('NewsController', function($scope, $rootScope, $state, $stateParams, $window, $location, News) {
   $scope.data = News.latestNews.get({series: 'f1' }, function(){
     $scope.content_loaded = true;
     console.log($scope.data);
@@ -284,14 +290,3 @@ angular.module('formulaOneApp.controllers', [])
       };
   }
 ]);
-
-function headerController($scope, $location) {
-  $scope.isActive = function (viewLocation) {
-    return $location.path().indexOf(viewLocation) >= 0;
-  };
-}
-
-function footerController($scope)
-{
-    $scope.currentDate = new Date();
-}

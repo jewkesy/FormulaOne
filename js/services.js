@@ -2,7 +2,7 @@ angular.module('formulaOneApp.services', ['ngResource'])
   .factory('News', function($resource) {
     return {
       latestNews: $resource(config.googleNews, {
-        'get':  { method: 'JSONP', params: {callback: 'JSON_CALLBACK'}, isArray: true }
+        'get':  { method: 'JSONP', params: {callback: 'JSON_CALLBACK'}, cache: true, isArray: true }
       })
     };
   }).factory('Driver', function($resource) {
