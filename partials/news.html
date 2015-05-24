@@ -6,6 +6,7 @@
   <h3>Latest News</h3>
 
     <div ng-repeat="article in results" >
+      <img width="200px" src="{{article.image.tbUrl}}"/>
       <h4>{{article.titleNoFormatting}}</h4>
       <span>{{article.content}}</span>
       <p><a target="_blank" ng-href="{{article.unescapedUrl}}"/>{{article.publisher}} <i>{{article.publishedDate}}</i></p>
