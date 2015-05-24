@@ -5,8 +5,8 @@ angular.module('formulaOneApp.controllers', [])
   };
 }).controller('FooterController', function($scope) {
   $scope.currentDate = new Date();
-}).controller('NewsController', function($scope, $rootScope, $state, $stateParams, $window, $location, News) {
-  $scope.data = News.latestNews.get({series: 'f1' }, function(){
+}).controller('NewsController', function($scope, $location, News) {
+  $scope.data = News.latestNews.get({}, function(){
     $scope.content_loaded = true;
     console.log($scope.data);
     var retVal = $scope.data.responseData.results
@@ -248,7 +248,6 @@ angular.module('formulaOneApp.controllers', [])
   $scope.data = Schedule.schedule.get({season: $stateParams.season, series: 'f1' }, function(){
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.RaceTable
-// console.log(retVal)
     var tmpDate = new Date();
     raceDate = tmpDate.getFullYear() + ('0' + (tmpDate.getMonth()+1)).slice(-2)+ ('0' + tmpDate.getDate()).slice(-2)
 
