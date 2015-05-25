@@ -1,20 +1,20 @@
-angular.module('formulaOneApp.controllers', [])
+angular.module('formulaOneApp.controllers', ['ngSanitize'])
 .controller('HeaderController', function($scope, $location) {
   $scope.isActive = function (viewLocation) {
     return $location.path().indexOf(viewLocation) >= 0;
   };
 }).controller('FooterController', function($scope) {
   $scope.currentDate = new Date();
-}).controller('NewsController', function($scope, $location, $http, News) {
+}).controller('NewsController', function($scope, $location, $sce, $http, News) {
 
   $http.jsonp(config.googleNews)
     .success(function(data){
       $scope.content_loaded = true;
       
-      var retVal = stripStuff(data.responseData.results);
+      var retVal = prepStuff(data.responseData.results);
 
-      console.log(retVal)
-      $scope.results = retVal
+      //console.log(retVal)
+      $scope.results = retVal;
     });
 
   $location.path('/news');

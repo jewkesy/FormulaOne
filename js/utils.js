@@ -1,5 +1,5 @@
-function stripStuff(content) {
-
+function prepStuff(content) {
+  //console.log(content)
 
   //remove html
   //content.replace("<b>", "");

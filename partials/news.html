@@ -3,12 +3,13 @@
   Just grabbing your data...
 </div>
 <div ng-show="content_loaded">
-  <h3>Latest News</h3>
+  <h1>Latest News</h1>
 
     <div ng-repeat="article in results" >
-      <img width="300px" src="{{article.image.url}}"/>
-      <h4>{{article.titleNoFormatting}}</h4>
-      <span>{{article.content}}</span>
+      
+      <h3 ng-bind-html="article.titleNoFormatting"></h3>
+      <img class="img-responsive center-block img-thumbnail" ng-src="{{article.image.url}}" />
+      <span ng-bind-html="article.content"></span>
       <p><a target="_blank" ng-href="{{article.unescapedUrl}}"/>{{article.publisher}} <i>{{article.publishedDate}}</i></p>
       <hr/>
     </div>
