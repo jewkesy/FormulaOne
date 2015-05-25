@@ -3,14 +3,14 @@
 </div>
 <div ng-show="content_loaded">
   <h3>Circuits<span class="divider"> .:. </span>
-  <span class="dropdown">
-    <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
-    <ul ng-model="seasonSelection" class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownYear">
-      <li ng-repeat="year in years">
-        <a ng-click="$parent.season = year">{{year}}</a>
-      </li>
-    </ul>
-  </span></h3>
+    <span class="dropdown">
+      <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
+      <ul ng-model="seasonSelection" class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownYear">
+        <li ng-repeat="year in years">
+          <a ng-click="$parent.season = year">{{year}}</a>
+        </li>
+      </ul>
+    </span></h3>
 
   <table class="table table-striped table-bordered table-hover table-condensed">
     <tr>
