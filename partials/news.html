@@ -2,14 +2,21 @@
   Just grabbing your data...
 </div>
 <div ng-show="content_loaded">
-  <h1>Latest News</h1>
+  <h3>Latest News</h3>
 
-  <div ng-repeat="article in results">
-    <h3 ng-bind-html="article.titleNoFormatting"></h3>
+  <div class="news" ng-repeat="article in results">
+    <a target="_blank" ng-href="{{article.unescapedUrl}}"><h4 ng-bind-html="article.titleNoFormatting"></h4></a>
     <img class="img-responsive center-block img-thumbnail" ng-src="{{article.image.url}}" />
     <span ng-bind-html="article.content"></span>
-    <p><a target="_blank" ng-href="{{article.unescapedUrl}}"/>{{article.publisher}} <i>{{article.publishedDate}}</i></p>
+    <span><b>{{article.publisher}}</b> - <i>{{article.publishedDate}}</i></span>
     <hr/>
+
+    <div ng-repeat="related in article.relatedStories">
+      <a target="_blank" ng-href="{{related.unescapedUrl}}"><h4 ng-bind-html="related.titleNoFormatting"></h4></a>
+      <span><b>{{related.publisher}}</b> - <i>{{related.publishedDate}}</i></span>
+    <hr/>
+    </div>
+
   </div>
 
 </div>
