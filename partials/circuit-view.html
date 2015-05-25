@@ -2,47 +2,7 @@
   Just grabbing your data...
 </div>
 <div ng-show="content_loaded">
-<!-- <table class="table circuitable">
-    <tr>
-      <td colspan="2"><h3>{{circuit.circuitName}} .:. {{circuit.Location.locality}}, {{circuit.Location.country}}</h3></td>
-    </tr>
-    <tr>
-      <td>
-        <table>
-          <tr>
-            <td>
-              Length:
-            </td>
-            <td>
-              {{circuit.details.trackLength}}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Turns:
-            </td>
-            <td>
-              {{circuit.details.turns}}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Record Time:
-            </td>
-            <td>
-              {{circuit.details.recordTime}}
-            </td>
-          </tr>
-        </table>
-      </td>
-      <td class="mainPic">
-        <img ng-src="{{circuit.imageUrl}}" />
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2"><a target="_blank" ng-href="{{circuit.url}}"/>Wiki Link</td>
-    </tr>
-  </table> -->
+
   <div ng-bind-html="circuit.details">
 
   </div>
