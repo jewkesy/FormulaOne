@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/bartels.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "bartels",
+            "Drivers": [
+                {
+                    "driverId": "bartels",
+                    "url": "http://en.wikipedia.org/wiki/Michael_Bartels",
+                    "givenName": "Michael",
+                    "familyName": "Bartels",
+                    "dateOfBirth": "1968-03-08",
+                    "nationality": "German"
+                }
+            ]
+        }
+    }
+}

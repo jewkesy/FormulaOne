@@ -1,0 +1,24 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/resta.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "resta",
+            "Drivers": [
+                {
+                    "driverId": "resta",
+                    "code": "DIR",
+                    "url": "http://en.wikipedia.org/wiki/Paul_di_Resta",
+                    "givenName": "Paul",
+                    "familyName": "di Resta",
+                    "dateOfBirth": "1986-04-16",
+                    "nationality": "British"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/johnson.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "johnson",
+            "Drivers": [
+                {
+                    "driverId": "johnson",
+                    "url": "http://en.wikipedia.org/wiki/Eddie_Johnson_(auto_racer)",
+                    "givenName": "Eddie",
+                    "familyName": "Johnson",
+                    "dateOfBirth": "1919-02-10",
+                    "nationality": "American"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/alliot.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "alliot",
+            "Drivers": [
+                {
+                    "driverId": "alliot",
+                    "url": "http://en.wikipedia.org/wiki/Philippe_Alliot",
+                    "givenName": "Philippe",
+                    "familyName": "Alliot",
+                    "dateOfBirth": "1954-07-27",
+                    "nationality": "French"
+                }
+            ]
+        }
+    }
+}

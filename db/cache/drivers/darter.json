@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/darter.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "darter",
+            "Drivers": [
+                {
+                    "driverId": "darter",
+                    "url": "http://en.wikipedia.org/wiki/Duane_Carter",
+                    "givenName": "Duane",
+                    "familyName": "Carter",
+                    "dateOfBirth": "1913-05-05",
+                    "nationality": "American"
+                }
+            ]
+        }
+    }
+}

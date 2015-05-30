@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/burti.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "burti",
+            "Drivers": [
+                {
+                    "driverId": "burti",
+                    "url": "http://en.wikipedia.org/wiki/Luciano_Burti",
+                    "givenName": "Luciano",
+                    "familyName": "Burti",
+                    "dateOfBirth": "1975-03-05",
+                    "nationality": "Brazilian"
+                }
+            ]
+        }
+    }
+}

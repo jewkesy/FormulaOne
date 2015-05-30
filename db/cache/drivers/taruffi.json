@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/taruffi.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "taruffi",
+            "Drivers": [
+                {
+                    "driverId": "taruffi",
+                    "url": "http://en.wikipedia.org/wiki/Piero_Taruffi",
+                    "givenName": "Piero",
+                    "familyName": "Taruffi",
+                    "dateOfBirth": "1906-10-12",
+                    "nationality": "Italian"
+                }
+            ]
+        }
+    }
+}

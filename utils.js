@@ -47,7 +47,6 @@ function processDriverPics(url) { request({ url: url, json: true }, function (er
 })
 }
 
-
 function buildConstructorCache(url, startFrom) {
   request({ url: url + 'constructors.json?limit=1000', json: true }, function (error, response, body) {
     fs.writeFile('db/cache/constructors.json', JSON.stringify(body, null, 4), function (err) {
@@ -82,6 +81,39 @@ function buildConstructorCache(url, startFrom) {
   });
 }
 
+function buildDriverCache(url, startFrom) {
+
+  request({ url: url + 'drivers.json?limit=100&offset=' + startFrom, json: true }, function (error, response, body) {
+    if(error) return console.log(error)
+    fs.writeFile('db/cache/drivers.json', JSON.stringify(body, null, 4), function (err) {
+      if (err) return console.log(err);
+      console.log('done > db/cache/drivers.json');
+    });
+
+    var drivers = body.MRData.DriverTable.Drivers;
+
+    for (var idx in drivers) {
+      driverUrl = url + 'drivers/' + drivers[idx].driverId + '.json'
+      console.log(driverUrl)
+
+      var driverFile = 'db/cache/drivers/' + drivers[idx].driverId + '.json'
+
+      request({ url: driverUrl, json: true }, function (error, response, body) {
+        if (error) return console.log(error);
+
+        var localPath = body.MRData.url.replace(url, 'db/cache/');
+
+        fs.writeFile(localPath, JSON.stringify(body, null, 4), function (err) {
+          if (err) return console.log(err);
+          console.log('done > ' + localPath)
+        });
+      });
+
+    }
+  });
+
+}
+
 // driver profile pics
 
 // get list of drivers
@@ -91,4 +123,4 @@ function buildConstructorCache(url, startFrom) {
 // circuits
 
 // constructors
-buildConstructorCache("http://ergast.com/api/f1/", "hill")
+buildDriverCache("http://ergast.com/api/f1/", 800)

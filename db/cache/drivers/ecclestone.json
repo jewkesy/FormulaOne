@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/ecclestone.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "ecclestone",
+            "Drivers": [
+                {
+                    "driverId": "ecclestone",
+                    "url": "http://en.wikipedia.org/wiki/Bernie_Ecclestone",
+                    "givenName": "Bernie",
+                    "familyName": "Ecclestone",
+                    "dateOfBirth": "1930-10-28",
+                    "nationality": "British"
+                }
+            ]
+        }
+    }
+}

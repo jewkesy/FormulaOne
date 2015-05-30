@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/schlesser.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "schlesser",
+            "Drivers": [
+                {
+                    "driverId": "schlesser",
+                    "url": "http://en.wikipedia.org/wiki/Jean-Louis_Schlesser",
+                    "givenName": "Jean-Louis",
+                    "familyName": "Schlesser",
+                    "dateOfBirth": "1948-09-12",
+                    "nationality": "French"
+                }
+            ]
+        }
+    }
+}

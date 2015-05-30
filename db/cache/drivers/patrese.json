@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/patrese.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "patrese",
+            "Drivers": [
+                {
+                    "driverId": "patrese",
+                    "url": "http://en.wikipedia.org/wiki/Riccardo_Patrese",
+                    "givenName": "Riccardo",
+                    "familyName": "Patrese",
+                    "dateOfBirth": "1957-04-17",
+                    "nationality": "Italian"
+                }
+            ]
+        }
+    }
+}

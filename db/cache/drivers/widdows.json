@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/widdows.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "widdows",
+            "Drivers": [
+                {
+                    "driverId": "widdows",
+                    "url": "http://en.wikipedia.org/wiki/Robin_Widdows",
+                    "givenName": "Robin",
+                    "familyName": "Widdows",
+                    "dateOfBirth": "1942-05-27",
+                    "nationality": "British"
+                }
+            ]
+        }
+    }
+}

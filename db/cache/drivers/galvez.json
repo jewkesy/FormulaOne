@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/galvez.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "galvez",
+            "Drivers": [
+                {
+                    "driverId": "galvez",
+                    "url": "http://en.wikipedia.org/wiki/%C3%93scar_Alfredo_G%C3%A1lvez",
+                    "givenName": "Oscar",
+                    "familyName": "Gálvez",
+                    "dateOfBirth": "1913-08-17",
+                    "nationality": "Argentine"
+                }
+            ]
+        }
+    }
+}

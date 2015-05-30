@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/nannini.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "nannini",
+            "Drivers": [
+                {
+                    "driverId": "nannini",
+                    "url": "http://en.wikipedia.org/wiki/Alessandro_Nannini",
+                    "givenName": "Alessandro",
+                    "familyName": "Nannini",
+                    "dateOfBirth": "1959-07-07",
+                    "nationality": "Italian"
+                }
+            ]
+        }
+    }
+}

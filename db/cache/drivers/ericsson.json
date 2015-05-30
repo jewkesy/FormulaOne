@@ -1,0 +1,25 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/ericsson.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "ericsson",
+            "Drivers": [
+                {
+                    "driverId": "ericsson",
+                    "permanentNumber": "9",
+                    "code": "ERI",
+                    "url": "http://en.wikipedia.org/wiki/Marcus_Ericsson",
+                    "givenName": "Marcus",
+                    "familyName": "Ericsson",
+                    "dateOfBirth": "1990-09-02",
+                    "nationality": "Swedish"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/naylor.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "naylor",
+            "Drivers": [
+                {
+                    "driverId": "naylor",
+                    "url": "http://en.wikipedia.org/wiki/Brian_Naylor",
+                    "givenName": "Brian",
+                    "familyName": "Naylor",
+                    "dateOfBirth": "1923-03-24",
+                    "nationality": "British"
+                }
+            ]
+        }
+    }
+}

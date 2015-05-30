@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/rodriguez.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "rodriguez",
+            "Drivers": [
+                {
+                    "driverId": "rodriguez",
+                    "url": "http://en.wikipedia.org/wiki/Pedro_Rodr%C3%ADguez_(racing_driver)",
+                    "givenName": "Pedro",
+                    "familyName": "Rodríguez",
+                    "dateOfBirth": "1940-01-18",
+                    "nationality": "Mexican"
+                }
+            ]
+        }
+    }
+}

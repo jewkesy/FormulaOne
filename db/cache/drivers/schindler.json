@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/schindler.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "schindler",
+            "Drivers": [
+                {
+                    "driverId": "schindler",
+                    "url": "http://en.wikipedia.org/wiki/Bill_Schindler",
+                    "givenName": "Bill",
+                    "familyName": "Schindler",
+                    "dateOfBirth": "1909-03-06",
+                    "nationality": "American"
+                }
+            ]
+        }
+    }
+}

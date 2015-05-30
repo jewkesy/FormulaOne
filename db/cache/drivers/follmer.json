@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/follmer.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "follmer",
+            "Drivers": [
+                {
+                    "driverId": "follmer",
+                    "url": "http://en.wikipedia.org/wiki/George_Follmer",
+                    "givenName": "George",
+                    "familyName": "Follmer",
+                    "dateOfBirth": "1934-01-27",
+                    "nationality": "American"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/vergne.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "vergne",
+            "Drivers": [
+                {
+                    "driverId": "vergne",
+                    "permanentNumber": "25",
+                    "code": "VER",
+                    "url": "http://en.wikipedia.org/wiki/Jean-%C3%89ric_Vergne",
+                    "givenName": "Jean-Éric",
+                    "familyName": "Vergne",
+                    "dateOfBirth": "1990-04-25",
+                    "nationality": "French"
+                }
+            ]
+        }
+    }
+}

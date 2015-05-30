@@ -1,0 +1,24 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/barrichello.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "barrichello",
+            "Drivers": [
+                {
+                    "driverId": "barrichello",
+                    "code": "BAR",
+                    "url": "http://en.wikipedia.org/wiki/Rubens_Barrichello",
+                    "givenName": "Rubens",
+                    "familyName": "Barrichello",
+                    "dateOfBirth": "1972-05-23",
+                    "nationality": "Brazilian"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/hailwood.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "hailwood",
+            "Drivers": [
+                {
+                    "driverId": "hailwood",
+                    "url": "http://en.wikipedia.org/wiki/Mike_Hailwood",
+                    "givenName": "Mike",
+                    "familyName": "Hailwood",
+                    "dateOfBirth": "1940-04-02",
+                    "nationality": "British"
+                }
+            ]
+        }
+    }
+}

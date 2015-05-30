@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/apicella.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "apicella",
+            "Drivers": [
+                {
+                    "driverId": "apicella",
+                    "url": "http://en.wikipedia.org/wiki/Marco_Apicella",
+                    "givenName": "Marco",
+                    "familyName": "Apicella",
+                    "dateOfBirth": "1965-10-07",
+                    "nationality": "Italian"
+                }
+            ]
+        }
+    }
+}

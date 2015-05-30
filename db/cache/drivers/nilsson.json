@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/nilsson.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "nilsson",
+            "Drivers": [
+                {
+                    "driverId": "nilsson",
+                    "url": "http://en.wikipedia.org/wiki/Gunnar_Nilsson",
+                    "givenName": "Gunnar",
+                    "familyName": "Nilsson",
+                    "dateOfBirth": "1948-11-20",
+                    "nationality": "Swedish"
+                }
+            ]
+        }
+    }
+}

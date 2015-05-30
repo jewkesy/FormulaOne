@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/fitch.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "fitch",
+            "Drivers": [
+                {
+                    "driverId": "fitch",
+                    "url": "http://en.wikipedia.org/wiki/John_Fitch_(driver)",
+                    "givenName": "John",
+                    "familyName": "Fitch",
+                    "dateOfBirth": "1917-08-04",
+                    "nationality": "American"
+                }
+            ]
+        }
+    }
+}

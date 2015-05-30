@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/mcdowell.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "mcdowell",
+            "Drivers": [
+                {
+                    "driverId": "mcdowell",
+                    "url": "http://en.wikipedia.org/wiki/Johnny_McDowell",
+                    "givenName": "Johnny",
+                    "familyName": "McDowell",
+                    "dateOfBirth": "1915-01-29",
+                    "nationality": "American"
+                }
+            ]
+        }
+    }
+}

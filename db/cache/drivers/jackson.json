@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/jackson.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "jackson",
+            "Drivers": [
+                {
+                    "driverId": "jackson",
+                    "url": "http://en.wikipedia.org/wiki/Jimmy_Jackson_(driver)",
+                    "givenName": "Jimmy",
+                    "familyName": "Jackson",
+                    "dateOfBirth": "1910-07-25",
+                    "nationality": "American"
+                }
+            ]
+        }
+    }
+}

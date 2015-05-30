@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/lovely.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "lovely",
+            "Drivers": [
+                {
+                    "driverId": "lovely",
+                    "url": "http://en.wikipedia.org/wiki/Pete_Lovely",
+                    "givenName": "Pete",
+                    "familyName": "Lovely",
+                    "dateOfBirth": "1926-04-11",
+                    "nationality": "American"
+                }
+            ]
+        }
+    }
+}

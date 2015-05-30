@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/fontana.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "fontana",
+            "Drivers": [
+                {
+                    "driverId": "fontana",
+                    "url": "http://en.wikipedia.org/wiki/Norberto_Fontana",
+                    "givenName": "Norberto",
+                    "familyName": "Fontana",
+                    "dateOfBirth": "1975-01-20",
+                    "nationality": "Argentine"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/ghinzani.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "ghinzani",
+            "Drivers": [
+                {
+                    "driverId": "ghinzani",
+                    "url": "http://en.wikipedia.org/wiki/Piercarlo_Ghinzani",
+                    "givenName": "Piercarlo",
+                    "familyName": "Ghinzani",
+                    "dateOfBirth": "1952-01-16",
+                    "nationality": "Italian"
+                }
+            ]
+        }
+    }
+}

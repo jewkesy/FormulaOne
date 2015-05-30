@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/bayol.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "bayol",
+            "Drivers": [
+                {
+                    "driverId": "bayol",
+                    "url": "http://en.wikipedia.org/wiki/%C3%89lie_Bayol",
+                    "givenName": "Élie",
+                    "familyName": "Bayol",
+                    "dateOfBirth": "1914-02-28",
+                    "nationality": "French"
+                }
+            ]
+        }
+    }
+}

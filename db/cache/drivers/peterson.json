@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/peterson.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "peterson",
+            "Drivers": [
+                {
+                    "driverId": "peterson",
+                    "url": "http://en.wikipedia.org/wiki/Ronnie_Peterson",
+                    "givenName": "Ronnie",
+                    "familyName": "Peterson",
+                    "dateOfBirth": "1944-02-14",
+                    "nationality": "Swedish"
+                }
+            ]
+        }
+    }
+}

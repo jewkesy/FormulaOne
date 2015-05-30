@@ -1,0 +1,24 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/ambrosio.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "ambrosio",
+            "Drivers": [
+                {
+                    "driverId": "ambrosio",
+                    "code": "DAM",
+                    "url": "http://en.wikipedia.org/wiki/J%C3%A9r%C3%B4me_d%27Ambrosio",
+                    "givenName": "Jérôme",
+                    "familyName": "d'Ambrosio",
+                    "dateOfBirth": "1985-12-27",
+                    "nationality": "Belgian"
+                }
+            ]
+        }
+    }
+}

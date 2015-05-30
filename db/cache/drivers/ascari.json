@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/ascari.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "ascari",
+            "Drivers": [
+                {
+                    "driverId": "ascari",
+                    "url": "http://en.wikipedia.org/wiki/Alberto_Ascari",
+                    "givenName": "Alberto",
+                    "familyName": "Ascari",
+                    "dateOfBirth": "1918-07-13",
+                    "nationality": "Italian"
+                }
+            ]
+        }
+    }
+}

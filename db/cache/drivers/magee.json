@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/magee.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "magee",
+            "Drivers": [
+                {
+                    "driverId": "magee",
+                    "url": "http://en.wikipedia.org/wiki/Damien_Magee",
+                    "givenName": "Damien",
+                    "familyName": "Magee",
+                    "dateOfBirth": "1945-11-17",
+                    "nationality": "British"
+                }
+            ]
+        }
+    }
+}

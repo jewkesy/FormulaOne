@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/duncan.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "duncan",
+            "Drivers": [
+                {
+                    "driverId": "duncan",
+                    "url": "http://en.wikipedia.org/wiki/Len_Duncan",
+                    "givenName": "Len",
+                    "familyName": "Duncan",
+                    "dateOfBirth": "1911-07-25",
+                    "nationality": "American"
+                }
+            ]
+        }
+    }
+}

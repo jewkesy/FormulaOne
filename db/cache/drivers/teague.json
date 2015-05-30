@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/teague.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "teague",
+            "Drivers": [
+                {
+                    "driverId": "teague",
+                    "url": "http://en.wikipedia.org/wiki/Marshall_Teague",
+                    "givenName": "Marshall",
+                    "familyName": "Teague",
+                    "dateOfBirth": "1922-02-22",
+                    "nationality": "American"
+                }
+            ]
+        }
+    }
+}

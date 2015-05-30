@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/surer.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "surer",
+            "Drivers": [
+                {
+                    "driverId": "surer",
+                    "url": "http://en.wikipedia.org/wiki/Marc_Surer",
+                    "givenName": "Marc",
+                    "familyName": "Surer",
+                    "dateOfBirth": "1951-09-18",
+                    "nationality": "Swiss"
+                }
+            ]
+        }
+    }
+}

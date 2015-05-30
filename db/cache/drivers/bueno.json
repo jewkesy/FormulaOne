@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/bueno.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "bueno",
+            "Drivers": [
+                {
+                    "driverId": "bueno",
+                    "url": "http://en.wikipedia.org/wiki/Luiz_Bueno",
+                    "givenName": "Luiz",
+                    "familyName": "Bueno",
+                    "dateOfBirth": "1937-01-16",
+                    "nationality": "Brazilian"
+                }
+            ]
+        }
+    }
+}

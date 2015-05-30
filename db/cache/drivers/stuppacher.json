@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/stuppacher.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "stuppacher",
+            "Drivers": [
+                {
+                    "driverId": "stuppacher",
+                    "url": "http://en.wikipedia.org/wiki/Otto_Stuppacher",
+                    "givenName": "Otto",
+                    "familyName": "Stuppacher",
+                    "dateOfBirth": "1947-03-03",
+                    "nationality": "Austrian"
+                }
+            ]
+        }
+    }
+}

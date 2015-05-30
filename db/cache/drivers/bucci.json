@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/bucci.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "bucci",
+            "Drivers": [
+                {
+                    "driverId": "bucci",
+                    "url": "http://en.wikipedia.org/wiki/Clemar_Bucci",
+                    "givenName": "Clemar",
+                    "familyName": "Bucci",
+                    "dateOfBirth": "1920-09-04",
+                    "nationality": "Argentine"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/mcguire.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "mcguire",
+            "Drivers": [
+                {
+                    "driverId": "mcguire",
+                    "url": "http://en.wikipedia.org/wiki/Brian_McGuire",
+                    "givenName": "Brian",
+                    "familyName": "McGuire",
+                    "dateOfBirth": "1945-12-13",
+                    "nationality": "Australian"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/giacomelli.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "giacomelli",
+            "Drivers": [
+                {
+                    "driverId": "giacomelli",
+                    "url": "http://en.wikipedia.org/wiki/Bruno_Giacomelli",
+                    "givenName": "Bruno",
+                    "familyName": "Giacomelli",
+                    "dateOfBirth": "1952-09-10",
+                    "nationality": "Italian"
+                }
+            ]
+        }
+    }
+}

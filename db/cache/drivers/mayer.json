@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/mayer.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "mayer",
+            "Drivers": [
+                {
+                    "driverId": "mayer",
+                    "url": "http://en.wikipedia.org/wiki/Timmy_Mayer",
+                    "givenName": "Timmy",
+                    "familyName": "Mayer",
+                    "dateOfBirth": "1938-02-22",
+                    "nationality": "American"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/migault.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "migault",
+            "Drivers": [
+                {
+                    "driverId": "migault",
+                    "url": "http://en.wikipedia.org/wiki/Fran%C3%A7ois_Migault",
+                    "givenName": "François",
+                    "familyName": "Migault",
+                    "dateOfBirth": "1944-12-04",
+                    "nationality": "French"
+                }
+            ]
+        }
+    }
+}

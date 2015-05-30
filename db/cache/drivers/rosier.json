@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/rosier.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "rosier",
+            "Drivers": [
+                {
+                    "driverId": "rosier",
+                    "url": "http://en.wikipedia.org/wiki/Louis_Rosier",
+                    "givenName": "Louis",
+                    "familyName": "Rosier",
+                    "dateOfBirth": "1905-11-05",
+                    "nationality": "French"
+                }
+            ]
+        }
+    }
+}

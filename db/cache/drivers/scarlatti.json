@@ -1,0 +1,23 @@
+{
+    "MRData": {
+        "xmlns": "http://ergast.com/mrd/1.4",
+        "series": "f1",
+        "url": "http://ergast.com/api/f1/drivers/scarlatti.json",
+        "limit": "30",
+        "offset": "0",
+        "total": "1",
+        "DriverTable": {
+            "driverId": "scarlatti",
+            "Drivers": [
+                {
+                    "driverId": "scarlatti",
+                    "url": "http://en.wikipedia.org/wiki/Giorgio_Scarlatti",
+                    "givenName": "Giorgio",
+                    "familyName": "Scarlatti",
+                    "dateOfBirth": "1921-10-02",
+                    "nationality": "Italian"
+                }
+            ]
+        }
+    }
+}
