@@ -15,6 +15,9 @@ angular.module('formulaOneApp.services', ['ngResource'])
       }),
       driverStandings: $resource(config.api + ':series/drivers/:id/driverStandings.json', {
         'get': { method:'GET', cache: true, isArray:true }
+      }),
+      cache: $resource('db/cache/drivers/:id.json', {
+        'get': { method:'GET', cache: true, isArray:true }
       })
     };
   }).factory('Circuit', function($resource) {
