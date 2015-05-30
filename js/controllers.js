@@ -40,7 +40,19 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
 }).controller('DriverViewController', function($scope, $rootScope, $http, $timeout, $stateParams, Driver) {
   //console.log($stateParams)
-  $scope.data = Driver.driver.get({ id: $stateParams.id, series: 'f1' }, function(){
+
+  $scope.data = Driver.cache.get({ id: $stateParams.id, series: 'f1' }, buildDriver, function(response){
+    if(response.status === 404) {
+      console.log('could not find cache for ' + $stateParams.id)
+      $scope.data = Driver.driver.get({ id: $stateParams.id, series: 'f1' }, buildDriver, function(response){
+        if(response.status === 404) {
+          console.log('could not find driver for ' + $stateParams.id)
+        } 
+      });
+    }
+  });
+
+  function buildDriver() {
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.DriverTable.Drivers[0];
 
@@ -60,7 +72,29 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.getProfilePic(wikiUrl);
 
     $scope.driver = retVal
-  }); //Get a single driver. Issues a GET to /api/driver/:id
+  }
+
+  // $scope.data = Driver.driver.get({ id: $stateParams.id, series: 'f1' }, function(){
+  //   $scope.content_loaded = true;
+  //   var retVal = $scope.data.MRData.DriverTable.Drivers[0];
+
+  //   $rootScope.title = " .:. FormulaOne Stats .:. Driver .:. " + retVal.givenName + ' ' + retVal.familyName;
+
+  //   var ageDifMs = Date.now() - new Date(retVal.dateOfBirth);
+  //   var ageDate = new Date(ageDifMs); // miliseconds from epoch
+
+  //   retVal.Age = Math.abs(ageDate.getUTCFullYear() - 1970);
+  //   retVal.flagUrl = config.flagsUrl + retVal.nationality + ".png"
+
+  //   var wikiUrl = retVal.url.split("/");
+  //   wikiUrl = wikiUrl[wikiUrl.length - 1];
+
+  //   retVal.wikiName = wikiUrl;
+
+  //   $scope.getProfilePic(wikiUrl);
+
+  //   $scope.driver = retVal
+  // }); //Get a single driver. Issues a GET to /api/driver/:id
 
   $scope.getProfilePic = function(driverName) {
     var url = config.wikiApi + driverName + "&pithumbsize=" + config.picNarrowSize;
