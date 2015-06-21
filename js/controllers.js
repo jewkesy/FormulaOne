@@ -224,7 +224,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   $scope.data = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function(){
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.RaceTable
-    //console.log($scope.data)
+    console.log($scope.data)
     $scope.noRounds = $scope.data.MRData.total;
     if ($scope.noRounds == 0) {
       $state.go('viewResult', {'season': $scope.season, 'round': '1'});
@@ -241,7 +241,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
   $scope.$watch("season", function( value ) {
       if (value >= 1950) {
-        $state.go('viewResult', {'season': $scope.season, 'round': $scope.round});
+        $state.go('viewResult', {'season': $scope.season, 'round': 1});
       }
   });
 
