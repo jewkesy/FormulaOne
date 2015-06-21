@@ -22,8 +22,9 @@
       <td>{{race.round}} </td>
       <td>{{race.raceName}}<br/><a ui-sref="viewCircuit({id: race.Circuit.circuitId})">{{race.Circuit.circuitName}}</a><br/>{{race | formatDateTime}}</td>
       <td><a target="_blank" ng-href="{{race.url}}"/>Wiki Link</td>
+      <td ng-if="race.date == currentDate"><i>Awaiting Results</i></td>
       <td ng-if="race.date > currentDate"><i>Coming Soon</i></td>
-      <td ng-if="race.date <= currentDate"><a ui-sref="viewResult({season: season, round: race.round})">Result</td>
+      <td ng-if="race.date < currentDate"><a ui-sref="viewResult({season: season, round: race.round})">Result</td>
     </tr>
   </table>
 </div>

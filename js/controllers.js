@@ -259,8 +259,8 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
   var d = new Date();
-  $scope.currentDate = d.getFullYear() + '-' + ('0' + (d.getMonth()+1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2) ;
-
+  $scope.currentDate = d.getFullYear() + '-' + ('0' + (d.getMonth()+1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+  // console.log($scope.currentDate)
   $scope.data = Schedule.schedule.get({season: $stateParams.season, series: 'f1' }, function(){
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.RaceTable
