@@ -45,7 +45,7 @@
 
   <div  id="isotopeContainer" isotope-container>
     <div ng-repeat="race in results.Races[0].Results">
-      <div ng-class="{pole: race.position==1}" class="item">
+      <div ng-class="{pole: race.position==1}" class="item"><img ng-src="http://jewkesy.github.io/colloquial/images/flags/{{race.Driver.nationality}}.png" alt="{{driver.Driver.nationality}}" />
         <span class="position">{{race.position}}</span>
         <p class="lastName"><a ui-sref="viewDriver({id:race.Driver.driverId})">{{race.Driver.familyName}}</a></p>
         <p class="firstName">{{race.Driver.givenName}}</p>

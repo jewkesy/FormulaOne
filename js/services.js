@@ -1,5 +1,11 @@
 angular.module('formulaOneApp.services', ['ngResource'])
-  .factory('News', function($resource) {
+  .factory('Weather', function($resource) {
+    return {
+      forecast: $resource(config.weatherFeed + '&lat=:latitude&lon=:longitude', {
+        'get': {method: 'JSONP', cache: true, isArray: true }
+      })
+    };
+  }).factory('News', function($resource) {
     return {
       latestNews: $resource(config.googleNews, {
         'get':  { method: 'JSONP', cache: true, isArray: true }

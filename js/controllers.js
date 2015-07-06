@@ -231,7 +231,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     }
     $scope.rounds = (getRoundRange($scope.data.MRData.total));
 
-    $scope.results = retVal
+    // $scope.results = retVal
     console.log($scope.results)
     if (retVal.Races.length == 0) {
       retVal.Races = [{raceName : "TBA"}];
@@ -254,7 +254,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
   $location.path('/' + $stateParams.season + '/results/' +  $stateParams.round);
 
-}).controller('ScheduleListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Schedule) {
+}).controller('ScheduleListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Schedule, Weather) {
   if (!$stateParams.season) $stateParams.season = config.defaultYear;
   $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Race Schedule";
   $scope.season = $stateParams.season;
@@ -269,6 +269,25 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     raceDate = tmpDate.getFullYear() + ('0' + (tmpDate.getMonth()+1)).slice(-2)+ ('0' + tmpDate.getDate()).slice(-2)
 
     $scope.schedule = retVal
+    // console.log(retVal)
+
+    // var circuit = retVal.Races[2];
+
+    // $scope.weather = Weather.forecast.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.lon}, function(){
+    //   console.log($scope.weather)
+    // })
+
+
+    // $http.jsonp(config.googleNews)
+    // .success(function(data){
+    //   $scope.content_loaded = true;
+      
+    //   var retVal = prepStuff(data.responseData.results);
+
+    //   //console.log(retVal)
+    //   $scope.results = retVal;
+    // });
+
   });
 
   $scope.$watch("season", function( value ) {
