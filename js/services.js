@@ -1,7 +1,14 @@
 angular.module('formulaOneApp.services', ['ngResource'])
   .factory('Weather', function($resource) {
     return {
-      forecast: $resource(config.weatherFeed + '&lat=:latitude&lon=:longitude', {
+      // Current -  http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139
+      // 5 Day -    http://api.openweathermap.org/data/2.5/forecast?lat=35&lon=139
+      // 16 day -   http://api.openweathermap.org/data/2.5/forecast/daily?lat=35&lon=139&cnt=10&mode=json
+
+      forecast: $resource(config.weatherFeed + 'forecast?&lat=:latitude&lon=:longitude&cnt=:days', {
+        'get': {method: 'JSONP', cache: true, isArray: true }
+      }),
+      extended: $resource(config.weatherFeed + 'forecast/daily?&lat=:latitude&lon=:longitude&cnt=:days', {
         'get': {method: 'JSONP', cache: true, isArray: true }
       })
     };

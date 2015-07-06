@@ -265,29 +265,26 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   $scope.data = Schedule.schedule.get({season: $stateParams.season, series: 'f1' }, function(){
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.RaceTable
-    var tmpDate = new Date();
-    raceDate = tmpDate.getFullYear() + ('0' + (tmpDate.getMonth()+1)).slice(-2)+ ('0' + tmpDate.getDate()).slice(-2)
 
     $scope.schedule = retVal
-    // console.log(retVal)
 
-    // var circuit = retVal.Races[2];
+    var currDate = new Date().getTime();
 
-    // $scope.weather = Weather.forecast.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.lon}, function(){
-    //   console.log($scope.weather)
-    // })
+    var idx = 0;
 
+    for (var i = 0; i < retVal.Races.length; i++) {
+      var tmpDate = new Date(retVal.Races[i].date).getTime();
+      if (tmpDate >= currDate) {
+        idx=i;
+        break;
+      }
+    }
 
-    // $http.jsonp(config.googleNews)
-    // .success(function(data){
-    //   $scope.content_loaded = true;
-      
-    //   var retVal = prepStuff(data.responseData.results);
+    var circuit = retVal.Races[idx];
+    $scope.weather = Weather.forecast.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: 16}, function(){
+      // console.log($scope.weather)
 
-    //   //console.log(retVal)
-    //   $scope.results = retVal;
-    // });
-
+    })
   });
 
   $scope.$watch("season", function( value ) {
