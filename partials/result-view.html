@@ -14,17 +14,17 @@
           </ul>
         </span>
         <span class="divider">.:.</span> <span class="dropdown">
-          <a class="btn btn-default" data-toggle="dropdown" href="#">Round {{ results.round }} - {{ results.Races[0].raceName }} <b class="caret"></b></a>
+          <a class="btn btn-default" data-toggle="dropdown" href="#">Round {{ results.round }} .:. {{ results.Races[0].raceName }} <b class="caret"></b></a>
           <ul ng-model="roundSelection" class="dropdown-menu" role="menu" aria-labelledby="dropdownRound">
             <li ng-repeat="round in rounds">
-              <a ng-click="$parent.round = round">Round {{round}} - </a>
+              <a ng-click="$parent.round = round">Round {{round}} .:. </a>
             </li>
           </ul>
         </span>
         </h3>
       </td>
     </tr>
-    <tr><td>{{ results.Races[0].Circuit.circuitName }}, {{ results.Races[0].Circuit.Location.country }} - {{results.Races[0] | formatDateTime}}</td></tr>
+    <tr><td>{{ results.Races[0].Circuit.circuitName }}, {{ results.Races[0].Circuit.Location.country }} .:. {{results.Races[0] | formatDateTime}}</td></tr>
   </table>
 
   <div class="btn-group" opt-kind ok-key="sortBy">
