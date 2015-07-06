@@ -299,6 +299,8 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   '$filter', function($filter) {
       return function(inputData) {
           var raceDate;
+          if (typeof(inputData) == 'undefined') return false;
+          // console.log(inputData)
           if (inputData.time) {
             raceDate = new Date(inputData.date + 'T' + inputData.time);
           }
