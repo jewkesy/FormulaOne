@@ -231,8 +231,8 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     }
     $scope.rounds = (getRoundRange($scope.data.MRData.total));
 
-    // $scope.results = retVal
-    console.log($scope.results)
+    $scope.results = retVal
+    // console.log($scope.results)
     if (retVal.Races.length == 0) {
       retVal.Races = [{raceName : "TBA"}];
     }
