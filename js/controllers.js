@@ -244,7 +244,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
     var retVal = mergeDriverRaceQualDetails(raceDetails.RaceTable, qualDetails);
 
-    console.log(retVal)
+    // console.log(retVal)
 
     $scope.results = retVal
     $scope.content_loaded = true;

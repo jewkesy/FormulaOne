@@ -1,3 +1,5 @@
+    <script type="text/javascript" src="./lib/jquery-isotope.js"></script>
+    <script type="text/javascript" src="./lib/angular-isotope.min.js"></script>
 <div ng-hide="content_loaded">
   Just grabbing your data...
 </div>
@@ -45,8 +47,8 @@
               </li>
           </div> -->
 
-  <div  id="isotopeContainer" isotope-container>
-    <div ng-repeat="race in results.Races[0].Results">
+  <div id="isotopeContainer" isotope-container ng-cloak>
+    <div ng-repeat="race in results.Races[0].Results" isotope-item>
       <div ng-class="{pole: race.position==1}" class="item"><img ng-src="http://jewkesy.github.io/colloquial/images/flags/{{race.Driver.nationality}}.png" alt="{{driver.Driver.nationality}}" />
         <span class="position">{{race.position}}</span>
         <p class="lastName"><a ui-sref="viewDriver({id:race.Driver.driverId})">{{race.Driver.familyName}}</a></p>
@@ -59,7 +61,7 @@
 
         <p>Fastest Lap ({{race.FastestLap.lap}}) - {{race.FastestLap.Time.time}}</p>
         <p>Avg Speed: {{race.FastestLap.AverageSpeed.speed}} {{race.FastestLap.AverageSpeed.units}}</p>
-        <p>Grid: {{race.grid}}</p>
+        <p class="grid" grid={{race.grid}}>Grid: {{race.grid}}</p>
       </div>
     </div>
   </div>
