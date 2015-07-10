@@ -213,7 +213,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
         });
     });
   };
-}).controller('ResultViewController', function($scope, $rootScope, $http, $state, $stateParams, $window, $location, Result) {
+}).controller('ResultViewController', function($scope, $rootScope, $http, $q, $state, $stateParams, $window, $location, Result) {
   if (!$stateParams.season) $stateParams.season = config.defaultYear;
 
   $scope.season = $stateParams.season;
@@ -221,23 +221,33 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   $scope.round = $stateParams.round
   $scope.noRounds = 1;
 
-  $scope.data = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function(){
-    $scope.content_loaded = true;
-    var retVal = $scope.data.MRData.RaceTable
-    // console.log($scope.data)
-    $scope.noRounds = $scope.data.MRData.total;
+  var raceResults = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function(){
+    return true;
+  });
+
+
+  var qualResults = Result.qualifying.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
+    return true;
+  });
+
+  $q.all([raceResults.$promise, qualResults.$promise]).then(function(data){
+  
+    var raceDetails = data[0].MRData
+    // console.log(raceDetails)
+
+    if (raceDetails.RaceTable.Races.length == 0) {
+      raceDetails.RaceTable.Races = [{raceName : "TBA"}];
+    }
+    $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Round " + raceDetails.RaceTable.round + " .:. " + raceDetails.RaceTable.Races[0].raceName;
+
+    $scope.noRounds = raceDetails.total;
     if ($scope.noRounds == 0) {
       $state.go('viewResult', {'season': $scope.season, 'round': '1'});
     }
-    $scope.rounds = (getRoundRange($scope.data.MRData.total));
+    $scope.rounds = (getRoundRange($scope.noRounds));
 
-    $scope.results = retVal
-    // console.log($scope.results)
-    if (retVal.Races.length == 0) {
-      retVal.Races = [{raceName : "TBA"}];
-    }
-    $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Round " + retVal.round + " .:. " + retVal.Races[0].raceName;
-    //console.log(retVal)
+    $scope.results = raceDetails.RaceTable
+    $scope.content_loaded = true;
   });
 
   $scope.$watch("season", function( value ) {
