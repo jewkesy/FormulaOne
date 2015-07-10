@@ -221,19 +221,15 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   $scope.round = $stateParams.round
   $scope.noRounds = 1;
 
-  var raceResults = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function(){
-    return true;
-  });
+  var raceResults = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function() {});
 
 
-  var qualResults = Result.qualifying.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
-    return true;
-  });
+  var qualResults = Result.qualifying.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {});
 
   $q.all([raceResults.$promise, qualResults.$promise]).then(function(data){
   
     var raceDetails = data[0].MRData
-    // console.log(raceDetails)
+    var qualDetails = data[1].MRData
 
     if (raceDetails.RaceTable.Races.length == 0) {
       raceDetails.RaceTable.Races = [{raceName : "TBA"}];
@@ -246,9 +242,18 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     }
     $scope.rounds = (getRoundRange($scope.noRounds));
 
-    $scope.results = raceDetails.RaceTable
+    var retVal = mergeDriverRaceQualDetails(raceDetails.RaceTable, qualDetails);
+
+    console.log(retVal)
+
+    $scope.results = retVal
     $scope.content_loaded = true;
   });
+
+  function mergeDriverRaceQualDetails(raceDetails, qualDetails) {
+    // TODO look to include qualifying data here
+    return raceDetails
+  }
 
   $scope.$watch("season", function( value ) {
       if (value >= 1950) {
