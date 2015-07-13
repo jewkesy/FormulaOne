@@ -286,11 +286,14 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     // var currDate = new Date("July 19, 2015 10:00:00Z").getTime();
 
     for (var i = 0; i < retVal.Races.length; i++) {
-      var raceDate = new Date(retVal.Races[i].date + ' ' + retVal.Races[i].time).getTime();
+      var strDateTime = retVal.Races[i].date + 'T' + retVal.Races[i].time;
+      var raceDate = new Date(strDateTime).getTime();
+      
       if (raceDate >= currDate) {
         retVal.Races[i].upcoming = true;
         $scope.nextRace = retVal.Races[i];
-        console.log(retVal.Races[i])
+        // console.log(retVal.Races[i])
+        // console.log(raceDate)
         // console.log(raceDate - currDate, raceDate, currDate)
 
         var circuit = retVal.Races[i];
@@ -310,21 +313,21 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
           $scope.weather = Weather.extended.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: daysDifference + 2, units: "metric"}, function(){
             $scope.weatherForecast = $scope.weather.list[(daysDifference + 2) - 1]
             $scope.weatherForecast.temp.day = Math.ceil($scope.weatherForecast.temp.day)
-            console.log($scope.weatherForecast)
+            // console.log($scope.weatherForecast)
             $scope.weather_loaded = true;
           })
         } else {
           $scope.weather = Weather.forecast.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: 0, units: "metric"}, function(){
             $scope.weatherForecast = "5 Day Forecast"
-            console.log($scope.weather)
+            // console.log($scope.weather)
             var list = $scope.weather.list
             var theWeather = '';
             for (var x = 0; x < list.length; x++) {
-              console.log(list[x].dt, raceDate)
+              // console.log(list[x].dt, raceDate)
 
               if (list[x].dt > raceDate) {
-                console.log('this is the race forecast: -')
-                console.log(list[x])
+                // console.log('this is the race forecast: -')
+                // console.log(list[x])
 
                 $scope.weather_loaded = true;
                 break;
