@@ -282,46 +282,57 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     var retVal = $scope.data.MRData.RaceTable
 
     $scope.schedule = retVal
-
-    var currDate = new Date("July 25, 2015 10:00:00Z").getTime();
-
-    var idx = 0;
+    var currDate = new Date().getTime();
+    // var currDate = new Date("July 19, 2015 10:00:00Z").getTime();
 
     for (var i = 0; i < retVal.Races.length; i++) {
-      var tmpDate = new Date(retVal.Races[i].date + ' ' + retVal.Races[i].time).getTime();
-      if (tmpDate >= currDate) {
-        idx=i;
+      var raceDate = new Date(retVal.Races[i].date + ' ' + retVal.Races[i].time).getTime();
+      if (raceDate >= currDate) {
         retVal.Races[i].upcoming = true;
+        $scope.nextRace = retVal.Races[i];
         console.log(retVal.Races[i])
-        console.log(tmpDate - currDate, tmpDate, currDate)
+        // console.log(raceDate - currDate, raceDate, currDate)
 
-        var circuit = retVal.Races[idx];
-        var daysDifference = Math.floor((tmpDate - currDate)/1000/60/60/24);  //+2 is used to account for day difference
-        console.log(daysDifference)
+        var circuit = retVal.Races[i];
+        var daysDifference = Math.floor((raceDate - currDate)/1000/60/60/24); 
 
-        if (daysDifference > 6) {
-          $scope.weather = Weather.extended.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: daysDifference, units: "metric"}, function(){
-            $scope.weatherForecast = daysDifference + " Day Forecast"
-            console.log($scope.weather)
-          })
+        if (daysDifference == 0) {
+          $scope.timeToRace = daysDifference + 1 + ' day away'
+        } else {
+          $scope.timeToRace = daysDifference + 1 + ' days away'
         }
-        else if (daysDifference == 0) {
-          $scope.weather = Weather.current.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: daysDifference, units: "metric"}, function(){
-            $scope.weatherForecast = "Todays Forecast"
-            console.log($scope.weather)
+        
+        // console.log(daysDifference)
+
+        raceDate = raceDate/1000
+
+        if (daysDifference > 5) { //+2 is used to account for day difference
+          $scope.weather = Weather.extended.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: daysDifference + 2, units: "metric"}, function(){
+            $scope.weatherForecast = $scope.weather.list[(daysDifference + 2) - 1]
+            $scope.weatherForecast.temp.day = Math.ceil($scope.weatherForecast.temp.day)
+            console.log($scope.weatherForecast)
           })
-        }
-        else if (daysDifference <= 5) {
-          $scope.weather = Weather.forecast.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: daysDifference, units: "metric"}, function(){
+        } else {
+          $scope.weather = Weather.forecast.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: 0, units: "metric"}, function(){
             $scope.weatherForecast = "5 Day Forecast"
             console.log($scope.weather)
+            var list = $scope.weather.list
+            var theWeather = '';
+            for (var x = 0; x < list.length; x++) {
+              console.log(list[x].dt, raceDate)
+
+              if (list[x].dt > raceDate) {
+                console.log('this is the race forecast: -')
+                console.log(list[x])
+                break;
+              }
+            }
           })
         }
         
         break;
       }
     }
-    
   });
 
   $scope.$watch("season", function( value ) {

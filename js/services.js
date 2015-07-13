@@ -7,7 +7,7 @@ angular.module('formulaOneApp.services', ['ngResource'])
       current: $resource(config.weatherFeed + 'weather?&lat=:latitude&lon=:longitude&units=:unit', {
         'get': {method: 'JSONP', cache: true, isArray: true }
       }),
-      forecast: $resource(config.weatherFeed + 'forecast?&lat=:latitude&lon=:longitude&cnt=:days&units=:unit', {
+      forecast: $resource(config.weatherFeed + 'forecast?&lat=:latitude&lon=:longitude&units=:unit', {
         'get': {method: 'JSONP', cache: true, isArray: true }
       }),
       extended: $resource(config.weatherFeed + 'forecast/daily?&lat=:latitude&lon=:longitude&cnt=:days&units=:unit', {

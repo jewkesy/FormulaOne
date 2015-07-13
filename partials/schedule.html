@@ -12,6 +12,17 @@
       </ul>
     </span></h3>
 
+  <table class="table table-bordered">
+    <tr>
+      <td>Next Race:</td>
+      <td>{{nextRace.raceName}}, {{timeToRace}}</td>
+    </tr>
+    <tr>
+      <td>Forecast:</td>
+      <td class="raceForecast">{{weatherForecast.temp.day}}&deg;C {{weatherForecast.weather[0].description}}</td>
+    </tr>
+  </table>  
+
   <table class="table table-striped table-bordered table-hover table-condensed">
     <tr>
       <th>Round</th>
@@ -20,7 +31,7 @@
     </tr>
     <tr ng-repeat="race in schedule.Races">
       <td>{{race.round}} </td>
-      <td>{{race.raceName}}<br/><a ui-sref="viewCircuit({id: race.Circuit.circuitId})">{{race.Circuit.circuitName}}</a><br/>{{race | formatDateTime}}<span ng-if="race.upcoming == true"><br/>{{weatherForecast}}</span></td>
+      <td>{{race.raceName}}<br/><a ui-sref="viewCircuit({id: race.Circuit.circuitId})">{{race.Circuit.circuitName}}</a><br/>{{race | formatDateTime}}</td>
       <td><a target="_blank" ng-href="{{race.url}}"/>Wiki Link</td>
       <td ng-if="race.date == currentDate"><i>Awaiting Results</i></td>
       <td ng-if="race.date > currentDate"><i>Coming Soon</i></td>
