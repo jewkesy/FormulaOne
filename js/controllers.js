@@ -283,23 +283,45 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
     $scope.schedule = retVal
 
-    var currDate = new Date().getTime();
+    var currDate = new Date("July 25, 2015 10:00:00Z").getTime();
 
     var idx = 0;
 
     for (var i = 0; i < retVal.Races.length; i++) {
-      var tmpDate = new Date(retVal.Races[i].date).getTime();
+      var tmpDate = new Date(retVal.Races[i].date + ' ' + retVal.Races[i].time).getTime();
       if (tmpDate >= currDate) {
         idx=i;
+        retVal.Races[i].upcoming = true;
+        console.log(retVal.Races[i])
+        console.log(tmpDate - currDate, tmpDate, currDate)
+
+        var circuit = retVal.Races[idx];
+        var daysDifference = Math.floor((tmpDate - currDate)/1000/60/60/24);  //+2 is used to account for day difference
+        console.log(daysDifference)
+
+        if (daysDifference > 6) {
+          $scope.weather = Weather.extended.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: daysDifference, units: "metric"}, function(){
+            $scope.weatherForecast = daysDifference + " Day Forecast"
+            console.log($scope.weather)
+          })
+        }
+        else if (daysDifference == 0) {
+          $scope.weather = Weather.current.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: daysDifference, units: "metric"}, function(){
+            $scope.weatherForecast = "Todays Forecast"
+            console.log($scope.weather)
+          })
+        }
+        else if (daysDifference <= 5) {
+          $scope.weather = Weather.forecast.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: daysDifference, units: "metric"}, function(){
+            $scope.weatherForecast = "5 Day Forecast"
+            console.log($scope.weather)
+          })
+        }
+        
         break;
       }
     }
-
-    var circuit = retVal.Races[idx];
-    $scope.weather = Weather.forecast.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: 16}, function(){
-      // console.log($scope.weather)
-
-    })
+    
   });
 
   $scope.$watch("season", function( value ) {
