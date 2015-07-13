@@ -311,6 +311,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
             $scope.weatherForecast = $scope.weather.list[(daysDifference + 2) - 1]
             $scope.weatherForecast.temp.day = Math.ceil($scope.weatherForecast.temp.day)
             console.log($scope.weatherForecast)
+            $scope.weather_loaded = true;
           })
         } else {
           $scope.weather = Weather.forecast.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: 0, units: "metric"}, function(){
@@ -324,6 +325,8 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
               if (list[x].dt > raceDate) {
                 console.log('this is the race forecast: -')
                 console.log(list[x])
+
+                $scope.weather_loaded = true;
                 break;
               }
             }
