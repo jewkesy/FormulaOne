@@ -21,7 +21,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
 }).controller('DriverListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Driver) {
   if (!$stateParams.season) $stateParams.season = config.defaultYear;
-  $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Driver Standings";
+  $rootScope.title = "Formula One Stats .:. " + $stateParams.season + " .:. Driver Standings";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
 
@@ -56,7 +56,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.DriverTable.Drivers[0];
 
-    $rootScope.title = " .:. FormulaOne Stats .:. Driver .:. " + retVal.givenName + ' ' + retVal.familyName;
+    $rootScope.title = "Formula One Stats .:. Driver .:. " + retVal.givenName + ' ' + retVal.familyName;
 
     var ageDifMs = Date.now() - new Date(retVal.dateOfBirth);
     var ageDate = new Date(ageDifMs); // miliseconds from epoch
@@ -88,7 +88,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
 }).controller('CircuitListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Circuit) {
   if (!$stateParams.season) $stateParams.season = config.defaultYear;
-  $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Circuits";
+  $rootScope.title = "Formula One Stats .:. " + $stateParams.season + " .:. Circuits";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
 
@@ -110,7 +110,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   $scope.data = Circuit.circuit.get({ id: $stateParams.id, series: 'f1' }, function(){
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.CircuitTable.Circuits[0];
-    $rootScope.title = " .:. FormulaOne Stats .:. Circuits .:. " + retVal.circuitName;
+    $rootScope.title = "Formula One Stats .:. Circuits .:. " + retVal.circuitName;
     $scope.gMapUrl = "https://www.google.co.uk/maps/@52.7055818,-1.7753949,15z";
 
     var wikiUrl = retVal.url.split("/");
@@ -152,7 +152,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
 }).controller('ConstructorListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Constructor) {
   if (!$stateParams.season) $stateParams.season = config.defaultYear;
-  $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Constructor Standings";
+  $rootScope.title = "Formula One Stats .:. " + $stateParams.season + " .:. Constructor Standings";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
 
@@ -190,7 +190,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   function buildConstructor() {
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.StandingsTable;
-    $rootScope.title = " .:. FormulaOne Stats .:. Constructors .:. " + retVal.StandingsLists[0].ConstructorStandings[0].Constructor.name;
+    $rootScope.title = "Formula One Stats .:. Constructors .:. " + retVal.StandingsLists[0].ConstructorStandings[0].Constructor.name;
     //console.log(retVal)
     var wikiUrl = retVal.StandingsLists[0].ConstructorStandings[0].Constructor.url.split("/");
     wikiUrl = wikiUrl[wikiUrl.length - 1];
@@ -234,7 +234,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     if (raceDetails.RaceTable.Races.length == 0) {
       raceDetails.RaceTable.Races = [{raceName : "TBA"}];
     }
-    $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Round " + raceDetails.RaceTable.round + " .:. " + raceDetails.RaceTable.Races[0].raceName;
+    $rootScope.title = "Formula One Stats .:. " + $stateParams.season + " .:. Round " + raceDetails.RaceTable.round + " .:. " + raceDetails.RaceTable.Races[0].raceName;
 
     $scope.noRounds = raceDetails.total;
     if ($scope.noRounds == 0) {
@@ -271,7 +271,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
 }).controller('ScheduleListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Schedule, Weather) {
   if (!$stateParams.season) $stateParams.season = config.defaultYear;
-  $rootScope.title = " .:. FormulaOne Stats .:. " + $stateParams.season + " .:. Race Schedule";
+  $rootScope.title = "Formula One Stats .:. " + $stateParams.season + " .:. Race Schedule";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
   var d = new Date();
