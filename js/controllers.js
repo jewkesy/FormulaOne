@@ -318,7 +318,8 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
             $scope.weatherForecast.temp.max = Math.round($scope.weatherForecast.temp.max)
 
             $scope.weatherForecast.icon = config.weatherIcons + $scope.weatherForecast.weather[0].icon + '.png'
-
+            $scope.weatherForecast.WindIcon = config.weatherIcons + 'arrow.png'
+            $scope.weatherForecast.windMph =  Math.round($scope.weatherForecast.speed * 2.2369)
 
             console.log($scope.weatherForecast)
             $scope.weather_loaded = true;

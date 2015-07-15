@@ -29,6 +29,11 @@
           <span class="tempMain tempTile">{{weatherForecast.temp.day}}&deg;C</span>
           <span class="tempMin tempTile">Min {{weatherForecast.temp.min}}&deg;C</span>
         </div>
+        <div class="weatherTile">
+           <span class="tempMax tempTile">Wind</span>
+           <img class="arrow" ng-src="{{ weatherForecast.WindIcon }}" style="-webkit-transform: rotate({{ weatherForecast.deg }}deg); -moz-transform: rotate({{ weatherForecast.deg }}deg); -ms-transform: rotate({{ weatherForecast.deg }}deg); -o-transform: rotate({{ weatherForecast.deg }}deg); transform: rotate({{ weatherForecast.deg }}deg);" />
+           <span class="weatherDesc">{{weatherForecast.windMph}}mph</span>
+        </div>
       </td>
     </tr>
   </table>  

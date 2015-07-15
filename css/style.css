@@ -133,6 +133,10 @@ body {
   width: 45px;
 }
 
+img.arrow {
+  width: 33px;
+}
+
 .tempTile {
   margin: 1px;
   display: block;
