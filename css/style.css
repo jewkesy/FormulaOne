@@ -109,6 +109,53 @@ body {
   border: 1px blue solid;
 }
 
+.raceForecast > div {
+  float: left;
+  margin-right: 2px;
+}
+
+.weatherTile {
+  text-align: center;
+  display: inline-block;
+  max-width: 60px;
+  height: 60px;
+  padding: 0px 4px;
+  line-height: 1;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+.weatherTile img {
+
+  width: 45px;
+}
+
+.tempTile {
+  padding: 0px;
+}
+
+.tempMin {
+  font-size: 0.5em;
+}
+
+.tempMax {
+  font-size: 0.5em;
+}
+
+.tempMain {
+  font-size: 1.7em;
+}
+
+.weatherDesc {
+  width: 100%;
+  float:left;
+  font-size: 0.6em;
+}
+
 .footer {
   background-color: #333;
   height: 40px;

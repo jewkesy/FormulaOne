@@ -19,7 +19,17 @@
     </tr>
     <tr>
       <td>Forecast:</td>
-      <td class="raceForecast"><img class="img-responsive img-thumbnail" ng-src="{{ weatherForecast.icon }}" />  {{weatherForecast.temp.day}}&deg;C {{weatherForecast.weather[0].description}}</td>
+      <td class="raceForecast">
+        <div class="weatherTile">
+          <img ng-src="{{ weatherForecast.icon }}" />
+          <span class="weatherDesc">{{ weatherForecast.weather[0].description }}</span>
+        </div>
+        <div class="weatherTile">
+          <span class="tempMax tempTile">Max {{weatherForecast.temp.max}}&deg;C</span>
+          <span class="tempMain tempTile">{{weatherForecast.temp.day}}&deg;C</span>
+          <span class="tempMin tempTile">Min {{weatherForecast.temp.min}}&deg;C</span>
+        </div>
+      </td>
     </tr>
   </table>  
 

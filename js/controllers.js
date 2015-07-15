@@ -312,11 +312,15 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
         if (daysDifference > 5) { //+2 is used to account for day difference
           $scope.weather = Weather.extended.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: daysDifference + 2, units: "metric"}, function(){
             $scope.weatherForecast = $scope.weather.list[(daysDifference + 2) - 1]
-            $scope.weatherForecast.temp.day = Math.ceil($scope.weatherForecast.temp.day)
+
+            $scope.weatherForecast.temp.day = Math.round($scope.weatherForecast.temp.day)
+            $scope.weatherForecast.temp.min = Math.round($scope.weatherForecast.temp.min)
+            $scope.weatherForecast.temp.max = Math.round($scope.weatherForecast.temp.max)
+
             $scope.weatherForecast.icon = config.weatherIcons + $scope.weatherForecast.weather[0].icon + '.png'
 
 
-            // console.log($scope.weatherForecast)
+            console.log($scope.weatherForecast)
             $scope.weather_loaded = true;
           })
         } else {
