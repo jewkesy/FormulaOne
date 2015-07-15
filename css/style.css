@@ -130,23 +130,29 @@ body {
 }
 
 .weatherTile img {
-
   width: 45px;
 }
 
 .tempTile {
-  padding: 0px;
+  margin: 1px;
+  display: block;
+  padding-top: 3px;
 }
 
 .tempMin {
-  font-size: 0.5em;
+  padding-top: 5px;
+  font-size: 0.6em;
+  text-align: left;
 }
 
 .tempMax {
-  font-size: 0.5em;
+
+  font-size: 0.6em;
+  text-align: right;
 }
 
 .tempMain {
+
   font-size: 1.7em;
 }
 
@@ -154,6 +160,7 @@ body {
   width: 100%;
   float:left;
   font-size: 0.6em;
+  display: block;
 }
 
 .footer {
