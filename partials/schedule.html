@@ -34,6 +34,10 @@
            <img class="arrow" ng-src="{{ weatherForecast.WindIcon }}" style="-webkit-transform: rotate({{ weatherForecast.deg }}deg); -moz-transform: rotate({{ weatherForecast.deg }}deg); -ms-transform: rotate({{ weatherForecast.deg }}deg); -o-transform: rotate({{ weatherForecast.deg }}deg); transform: rotate({{ weatherForecast.deg }}deg);" />
            <span class="weatherDesc">{{weatherForecast.windMph}}mph</span>
         </div>
+        <div class="weatherTile">
+          <img ng-src="{{ weatherForecast.cloud }}" />
+          <span class="weatherDesc">{{ weatherForecast.clouds }}% Cloudy</span>
+        </div>
       </td>
     </tr>
   </table>  
