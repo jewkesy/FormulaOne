@@ -313,6 +313,9 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
           $scope.weather = Weather.extended.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: daysDifference + 2, units: "metric"}, function(){
             $scope.weatherForecast = $scope.weather.list[(daysDifference + 2) - 1]
             $scope.weatherForecast.temp.day = Math.ceil($scope.weatherForecast.temp.day)
+            $scope.weatherForecast.icon = config.weatherIcons + $scope.weatherForecast.weather[0].icon + '.png'
+
+
             // console.log($scope.weatherForecast)
             $scope.weather_loaded = true;
           })
