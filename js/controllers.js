@@ -282,14 +282,33 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     var retVal = $scope.data.MRData.RaceTable
 
     $scope.schedule = retVal
-    var currDate = new Date().getTime();
+    // var currDate = new Date().getTime();
     // var currDate = new Date("July 19, 2015 10:00:00Z").getTime();
 
+
+    var today = new Date();
+    today.setDate(today.getDate() + 1);  // add 1 day for human-readable
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if(dd<10) {
+        dd='0'+dd
+    } 
+
+    if(mm<10) {
+        mm='0'+mm
+    } 
+
+    today = yyyy+'-'+mm+'-'+dd;
+    var currDate = new Date(today).getTime();
+
     for (var i = 0; i < retVal.Races.length; i++) {
-      var strDateTime = retVal.Races[i].date + 'T' + retVal.Races[i].time;
+      var strDateTime = retVal.Races[i].date;
       var raceDate = new Date(strDateTime).getTime();
       
       if (raceDate >= currDate) {
+        console.log(raceDate, currDate)
         retVal.Races[i].upcoming = true;
         $scope.nextRace = retVal.Races[i];
         // console.log(retVal.Races[i])
