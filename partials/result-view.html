@@ -1,9 +1,14 @@
     <script type="text/javascript" src="./lib/jquery-isotope.js"></script>
     <script type="text/javascript" src="./lib/angular-isotope.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1-beta.2/Chart.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
 <div ng-hide="content_loaded">
   Just grabbing your data...
 </div>
+
+
 <div ng-show="content_loaded">
+
   <table class="table scheduletable">
     <tr>
       <td colspan="5"><h3>Formula 1<span class="divider"> .:. </span>
@@ -28,7 +33,14 @@
     </tr>
     <tr><td>{{ results.Races[0].Circuit.circuitName }}, {{ results.Races[0].Circuit.Location.country }} .:. {{results.Races[0] | formatDateTime}}</td></tr>
   </table>
+</div>
 
+<!-- <canvas id="line" class="chart chart-line" data="chartData"
+  labels="chartLabels" legend="true" series="series"
+  click="onClick">
+</canvas>  -->
+
+<div ng-show="content_loaded">
   <div class="btn-group" opt-kind ok-key="sortBy">
     <button type="button" class="btn btn-default active" ok-sel="[position]">Race Results</button>
     <button type="button" class="btn btn-default" ok-sel="[grid]" ok-type="integer">Starting Grid</button>

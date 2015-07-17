@@ -244,10 +244,56 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
     var retVal = mergeDriverRaceQualDetails(raceDetails.RaceTable, qualDetails);
 
-    // console.log(retVal)
-
     $scope.results = retVal
     $scope.content_loaded = true;
+
+// $scope.chartLabels = ["January", "February", "March", "April", "May", "June", "July"];
+//   $scope.series = ['Series A', 'Series B'];
+//   $scope.chartData = [
+//     [65, 59, 80, 81, 56, 55, 40],
+//     [28, 48, 40, 19, 86, 27, 90]
+//   ];
+//   $scope.onClick = function (points, evt) {
+//     console.log(points, evt);
+//   };
+
+
+// $scope.lineChartData = {
+//       labels: [
+//         'Jan', 
+//         'Feb', 
+//         'Mar'
+//       ],
+//       datasets: [
+//         {
+//           data: [0, 5, 10, 15, 20, 25]
+//         },
+//         {
+//           data: [3, 6, 9, 12, 15, 18]
+//         }
+//       ]
+//     };
+    
+//     $scope.lineChartData2 = {
+//       labels: [
+//         'Apr', 
+//         'May', 
+//         'Jun'
+//       ],
+//       datasets: [
+//         {
+//           data: [1, 7, 15, 19, 31, 40]
+//         },
+//         {
+//           data: [6, 12, 18, 24, 30, 36]
+//         }
+//       ]
+//     };
+    
+//     $scope.activeData = $scope.lineChartData;
+//     console.log($scope.activeData)
+
+
   });
 
   function mergeDriverRaceQualDetails(raceDetails, qualDetails) {
@@ -308,7 +354,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
       var raceDate = new Date(strDateTime).getTime();
       
       if (raceDate >= currDate) {
-        console.log(raceDate, currDate)
+        // console.log(raceDate, currDate)
         retVal.Races[i].upcoming = true;
         $scope.nextRace = retVal.Races[i];
         // console.log(retVal.Races[i])
@@ -342,7 +388,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
             $scope.weatherForecast.cloud = config.weatherIcons + '03d.png'
 
-            console.log($scope.weatherForecast)
+            // console.log($scope.weatherForecast)
             $scope.weather_loaded = true;
           })
         } else {
