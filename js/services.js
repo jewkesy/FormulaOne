@@ -64,7 +64,7 @@ angular.module('formulaOneApp.services', ['ngResource'])
       qualifying: $resource(config.api + ':series/:season/:id/qualifying.json', {
         'get': { method: 'GET', cache: true, isArray: true }
       }),
-      laps: $resource(config.api + ':series/:season/:id/laps.json?limit=10000' ,{
+      laps: $resource(config.api + ':series/:season/:id/laps.json?limit=1000', {
         'get': { method: 'GET', cache: true, isArray: true }
       })
     };

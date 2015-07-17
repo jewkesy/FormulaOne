@@ -222,14 +222,48 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   $scope.noRounds = 1;
 
   var raceResults = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function() {});
-
-
   var qualResults = Result.qualifying.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {});
+  // var lapResults =  Result.laps.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
+
+  //   var lapDetails =  lapResults.MRData.RaceTable.Races[0].Laps
+  //   console.log(lapDetails)
+
+  //   $scope.chartLabels = [];
+  //   $scope.chartData = [];
+  //   $scope.series = [];
+
+  //   for (var i = 0; i < lapDetails[0].Timings.length; i++) {
+  //     $scope.series.push(lapDetails[0].Timings[i].driverId)
+  //   }
+
+  //   for (var i = 0; i < lapDetails.length; i++) {
+  //     $scope.chartLabels.push(lapDetails[i].number)
+  //     var timings = []
+  //     for (var x = 0; x < lapDetails[i].Timings.length; x++) {
+  //        timings.push(lapDetails[i].Timings[x].time)
+  //     }
+  //     console.log(timings)
+  //     $scope.chartData.push(timings)
+  //   }    
+  //   // console.log( $scope.chartData)
+
+  //   // $scope.chartLabels = ["January", "February", "March", "April", "May", "June", "July"];
+  //   // $scope.series = ['Series A', 'Series B'];
+  //   // $scope.chartData = [
+  //   //   [65, 59, 80, 81, 56, 55, 40],
+  //   //   [28, 48, 40, 19, 86, 27, 90]
+  //   // ];
+  //   $scope.onClick = function (points, evt) {
+  //     // console.log(points, evt);
+  //   };
+  // });
 
   $q.all([raceResults.$promise, qualResults.$promise]).then(function(data){
   
     var raceDetails = data[0].MRData
     var qualDetails = data[1].MRData
+    // var lapDetails =  data[2].MRData.RaceTable.Races[0].Laps
+    // console.log(lapDetails)
 
     if (raceDetails.RaceTable.Races.length == 0) {
       raceDetails.RaceTable.Races = [{raceName : "TBA"}];
@@ -245,55 +279,8 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     var retVal = mergeDriverRaceQualDetails(raceDetails.RaceTable, qualDetails);
 
     $scope.results = retVal
+    
     $scope.content_loaded = true;
-
-// $scope.chartLabels = ["January", "February", "March", "April", "May", "June", "July"];
-//   $scope.series = ['Series A', 'Series B'];
-//   $scope.chartData = [
-//     [65, 59, 80, 81, 56, 55, 40],
-//     [28, 48, 40, 19, 86, 27, 90]
-//   ];
-//   $scope.onClick = function (points, evt) {
-//     console.log(points, evt);
-//   };
-
-
-// $scope.lineChartData = {
-//       labels: [
-//         'Jan', 
-//         'Feb', 
-//         'Mar'
-//       ],
-//       datasets: [
-//         {
-//           data: [0, 5, 10, 15, 20, 25]
-//         },
-//         {
-//           data: [3, 6, 9, 12, 15, 18]
-//         }
-//       ]
-//     };
-    
-//     $scope.lineChartData2 = {
-//       labels: [
-//         'Apr', 
-//         'May', 
-//         'Jun'
-//       ],
-//       datasets: [
-//         {
-//           data: [1, 7, 15, 19, 31, 40]
-//         },
-//         {
-//           data: [6, 12, 18, 24, 30, 36]
-//         }
-//       ]
-//     };
-    
-//     $scope.activeData = $scope.lineChartData;
-//     console.log($scope.activeData)
-
-
   });
 
   function mergeDriverRaceQualDetails(raceDetails, qualDetails) {
