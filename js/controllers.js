@@ -28,6 +28,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   $scope.data = Driver.standings.get({season: $stateParams.season, series: 'f1' }, function(){
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
+    console.log(retVal)
     $scope.drivers = retVal
   }); //fetch all drivers. Issues a GET to /api/drivers
 
