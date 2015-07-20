@@ -44,7 +44,7 @@ angular.module('formulaOneApp').config(function($stateProvider) {
   //TODO: handle empty year data
   // if (!$state.season) $state.season = new Date().getFullYear();
   if (!$state.season) $state.season = config.defaultYear;
-  $state.go('drivers', {'season': $state.season}); //make a transition to drivers state when app starts
+  $state.go('news', {'season': $state.season}); //make a transition to drivers state when app starts
 });
 
 $('.navbar-collapse').click(function() {
