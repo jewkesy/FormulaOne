@@ -323,13 +323,8 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     var mm = today.getMonth()+1; //January is 0!
     var yyyy = today.getFullYear();
 
-    if(dd<10) {
-        dd='0'+dd
-    } 
-
-    if(mm<10) {
-        mm='0'+mm
-    } 
+    if (dd < 10) dd = '0' + dd
+    if (mm < 10) mm = '0' + mm 
 
     today = yyyy+'-'+mm+'-'+dd;
     var currDate = new Date(today).getTime();
@@ -340,12 +335,9 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
       var raceDate = new Date(strDateTime).getTime();
       
       if (raceDate >= currDate) {
-        // console.log(raceDate, currDate)
+
         retVal.Races[i].upcoming = true;
         $scope.nextRace = retVal.Races[i];
-        // console.log(retVal.Races[i])
-        // console.log(raceDate)
-        // console.log(raceDate - currDate, raceDate, currDate)
 
         var circuit = retVal.Races[i];
         var daysDifference = Math.floor((raceDate - currDate)/1000/60/60/24); 
@@ -372,36 +364,22 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
             $scope.weatherForecast.cloud = config.weatherIcons + '03d.png'
 
-            // console.log($scope.weatherForecast)
             $scope.weather_loaded = true;
           })
         } else {
           $scope.weather = Weather.forecast.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: 0, units: "metric"}, function(){
-            // $scope.weatherForecast.desc = "5 Day Forecast"
-// retVal.Races[i].date = "2015-07-22"
+
             pracDate = (new Date(retVal.Races[i].date + 'T' + retVal.Races[i].time)/1000) - (86400*2)
             qualDate = (new Date(retVal.Races[i].date + 'T' + retVal.Races[i].time)/1000) - 86400
             raceDate = (new Date(retVal.Races[i].date + 'T' + retVal.Races[i].time)/1000)
 
-            console.log(pracDate, qualDate, raceDate)
-
-            // 1. get practise date - midday
-
-            // 2. get qual date - midday
-
-            // 3. get race date time
-
             var list = $scope.weather.list
-            // console.log(list)
+            
             var theWeather = '';
             for (var x = 0; x < list.length; x++) {
-              // console.log(list[x].dt, raceDate)
 
               if (list[x].dt >= raceDate) {
                 $scope.weatherForecast = list[x]
-
-                // console.log('this is the race forecast: ', $scope.weatherForecast)
-
                 $scope.weatherForecast.desc = "Current Forecast"
                 $scope.weatherForecast.temp = {}
                 $scope.weatherForecast.temp.day = Math.round($scope.weatherForecast.main.temp)
@@ -416,6 +394,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
                 $scope.weatherForecast.cloud = config.weatherIcons + '03d.png'
                 $scope.weatherForecast.clouds = $scope.weatherForecast.clouds.all
                 $scope.weather_loaded = true;
+
                 if (x > 8) {
                   $scope.qualForecast = list[x-8]
                   $scope.qualForecast.temp = {}
@@ -432,7 +411,6 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
                   $scope.qualForecast.clouds = $scope.qualForecast.clouds.all
 
                   $scope.qualForecast_loaded = true;
-                  // console.log('this is the qual forecast: ', $scope.qualForecast)
                 }
                 
                 if (x > 16) {
@@ -450,16 +428,12 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
                   $scope.pracForecast.cloud = config.weatherIcons + '03d.png'
                   $scope.pracForecast.clouds = $scope.pracForecast.clouds.all
                   $scope.pracForecast_loaded = true;
-                  // console.log('this is the prac forecast: ', $scope.pracForecast)
                 }
-                
-                
                 break;
               }
             }
           })
         }
-        
         break;
       }
     }
