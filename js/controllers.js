@@ -311,13 +311,11 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   $scope.currentDate = d.getFullYear() + '-' + ('0' + (d.getMonth()+1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
   // console.log($scope.currentDate)
   $scope.data = Schedule.schedule.get({season: $stateParams.season, series: 'f1' }, function(){
+    // console.log($scope.data)
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.RaceTable
 
     $scope.schedule = retVal
-    // var currDate = new Date().getTime();
-    // var currDate = new Date("July 19, 2015 10:00:00Z").getTime();
-
 
     var today = new Date();
     today.setDate(today.getDate() + 1);  // add 1 day for human-readable
@@ -356,14 +354,12 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
         } else {
           $scope.timeToRace = daysDifference + 1 + ' days away'
         }
-        
-        // console.log(daysDifference)
 
-        raceDate = raceDate/1000
-
-        if (daysDifference > 5) { //+2 is used to account for day difference
+        if (daysDifference > 4) { //+2 is used to account for day difference
           $scope.weather = Weather.extended.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: daysDifference + 2, units: "metric"}, function(){
+            
             $scope.weatherForecast = $scope.weather.list[(daysDifference + 2) - 1]
+            $scope.weatherForecast.desc = "Extended Forecast"
 
             $scope.weatherForecast.temp.day = Math.round($scope.weatherForecast.temp.day)
             $scope.weatherForecast.temp.min = Math.round($scope.weatherForecast.temp.min)
@@ -380,18 +376,83 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
           })
         } else {
           $scope.weather = Weather.forecast.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: 0, units: "metric"}, function(){
-            $scope.weatherForecast = "5 Day Forecast"
-            console.log($scope.weather)
+            // $scope.weatherForecast.desc = "5 Day Forecast"
+// retVal.Races[i].date = "2015-07-22"
+            pracDate = (new Date(retVal.Races[i].date + 'T' + retVal.Races[i].time)/1000) - (86400*2)
+            qualDate = (new Date(retVal.Races[i].date + 'T' + retVal.Races[i].time)/1000) - 86400
+            raceDate = (new Date(retVal.Races[i].date + 'T' + retVal.Races[i].time)/1000)
+
+            console.log(pracDate, qualDate, raceDate)
+
+            // 1. get practise date - midday
+
+            // 2. get qual date - midday
+
+            // 3. get race date time
+
             var list = $scope.weather.list
+            // console.log(list)
             var theWeather = '';
             for (var x = 0; x < list.length; x++) {
               // console.log(list[x].dt, raceDate)
 
-              if (list[x].dt > raceDate) {
-                // console.log('this is the race forecast: -')
-                // console.log(list[x])
+              if (list[x].dt >= raceDate) {
+                $scope.weatherForecast = list[x]
 
+                // console.log('this is the race forecast: ', $scope.weatherForecast)
+
+                $scope.weatherForecast.desc = "Current Forecast"
+                $scope.weatherForecast.temp = {}
+                $scope.weatherForecast.temp.day = Math.round($scope.weatherForecast.main.temp)
+                $scope.weatherForecast.temp.min = Math.round($scope.weatherForecast.main.temp_min)
+                $scope.weatherForecast.temp.max = Math.round($scope.weatherForecast.main.temp_max)
+
+                $scope.weatherForecast.icon = config.weatherIcons + $scope.weatherForecast.weather[0].icon + '.png'
+                $scope.weatherForecast.WindIcon = config.weatherIcons + 'arrow.png'
+                $scope.weatherForecast.windMph =  Math.round($scope.weatherForecast.wind.speed * 2.2369)
+                $scope.weatherForecast.deg = $scope.weatherForecast.wind.deg
+
+                $scope.weatherForecast.cloud = config.weatherIcons + '03d.png'
+                $scope.weatherForecast.clouds = $scope.weatherForecast.clouds.all
                 $scope.weather_loaded = true;
+                if (x > 8) {
+                  $scope.qualForecast = list[x-8]
+                  $scope.qualForecast.temp = {}
+                  $scope.qualForecast.temp.day = Math.round($scope.qualForecast.main.temp)
+                  $scope.qualForecast.temp.min = Math.round($scope.qualForecast.main.temp_min)
+                  $scope.qualForecast.temp.max = Math.round($scope.qualForecast.main.temp_max)
+
+                  $scope.qualForecast.icon = config.weatherIcons + $scope.qualForecast.weather[0].icon + '.png'
+                  $scope.qualForecast.WindIcon = config.weatherIcons + 'arrow.png'
+                  $scope.qualForecast.windMph =  Math.round($scope.qualForecast.wind.speed * 2.2369)
+                  $scope.qualForecast.deg = $scope.qualForecast.wind.deg
+
+                  $scope.qualForecast.cloud = config.weatherIcons + '03d.png'
+                  $scope.qualForecast.clouds = $scope.qualForecast.clouds.all
+
+                  $scope.qualForecast_loaded = true;
+                  // console.log('this is the qual forecast: ', $scope.qualForecast)
+                }
+                
+                if (x > 16) {
+                  $scope.pracForecast = list[x-16]
+                  $scope.pracForecast.temp = {}
+                  $scope.pracForecast.temp.day = Math.round($scope.pracForecast.main.temp)
+                  $scope.pracForecast.temp.min = Math.round($scope.pracForecast.main.temp_min)
+                  $scope.pracForecast.temp.max = Math.round($scope.pracForecast.main.temp_max)
+
+                  $scope.pracForecast.icon = config.weatherIcons + $scope.pracForecast.weather[0].icon + '.png'
+                  $scope.pracForecast.WindIcon = config.weatherIcons + 'arrow.png'
+                  $scope.pracForecast.windMph =  Math.round($scope.pracForecast.wind.speed * 2.2369)
+                  $scope.pracForecast.deg = $scope.pracForecast.wind.deg
+
+                  $scope.pracForecast.cloud = config.weatherIcons + '03d.png'
+                  $scope.pracForecast.clouds = $scope.pracForecast.clouds.all
+                  $scope.pracForecast_loaded = true;
+                  // console.log('this is the prac forecast: ', $scope.pracForecast)
+                }
+                
+                
                 break;
               }
             }

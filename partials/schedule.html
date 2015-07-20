@@ -17,8 +17,54 @@
       <td>Next Race:</td>
       <td>{{nextRace.raceName}}, {{timeToRace}}</td>
     </tr>
+    <tr ng-show="pracForecast_loaded">
+      <td>Practice:</td>
+      <td class="raceForecast">
+        <div class="weatherTile">
+          <img ng-src="{{ pracForecast.icon }}" />
+          <span class="weatherDesc">{{ pracForecast.weather[0].description }}</span>
+        </div>
+        <div class="weatherTile">
+          <span class="tempMax tempTile">Max {{pracForecast.temp.max}}&deg;C</span>
+          <span class="tempMain tempTile">{{pracForecast.temp.day}}&deg;C</span>
+          <span class="tempMin tempTile">Min {{pracForecast.temp.min}}&deg;C</span>
+        </div>
+        <div class="weatherTile">
+           <span class="tempMax tempTile">Wind</span>
+           <img class="arrow" ng-src="{{ pracForecast.WindIcon }}" style="-webkit-transform: rotate({{ pracForecast.deg }}deg); -moz-transform: rotate({{ pracForecast.deg }}deg); -ms-transform: rotate({{ pracForecast.deg }}deg); -o-transform: rotate({{ pracForecast.deg }}deg); transform: rotate({{ pracForecast.deg }}deg);" />
+           <span class="weatherDesc">{{pracForecast.windMph}}mph</span>
+        </div>
+        <div class="weatherTile">
+          <img ng-src="{{ pracForecast.cloud }}" />
+          <span class="weatherDesc">{{ pracForecast.clouds }}% Cloudy</span>
+        </div>
+      </td>
+    </tr>
+    <tr ng-show="qualForecast_loaded">
+      <td>Qualifying:</td>
+      <td class="raceForecast">
+        <div class="weatherTile">
+          <img ng-src="{{ qualForecast.icon }}" />
+          <span class="weatherDesc">{{ qualForecast.weather[0].description }}</span>
+        </div>
+        <div class="weatherTile">
+          <span class="tempMax tempTile">Max {{qualForecast.temp.max}}&deg;C</span>
+          <span class="tempMain tempTile">{{qualForecast.temp.day}}&deg;C</span>
+          <span class="tempMin tempTile">Min {{qualForecast.temp.min}}&deg;C</span>
+        </div>
+        <div class="weatherTile">
+           <span class="tempMax tempTile">Wind</span>
+           <img class="arrow" ng-src="{{ qualForecast.WindIcon }}" style="-webkit-transform: rotate({{ qualForecast.deg }}deg); -moz-transform: rotate({{ qualForecast.deg }}deg); -ms-transform: rotate({{ qualForecast.deg }}deg); -o-transform: rotate({{ qualForecast.deg }}deg); transform: rotate({{ qualForecast.deg }}deg);" />
+           <span class="weatherDesc">{{qualForecast.windMph}}mph</span>
+        </div>
+        <div class="weatherTile">
+          <img ng-src="{{ qualForecast.cloud }}" />
+          <span class="weatherDesc">{{ qualForecast.clouds }}% Cloudy</span>
+        </div>
+      </td>
+    </tr>
     <tr ng-show="weather_loaded">
-      <td>Forecast:</td>
+      <td>Race:</td>
       <td class="raceForecast">
         <div class="weatherTile">
           <img ng-src="{{ weatherForecast.icon }}" />
