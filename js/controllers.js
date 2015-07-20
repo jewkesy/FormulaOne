@@ -333,6 +333,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
     today = yyyy+'-'+mm+'-'+dd;
     var currDate = new Date(today).getTime();
+    if (yyyy != $stateParams.season) { $scope.hideNextRace = true; return false;}
 
     for (var i = 0; i < retVal.Races.length; i++) {
       var strDateTime = retVal.Races[i].date;
