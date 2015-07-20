@@ -4,7 +4,7 @@
 <div ng-show="content_loaded">
   <h3>Constructor Standings<span class="divider"> .:. </span>
     <span class="dropdown">
-      <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
+      <a class="btn btn-default" data-toggle="dropdown" href="/constructors">{{ season }} <b class="caret"></b></a>
       <ul ng-model="seasonSelection" class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownYear">
         <li ng-repeat="year in years">
           <a ng-click="$parent.season = year">{{year}}</a>
