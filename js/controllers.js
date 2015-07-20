@@ -381,7 +381,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
         } else {
           $scope.weather = Weather.forecast.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: 0, units: "metric"}, function(){
             $scope.weatherForecast = "5 Day Forecast"
-            // console.log($scope.weather)
+            console.log($scope.weather)
             var list = $scope.weather.list
             var theWeather = '';
             for (var x = 0; x < list.length; x++) {

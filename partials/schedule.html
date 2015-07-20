@@ -12,12 +12,12 @@
       </ul>
     </span></h3>
 
-  <table ng-show="weather_loaded" class="table table-bordered">
+  <table class="table table-bordered">
     <tr>
       <td>Next Race:</td>
       <td>{{nextRace.raceName}}, {{timeToRace}}</td>
     </tr>
-    <tr>
+    <tr ng-show="weather_loaded">
       <td>Forecast:</td>
       <td class="raceForecast">
         <div class="weatherTile">
