@@ -28,7 +28,6 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   $scope.data = Driver.standings.get({season: $stateParams.season, series: 'f1' }, function(){
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
-    console.log(retVal)
     $scope.drivers = retVal
   }); //fetch all drivers. Issues a GET to /api/drivers
 
@@ -224,40 +223,40 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
   var raceResults = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function() {});
   var qualResults = Result.qualifying.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {});
-  // var lapResults =  Result.laps.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
+  var lapResults =  Result.laps.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
 
-  //   var lapDetails =  lapResults.MRData.RaceTable.Races[0].Laps
-  //   console.log(lapDetails)
+    var lapDetails =  lapResults.MRData.RaceTable.Races[0].Laps
+    console.log(lapDetails)
 
-  //   $scope.chartLabels = [];
-  //   $scope.chartData = [];
-  //   $scope.series = [];
+    $scope.chartLabels = [];
+    $scope.chartData = [];
+    $scope.series = [];
 
-  //   for (var i = 0; i < lapDetails[0].Timings.length; i++) {
-  //     $scope.series.push(lapDetails[0].Timings[i].driverId)
-  //   }
+    for (var i = 0; i < lapDetails[0].Timings.length; i++) {
+      $scope.series.push(lapDetails[0].Timings[i].driverId)
+    }
 
-  //   for (var i = 0; i < lapDetails.length; i++) {
-  //     $scope.chartLabels.push(lapDetails[i].number)
-  //     var timings = []
-  //     for (var x = 0; x < lapDetails[i].Timings.length; x++) {
-  //        timings.push(lapDetails[i].Timings[x].time)
-  //     }
-  //     console.log(timings)
-  //     $scope.chartData.push(timings)
-  //   }    
-  //   // console.log( $scope.chartData)
+    for (var i = 0; i < lapDetails.length; i++) {
+      $scope.chartLabels.push(lapDetails[i].number)
+      var timings = []
+      for (var x = 0; x < lapDetails[i].Timings.length; x++) {
+         timings.push(lapDetails[i].Timings[x].time)
+      }
+      console.log(timings)
+      $scope.chartData.push(timings)
+    }    
+    // console.log( $scope.chartData)
 
-  //   // $scope.chartLabels = ["January", "February", "March", "April", "May", "June", "July"];
-  //   // $scope.series = ['Series A', 'Series B'];
-  //   // $scope.chartData = [
-  //   //   [65, 59, 80, 81, 56, 55, 40],
-  //   //   [28, 48, 40, 19, 86, 27, 90]
-  //   // ];
-  //   $scope.onClick = function (points, evt) {
-  //     // console.log(points, evt);
-  //   };
-  // });
+    $scope.chartLabels = ["January", "February", "March", "April", "May", "June", "July"];
+    $scope.series = ['Series A', 'Series B'];
+    $scope.chartData = [
+      [65, 59, 80, 81, 56, 55, 40],
+      [28, 48, 40, 19, 86, 27, 90]
+    ];
+    $scope.onClick = function (points, evt) {
+      // console.log(points, evt);
+    };
+  });
 
   $q.all([raceResults.$promise, qualResults.$promise]).then(function(data){
   
@@ -333,15 +332,16 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
     for (var i = 0; i < retVal.Races.length; i++) {
       var strDateTime = retVal.Races[i].date;
-      var raceDate = new Date(strDateTime).getTime();
+      var raceDate = new Date(strDateTime);
+      var raceUnixTme = raceDate.getTime();
       
-      if (raceDate >= currDate) {
+      if (raceUnixTme >= currDate) {
 
         retVal.Races[i].upcoming = true;
         $scope.nextRace = retVal.Races[i];
 
         var circuit = retVal.Races[i];
-        var daysDifference = Math.floor((raceDate - currDate)/1000/60/60/24); 
+        var daysDifference = Math.floor((raceUnixTme - currDate)/1000/60/60/24); 
 
         if (daysDifference == 0) {
           $scope.timeToRace = daysDifference + 1 + ' day away'
@@ -354,7 +354,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
             
             $scope.weatherForecast = $scope.weather.list[(daysDifference + 2) - 1]
             $scope.weatherForecast.desc = "Extended Forecast"
-
+            $scope.weatherForecast.dateText = raceDate.toDateString();;
             $scope.weatherForecast.temp.day = Math.round($scope.weatherForecast.temp.day)
             $scope.weatherForecast.temp.min = Math.round($scope.weatherForecast.temp.min)
             $scope.weatherForecast.temp.max = Math.round($scope.weatherForecast.temp.max)
@@ -372,16 +372,19 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
             pracDate = (new Date(retVal.Races[i].date + 'T' + retVal.Races[i].time)/1000) - (86400*2)
             qualDate = (new Date(retVal.Races[i].date + 'T' + retVal.Races[i].time)/1000) - 86400
-            raceDate = (new Date(retVal.Races[i].date + 'T' + retVal.Races[i].time)/1000)
+            raceUnixTme = (new Date(retVal.Races[i].date + 'T' + retVal.Races[i].time)/1000)
 
             var list = $scope.weather.list
             
             var theWeather = '';
             for (var x = 0; x < list.length; x++) {
 
-              if (list[x].dt >= raceDate) {
+              if (list[x].dt >= raceUnixTme) {
                 $scope.weatherForecast = list[x]
                 $scope.weatherForecast.desc = "Current Forecast"
+                var theDate = raceDate.toDateString();
+                $scope.weatherForecast.dateText = theDate.substring(0, theDate.length - 4);
+                $scope.weatherForecast.dateTextSuper = ""
                 $scope.weatherForecast.temp = {}
                 $scope.weatherForecast.temp.day = Math.round($scope.weatherForecast.main.temp)
                 $scope.weatherForecast.temp.min = Math.round($scope.weatherForecast.main.temp_min)
@@ -398,6 +401,9 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
                 if (x > 8) {
                   $scope.qualForecast = list[x-8]
+                  raceDate.setDate(raceDate.getDate() - 1);
+                  var theDate = raceDate.toDateString();
+                  $scope.qualForecast.dateText = theDate.substring(0, theDate.length - 4);
                   $scope.qualForecast.temp = {}
                   $scope.qualForecast.temp.day = Math.round($scope.qualForecast.main.temp)
                   $scope.qualForecast.temp.min = Math.round($scope.qualForecast.main.temp_min)
@@ -416,6 +422,9 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
                 
                 if (x > 16) {
                   $scope.pracForecast = list[x-16]
+                  raceDate.setDate(raceDate.getDate() - 1);
+                  var theDate = raceDate.toDateString();
+                  $scope.pracForecast.dateText = theDate.substring(0, theDate.length - 4);
                   $scope.pracForecast.temp = {}
                   $scope.pracForecast.temp.day = Math.round($scope.pracForecast.main.temp)
                   $scope.pracForecast.temp.min = Math.round($scope.pracForecast.main.temp_min)

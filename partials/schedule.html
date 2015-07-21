@@ -18,7 +18,7 @@
       <td>{{nextRace.raceName}}, {{timeToRace}}</td>
     </tr>
     <tr ng-show="pracForecast_loaded">
-      <td>Practice:</td>
+      <td>Practice:<br/><i>{{pracForecast.dateText}}<sup>{{pracForecast.dateTextSuper}}</sup></i></td>
       <td class="raceForecast">
         <div class="weatherTile">
           <img ng-src="{{ pracForecast.icon }}" />
@@ -41,7 +41,7 @@
       </td>
     </tr>
     <tr ng-show="qualForecast_loaded">
-      <td>Qualifying:</td>
+      <td>Qualifying:<br/><i>{{qualForecast.dateText}}<sup>{{qualForecast.dateTextSuper}}</sup></i></td>
       <td class="raceForecast">
         <div class="weatherTile">
           <img ng-src="{{ qualForecast.icon }}" />
@@ -64,7 +64,7 @@
       </td>
     </tr>
     <tr ng-show="weather_loaded">
-      <td>Race:</td>
+      <td>Race:<br/><i>{{weatherForecast.dateText}}<sup>{{weatherForecast.dateTextSuper}}</sup></i></td>
       <td class="raceForecast">
         <div class="weatherTile">
           <img ng-src="{{ weatherForecast.icon }}" />
