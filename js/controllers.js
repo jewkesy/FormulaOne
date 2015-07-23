@@ -223,40 +223,104 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
   var raceResults = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function() {});
   var qualResults = Result.qualifying.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {});
+
+  var lapTimes=[];
+
   var lapResults =  Result.laps.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
 
     var lapDetails =  lapResults.MRData.RaceTable.Races[0].Laps
-    console.log(lapDetails)
+    // console.log(lapDetails)
 
     $scope.chartLabels = [];
     $scope.chartData = [];
     $scope.series = [];
 
-    for (var i = 0; i < lapDetails[0].Timings.length; i++) {
-      $scope.series.push(lapDetails[0].Timings[i].driverId)
-    }
-
     for (var i = 0; i < lapDetails.length; i++) {
       $scope.chartLabels.push(lapDetails[i].number)
-      var timings = []
-      for (var x = 0; x < lapDetails[i].Timings.length; x++) {
-         timings.push(lapDetails[i].Timings[x].time)
+      var lap = lapDetails[i].Timings
+      for (var j = 0; j < lap.length; j++){
+        var idx = keyExists(lap[j].driverId, lapTimes)
+        // console.log(idx)
+        if (idx == -1) {
+          lapTimes.push({
+            key: lap[j].driverId,
+            timings: [{
+              time: lap[j].time
+            }]
+          })
+        } else {
+          lapTimes[idx].timings.push({time: lap[j].time})
+        }  
       }
-      console.log(timings)
-      $scope.chartData.push(timings)
-    }    
+      
+
+
+
+
+      // var timings = []
+      // for (var x = 0; x < lapDetails[i].Timings.length; x++) {
+      //    timings.push(lapDetails[i].Timings[x].time)
+      // }
+      // // console.log(timings)
+      // $scope.chartData.push(timings)
+    }  
+    // console.log(lapTimes)
+    for (x = 0; x < lapTimes.length; x++) {
+      $scope.series.push(lapTimes[x].key)
+      var times = []
+      for (y = 0; y < lapTimes[x].timings.length; y++) {
+        times.push(convertToSecs(lapTimes[x].timings[y].time))
+        //times.push(parseFloat(lapTimes[x].timings[y].time, 5))
+      }
+      // console.log(lapTimes[x].key,times)
+      $scope.chartData.push(times)
+      // $scope.chartData.push(lapTimes[x].timings)
+    }
+
+
+
+    // console.log($scope.series, $scope.chartData)
+    // for (var i = 0; i < lapDetails[0].Timings.length; i++) {
+    //   $scope.series.push(lapDetails[0].Timings[i].driverId)
+    // }
+
+    // for (var i = 0; i < lapDetails.length; i++) {
+    //   $scope.chartLabels.push(lapDetails[i].number)
+    //   var timings = []
+    //   for (var x = 0; x < lapDetails[i].Timings.length; x++) {
+    //      timings.push(lapDetails[i].Timings[x].time)
+    //   }
+    //   console.log(timings)
+    //   $scope.chartData.push(timings)
+    // }    
     // console.log( $scope.chartData)
 
-    $scope.chartLabels = ["January", "February", "March", "April", "May", "June", "July"];
-    $scope.series = ['Series A', 'Series B'];
-    $scope.chartData = [
-      [65, 59, 80, 81, 56, 55, 40],
-      [28, 48, 40, 19, 86, 27, 90]
-    ];
+    // $scope.chartLabels = ["January", "February", "March", "April", "May", "June", "July"];
+    // $scope.series = ['Series A', 'Series B'];
+    // $scope.chartData = [
+    //   [65, 59, 80, 81, 56, 55, 40],
+    //   [28, 48, 40, 19, 86, 27, 90]
+    // ];
     $scope.onClick = function (points, evt) {
       // console.log(points, evt);
     };
   });
+
+  function convertToSecs(timing) {
+    var parts = timing.split(':')
+
+    var retVal = Number(parts[0]*60) + Number(parts[1])
+// console.log(timing, retVal)
+    return retVal
+  }
+
+  function keyExists(name, arr) {
+    for(var i = 0, len = arr.length; i < len; i++) {
+        if( arr[ i ].key === name )
+            return i;
+    }
+    return -1;
+  }
 
   $q.all([raceResults.$promise, qualResults.$promise]).then(function(data){
   
