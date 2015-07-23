@@ -26,6 +26,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   $scope.years = getYearRange();
 
   $scope.data = Driver.standings.get({season: $stateParams.season, series: 'f1' }, function(){
+    console.log($scope.data)
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
     $scope.drivers = retVal
