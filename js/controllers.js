@@ -26,7 +26,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   $scope.years = getYearRange();
 
   $scope.data = Driver.standings.get({season: $stateParams.season, series: 'f1' }, function(){
-    console.log($scope.data)
+    // console.log($scope.data)
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
     $scope.drivers = retVal
@@ -222,6 +222,10 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   $scope.round = $stateParams.round
   $scope.noRounds = 1;
 
+  var driverList = Result.cacheDriverList.get({}, function() {
+    driverList = driverList.MRData.DriverTable.Drivers
+  });
+
   var raceResults = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function() {});
   var qualResults = Result.qualifying.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {});
 
@@ -241,10 +245,10 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
       var lap = lapDetails[i].Timings
       for (var j = 0; j < lap.length; j++){
         var idx = keyExists(lap[j].driverId, lapTimes)
-        // console.log(idx)
         if (idx == -1) {
           lapTimes.push({
             key: lap[j].driverId,
+            code: getDriverCode(lap[j].driverId, driverList),
             timings: [{
               time: lap[j].time
             }]
@@ -253,55 +257,19 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
           lapTimes[idx].timings.push({time: lap[j].time})
         }  
       }
-      
 
-
-
-
-      // var timings = []
-      // for (var x = 0; x < lapDetails[i].Timings.length; x++) {
-      //    timings.push(lapDetails[i].Timings[x].time)
-      // }
-      // // console.log(timings)
-      // $scope.chartData.push(timings)
     }  
-    // console.log(lapTimes)
     for (x = 0; x < lapTimes.length; x++) {
-      $scope.series.push(lapTimes[x].key)
+      $scope.series.push(lapTimes[x].code)
       var times = []
       for (y = 0; y < lapTimes[x].timings.length; y++) {
         times.push(convertToSecs(lapTimes[x].timings[y].time))
-        //times.push(parseFloat(lapTimes[x].timings[y].time, 5))
       }
-      // console.log(lapTimes[x].key,times)
       $scope.chartData.push(times)
-      // $scope.chartData.push(lapTimes[x].timings)
     }
 
 
 
-    // console.log($scope.series, $scope.chartData)
-    // for (var i = 0; i < lapDetails[0].Timings.length; i++) {
-    //   $scope.series.push(lapDetails[0].Timings[i].driverId)
-    // }
-
-    // for (var i = 0; i < lapDetails.length; i++) {
-    //   $scope.chartLabels.push(lapDetails[i].number)
-    //   var timings = []
-    //   for (var x = 0; x < lapDetails[i].Timings.length; x++) {
-    //      timings.push(lapDetails[i].Timings[x].time)
-    //   }
-    //   console.log(timings)
-    //   $scope.chartData.push(timings)
-    // }    
-    // console.log( $scope.chartData)
-
-    // $scope.chartLabels = ["January", "February", "March", "April", "May", "June", "July"];
-    // $scope.series = ['Series A', 'Series B'];
-    // $scope.chartData = [
-    //   [65, 59, 80, 81, 56, 55, 40],
-    //   [28, 48, 40, 19, 86, 27, 90]
-    // ];
     $scope.onClick = function (points, evt) {
       // console.log(points, evt);
     };
@@ -316,11 +284,18 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   }
 
   function keyExists(name, arr) {
-    for(var i = 0, len = arr.length; i < len; i++) {
+    for (var i = 0; i < arr.length; i++) {
         if( arr[ i ].key === name )
             return i;
     }
     return -1;
+  }
+
+  function getDriverCode(driverId, arr) {
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].driverId == driverId) return arr[i].code
+    }
+    return driverId
   }
 
   $q.all([raceResults.$promise, qualResults.$promise]).then(function(data){

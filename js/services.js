@@ -66,6 +66,9 @@ angular.module('formulaOneApp.services', ['ngResource'])
       }),
       laps: $resource(config.api + ':series/:season/:id/laps.json?limit=1000', {
         'get': { method: 'GET', cache: true, isArray: true }
+      }),
+      cacheDriverList: $resource('db/cache/drivers.json', {
+        'get': { method: 'GET', cache: true, isArray: true }
       })
     };
   }).factory('Schedule', function($resource) {
