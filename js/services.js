@@ -42,6 +42,9 @@ angular.module('formulaOneApp.services', ['ngResource'])
       }),
       circuit: $resource(config.api + ':series/circuits/:id.json', {
         'get': { method: 'GET', cache: true, isArray: true }
+      }),
+      mongo: $resource(config.mongo.host + config.mongo.database + '/collections/circuits?apiKey=' + config.mongo.apiKey + '&callback=CALLBACK', {
+        'query': {method: 'GET', cache: true, isArray: false }
       })
     };
   }).factory('Constructor', function($resource) {
