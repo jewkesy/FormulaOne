@@ -246,8 +246,6 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
   // var raceResults = getRaceResults();
 
-  
-
   var raceResults = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function() {});
   var qualResults = Result.qualifying.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {});
 
@@ -255,6 +253,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     if (typeof(lapResults[0]) == 'undefined') {
       lapResults = Result.laps.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
         var retVal = lapResults
+        if ( typeof(lapResults.MRData.RaceTable.Races[0]) == 'undefined') return;
         $scope.circuits = retVal.CircuitTable
         retVal._id = $stateParams.season + $stateParams.round
         retVal.series = 'f1'
