@@ -367,16 +367,11 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   $scope.years = getYearRange();
   var d = new Date();
   $scope.currentDate = d.getFullYear() + '-' + ('0' + (d.getMonth()+1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
-  // console.log($scope.currentDate)
 
   $scope.data = Schedule.mongo.query({season: $stateParams.season, series: 'f1'}, function() {
     var retVal = $scope.data[0]
-    // console.log(retVal)
     if (typeof(retVal) == 'undefined') {
        $scope.data = Schedule.schedule.get({season: $stateParams.season, series: 'f1' }, function(){
-
-        // console.log($scope.data)
-        // $scope.content_loaded = true;
         var retVal = $scope.data.MRData.RaceTable
         retVal._id = $stateParams.season
         retVal.series = 'f1'
@@ -389,12 +384,9 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
         $scope.schedule = retVal
         buildSchedulePage()
-
         
       });
     } else {
-      // console.log('got from cache')
-      // $scope.content_loaded = true;
       $scope.schedule = retVal
       buildSchedulePage()
     }
