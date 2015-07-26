@@ -322,7 +322,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
   function convertToSecs(timing) {
     var parts = timing.split(':')
-    var retVal = Number(parts[0]*60) + Number(parts[1])
+    var retVal = (Number(parts[0]*60) + Number(parts[1])).toFixed(3)
     return retVal
   }
 
