@@ -215,7 +215,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
         retVal.series = 'f1'
         // console.log(retVal)
         retVal.MRData.StandingsTable.StandingsLists.sort(function(a, b){
-         return b.season-a.season
+         return b.season - a.season
         })
         $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/constructors?apiKey=' + config.mongo.apiKey,
           data: JSON.stringify( retVal),
@@ -234,7 +234,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.content_loaded = true;
     var retVal = constructor.MRData.StandingsTable;
     $rootScope.title = "Formula One Stats .:. Constructors .:. " + retVal.StandingsLists[0].ConstructorStandings[0].Constructor.name;
-    //console.log(retVal)
+    
     var wikiUrl = retVal.StandingsLists[0].ConstructorStandings[0].Constructor.url.split("/");
     wikiUrl = wikiUrl[wikiUrl.length - 1];
 
