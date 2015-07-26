@@ -73,7 +73,10 @@ angular.module('formulaOneApp.services', ['ngResource'])
       cacheDriverList: $resource('db/cache/drivers.json', {
         'get': { method: 'GET', cache: true, isArray: true }
       }),
-      mongo: $resource(config.mongo.host + config.mongo.database + '/collections/results?q={"_id": ":season", "series": ":series"}&apiKey=' + config.mongo.apiKey + '&callback=CALLBACK', {
+      mongoResults: $resource(config.mongo.host + config.mongo.database + '/collections/results?q={"_id": ":season:round", "series": ":series"}&apiKey=' + config.mongo.apiKey + '&callback=CALLBACK', {
+        'query': {method: 'GET', cache: true, isArray: false }
+      }),
+      mongoLaps: $resource(config.mongo.host + config.mongo.database + '/collections/laps?q={"_id": ":season:round", "series": ":series"}&apiKey=' + config.mongo.apiKey + '&callback=CALLBACK', {
         'query': {method: 'GET', cache: true, isArray: false }
       })
     };
