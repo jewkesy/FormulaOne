@@ -60,6 +60,9 @@ angular.module('formulaOneApp.services', ['ngResource'])
       }),
       cache: $resource('db/cache/constructors/:id.json', {
         'get': { method: 'GET', cache: true, isArray: true }
+      }),
+      mongo: $resource(config.mongo.host + config.mongo.database + '/collections/constructors?q={"_id": ":id", "series": ":series"}&apiKey=' + config.mongo.apiKey + '&callback=CALLBACK', {
+        'query': {method: 'GET', cache: true, isArray: false }
       })
     };
   }).factory('Result', function($resource) {

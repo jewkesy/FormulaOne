@@ -61,7 +61,6 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
       });
     } else {
       // console.log('got driver from mongo')
-
       buildDriver($scope.data[0])
     }
 
@@ -206,24 +205,31 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
 }).controller('ConstructorViewController', function($scope, $rootScope, $http, $timeout, $stateParams, Constructor) {
 
-  // $scope.data = Constructor.cache.get({ id: $stateParams.id, series: 'f1' }, function(){
-  //   console.log($scope.data)
-  // })
-
-  $scope.data = Constructor.cache.get({ id: $stateParams.id, series: 'f1' }, buildConstructor, function(response){
-    if(response.status === 404) {
-      console.log('could not find cache for ' + $stateParams.id)
-      $scope.data = Constructor.constructor.get({ id: $stateParams.id, series: 'f1' }, buildConstructor, function(response){
-        if(response.status === 404) {
-          console.log('could not find constructor for ' + $stateParams.id)
-        }
+  $scope.data = Constructor.mongo.query({ id: $stateParams.id, series: 'f1' }, function(response){
+    // console.log($scope.data)
+    if (typeof($scope.data[0]) == 'undefined') {
+      $scope.data = Constructor.constructor.get({ id: $stateParams.id, series: 'f1' }, function(response){
+        var retVal = $scope.data
+        // console.log(retVal)
+        retVal._id = $stateParams.id
+        retVal.series = 'f1'
+        // console.log(retVal)
+        $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/constructors?apiKey=' + config.mongo.apiKey,
+          data: JSON.stringify( retVal),
+          type: "POST",
+          contentType: "application/json" 
+        });
+        buildConstructor(retVal)
       });
+    } else {
+      // console.log('got constructor from mongo')
+      buildConstructor($scope.data[0])
     }
   });
 
-  function buildConstructor() {
+  function buildConstructor(constructor) {
     $scope.content_loaded = true;
-    var retVal = $scope.data.MRData.StandingsTable;
+    var retVal = constructor.MRData.StandingsTable;
     $rootScope.title = "Formula One Stats .:. Constructors .:. " + retVal.StandingsLists[0].ConstructorStandings[0].Constructor.name;
     //console.log(retVal)
     var wikiUrl = retVal.StandingsLists[0].ConstructorStandings[0].Constructor.url.split("/");
