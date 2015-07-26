@@ -313,7 +313,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
           retVal.chartData.push(times)
         }
 
-        console.log(retVal)
+        // console.log(retVal)
 
         $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/laps?apiKey=' + config.mongo.apiKey,
           data: JSON.stringify( retVal),
