@@ -95,7 +95,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
   $scope.data = Circuit.mongo.query({season: $stateParams.season, series: 'f1'}, function() {
     var retVal = $scope.data[0]
-    console.log(retVal)
+    // console.log(retVal)
     if (typeof(retVal) == 'undefined') {
       $scope.data = Circuit.circuits.get({season: $stateParams.season, series: 'f1' }, function(){
         $scope.content_loaded = true;
@@ -113,7 +113,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
       });
     } else {
       $scope.content_loaded = true;
-
+console.log('got from cache')
       $scope.circuits = retVal.CircuitTable
     }
   })
@@ -407,9 +407,8 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
           $scope.timeToRace = daysDifference + 1 + ' days away'
         }
 
-        if (daysDifference > 4) { //+2 is used to account for day difference
+        if (daysDifference > 4 && daysDifference <= 16) { //+2 is used to account for day difference
           $scope.weather = Weather.extended.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: daysDifference + 2, units: "metric"}, function(){
-            
             $scope.weatherForecast = $scope.weather.list[(daysDifference + 2) - 1]
             $scope.weatherForecast.desc = "Extended Forecast"
             $scope.weatherForecast.dateText = raceDate.toDateString();;
