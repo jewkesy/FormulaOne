@@ -42,20 +42,35 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 }).controller('DriverViewController', function($scope, $rootScope, $http, $timeout, $stateParams, Driver) {
   //console.log($stateParams)
 
-  $scope.data = Driver.cache.get({ id: $stateParams.id, series: 'f1' }, buildDriver, function(response){
-    if(response.status === 404) {
-      console.log('could not find cache for ' + $stateParams.id)
-      $scope.data = Driver.driver.get({ id: $stateParams.id, series: 'f1' }, buildDriver, function(response){
-        if(response.status === 404) {
-          console.log('could not find driver for ' + $stateParams.id)
-        } 
+  $scope.data = Driver.mongo.query({ id: $stateParams.id, series: 'f1' }, function(response){
+    // console.log($scope.data)
+    if (typeof($scope.data[0]) == 'undefined') {
+      // console.log('could not find cache for ' + $stateParams.id)
+      $scope.data = Driver.driver.get({ id: $stateParams.id, series: 'f1' }, function(response){
+        var retVal = $scope.data
+        // console.log(retVal)
+        retVal._id = $stateParams.id
+        retVal.series = 'f1'
+        // console.log(retVal)
+        $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/drivers?apiKey=' + config.mongo.apiKey,
+          data: JSON.stringify( retVal),
+          type: "POST",
+          contentType: "application/json" 
+        });
+        buildDriver(retVal)
       });
+    } else {
+      // console.log('got driver from mongo')
+
+      buildDriver($scope.data[0])
     }
+
   });
 
-  function buildDriver() {
+  function buildDriver(driver) {
+    // console.log(driver)
     $scope.content_loaded = true;
-    var retVal = $scope.data.MRData.DriverTable.Drivers[0];
+    var retVal = driver.MRData.DriverTable.Drivers[0];
 
     $rootScope.title = "Formula One Stats .:. Driver .:. " + retVal.givenName + ' ' + retVal.familyName;
 
@@ -104,7 +119,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
         $scope.circuits = retVal.CircuitTable
         retVal._id = $stateParams.season
         retVal.series = 'f1'
-        console.log(retVal)
+        // console.log(retVal)
         $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/circuits?apiKey=' + config.mongo.apiKey,
           data: JSON.stringify( retVal),
           type: "POST",
