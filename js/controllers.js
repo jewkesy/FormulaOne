@@ -214,6 +214,9 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
         retVal._id = $stateParams.id
         retVal.series = 'f1'
         // console.log(retVal)
+        retVal.MRData.StandingsTable.StandingsLists.sort(function(a, b){
+         return b.season-a.season
+        })
         $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/constructors?apiKey=' + config.mongo.apiKey,
           data: JSON.stringify( retVal),
           type: "POST",

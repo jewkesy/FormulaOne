@@ -52,10 +52,10 @@ angular.module('formulaOneApp.services', ['ngResource'])
     };
   }).factory('Constructor', function($resource) {
     return {
-      standings: $resource(config.api + ':series/:season/constructorStandings.json', {
+      standings: $resource(config.api + ':series/:season/constructorStandings.json?limit=1000', {
         'get': { method: 'GET', cache: true, isArray: true }
       }),
-      constructor: $resource(config.api + ':series/constructors/:id/constructorStandings.json', {
+      constructor: $resource(config.api + ':series/constructors/:id/constructorStandings.json?limit=1000', {
         'get': { method: 'GET', cache: true, isArray: true }
       }),
       cache: $resource('db/cache/constructors/:id.json', {
