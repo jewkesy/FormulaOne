@@ -244,18 +244,9 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     driverList = driverList.MRData.DriverTable.Drivers
   });
 
-  var raceResults = function() {
-    var retVal = Result.mongoResults.query({season: $stateParams.season, series: 'f1'}, function() {
-      console.log(retVal)
-      if (typeof(retVal) == 'undefined') {
-        retVal  = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function() {});
-        console.log(retVal)
-        return retVal;
-      } else {
-        console.log('got results from cache')
-      }
-    })
-  }
+  // var raceResults = getRaceResults();
+
+  
 
   var raceResults = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function() {});
   var qualResults = Result.qualifying.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {});
@@ -280,12 +271,94 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     }
   });
 
+
+  $q.all([raceResults.$promise, qualResults.$promise]).then(function(data){
+    // console.log(data)
+    var raceDetails = data[0].MRData
+    var qualDetails = data[1].MRData
+    // var lapDetails =  data[2].MRData.RaceTable.Races[0].Laps
+    // console.log(lapDetails)
+
+    if (raceDetails.RaceTable.Races.length == 0) {
+      raceDetails.RaceTable.Races = [{raceName : "TBA"}];
+    }
+    $rootScope.title = "Formula One Stats .:. " + $stateParams.season + " .:. Round " + raceDetails.RaceTable.round + " .:. " + raceDetails.RaceTable.Races[0].raceName;
+
+    $scope.noRounds = raceDetails.total;
+    if ($scope.noRounds == 0) {
+      $state.go('viewResult', {'season': $scope.season, 'round': '1'});
+    }
+    $scope.rounds = (getRoundRange($scope.noRounds));
+
+    var retVal = mergeDriverRaceQualDetails(raceDetails.RaceTable, qualDetails);
+
+    $scope.results = retVal
+    
+    $scope.content_loaded = true;
+  });
+
+  function getRaceResults(){
+
+    return $q(function(resolve, reject) {
+    setTimeout(function() {
+      if (getStuff('Daryl')) {
+        resolve('Hello, ' + name + '!');
+      } else {
+        reject('Greeting ' + name + ' is not allowed.');
+      }
+    }, 1000);
+  });
+
+
+    // var d = $q.defer();
+    // getStuff('param',function(err,data){
+    //      if(err !== null) return d.reject(err); // `throw err` also works here.
+    //          d.resolve(data);
+    // });
+    // return d.promise;   
+  }
+  function getStuff(stuff) {
+    setTimeout(function(){ return stuff; }, 110);
+  }
+
+  function getRaceResultsMaster() {
+
+    var deferred = $q.defer();
+    var results = Result.mongoResults.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {
+    
+      console.log(results[0])
+      if (typeof(results[0]) == 'undefined') {
+        results = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function() {
+          results._id = $stateParams.season + $stateParams.round
+          results.series = 'f1'
+          console.log(results)
+          // $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/results?apiKey=' + config.mongo.apiKey,
+          //   data: JSON.stringify( retVal),
+          //   type: "POST",
+          //   contentType: "application/json" 
+          // });
+        raceResults = results;
+           return deferred.resolve(raceResults);
+           return deferred.promise();
+        });
+      } else {
+        console.log('got results from cache')
+        raceResults = results;
+         return deferred.resolve(raceResults)
+         return deferred.promise();
+      }
+    })
+  }
+
+
   var lapTimes=[];
 
   function buildLapsChart(lapDetails) {
     $scope.chartLabels = [];
     $scope.chartData = [];
     $scope.series = [];
+    $scope.options = {datasetFill : false, scaleShowVerticalLines: true}
+    
 
     for (var i = 0; i < lapDetails.length; i++) {
       $scope.chartLabels.push(lapDetails[i].number)
@@ -339,31 +412,6 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     }
     return driverId
   }
-
-  $q.all([raceResults.$promise, qualResults.$promise]).then(function(data){
-  
-    var raceDetails = data[0].MRData
-    var qualDetails = data[1].MRData
-    // var lapDetails =  data[2].MRData.RaceTable.Races[0].Laps
-    // console.log(lapDetails)
-
-    if (raceDetails.RaceTable.Races.length == 0) {
-      raceDetails.RaceTable.Races = [{raceName : "TBA"}];
-    }
-    $rootScope.title = "Formula One Stats .:. " + $stateParams.season + " .:. Round " + raceDetails.RaceTable.round + " .:. " + raceDetails.RaceTable.Races[0].raceName;
-
-    $scope.noRounds = raceDetails.total;
-    if ($scope.noRounds == 0) {
-      $state.go('viewResult', {'season': $scope.season, 'round': '1'});
-    }
-    $scope.rounds = (getRoundRange($scope.noRounds));
-
-    var retVal = mergeDriverRaceQualDetails(raceDetails.RaceTable, qualDetails);
-
-    $scope.results = retVal
-    
-    $scope.content_loaded = true;
-  });
 
   function mergeDriverRaceQualDetails(raceDetails, qualDetails) {
     // TODO look to include qualifying data here
