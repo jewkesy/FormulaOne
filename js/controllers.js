@@ -288,6 +288,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
         for (var i = 0; i < lapDetails.length; i++) {
           retVal.chartLabels.push(lapDetails[i].number)
           var lap = lapDetails[i].Timings
+
           for (var j = 0; j < lap.length; j++){
             var idx = keyExists(lap[j].driverId, lapTimes)
             if (idx == -1) {
@@ -314,6 +315,8 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
         }
 
         // console.log(retVal)
+        retVal.MRData = ""
+        // console.log(retVal)
 
         $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/laps?apiKey=' + config.mongo.apiKey,
           data: JSON.stringify( retVal),
@@ -324,6 +327,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
         buildLapsChart(retVal)
       })
     } else {
+      // console.log(lapResults[0])
       buildLapsChart(lapResults[0])
     }
   });
