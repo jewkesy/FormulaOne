@@ -421,7 +421,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.content_loaded = true;
     var retVal = $scope.schedule 
     var today = new Date();
-        today.setDate(today.getDate() + 1);  // add 1 day for human-readable
+        today.setDate(today.getDate());
         var dd = today.getDate();
         var mm = today.getMonth()+1; //January is 0!
         var yyyy = today.getFullYear();
@@ -447,7 +447,9 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
             var daysDifference = Math.floor((raceUnixTme - currDate)/1000/60/60/24); 
 
             if (daysDifference == 0) {
-              $scope.timeToRace = daysDifference + 1 + ' day away'
+              $scope.timeToRace = ' today!'
+            } else if (daysDifference == 1) {
+              $scope.timeToRace = ' tomorrow!'
             } else {
               $scope.timeToRace = daysDifference + 1 + ' days away'
             }
