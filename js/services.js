@@ -43,7 +43,7 @@ angular.module('formulaOneApp.services', ['ngResource'])
       circuit: $resource(config.api + ':series/circuits/:id.json', {
         'get': { method: 'GET', cache: true, isArray: true }
       }),
-      mongo: $resource(config.mongo.host + config.mongo.database + '/collections/circuits?apiKey=' + config.mongo.apiKey + '&callback=CALLBACK', {
+      mongo: $resource(config.mongo.host + config.mongo.database + '/collections/circuits?q={"_id": ":season", "series": ":series"}&apiKey=' + config.mongo.apiKey + '&callback=CALLBACK', {
         'query': {method: 'GET', cache: true, isArray: false }
       })
     };

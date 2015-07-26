@@ -95,17 +95,28 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
   $scope.data = Circuit.mongo.query({season: $stateParams.season, series: 'f1'}, function() {
     var retVal = $scope.data[0]
+    console.log(retVal)
     if (typeof(retVal) == 'undefined') {
       $scope.data = Circuit.circuits.get({season: $stateParams.season, series: 'f1' }, function(){
         $scope.content_loaded = true;
-        var retVal = $scope.data.MRData.CircuitTable
-        //console.log(retVal)
-        $scope.circuits = retVal
+        var retVal = $scope.data.MRData
+        console.log(retVal)
+        $scope.circuits = retVal.CircuitTable
+        retVal._id = $stateParams.season
+        retVal.series = 'f1'
+        console.log(retVal)
+        $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/circuits?apiKey=' + config.mongo.apiKey,
+          data: JSON.stringify( retVal),
+          type: "POST",
+          contentType: "application/json" 
+        });
       });
+    } else {
+      $scope.content_loaded = true;
 
+      $scope.circuits = retVal.CircuitTable
     }
   })
-
 
   $scope.$watch("season", function( value ) {
       if (value >= 1950) {
