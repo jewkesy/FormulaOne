@@ -278,16 +278,53 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
         $scope.circuits = retVal.CircuitTable
         retVal._id = $stateParams.season + $stateParams.round
         retVal.series = 'f1'
+
+        retVal.chartLabels = []
+        retVal.chartSeries = []
+        retVal.chartData = []
+
+        var lapDetails = lapResults.MRData.RaceTable.Races[0].Laps
+        var lapTimes=[];
+        for (var i = 0; i < lapDetails.length; i++) {
+          retVal.chartLabels.push(lapDetails[i].number)
+          var lap = lapDetails[i].Timings
+          for (var j = 0; j < lap.length; j++){
+            var idx = keyExists(lap[j].driverId, lapTimes)
+            if (idx == -1) {
+              lapTimes.push({
+                key: lap[j].driverId,
+                code: getDriverCode(lap[j].driverId, driverList),
+                timings: [{
+                  time: lap[j].time
+                }]
+              })
+            } else {
+              lapTimes[idx].timings.push({time: lap[j].time})
+            }  
+          }
+        }  
+
+        for (x = 0; x < lapTimes.length; x++) {
+          retVal.chartSeries.push(lapTimes[x].code)
+          var times = []
+          for (y = 0; y < lapTimes[x].timings.length; y++) {
+            times.push(convertToSecs(lapTimes[x].timings[y].time))
+          }
+          retVal.chartData.push(times)
+        }
+
+        console.log(retVal)
+
         $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/laps?apiKey=' + config.mongo.apiKey,
           data: JSON.stringify( retVal),
           type: "POST",
           contentType: "application/json" 
         });
 
-        buildLapsChart(lapResults.MRData.RaceTable.Races[0].Laps)
+        buildLapsChart(retVal)
       })
     } else {
-      buildLapsChart(lapResults[0].MRData.RaceTable.Races[0].Laps)
+      buildLapsChart(lapResults[0])
     }
   });
 
@@ -370,44 +407,12 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     })
   }
 
-
-  var lapTimes=[];
-
   function buildLapsChart(lapDetails) {
-    $scope.chartLabels = [];
-    $scope.chartData = [];
-    $scope.series = [];
-    $scope.options = {datasetFill : false, scaleShowVerticalLines: true}
+    $scope.chartLabels = lapDetails.chartLabels;
+    $scope.chartData = lapDetails.chartData;
+    $scope.series = lapDetails.chartSeries;
+    $scope.options = {datasetFill : false}
     
-
-    for (var i = 0; i < lapDetails.length; i++) {
-      $scope.chartLabels.push(lapDetails[i].number)
-      var lap = lapDetails[i].Timings
-      for (var j = 0; j < lap.length; j++){
-        var idx = keyExists(lap[j].driverId, lapTimes)
-        if (idx == -1) {
-          lapTimes.push({
-            key: lap[j].driverId,
-            code: getDriverCode(lap[j].driverId, driverList),
-            timings: [{
-              time: lap[j].time
-            }]
-          })
-        } else {
-          lapTimes[idx].timings.push({time: lap[j].time})
-        }  
-      }
-    }  
-
-    for (x = 0; x < lapTimes.length; x++) {
-      $scope.series.push(lapTimes[x].code)
-      var times = []
-      for (y = 0; y < lapTimes[x].timings.length; y++) {
-        times.push(convertToSecs(lapTimes[x].timings[y].time))
-      }
-      $scope.chartData.push(times)
-    }
-
     $scope.onClick = function (points, evt) {
       // console.log(points, evt);
     };
