@@ -335,7 +335,6 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     }
   });
 
-
   $q.all([raceResults.$promise, qualResults.$promise]).then(function(data){
     // console.log(data)
     var raceDetails = data[0].MRData
@@ -361,59 +360,6 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.content_loaded = true;
   });
 
-  function getRaceResults(){
-
-    return $q(function(resolve, reject) {
-    setTimeout(function() {
-      if (getStuff('Daryl')) {
-        resolve('Hello, ' + name + '!');
-      } else {
-        reject('Greeting ' + name + ' is not allowed.');
-      }
-    }, 1000);
-  });
-
-
-    // var d = $q.defer();
-    // getStuff('param',function(err,data){
-    //      if(err !== null) return d.reject(err); // `throw err` also works here.
-    //          d.resolve(data);
-    // });
-    // return d.promise;   
-  }
-  function getStuff(stuff) {
-    setTimeout(function(){ return stuff; }, 110);
-  }
-
-  function getRaceResultsMaster() {
-
-    var deferred = $q.defer();
-    var results = Result.mongoResults.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {
-    
-      console.log(results[0])
-      if (typeof(results[0]) == 'undefined') {
-        results = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function() {
-          results._id = $stateParams.season + $stateParams.round
-          results.series = 'f1'
-          console.log(results)
-          // $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/results?apiKey=' + config.mongo.apiKey,
-          //   data: JSON.stringify( retVal),
-          //   type: "POST",
-          //   contentType: "application/json" 
-          // });
-        raceResults = results;
-           return deferred.resolve(raceResults);
-           return deferred.promise();
-        });
-      } else {
-        console.log('got results from cache')
-        raceResults = results;
-         return deferred.resolve(raceResults)
-         return deferred.promise();
-      }
-    })
-  }
-
   function buildLapsChart(lapDetails) {
     $scope.chartLabels = lapDetails.chartLabels;
     $scope.chartData = lapDetails.chartData;
@@ -426,31 +372,6 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.$on('create', function () {
        $scope.chartLoaded = true;
     });
-  }
-
-  function convertToSecs(timing) {
-    var parts = timing.split(':')
-    var retVal = (Number(parts[0]*60) + Number(parts[1])).toFixed(3)
-    return retVal
-  }
-
-  function keyExists(name, arr) {
-    for (var i = 0; i < arr.length; i++) {
-      if( arr[ i ].key === name ) return i;
-    }
-    return -1;
-  }
-
-  function getDriverCode(driverId, arr) {
-    for (var i = 0; i < arr.length; i++) {
-      if (arr[i].driverId == driverId) return arr[i].code
-    }
-    return driverId
-  }
-
-  function mergeDriverRaceQualDetails(raceDetails, qualDetails) {
-    // TODO look to include qualifying data here
-    return raceDetails
   }
 
   $scope.$watch("season", function( value ) {

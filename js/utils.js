@@ -42,7 +42,6 @@ function getRoundRange(noRounds) {
   return roundRange;
 }
 
-
 function parseXWiki(text) {
   return text;
   var retVal = text.split('|');
@@ -56,4 +55,30 @@ function parseXWiki(text) {
   }
 
   return tempRetVal;
+}
+
+function convertToSecs(timing) {
+  var parts = timing.split(':')
+  var retVal = (Number(parts[0]*60) + Number(parts[1])).toFixed(3)
+  return retVal
+}
+
+function keyExists(name, arr) {
+  for (var i = 0; i < arr.length; i++) {
+    if( arr[ i ].key === name ) return i;
+  }
+  return -1;
+}
+
+function getDriverCode(driverId, arr) {
+  console.log('getting driver ' + driverId)
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].driverId == driverId) return arr[i].code
+  }
+  return driverId
+}
+
+function mergeDriverRaceQualDetails(raceDetails, qualDetails) {
+  // TODO look to include qualifying data here
+  return raceDetails
 }
