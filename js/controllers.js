@@ -477,7 +477,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     if (typeof(retVal) == 'undefined') {
        $scope.data = Schedule.schedule.get({season: $stateParams.season, series: 'f1' }, function(){
         var retVal = $scope.data.MRData.RaceTable
-        retVal._id = $stateParams.season
+        retVal._id = $stateParams.season.toString()
         retVal.series = 'f1'
 
         $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/schedule?apiKey=' + config.mongo.apiKey,
