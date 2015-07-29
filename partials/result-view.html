@@ -37,6 +37,9 @@
 
 <hr/>
 <h4>Lap Times (secs)</h4>
+<div ng-hide="chartLoaded">
+  <img src="./images/loading.gif">
+</div>
 <canvas id="line" class="chart chart-line" data="chartData"
   labels="chartLabels" legend="true" series="series" options="options"
   click="onClick">

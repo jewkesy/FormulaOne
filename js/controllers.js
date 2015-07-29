@@ -418,11 +418,14 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.chartLabels = lapDetails.chartLabels;
     $scope.chartData = lapDetails.chartData;
     $scope.series = lapDetails.chartSeries;
-    $scope.options = {datasetFill : false, animation: false}
+    $scope.options = {datasetFill : false, animation: true}
     
     $scope.onClick = function (points, evt) {
       // console.log(points, evt);
     };
+    $scope.$on('create', function () {
+       $scope.chartLoaded = true;
+    });
   }
 
   function convertToSecs(timing) {
