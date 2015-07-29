@@ -418,7 +418,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.chartLabels = lapDetails.chartLabels;
     $scope.chartData = lapDetails.chartData;
     $scope.series = lapDetails.chartSeries;
-    $scope.options = {datasetFill : false}
+    $scope.options = {datasetFill : false, animation: false}
     
     $scope.onClick = function (points, evt) {
       // console.log(points, evt);
