@@ -116,7 +116,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
         var retVal = $scope.data.MRData
         console.log(retVal)
         $scope.circuits = retVal.CircuitTable
-        retVal._id = $stateParams.season
+        retVal._id = $stateParams.season.toString()
         retVal.series = 'f1'
         // console.log(retVal)
         $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/circuits?apiKey=' + config.mongo.apiKey,
