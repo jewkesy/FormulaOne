@@ -5,7 +5,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   };
 }).controller('FooterController', function($scope) {
   $scope.currentDate = new Date();
-}).controller('NewsController', function($scope, $location, $sce, $http, News) {
+}).controller('NewsController', function($scope, $location, $window, $sce, $http, News) {
 
   $http.jsonp(config.googleNews)
     .success(function(data){
@@ -18,6 +18,10 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     });
 
   $location.path('/news');
+  $scope.$on('$viewContentLoaded', function(event) {
+    // console.log('viewContentLoaded', $location.url())
+    $window.ga('send', 'pageview', { page: $location.url() });
+  });
 
 }).controller('DriverListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Driver) {
   if (!$stateParams.season) $stateParams.season = config.defaultYear;
@@ -38,9 +42,16 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
       }
   });
   $location.path('/' + $stateParams.season + '/drivers');
+  $scope.$on('$viewContentLoaded', function(event) {
+    // console.log('viewContentLoaded', $location.url())
+    $window.ga('send', 'pageview', { page: $location.url() });
+  });
 
-}).controller('DriverViewController', function($scope, $rootScope, $http, $timeout, $stateParams, Driver) {
-  //console.log($stateParams)
+}).controller('DriverViewController', function($scope, $rootScope, $http, $timeout, $stateParams, $location, $window, Driver) {
+  $scope.$on('$viewContentLoaded', function(event) {
+    // console.log('viewContentLoaded', $location.url())
+    $window.ga('send', 'pageview', { page: $location.url() });
+  });
 
   $scope.data = Driver.mongo.query({ id: $stateParams.id, series: 'f1' }, function(response){
     // console.log($scope.data)
@@ -138,8 +149,16 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
       }
   });
   $location.path('/' + $stateParams.season + '/circuits');
+  $scope.$on('$viewContentLoaded', function(event) {
+    // console.log('viewContentLoaded', $location.url())
+    $window.ga('send', 'pageview', { page: $location.url() });
+  });
 
-}).controller('CircuitViewController', function($scope, $rootScope, $http, $sce, $timeout, $stateParams, Circuit) {
+}).controller('CircuitViewController', function($scope, $rootScope, $http, $sce, $timeout, $stateParams, $location, $window, Circuit) {
+  $scope.$on('$viewContentLoaded', function(event) {
+    // console.log('viewContentLoaded', $location.url())
+    $window.ga('send', 'pageview', { page: $location.url() });
+  });
   $scope.data = Circuit.circuit.get({ id: $stateParams.id, series: 'f1' }, function(){
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.CircuitTable.Circuits[0];
@@ -202,9 +221,15 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
       }
   });
   $location.path('/' + $stateParams.season + '/constructors');
+  $scope.$on('$viewContentLoaded', function(event) {
+    // console.log('viewContentLoaded', $location.url())
+    $window.ga('send', 'pageview', { page: $location.url() });
+  });
 
-}).controller('ConstructorViewController', function($scope, $rootScope, $http, $timeout, $stateParams, $window, Constructor) {
-
+}).controller('ConstructorViewController', function($scope, $rootScope, $http, $timeout, $stateParams, $window, $location, Constructor) {
+  $scope.$on('$viewContentLoaded', function(event) {
+    $window.ga('send', 'pageview', { page: $location.url() });
+  });
   $scope.data = Constructor.mongo.query({ id: $stateParams.id, series: 'f1' }, function(response){
     // console.log($scope.data)
     if (typeof($scope.data[0]) == 'undefined') {
@@ -439,6 +464,10 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   })
 
   $location.path('/' + $stateParams.season + '/results/' +  $stateParams.round);
+  $scope.$on('$viewContentLoaded', function(event) {
+    // console.log('viewContentLoaded', $location.url())
+    $window.ga('send', 'pageview', { page: $location.url() });
+  });
 
 }).controller('ScheduleListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Schedule, Weather) {
   if (!$stateParams.season) $stateParams.season = config.defaultYear;
@@ -616,6 +645,10 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   });
 
   $location.path('/' + $stateParams.season + '/results');
+  $scope.$on('$viewContentLoaded', function(event) {
+    // console.log('viewContentLoaded', $location.url())
+    $window.ga('send', 'pageview', { page: $location.url() });
+  });
 
 }).filter('formatDateTime', [
   '$filter', function($filter) {
