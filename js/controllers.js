@@ -275,7 +275,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
   function buildConstructor(constructor) {
     var retVal = constructor.MRData.StandingsTable;
-    if (retVal.StandingsLists.length == 0) return false;
+    if (retVal.StandingsLists.length == 0) { $scope.content_loaded=true; $scope.no_data=true;$scope.chartLoaded = true; return false;}
     $rootScope.title = "Formula One Stats .:. Constructors .:. " + retVal.StandingsLists[0].ConstructorStandings[0].Constructor.name;
     
     var wikiUrl = retVal.StandingsLists[0].ConstructorStandings[0].Constructor.url.split("/");
