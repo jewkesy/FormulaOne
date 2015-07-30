@@ -1,3 +1,5 @@
+ <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1-beta.2/Chart.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
 <div ng-hide="content_loaded">
   Just grabbing your data...
 </div>
@@ -13,7 +15,8 @@
       <td><a target="_blank" ng-href="{{team.StandingsLists[0].ConstructorStandings[0].Constructor.url}}"/>Wiki Link</td>
     </tr>
   </table>
-  <table class="table constructorable table-striped table-bordered table-condensed">
+  
+  <table class="table constructortable table-striped table-bordered table-condensed">
     <tr>
       <th>Season</th>
       <th>Rounds</th>
@@ -30,3 +33,7 @@
     </tr>
   </table>
 </div>
+<canvas id="bar" class="chart chart-bar" data="chartData"
+    labels="chartLabels" legend="true" series="chartSeries" options="chartOptions"
+    click="onClick">
+  </canvas> 

@@ -222,16 +222,49 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
           type: "POST",
           contentType: "application/json" 
         });
+        buildConstructorChart(retVal)
         buildConstructor(retVal)
+
       });
     } else {
       // console.log('got constructor from mongo')
+      buildConstructorChart($scope.data[0])
       buildConstructor($scope.data[0])
     }
   });
 
+  function buildConstructorChart(data) {
+
+    // console.log(data)
+    var chartLabels = []
+    var chartData = []
+    var chartSeries = []
+    chartSeries.push(data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0].Constructor.name)
+
+    // for (var i = 0; i < data.MRData.StandingsTable.StandingsLists.length; i++){
+    for (var i = data.MRData.StandingsTable.StandingsLists.length -1; i>=0; i--){
+      var score = data.MRData.StandingsTable.StandingsLists[i];
+      // console.log(i, score)
+      chartLabels.push(score.season)
+      chartData.push(parseInt(score.ConstructorStandings[0].wins,0))
+    }
+
+    // console.log(chartLabels, chartData)
+
+    $scope.chartLabels = chartLabels;
+    $scope.chartData = [chartData];
+    $scope.chartSeries = chartSeries;
+    $scope.chartOptions = {legend: true}
+    
+    $scope.onClick = function (points, evt) {
+      // console.log(points, evt);
+    };
+    $scope.$on('create', function () {
+       $scope.chartLoaded = true;
+    });
+  }
+
   function buildConstructor(constructor) {
-    $scope.content_loaded = true;
     var retVal = constructor.MRData.StandingsTable;
     $rootScope.title = "Formula One Stats .:. Constructors .:. " + retVal.StandingsLists[0].ConstructorStandings[0].Constructor.name;
     
@@ -243,6 +276,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.getConstructorPic(wikiUrl);
 
     $scope.team = retVal
+    $scope.content_loaded = true;
   }
 
   $scope.getConstructorPic = function(constructorName) {
