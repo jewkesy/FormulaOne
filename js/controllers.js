@@ -203,7 +203,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   });
   $location.path('/' + $stateParams.season + '/constructors');
 
-}).controller('ConstructorViewController', function($scope, $rootScope, $http, $timeout, $stateParams, Constructor) {
+}).controller('ConstructorViewController', function($scope, $rootScope, $http, $timeout, $stateParams, $window, Constructor) {
 
   $scope.data = Constructor.mongo.query({ id: $stateParams.id, series: 'f1' }, function(response){
     // console.log($scope.data)
@@ -255,7 +255,15 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.chartLabels = chartLabels;
     $scope.chartData = [chartData];
     $scope.chartSeries = chartSeries;
-    $scope.chartOptions = {legend: true}
+
+    var width = $window.innerWidth
+    // console.log(width)
+    if (width < 400) 
+      $scope.chartOptions = {legend: true, animation: false}
+    else if (width <= 640)
+      $scope.chartOptions = {legend: true, animation: true, animationStep: 10}
+    else 
+      $scope.chartOptions = {legend: true, animation: true}
     
     $scope.onClick = function (points, evt) {
       // console.log(points, evt);
