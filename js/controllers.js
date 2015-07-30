@@ -364,7 +364,15 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.chartLabels = lapDetails.chartLabels;
     $scope.chartData = lapDetails.chartData;
     $scope.series = lapDetails.chartSeries;
-    $scope.options = {datasetFill : false, animation: true, animationSteps : 20}
+
+    var width = $window.innerWidth
+    // console.log(width)
+    if (width < 400) 
+      $scope.options = {datasetFill : false, animation: false}
+    else if (width <= 640)
+      $scope.options = {datasetFill : false, animation: true, animationStep: 10}
+    else 
+      $scope.options = {datasetFill : true, animation: true}
     
     $scope.onClick = function (points, evt) {
       // console.log(points, evt);
