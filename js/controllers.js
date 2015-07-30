@@ -234,8 +234,9 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   });
 
   function buildConstructorChart(data) {
-
-    // console.log(data)
+    // console.log(data.MRData.StandingsTable.StandingsLists.length)
+    if (data.MRData.StandingsTable.StandingsLists.length == 0) return false;
+    
     var chartLabels = []
     var chartData = []
     var chartSeries = []
@@ -266,6 +267,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
   function buildConstructor(constructor) {
     var retVal = constructor.MRData.StandingsTable;
+    if (retVal.StandingsLists.length == 0) return false;
     $rootScope.title = "Formula One Stats .:. Constructors .:. " + retVal.StandingsLists[0].ConstructorStandings[0].Constructor.name;
     
     var wikiUrl = retVal.StandingsLists[0].ConstructorStandings[0].Constructor.url.split("/");

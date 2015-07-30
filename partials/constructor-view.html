@@ -15,7 +15,18 @@
       <td><a target="_blank" ng-href="{{team.StandingsLists[0].ConstructorStandings[0].Constructor.url}}"/>Wiki Link</td>
     </tr>
   </table>
-  
+</div>
+<hr/>
+<h4>Race Wins History</h4>
+<div ng-hide="chartLoaded">
+  <img width="300px" src="./images/loading.gif">
+</div>
+<hr/>
+<canvas id="bar" class="chart chart-bar" data="chartData"
+    labels="chartLabels" legend="true" series="chartSeries" options="chartOptions"
+    click="onClick">
+  </canvas> 
+<div ng-show="content_loaded">
   <table class="table constructortable table-striped table-bordered table-condensed">
     <tr>
       <th>Season</th>
@@ -33,7 +44,3 @@
     </tr>
   </table>
 </div>
-<canvas id="bar" class="chart chart-bar" data="chartData"
-    labels="chartLabels" legend="true" series="chartSeries" options="chartOptions"
-    click="onClick">
-  </canvas> 
