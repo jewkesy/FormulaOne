@@ -76,6 +76,9 @@ angular.module('formulaOneApp.services', ['ngResource'])
       laps: $resource(config.api + ':series/:season/:id/laps.json?limit=1000', {
         'get': { method: 'GET', cache: true, isArray: true }
       }),
+      pits: $resource(config.api + ':series/:season/:id/pitstops.json?limit=1000', {
+        'get': { method: 'GET', cache: true, isArray: true }
+      }),
       cacheDriverList: $resource('db/cache/drivers.json', {
         'get': { method: 'GET', cache: true, isArray: true }
       }),
@@ -83,6 +86,9 @@ angular.module('formulaOneApp.services', ['ngResource'])
         'query': {method: 'GET', cache: true, isArray: false }
       }),
       mongoLaps: $resource(config.mongo.host + config.mongo.database + '/collections/laps?q={"_id": ":season:round", "series": ":series"}&apiKey=' + config.mongo.apiKey + '&callback=CALLBACK', {
+        'query': {method: 'GET', cache: true, isArray: false }
+      }),
+      mongoPits: $resource(config.mongo.host + config.mongo.database + '/collections/pits?q={"_id": ":season:round", "series": ":series"}&apiKey=' + config.mongo.apiKey + '&callback=CALLBACK', {
         'query': {method: 'GET', cache: true, isArray: false }
       })
     };

@@ -404,6 +404,30 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     }
   });
 
+  var pitResults = Result.mongoPits.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {
+    if (typeof(pitResults[0]) == 'undefined') {
+      pitResults = Result.pits.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
+        var retVal = pitResults.MRData.RaceTable.Races[0]
+        
+        retVal._id = $stateParams.season + $stateParams.round
+        retVal.series = 'f1'
+
+        retVal.chartLabels = []
+        retVal.chartSeries = []
+        retVal.chartData = []
+        console.log(retVal)
+        $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/pits?apiKey=' + config.mongo.apiKey,
+          data: JSON.stringify(retVal),
+          type: "POST",
+          contentType: "application/json" 
+        });
+      });
+    } else {
+
+    }
+  });
+
+
   $q.all([raceResults.$promise, qualResults.$promise]).then(function(data){
     // console.log(data)
     var raceDetails = data[0].MRData
