@@ -342,9 +342,6 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   var raceResults = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function() {});
   var qualResults = Result.qualifying.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {});
 
-
-
-
   $q.all([raceResults.$promise, qualResults.$promise]).then(function(data){
     // console.log(data)
     var raceDetails = data[0].MRData
@@ -370,23 +367,11 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.content_loaded = true;
   });
 
-
-  
-
-  
-
-
-
-  function getPitResultsTmp() {
-    return $q(function(resolve, reject) {
-      setTimeout(function() {
-        resolve('Pits done')
-      }, 200);
-    });
-  }
-
   $q.all([getLapResults(), getPitResults()]).then(function(result) {
     console.log(result)
+    buildLapsChart(result[0])
+
+
   });
 
   function getPitResults() {
@@ -472,25 +457,18 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
           type: "POST",
           contentType: "application/json" 
         });
-        console.log('laps live', retVal)
-        buildLapsChart(retVal)
+        console.log('laps live')
+        // buildLapsChart(retVal)
         return deferred.resolve(retVal)
       })
     } else {
       console.log('laps cache')
-      buildLapsChart(lapResults[0])
+      // buildLapsChart(lapResults[0])
       return deferred.resolve(lapResults[0])
     }
   });
   return deferred.promise
 }
-
-
-
-  // $q.all([getLapResults.$promise]).then(function(data) {
-  //   console.log(data)
-  // });
-
 
   function buildLapsChart(lapDetails) {
     $scope.chartLabels = lapDetails.chartLabels;
