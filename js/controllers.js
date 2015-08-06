@@ -342,7 +342,86 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   var raceResults = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function() {});
   var qualResults = Result.qualifying.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {});
 
-  var lapResults = Result.mongoLaps.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {
+
+
+
+  $q.all([raceResults.$promise, qualResults.$promise]).then(function(data){
+    // console.log(data)
+    var raceDetails = data[0].MRData
+    var qualDetails = data[1].MRData
+    // var lapDetails =  data[2].MRData.RaceTable.Races[0].Laps
+    // console.log(lapDetails)
+
+    if (raceDetails.RaceTable.Races.length == 0) {
+      raceDetails.RaceTable.Races = [{raceName : "TBA"}];
+    }
+    $rootScope.title = "Formula One Stats .:. " + $stateParams.season + " .:. Round " + raceDetails.RaceTable.round + " .:. " + raceDetails.RaceTable.Races[0].raceName;
+
+    $scope.noRounds = raceDetails.total;
+    if ($scope.noRounds == 0) {
+      $state.go('viewResult', {'season': $scope.season, 'round': '1'});
+    }
+    $scope.rounds = (getRoundRange($scope.noRounds));
+
+    var retVal = mergeDriverRaceQualDetails(raceDetails.RaceTable, qualDetails);
+
+    $scope.results = retVal
+    
+    $scope.content_loaded = true;
+  });
+
+
+  
+
+  
+
+
+
+  function getPitResultsTmp() {
+    return $q(function(resolve, reject) {
+      setTimeout(function() {
+        resolve('Pits done')
+      }, 200);
+    });
+  }
+
+  $q.all([getLapResults(), getPitResults()]).then(function(result) {
+    console.log(result)
+  });
+
+  function getPitResults() {
+    var deferred = $q.defer();
+    var pitResults = Result.mongoPits.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {
+    if (typeof(pitResults[0]) == 'undefined') {
+      pitResults = Result.pits.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
+        var retVal = pitResults.MRData.RaceTable.Races[0]
+        
+        retVal._id = $stateParams.season + $stateParams.round
+        retVal.series = 'f1'
+
+        retVal.chartLabels = []
+        retVal.chartSeries = []
+        retVal.chartData = []
+        console.log(retVal)
+        $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/pits?apiKey=' + config.mongo.apiKey,
+          data: JSON.stringify(retVal),
+          type: "POST",
+          contentType: "application/json" 
+        });
+        console.log('pit live')
+        return deferred.resolve(retVal)
+      });
+    } else {
+      console.log('pit cache')
+      return deferred.resolve(pitResults[0])
+    }
+  });
+    return deferred.promise
+  }
+
+  function getLapResults() {
+    var deferred = $q.defer();
+    var lapResults = Result.mongoLaps.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {
     if (typeof(lapResults[0]) == 'undefined') {
       lapResults = Result.laps.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
         var retVal = lapResults
@@ -386,72 +465,32 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
           retVal.chartData.push(times)
         }
 
-        // console.log(retVal)
         retVal.MRData = ""
-        // console.log(retVal)
 
         $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/laps?apiKey=' + config.mongo.apiKey,
           data: JSON.stringify( retVal),
           type: "POST",
           contentType: "application/json" 
         });
-
+        console.log('laps live', retVal)
         buildLapsChart(retVal)
+        return deferred.resolve(retVal)
       })
     } else {
-      // console.log(lapResults[0])
+      console.log('laps cache')
       buildLapsChart(lapResults[0])
+      return deferred.resolve(lapResults[0])
     }
   });
-
-  var pitResults = Result.mongoPits.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {
-    if (typeof(pitResults[0]) == 'undefined') {
-      pitResults = Result.pits.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
-        var retVal = pitResults.MRData.RaceTable.Races[0]
-        
-        retVal._id = $stateParams.season + $stateParams.round
-        retVal.series = 'f1'
-
-        retVal.chartLabels = []
-        retVal.chartSeries = []
-        retVal.chartData = []
-        console.log(retVal)
-        $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/pits?apiKey=' + config.mongo.apiKey,
-          data: JSON.stringify(retVal),
-          type: "POST",
-          contentType: "application/json" 
-        });
-      });
-    } else {
-
-    }
-  });
+  return deferred.promise
+}
 
 
-  $q.all([raceResults.$promise, qualResults.$promise]).then(function(data){
-    // console.log(data)
-    var raceDetails = data[0].MRData
-    var qualDetails = data[1].MRData
-    // var lapDetails =  data[2].MRData.RaceTable.Races[0].Laps
-    // console.log(lapDetails)
 
-    if (raceDetails.RaceTable.Races.length == 0) {
-      raceDetails.RaceTable.Races = [{raceName : "TBA"}];
-    }
-    $rootScope.title = "Formula One Stats .:. " + $stateParams.season + " .:. Round " + raceDetails.RaceTable.round + " .:. " + raceDetails.RaceTable.Races[0].raceName;
+  // $q.all([getLapResults.$promise]).then(function(data) {
+  //   console.log(data)
+  // });
 
-    $scope.noRounds = raceDetails.total;
-    if ($scope.noRounds == 0) {
-      $state.go('viewResult', {'season': $scope.season, 'round': '1'});
-    }
-    $scope.rounds = (getRoundRange($scope.noRounds));
-
-    var retVal = mergeDriverRaceQualDetails(raceDetails.RaceTable, qualDetails);
-
-    $scope.results = retVal
-    
-    $scope.content_loaded = true;
-  });
 
   function buildLapsChart(lapDetails) {
     $scope.chartLabels = lapDetails.chartLabels;

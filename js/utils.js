@@ -71,7 +71,7 @@ function keyExists(name, arr) {
 }
 
 function getDriverCode(driverId, arr) {
-  console.log('getting driver ' + driverId)
+  // console.log('getting driver ' + driverId)
   for (var i = 0; i < arr.length; i++) {
     if (arr[i].driverId == driverId) return arr[i].code
   }
