@@ -337,8 +337,6 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     driverList = driverList.MRData.DriverTable.Drivers
   });
 
-  // var raceResults = getRaceResults();
-
   var raceResults = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function() {});
   var qualResults = Result.qualifying.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {});
 
@@ -370,8 +368,6 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   $q.all([getLapResults(), getPitResults()]).then(function(result) {
     console.log(result)
     buildLapsChart(result[0])
-
-
   });
 
   function getPitResults() {
