@@ -21,7 +21,7 @@
     </tr>
     <tr ng-repeat="team in teams.ConstructorStandings">
       <td>{{team.position}}</td>
-      <td><img ng-src="http://jewkesy.github.io/colloquial/images/flags/{{team.Constructor.nationality}}.png" alt="{{team.Constructor.nationality}}" /> <a ui-sref="viewConstructor({id:team.Constructor.constructorId})">{{team.Constructor.name}}</a></td>
+      <td><img ng-src="./images/flags/{{team.Constructor.nationality}}.png" alt="{{team.Constructor.nationality}}" /> <a ui-sref="viewConstructor({id:team.Constructor.constructorId})">{{team.Constructor.name}}</a></td>
       <td>{{team.points}}</td>
       <td>{{team.wins}}</td>
     </tr>
