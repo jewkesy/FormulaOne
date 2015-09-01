@@ -34,6 +34,23 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.content_loaded = true;
     var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
     $scope.drivers = retVal
+
+    var winDetails = {
+      chartData: [[]],
+      chartSeries: [],
+      chartLabels: []
+    }
+
+// console.log(retVal)
+for (x = 0; x < retVal.DriverStandings.length; x++) {
+  var win = retVal.DriverStandings[x]
+  // console.log(win)
+  winDetails.chartLabels.push(win.Driver.code)
+  winDetails.chartSeries.push(win.Driver.code)
+  winDetails.chartData[0].push(win.wins)
+}
+
+    buildDriversChart(winDetails)
   }); //fetch all drivers. Issues a GET to /api/drivers
 
   $scope.$watch("season", function( value ) {
@@ -46,6 +63,29 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     // console.log('viewContentLoaded', $location.url())
     $window.ga('send', 'pageview', { page: $location.url() });
   });
+
+  function buildDriversChart(winDetails) {
+    // console.log(winDetails.chartLabels, winDetails.chartData, winDetails.chartSeries)
+    $scope.chartLabels = winDetails.chartLabels;
+    $scope.chartData = winDetails.chartData;
+    $scope.series = winDetails.chartSeries;
+
+    var width = $window.innerWidth
+    // console.log(width)
+    if (width < 400) 
+      $scope.options = {datasetFill : false, animation: false}
+    else if (width <= 640)
+      $scope.options = {datasetFill : false, animation: true, animationStep: 10}
+    else 
+      $scope.options = {datasetFill : true, animation: true}
+    
+    $scope.onClick = function (points, evt) {
+      // console.log(points, evt);
+    };
+    $scope.$on('create', function () {
+       $scope.chartLoaded = true;
+    });
+  }
 
 }).controller('DriverViewController', function($scope, $rootScope, $http, $timeout, $stateParams, $location, $window, Driver) {
   $scope.$on('$viewContentLoaded', function(event) {
@@ -275,7 +315,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
       chartData.push(parseInt(score.ConstructorStandings[0].wins,0))
     }
 
-    // console.log(chartLabels, chartData)
+    // console.log(chartLabels, chartData, chartSeries)
 
     $scope.chartLabels = chartLabels;
     $scope.chartData = [chartData];
