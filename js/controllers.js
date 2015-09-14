@@ -41,14 +41,15 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
       chartLabels: []
     }
 
-// console.log(retVal)
-for (x = 0; x < retVal.DriverStandings.length; x++) {
-  var win = retVal.DriverStandings[x]
-  // console.log(win)
-  winDetails.chartLabels.push(win.Driver.code)
-  winDetails.chartSeries.push(win.Driver.code)
-  winDetails.chartData[0].push(win.wins)
-}
+    // console.log(retVal)
+    for (x = 0; x < retVal.DriverStandings.length; x++) {
+      var win = retVal.DriverStandings[x]
+      // console.log(win)
+      if (typeof win.Driver.code == 'undefined') win.Driver.code = win.Driver.familyName
+      winDetails.chartLabels.push(win.Driver.code)
+      winDetails.chartSeries.push(win.Driver.code)
+      winDetails.chartData[0].push(win.wins)
+    }
 
     buildDriversChart(winDetails)
   }); //fetch all drivers. Issues a GET to /api/drivers
