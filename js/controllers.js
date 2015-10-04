@@ -514,10 +514,8 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
     var width = $window.innerWidth
     // console.log(width)
-    if (width < 400) 
+    if (width <= 640)
       $scope.options = {datasetFill : false, animation: false}
-    else if (width <= 640)
-      $scope.options = {datasetFill : false, animation: true, animationStep: 10}
     else 
       $scope.options = {datasetFill : true, animation: true}
     
