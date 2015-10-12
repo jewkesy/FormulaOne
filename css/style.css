@@ -78,8 +78,9 @@ body {
   margin: 5px;
   border-radius: 25px;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  /*white-space: nowrap;*/
   text-align: center;
+  min-width: 175px;
   /*background-image: url(/images/helmet-icon.png);
   opacity : 0.2;*/
 }
