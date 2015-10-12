@@ -74,15 +74,20 @@ body {
   line-height: 1;
   border: 1px  #8585AD solid;
   float: left;
-  padding: 5px;
-  margin: 5px;
+  padding: 2px;
+  margin: 2px;
   border-radius: 25px;
   text-overflow: ellipsis;
   /*white-space: nowrap;*/
   text-align: center;
-  min-width: 175px;
+  min-width: 165px;
   /*background-image: url(/images/helmet-icon.png);
   opacity : 0.2;*/
+}
+
+.item > hr {
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
 
 .round {
@@ -91,7 +96,7 @@ body {
 }
 
 .position {
-  font-size: 8em;
+  font-size: 7em;
   font-weight: bold;
   color: #8585AD;
   width: 100%;
@@ -101,19 +106,19 @@ body {
 }
 
 .consName{
-  font-size: 2.5em;
+  font-size: 2em;
   margin: 0px;
   text-align: right;
 }
 
 .lastName {
-  font-size: 2.5em;
+  font-size: 2em;
   margin: 0px;
   text-align: right;
 }
 
 .firstName {
-  font-size: 1.2em;
+  font-size: 1em;
   font-style: italic;
   text-align: left;
 }
@@ -132,12 +137,12 @@ body {
 }
 
 .item .status {
-  font-size: 1.4em;
+  font-size: 1.2em;
   font-weight: bold;
 }
 
 .item .raceTime {
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 .mainPic {
