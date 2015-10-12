@@ -81,8 +81,9 @@ function getDriverCode(driverId, arr) {
 function setStatData(raceTable) {
   // console.log(raceTable.Races[0].Results.length)
   for (var i = 0; i < raceTable.Races[0].Results.length; i++) {
+    if(raceTable.Races[0].Results[i].grid == 0) raceTable.Races[0].Results[i].grid = ''
     if (typeof raceTable.Races[0].Results[i].FastestLap == 'undefined') {
-      raceTable.Races[0].Results[i].FastestLap = {TimeOrder: 10000, AverageSpeedOrder: 1000}
+      raceTable.Races[0].Results[i].FastestLap = {TimeOrder: 99999, AverageSpeedOrder: 1000}
     } else {
       raceTable.Races[0].Results[i].FastestLap.TimeOrder = convertToSecs(raceTable.Races[0].Results[i].FastestLap.Time.time);
       raceTable.Races[0].Results[i].FastestLap.AverageSpeedOrder = 1000 - raceTable.Races[0].Results[i].FastestLap.AverageSpeed.speed;

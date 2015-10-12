@@ -382,11 +382,11 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   var qualResults = Result.qualifying.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {});
 
   $q.all([raceResults.$promise, qualResults.$promise]).then(function(data){
-    console.log(data)
+    // console.log(data)
     var raceDetails = data[0].MRData
     var qualDetails = data[1].MRData
     // var lapDetails =  data[2].MRData.RaceTable.Races[0].Laps
-    console.log(raceDetails)
+    // console.log(raceDetails)
 
     if (raceDetails.RaceTable.Races.length == 0) {
       raceDetails.RaceTable.Races = [{raceName : "TBA"}];
