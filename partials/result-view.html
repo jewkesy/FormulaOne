@@ -60,9 +60,9 @@
         <p class="lastName centerMe"><a ui-sref="viewConstructor({id:race.Constructor.constructorId})">{{race.Constructor.name}}</a></p>
         <hr/>
         <p class="status">{{race.status}}</p>
-        <p class="raceTime">{{race.Time.time}}</p>
+        <p class="raceTime">{{race.Time.time || 'DNF'}}</p>
         <p class="fastestLap" fastestLap={{race.FastestLap.TimeOrder}}>Fastest Lap: {{race.FastestLap.Time.time}}  (Lap {{race.FastestLap.lap}})</p>
-        <p class="avgSpeed" avgSpeed={{race.FastestLap.AverageSpeedOrder}}>Avg Speed: {{race.FastestLap.AverageSpeed.speed}} {{race.FastestLap.AverageSpeed.units}}</p>
+        <p class="avgSpeed" avgSpeed={{race.FastestLap.AverageSpeedOrder}}>Avg Speed: {{race.FastestLap.AverageSpeed.speed || 'N/A'}} {{race.FastestLap.AverageSpeed.units}}</p>
         <p class="grid" grid={{race.grid}}>Grid: {{race.grid}}</p>
       </div>
     </li>
