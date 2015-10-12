@@ -85,6 +85,11 @@ body {
   opacity : 0.2;*/
 }
 
+.round {
+  font-size: 3em;
+  text-align: center;
+}
+
 .position {
   font-size: 8em;
   font-weight: bold;

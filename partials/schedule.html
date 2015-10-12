@@ -90,21 +90,15 @@
     </tr>
   </table>  
 
-
-
-    
-
-
   <table class="table table-striped table-bordered table-condensed">
     <tr>
       <th>Round</th>
       <th>Name / Circuit / Date</th>
-      <th colspan="2">Details</th>
+      <th>Details</th>
     </tr>
     <tr ng-repeat="race in schedule.Races">
-      <td>{{race.round}} </td>
-      <td>{{race.raceName}}<br/><a ui-sref="viewCircuit({id: race.Circuit.circuitId})">{{race.Circuit.circuitName}}</a><br/>{{race | formatDateTime}}</td>
-      <td><a target="_blank" ng-href="{{race.url}}"/>Wiki Link</td>
+      <td class="round">{{race.round}} </td>
+      <td>{{race.raceName}} (<a target="_blank" ng-href="{{race.url}}">Wiki Link</a>)<br/><a ui-sref="viewCircuit({id: race.Circuit.circuitId})">{{race.Circuit.circuitName}}</a><br/>{{race | formatDateTime}}</td>
       <td ng-if="race.date == currentDate"><i>Awaiting Results</i></td>
       <td ng-if="race.date > currentDate"><i>Coming Soon</i></td>
       <td ng-if="race.date < currentDate"><a ui-sref="viewResult({season: season, round: race.round})">Result</td>
