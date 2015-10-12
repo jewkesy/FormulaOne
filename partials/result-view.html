@@ -46,10 +46,9 @@
   <div class="btn-group" opt-kind ok-key="sortBy">
     <button type="button" class="btn btn-default active" ok-sel="[position]" ok-type="integer">Race Results</button>
     <button type="button" class="btn btn-default" ok-sel="[grid]" ok-type="integer">Starting Grid</button>
-    <button type="button" class="btn btn-default" ok-sel="[fastestLap]" ok-type="string">Fastest Lap</button>
+    <button type="button" class="btn btn-default" ok-sel="[fastestLap]" ok-type="integer">Fastest Lap</button>
     <button type="button" class="btn btn-default" ok-sel="[avgSpeed]" ok-type="integer">Average Speed</button>
   </div>
-
 
   <ul id="isotopeContainer" isotope-container ng-cloak>
     <li ng-repeat="race in results.Races[0].Results" isotope-item="isotope-item">
