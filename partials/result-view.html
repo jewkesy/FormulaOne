@@ -1,7 +1,4 @@
-    <script type="text/javascript" src="./lib/jquery-isotope.js"></script>
-    <script type="text/javascript" src="./lib/angular-isotope.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1-beta.2/Chart.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+
 <div ng-hide="content_loaded">
   Just grabbing your data...
 </div>
@@ -49,23 +46,14 @@
   <div class="btn-group" opt-kind ok-key="sortBy">
     <button type="button" class="btn btn-default active" ok-sel="[position]">Race Results</button>
     <button type="button" class="btn btn-default" ok-sel="[grid]" ok-type="integer">Starting Grid</button>
+    <button type="button" class="btn btn-default" ok-sel="[grid]" ok-type="integer" ok-sortby-key="opt[number]">Number</button>
     <button type="button" class="btn btn-default" ok-sel="[fastestLap]" ok-type="integer">Fastest Lap</button>
     <button type="button" class="btn btn-default" ok-sel="[AvgSpeed]" ok-type="integer">Average Speed</button>
-<!--     <button type="button" class="btn btn-default" ok-sel="[practice]" ok-type="integer" disabled>Qualifier</button> -->
-<!--     <button type="button" class="btn btn-default" ok-sel="[number]" ok-type="integer">Practice</button> -->
   </div>
 
-          <!-- <div class="row">
-            <ul id="isotopeContainer" isotope-container ng-cloak class="ng-cloak">
-              <li ng-repeat="race in results.Races[0].Results" isotope-item class="item" onClick="removeItem(this)">
-                 <div class="position" position="{{race.position}}">Position: {{race.position}}</div>
-                 <div class="grid" grid="{{race.grid}}">Grid: {{race.grid}}</div>
-                 <div class="number">{{race.Driver.familyName}}</div>
-              </li>
-          </div> -->
 
-  <div id="isotopeContainer" isotope-container ng-cloak>
-    <div ng-repeat="race in results.Races[0].Results" isotope-item>
+  <ul id="isotopeContainer" isotope-container ng-cloak>
+    <li ng-repeat="race in results.Races[0].Results" isotope-item="isotope-item">
       <div ng-class="{pole: race.position==1}" class="item"><img ng-src="./images/flags/{{race.Driver.nationality}}.png" alt="{{driver.Driver.nationality}}" />
         <span class="position">{{race.position}}</span>
         <p class="lastName"><a ui-sref="viewDriver({id:race.Driver.driverId})">{{race.Driver.familyName}}</a></p>
@@ -80,6 +68,6 @@
         <p>Avg Speed: {{race.FastestLap.AverageSpeed.speed}} {{race.FastestLap.AverageSpeed.units}}</p>
         <p class="grid" grid={{race.grid}}>Grid: {{race.grid}}</p>
       </div>
-    </div>
-  </div>
+    </li>
+  </ul>
 </div>

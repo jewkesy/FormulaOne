@@ -89,6 +89,11 @@ body {
     overflow-x: hidden;
 }
 
+ul {
+  list-style: none;
+
+}
+
 .pole {
   background-image: url("../images/flag_opac.jpg");
   color: #fff;
