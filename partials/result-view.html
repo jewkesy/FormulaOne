@@ -44,18 +44,17 @@
 <hr/>
 <div ng-show="content_loaded">
   <div class="btn-group" opt-kind ok-key="sortBy">
-    <button type="button" class="btn btn-default active" ok-sel="[position]">Race Results</button>
+    <button type="button" class="btn btn-default active" ok-sel="[position]" ok-type="integer">Race Results</button>
     <button type="button" class="btn btn-default" ok-sel="[grid]" ok-type="integer">Starting Grid</button>
-    <button type="button" class="btn btn-default" ok-sel="[grid]" ok-type="integer" ok-sortby-key="opt[number]">Number</button>
-    <button type="button" class="btn btn-default" ok-sel="[fastestLap]" ok-type="integer">Fastest Lap</button>
-    <button type="button" class="btn btn-default" ok-sel="[AvgSpeed]" ok-type="integer">Average Speed</button>
+    <button type="button" class="btn btn-default" ok-sel="[fastestLap]" ok-type="string">Fastest Lap</button>
+    <button type="button" class="btn btn-default" ok-sel="[avgSpeed]" ok-type="integer">Average Speed</button>
   </div>
 
 
   <ul id="isotopeContainer" isotope-container ng-cloak>
     <li ng-repeat="race in results.Races[0].Results" isotope-item="isotope-item">
       <div ng-class="{pole: race.position==1}" class="item"><img ng-src="./images/flags/{{race.Driver.nationality}}.png" alt="{{driver.Driver.nationality}}" />
-        <span class="position">{{race.position}}</span>
+        <span class="position" position={{race.position}}>{{race.position}}</span>
         <p class="lastName"><a ui-sref="viewDriver({id:race.Driver.driverId})">{{race.Driver.familyName}}</a></p>
         <p class="firstName">{{race.Driver.givenName}}</p>
         <hr/>
@@ -63,9 +62,8 @@
         <hr/>
         <p class="status">{{race.status}}</p>
         <p class="raceTime">{{race.Time.time}}</p>
-
-        <p>Fastest Lap ({{race.FastestLap.lap}}) - {{race.FastestLap.Time.time}}</p>
-        <p>Avg Speed: {{race.FastestLap.AverageSpeed.speed}} {{race.FastestLap.AverageSpeed.units}}</p>
+        <p class="fastestLap" fastestLap={{race.FastestLap.TimeOrder}}>Fastest Lap: {{race.FastestLap.Time.time}}  (Lap {{race.FastestLap.lap}})</p>
+        <p class="avgSpeed" avgSpeed={{race.FastestLap.AverageSpeedOrder}}>Avg Speed: {{race.FastestLap.AverageSpeed.speed}} {{race.FastestLap.AverageSpeed.units}}</p>
         <p class="grid" grid={{race.grid}}>Grid: {{race.grid}}</p>
       </div>
     </li>

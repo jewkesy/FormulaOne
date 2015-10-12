@@ -382,11 +382,11 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   var qualResults = Result.qualifying.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {});
 
   $q.all([raceResults.$promise, qualResults.$promise]).then(function(data){
-    // console.log(data)
+    console.log(data)
     var raceDetails = data[0].MRData
     var qualDetails = data[1].MRData
     // var lapDetails =  data[2].MRData.RaceTable.Races[0].Laps
-    // console.log(lapDetails)
+    console.log(raceDetails)
 
     if (raceDetails.RaceTable.Races.length == 0) {
       raceDetails.RaceTable.Races = [{raceName : "TBA"}];
@@ -399,15 +399,17 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     }
     $scope.rounds = (getRoundRange($scope.noRounds));
 
+    setStatData(raceDetails.RaceTable)
+
     var retVal = mergeDriverRaceQualDetails(raceDetails.RaceTable, qualDetails);
 
     $scope.results = retVal
-    
+
     $scope.content_loaded = true;
   });
 
   $q.all([getLapResults(), getPitResults()]).then(function(result) {
-    console.log(result)
+    // console.log(result)
     buildLapsChart(result[0])
   });
 
@@ -434,7 +436,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
         return deferred.resolve(retVal)
       });
     } else {
-      console.log('pit cache')
+      // console.log('pit cache')
       return deferred.resolve(pitResults[0])
     }
   });
@@ -461,7 +463,6 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
         for (var i = 0; i < lapDetails.length; i++) {
           retVal.chartLabels.push(lapDetails[i].number)
           var lap = lapDetails[i].Timings
-
           for (var j = 0; j < lap.length; j++){
             var idx = keyExists(lap[j].driverId, lapTimes)
             if (idx == -1) {
@@ -494,12 +495,12 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
           type: "POST",
           contentType: "application/json" 
         });
-        console.log('laps live')
+        // console.log('laps live')
         // buildLapsChart(retVal)
         return deferred.resolve(retVal)
       })
     } else {
-      console.log('laps cache')
+      // console.log('laps cache')
       // buildLapsChart(lapResults[0])
       return deferred.resolve(lapResults[0])
     }
