@@ -66,13 +66,13 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   });
 
   function buildDriversChart(winDetails) {
-    // console.log(winDetails.chartLabels, winDetails.chartData, winDetails.chartSeries)
+    console.log(winDetails.chartLabels, winDetails.chartData, winDetails.chartSeries)
     $scope.chartLabels = winDetails.chartLabels;
     $scope.chartData = winDetails.chartData;
-    $scope.series = winDetails.chartSeries;
+    // $scope.series = winDetails.chartSeries;
 
     var width = $window.innerWidth
-    // console.log(width)
+    console.log(width)
     if (width < 400) 
       $scope.options = {datasetFill : false, animation: false}
     else if (width <= 640)

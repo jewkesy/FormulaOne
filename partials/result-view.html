@@ -8,7 +8,7 @@
 
   <table class="table scheduletable">
     <tr>
-      <td colspan="5"><h3>Formula 1<span class="divider"> .:. </span>
+      <td colspan="5"><h3>
         <span class="dropdown">
           <a class="btn btn-default" data-toggle="dropdown" href="#">{{ season }} <b class="caret"></b></a>
           <ul ng-model="seasonSelection" class="dropdown-menu" role="menu" aria-labelledby="dropdownYear">
@@ -28,7 +28,7 @@
         </h3>
       </td>
     </tr>
-    <tr><td>{{ results.Races[0].Circuit.circuitName }}, {{ results.Races[0].Circuit.Location.country }} .:. {{results.Races[0] | formatDateTime}}</td></tr>
+    <tr><td>{{ results.Races[0].Circuit.circuitName }}, {{ results.Races[0].Circuit.Location.country }} <br/> {{results.Races[0] | formatDateTime}}</td></tr>
   </table>
 </div>
 
@@ -44,10 +44,10 @@
 <hr/>
 <div ng-show="content_loaded">
   <div class="btn-group" opt-kind ok-key="sortBy">
-    <button type="button" class="btn btn-default active" ok-sel="[position]" ok-type="integer">Race Results</button>
+    <button type="button" class="btn btn-default active" ok-sel="[position]" ok-type="integer">Results</button>
     <button type="button" class="btn btn-default" ok-sel="[grid]" ok-type="integer">Starting Grid</button>
     <button type="button" class="btn btn-default" ok-sel="[fastestLap]" ok-type="integer">Fastest Lap</button>
-    <button type="button" class="btn btn-default" ok-sel="[avgSpeed]" ok-type="integer">Average Speed</button>
+    <button type="button" class="btn btn-default" ok-sel="[avgSpeed]" ok-type="integer">Avg Speed</button>
   </div>
 
   <ul id="isotopeContainer" isotope-container ng-cloak>
