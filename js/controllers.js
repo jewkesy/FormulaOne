@@ -408,7 +408,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   }
 
 
-  $q.all([getRaceResults()]).then(function(data){
+  $q.all([getRaceResults(), getLapResults()]).then(function(data){
     // console.log(data)
     var raceDetails = data[0].MRData
     // var qualDetails = data[1].MRData
@@ -434,11 +434,12 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.results = retVal
 
     $scope.content_loaded = true;
+    buildLapsChart(data[1])
   });
 
-  $q.all([getLapResults()]).then(function(result) {
-    buildLapsChart(result[0])
-  });
+  // $q.all([getLapResults()]).then(function(result) {
+  //   buildLapsChart(result[0])
+  // });
 
   function getPitResults() {
     var deferred = $q.defer();
@@ -668,10 +669,9 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
             raceUnixTme = (new Date(retVal.Races[i].date + 'T' + retVal.Races[i].time)/1000)
 
             var list = $scope.weather.list
-            
+           
             var theWeather = '';
             for (var x = 0; x < list.length; x++) {
-
               if (list[x].dt >= raceUnixTme) {
                 $scope.weatherForecast = list[x]
                 $scope.weatherForecast.desc = "Current Forecast"
@@ -693,6 +693,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
                 $scope.weather_loaded = true;
 
                 if (x > 8) {
+                  // console.log('x > 8')
                   $scope.qualForecast = list[x-8]
                   raceDate.setDate(raceDate.getDate() - 1);
                   var theDate = raceDate.toDateString();
@@ -714,6 +715,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
                 }
                 
                 if (x > 16) {
+                  // console.log('x > 16')
                   $scope.pracForecast = list[x-16]
                   raceDate.setDate(raceDate.getDate() - 1);
                   var theDate = raceDate.toDateString();
