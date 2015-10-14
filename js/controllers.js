@@ -72,13 +72,12 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     // $scope.series = winDetails.chartSeries;
 
     var width = $window.innerWidth
-    // console.log(width)
-    if (width < 400) 
-      $scope.options = {datasetFill : false, animation: false}
+    if (width <= 400) 
+      $scope.chartOptions = {legend: true, animation: false}
     else if (width <= 640)
-      $scope.options = {datasetFill : false, animation: true, animationStep: 10}
+      $scope.chartOptions = {legend: true, animation: true, animationStep: 10}
     else 
-      $scope.options = {datasetFill : true, animation: true}
+      $scope.chartOptions = {legend: true, animation: true}
     
     $scope.onClick = function (points, evt) {
       // console.log(points, evt);
@@ -323,8 +322,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.chartSeries = chartSeries;
 
     var width = $window.innerWidth
-    // console.log(width)
-    if (width < 400) 
+    if (width <= 400) 
       $scope.chartOptions = {legend: true, animation: false}
     else if (width <= 640)
       $scope.chartOptions = {legend: true, animation: true, animationStep: 10}
@@ -542,12 +540,13 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.series = lapDetails.chartSeries;
 
     var width = $window.innerWidth
-    // console.log(width)
-    if (width <= 640)
-      $scope.options = {datasetFill : false, animation: false}
+    if (width <= 400) 
+      $scope.chartOptions = {legend: true, animation: false}
+    else if (width <= 640)
+      $scope.chartOptions = {legend: true, animation: true, animationStep: 10}
     else 
-      $scope.options = {datasetFill : true, animation: true}
-    
+      $scope.chartOptions = {legend: true, animation: true}
+
     $scope.onClick = function (points, evt) {
       // console.log(points, evt);
     };
