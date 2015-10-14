@@ -535,11 +535,20 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 }
 
   function buildLapsChart(lapDetails) {
-    $scope.chartLabels = lapDetails.chartLabels;
-    $scope.chartData = lapDetails.chartData;
-    $scope.series = lapDetails.chartSeries;
-
     var width = $window.innerWidth
+    if (width <= 400) {
+      $scope.chartData = lapDetails.chartData.slice(0, 5);
+      $scope.series = lapDetails.chartSeries.slice(0, 5);
+    } else if (width <= 640) {
+      $scope.chartData = lapDetails.chartData.slice(0, 10);
+      $scope.series = lapDetails.chartSeries.slice(0, 10);
+    } else {  
+      $scope.chartData = lapDetails.chartData;
+      $scope.series = lapDetails.chartSeries;
+    }
+
+    $scope.chartLabels = lapDetails.chartLabels;
+    
     if (width <= 400) 
       $scope.chartOptions = {legend: true, animation: false}
     else if (width <= 640)
