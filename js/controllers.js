@@ -436,7 +436,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.content_loaded = true;
   });
 
-  $q.all([getLapResults(), getPitResults()]).then(function(result) {
+  $q.all([getLapResults()]).then(function(result) {
     buildLapsChart(result[0])
   });
 
