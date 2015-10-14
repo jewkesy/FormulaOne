@@ -392,7 +392,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
           retVal._id = $stateParams.season + $stateParams.round
           retVal.series = 'f1'
 
-          console.log('results live')
+          // console.log('results live')
           $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/results?apiKey=' + config.mongo.apiKey,
             data: JSON.stringify(retVal),
             type: "POST",
@@ -401,7 +401,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
            return deferred.resolve(retVal)
         });
       } else {
-      console.log('results cache')
+      // console.log('results cache')
       return deferred.resolve(raceResults[0])
     }
     });
