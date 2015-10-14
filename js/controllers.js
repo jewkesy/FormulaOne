@@ -379,8 +379,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   });
 
   // var raceResults = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function() {});
-  var qualResults = Result.qualifying.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {});
-
+  // var qualResults = Result.qualifying.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {});
 
   function getRaceResults() {
     var deferred = $q.defer();
@@ -409,10 +408,10 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   }
 
 
-  $q.all([getRaceResults(), qualResults.$promise]).then(function(data){
-    console.log(data)
+  $q.all([getRaceResults()]).then(function(data){
+    // console.log(data)
     var raceDetails = data[0].MRData
-    var qualDetails = data[1].MRData
+    // var qualDetails = data[1].MRData
     // var lapDetails =  data[2].MRData.RaceTable.Races[0].Laps
     // console.log(raceDetails)
 
@@ -429,7 +428,8 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
     setStatData(raceDetails.RaceTable)
 
-    var retVal = mergeDriverRaceQualDetails(raceDetails.RaceTable, qualDetails);
+    // var retVal = mergeDriverRaceQualDetails(raceDetails.RaceTable, qualDetails);
+    var retVal = raceDetails.RaceTable
 
     $scope.results = retVal
 
