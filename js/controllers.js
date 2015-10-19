@@ -24,7 +24,8 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   });
 
 }).controller('DriverListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Driver) {
-  if (!$stateParams.season) $stateParams.season = config.defaultYear;
+  var currentYear = new Date().getFullYear();
+  if (!$stateParams.season || $stateParams.season > currentYear) $stateParams.season = currentYear;
   $rootScope.title = "Formula One Stats .:. " + $stateParams.season + " .:. Driver Standings";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
@@ -41,10 +42,9 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
       chartLabels: []
     }
 
-    // console.log(retVal)
     for (x = 0; x < retVal.DriverStandings.length; x++) {
       var win = retVal.DriverStandings[x]
-      // console.log(win)
+
       if (typeof win.Driver.code == 'undefined') win.Driver.code = win.Driver.familyName
       winDetails.chartLabels.push(win.Driver.code)
       winDetails.chartSeries.push(win.Driver.code)
@@ -153,7 +153,8 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   };
 
 }).controller('CircuitListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Circuit) {
-  if (!$stateParams.season) $stateParams.season = config.defaultYear;
+  var currentYear = new Date().getFullYear();
+  if (!$stateParams.season || $stateParams.season > currentYear) $stateParams.season = currentYear;
   $rootScope.title = "Formula One Stats .:. " + $stateParams.season + " .:. Circuits";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
@@ -243,7 +244,8 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   };
 
 }).controller('ConstructorListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Constructor) {
-  if (!$stateParams.season) $stateParams.season = config.defaultYear;
+  var currentYear = new Date().getFullYear();
+  if (!$stateParams.season || $stateParams.season > currentYear) $stateParams.season = currentYear;
   $rootScope.title = "Formula One Stats .:. " + $stateParams.season + " .:. Constructor Standings";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
@@ -365,7 +367,8 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     });
   };
 }).controller('ResultViewController', function($scope, $rootScope, $http, $q, $state, $stateParams, $window, $location, Result) {
-  if (!$stateParams.season) $stateParams.season = config.defaultYear;
+  var currentYear = new Date().getFullYear();
+  if (!$stateParams.season || $stateParams.season > currentYear) $stateParams.season = currentYear;
 
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
@@ -559,7 +562,8 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   });
 
 }).controller('ScheduleListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Schedule, Weather) {
-  if (!$stateParams.season) $stateParams.season = config.defaultYear;
+  var currentYear = new Date().getFullYear();
+  if (!$stateParams.season || $stateParams.season > currentYear) $stateParams.season = currentYear;
   $rootScope.title = "Formula One Stats .:. " + $stateParams.season + " .:. Race Schedule";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();

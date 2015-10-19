@@ -41,9 +41,8 @@ angular.module('formulaOneApp').config(function($stateProvider) {
     controller: 'NewsController'
   });
 }).run(function($state) {
-  //TODO: handle empty year data
-  // if (!$state.season) $state.season = new Date().getFullYear();
-  if (!$state.season) $state.season = config.defaultYear;
+  currentYear = new Date().getFullYear();
+  if (!$state.season || $state.season > currentYear) $state.season = currentYear;
   $state.go('news', {'season': $state.season}); //make a transition to drivers state when app starts
 });
 
