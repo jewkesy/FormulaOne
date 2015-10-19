@@ -376,9 +376,6 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     driverList = driverList.MRData.DriverTable.Drivers
   });
 
-  // var raceResults = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function() {});
-  // var qualResults = Result.qualifying.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {});
-
   function getRaceResults() {
     var deferred = $q.defer();
     var raceResults = Result.mongoResults.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {
@@ -405,17 +402,10 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     return deferred.promise
   }
 
-
   $q.all([getRaceResults(), getLapResults()]).then(function(data){
     // console.log(data)
     var raceDetails = data[0].MRData
-    // var qualDetails = data[1].MRData
-    // var lapDetails =  data[2].MRData.RaceTable.Races[0].Laps
-    // console.log(raceDetails)
 
-    // if (raceDetails.RaceTable.Races.length == 0) {
-    //   raceDetails.RaceTable.Races = [{raceName : "TBA"}];
-    // }
     $rootScope.title = "Formula One Stats .:. " + $stateParams.season + " .:. Round " + raceDetails.RaceTable.round + " .:. " + raceDetails.RaceTable.Races[0].raceName;
 
     $scope.noRounds = raceDetails.total;
@@ -426,18 +416,13 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
     setStatData(raceDetails.RaceTable)
 
-    // var retVal = mergeDriverRaceQualDetails(raceDetails.RaceTable, qualDetails);
     var retVal = raceDetails.RaceTable
 
     $scope.results = retVal
 
     $scope.content_loaded = true;
-    buildLapsChart(data[1])
+    buildLapsChart(data[1]);
   });
-
-  // $q.all([getLapResults()]).then(function(result) {
-  //   buildLapsChart(result[0])
-  // });
 
   function getPitResults() {
     var deferred = $q.defer();
@@ -521,13 +506,9 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
           type: "POST",
           contentType: "application/json" 
         });
-        // console.log('laps live')
-        // buildLapsChart(retVal)
         return deferred.resolve(retVal)
       })
     } else {
-      // console.log('laps cache')
-      // buildLapsChart(lapResults[0])
       return deferred.resolve(lapResults[0])
     }
   });
@@ -536,26 +517,21 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
   function buildLapsChart(lapDetails) {
     var width = $window.innerWidth
-    console.log(width)
+    $scope.chartLabels = lapDetails.chartLabels;
+
     if (width <= 400) {
-      $scope.chartData = lapDetails.chartData.slice(0, 5);
-      $scope.series = lapDetails.chartSeries.slice(0, 5);
+      $scope.chartData =  sortAndSplice(lapDetails.chartData, 5);
+      $scope.series =     sortAndSplice(lapDetails.chartSeries, 5);
+      $scope.chartOptions = {legend: true, animation: false, datasetFill: false}
     } else if (width <= 1024) {
-      $scope.chartData = lapDetails.chartData.slice(0, 10);
-      $scope.series = lapDetails.chartSeries.slice(0, 10);
+      $scope.chartData =  sortAndSplice(lapDetails.chartData, 10);
+      $scope.series =     sortAndSplice(lapDetails.chartSeries, 10);
+      $scope.chartOptions = {legend: true, animation: true, animationStep: 5, datasetFill: false}
     } else {  
       $scope.chartData = lapDetails.chartData;
       $scope.series = lapDetails.chartSeries;
-    }
-
-    $scope.chartLabels = lapDetails.chartLabels;
-    
-    if (width <= 400) 
-      $scope.chartOptions = {legend: true, animation: false}
-    else if (width <= 1024)
-      $scope.chartOptions = {legend: true, animation: true, animationStep: 10}
-    else 
       $scope.chartOptions = {legend: true, animation: true}
+    }
 
     $scope.onClick = function (points, evt) {
       // console.log(points, evt);
@@ -565,21 +541,20 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     });
   }
 
+  function sortAndSplice(arr, size) {
+    return arr.slice(0, size);
+  }
+
   $scope.$watch("season", function( value ) {
-      if (value >= 1950) {
-        $state.go('viewResult', {'season': $scope.season, 'round': 1});
-      }
+    if (value >= 1950) $state.go('viewResult', {'season': $scope.season, 'round': 1});
   });
 
   $scope.$watch("round", function( value ) {
-      if (value > 0) {
-        $state.go('viewResult', {'season': $scope.season, 'round': $scope.round});
-      }
+    if (value > 0) $state.go('viewResult', {'season': $scope.season, 'round': $scope.round});
   })
 
   $location.path('/' + $stateParams.season + '/results/' +  $stateParams.round);
   $scope.$on('$viewContentLoaded', function(event) {
-    // console.log('viewContentLoaded', $location.url())
     $window.ga('send', 'pageview', { page: $location.url() });
   });
 
