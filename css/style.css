@@ -76,7 +76,7 @@ body {
   float: left;
   padding: 2px;
   margin: 2px;
-  border-radius: 25px;
+  border-radius: 12px;
   text-overflow: ellipsis;
   /*white-space: nowrap;*/
   text-align: center;
