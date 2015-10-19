@@ -456,7 +456,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
   function getLapResults() {
     var deferred = $q.defer();
-    var lapResults = Result.mongoLaps.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {
+    var lapResults = Result.mongoLaps.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {    
     if (typeof(lapResults[0]) == 'undefined') {
       lapResults = Result.laps.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
         var retVal = lapResults
@@ -499,7 +499,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
           retVal.chartData.push(times)
         }
 
-        retVal.MRData = ""
+        // retVal.MRData = ""
 
         $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/laps?apiKey=' + config.mongo.apiKey,
           data: JSON.stringify( retVal),
@@ -520,12 +520,12 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.chartLabels = lapDetails.chartLabels;
 
     if (width <= 400) {
-      $scope.chartData =  sortAndSplice(lapDetails.chartData, 5);
-      $scope.series =     sortAndSplice(lapDetails.chartSeries, 5);
+      $scope.chartData =  sortAndSplice(lapDetails.chartData, 50);
+      $scope.series =     sortAndSplice(lapDetails.chartSeries, 50);
       $scope.chartOptions = {legend: true, animation: false, datasetFill: false}
     } else if (width <= 1024) {
-      $scope.chartData =  sortAndSplice(lapDetails.chartData, 10);
-      $scope.series =     sortAndSplice(lapDetails.chartSeries, 10);
+      $scope.chartData =  sortAndSplice(lapDetails.chartData, 50);
+      $scope.series =     sortAndSplice(lapDetails.chartSeries, 50);
       $scope.chartOptions = {legend: true, animation: true, animationStep: 5, datasetFill: false}
     } else {  
       $scope.chartData = lapDetails.chartData;
