@@ -259,3 +259,35 @@ img.arrow {
 .footer a {
   color: white;
 }
+
+.article {
+
+}
+
+.news {
+  width: 100%;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  clear: both;
+}
+
+.related {
+  width: 96%;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  clear: both;
+}
+
+.twitter {
+  width: 48%;
+  margin: 3px;
+  padding: 3px;
+  float: left;
+  word-wrap: break-word;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+
