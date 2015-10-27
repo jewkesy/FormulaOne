@@ -30,8 +30,16 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
       getTwitterFeed('@f1'), 
       getTwitterFeed('@McLarenF1'), 
       getTwitterFeed('@mercedesamgf1'), 
-      getTwitterFeed('@therealdcf1')]).then(function(data) {
-        
+      getTwitterFeed('@therealdcf1'),
+      getTwitterFeed('@redbullracing'),
+      getTwitterFeed('@ScuderiaFerrari'),
+      getTwitterFeed('@WilliamsRacing'),
+      getTwitterFeed('@ForceIndiaF1'),
+      getTwitterFeed('@Lotus_F1Team'),
+      getTwitterFeed('@ToroRossoSpy'),
+      getTwitterFeed('@SauberF1Team')
+    ]).then(function(data) {
+
     $scope.content_loaded = true;
     var combined = [];
     for (var i = 0; i < data.length; i++) {
