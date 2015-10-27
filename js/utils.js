@@ -46,6 +46,7 @@ function prepTweets(content, feed) {
     var item = content[i];
 
     item.content = item.content.replace(/a href/g, "a target='_blank' href")
+    item.content = item.content.replace(/<s>/g, "")
 
     retVal.push({
       feed: feed,
