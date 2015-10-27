@@ -544,11 +544,11 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     } else if (width <= 1024) {
       $scope.chartData =  sortAndSplice(lapDetails.chartData, 50);
       $scope.series =     sortAndSplice(lapDetails.chartSeries, 50);
-      $scope.chartOptions = {legend: true, animation: true, animationStep: 5, datasetFill: false}
+      $scope.chartOptions = {legend: true, animation: false, animationStep: 5, datasetFill: false}
     } else {  
       $scope.chartData = lapDetails.chartData;
       $scope.series = lapDetails.chartSeries;
-      $scope.chartOptions = {legend: true, animation: true}
+      $scope.chartOptions = {legend: true, animation: false}
     }
 
     $scope.onClick = function (points, evt) {
