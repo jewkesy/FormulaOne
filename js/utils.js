@@ -13,8 +13,9 @@ function prepNews(content) {
       image: item.image,
       content: item.content,
       publisher: item.publisher,
-      publishedDate: item.publishedDate,
-      timestamp: +new Date(item.publishedDate)
+      publishedDate: new Date(item.publishedDate).toUTCString(),
+      timestamp: +new Date(item.publishedDate),
+      type: 'news'
     })
     if (retVal.length == 1) retVal[0].timestamp = 9999999999999; // to push the main artical back to top
     if (item.relatedStories) {
@@ -24,29 +25,41 @@ function prepNews(content) {
           unescapedUrl: rel.unescapedUrl,
           titleNoFormatting: rel.titleNoFormatting,
           publisher: rel.publisher,
-          publishedDate: rel.publishedDate,
-          timestamp: +new Date(rel.publishedDate)
+          publishedDate: new Date(rel.publishedDate).toUTCString(),
+          timestamp: +new Date(rel.publishedDate),
+          type: 'related'
         })
       }
     }
   }
 
+  // retVal.sort(timestampSort)
 
-  console.log(retVal)
-
-  retVal.sort(timestampSort)
-
-  console.log(retVal)
-
-  //remove html
-  //content.replace("<b>", "");
-  //retVal = retVal.replace("</b>", "");
-
+  // console.log(retVal)
   return retVal
 }
 
-function prepTweets(content) {
-  return content
+function prepTweets(content, feed) {
+  // console.log(content)
+  var retVal = []
+  for (var i = 0; i < content.length; i++) {
+    var item = content[i];
+
+    item.content = item.content.replace(/a href/g, "a target='_blank' href")
+
+    retVal.push({
+      feed: feed,
+      titleNoFormatting: item.title,
+      unescapedUrl: item.link,
+      publisher: 'Twitter ' + feed,
+      content: item.content,
+      publishedDate: new Date(item.publishedDate).toUTCString(),
+      timestamp: +new Date(item.publishedDate),
+      type: 'twitter'
+    })
+  }
+  // console.log(retVal)
+  return retVal
 }
 
 function timestampSort(a,b) {
@@ -56,6 +69,19 @@ function timestampSort(a,b) {
     return -1;
   return 0;
 }
+
+Array.prototype.unique = function() {
+    var a = this.concat();
+    for(var i=0; i<a.length; ++i) {
+        for(var j=i+1; j<a.length; ++j) {
+            if(a[i].timestamp === a[j].timestamp) {
+              a.splice(j--, 1);
+            }
+        }
+    }
+
+    return a;
+};
 
 function getImageWidth() {
   //console.log($(window).width())

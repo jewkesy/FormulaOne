@@ -16,19 +16,28 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     return deferred.promise
   }
 
-  function getTwitterFeed() {
+  function getTwitterFeed(feed) {
     var deferred = $q.defer();
-    $http.jsonp(config.twitterFeed).success(function(data){
-      var retVal = prepTweets(data.responseData.feed.entries);
+
+    $http.jsonp(config.googleApi + config.twitterFeed + feed + '&callback=JSON_CALLBACK').success(function(data){
+      var retVal = prepTweets(data.responseData.feed.entries, feed);
       return deferred.resolve(retVal);
     });
     return deferred.promise
   }
 
-  $q.all([getNewsFeed(), getTwitterFeed()]).then(function(data){
-    console.log(data)
+  $q.all([getNewsFeed(), 
+      getTwitterFeed('@f1'), 
+      getTwitterFeed('@McLarenF1'), 
+      getTwitterFeed('@mercedesamgf1'), 
+      getTwitterFeed('@therealdcf1')]).then(function(data) {
+        
     $scope.content_loaded = true;
-    var retVal = data[0]
+    var combined = [];
+    for (var i = 0; i < data.length; i++) {
+      combined = combined.concat(data[i])
+    }
+    var retVal = combined.sort(timestampSort).unique()
     $scope.results = retVal;
   });
 

@@ -11,12 +11,6 @@
     <span><b>{{article.publisher}}</b> - <i>{{article.publishedDate}}</i></span>
     <hr/>
 
-    <div ng-repeat="related in article.relatedStories">
-      <a target="_blank" ng-href="{{related.unescapedUrl}}"><h4 ng-bind-html="related.titleNoFormatting"></h4></a>
-      <span><b>{{related.publisher}}</b> - <i>{{related.publishedDate}}</i></span>
-    <hr/>
-    </div>
-
   </div>
 
 </div>
