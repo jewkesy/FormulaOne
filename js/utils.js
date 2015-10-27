@@ -1,13 +1,61 @@
-function prepStuff(content) {
-  //console.log(content)
+function prepNews(content) {
+  // add a timestamp so that we can sort and merge the news feed
+  var retVal = []
+  // console.log(content)
+  for (var i = 0; i < content.length; i++) {
+    var item = content[i];
+    // var itemDate = new Date(item.publishedDate)
+    // var timestamp = +new Date(item.publishedDate)
+    // console.log(itemDate, item.publishedDate, timestamp)
+    retVal.push({
+      unescapedUrl: item.unescapedUrl,
+      titleNoFormatting: item.titleNoFormatting,
+      image: item.image,
+      content: item.content,
+      publisher: item.publisher,
+      publishedDate: item.publishedDate,
+      timestamp: +new Date(item.publishedDate)
+    })
+    if (retVal.length == 1) retVal[0].timestamp = 9999999999999; // to push the main artical back to top
+    if (item.relatedStories) {
+      for (var j = 0; j < item.relatedStories.length; j++) {
+        var rel = item.relatedStories[j];
+        retVal.push({
+          unescapedUrl: rel.unescapedUrl,
+          titleNoFormatting: rel.titleNoFormatting,
+          publisher: rel.publisher,
+          publishedDate: rel.publishedDate,
+          timestamp: +new Date(rel.publishedDate)
+        })
+      }
+    }
+  }
+
+
+  console.log(retVal)
+
+  retVal.sort(timestampSort)
+
+  console.log(retVal)
 
   //remove html
   //content.replace("<b>", "");
   //retVal = retVal.replace("</b>", "");
 
+  return retVal
+}
+
+function prepTweets(content) {
   return content
 }
 
+function timestampSort(a,b) {
+  if (a.timestamp < b.timestamp)
+    return 1;
+  if (a.timestamp > b.timestamp)
+    return -1;
+  return 0;
+}
 
 function getImageWidth() {
   //console.log($(window).width())

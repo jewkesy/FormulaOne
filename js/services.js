@@ -18,6 +18,9 @@ angular.module('formulaOneApp.services', ['ngResource'])
     return {
       latestNews: $resource(config.googleNews, {
         'get': { method: 'JSONP', cache: true, isArray: true }
+      }),
+      twitter: $resource(config.twitterFeed, {
+        'get': { method: 'JSONP', cache: true, isArray: true }
       })
     };
   }).factory('Driver', function($resource) {

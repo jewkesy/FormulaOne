@@ -7,7 +7,7 @@ var config = {
     "weatherApi": "afbf142577576c3db459a1ec11269be9",
     "wikiApi": "http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&format=json&action=query&redirects&prop=pageimages&titles=",
     "googleNews": "http://ajax.googleapis.com/ajax/services/search/news?v=1.0&q=f1&callback=JSON_CALLBACK",
-    "twitterFeed": "https://queryfeed.net/tw?q=%40f1",
+    "twitterFeed": "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=https://queryfeed.net/tw?q=f1&callback=JSON_CALLBACK",
     "weatherFeed": "http://api.openweathermap.org/data/2.5/",
     "picNarrowSize": 320,
     "picThumbSize": 50,

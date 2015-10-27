@@ -5,17 +5,32 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   };
 }).controller('FooterController', function($scope) {
   $scope.currentDate = new Date();
-}).controller('NewsController', function($scope, $location, $window, $sce, $http, News) {
+}).controller('NewsController', function($scope, $location, $window, $sce, $http, $q, News) {
 
-  $http.jsonp(config.googleNews)
-    .success(function(data){
-      $scope.content_loaded = true;
-      
-      var retVal = prepStuff(data.responseData.results);
-
-      //console.log(retVal)
-      $scope.results = retVal;
+  function getNewsFeed() {
+    var deferred = $q.defer();
+    $http.jsonp(config.googleNews).success(function(data){
+      var retVal = prepNews(data.responseData.results);
+      return deferred.resolve(retVal);
     });
+    return deferred.promise
+  }
+
+  function getTwitterFeed() {
+    var deferred = $q.defer();
+    $http.jsonp(config.twitterFeed).success(function(data){
+      var retVal = prepTweets(data.responseData.feed.entries);
+      return deferred.resolve(retVal);
+    });
+    return deferred.promise
+  }
+
+  $q.all([getNewsFeed(), getTwitterFeed()]).then(function(data){
+    console.log(data)
+    $scope.content_loaded = true;
+    var retVal = data[0]
+    $scope.results = retVal;
+  });
 
   $location.path('/news');
   $scope.$on('$viewContentLoaded', function(event) {
