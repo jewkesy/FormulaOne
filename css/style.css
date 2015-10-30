@@ -284,10 +284,34 @@ img.arrow {
   width: 48%;
   margin: 3px;
   padding: 3px;
+   padding-top: 0px;
+   padding-left: 0px;
   float: left;
   word-wrap: break-word;
-  border-radius: 8px;
+  -webkit-border-bottom-right-radius: 12px;
+  -moz-border-radius-bottomright: 12px;
+  border-bottom-right-radius: 12px;
   border: 1px solid #eee;
 }
+.twitter > img.icon {
+  float:left;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
 
+.date {
+  font-size: 0.8em;
+  width: 100%;
+  text-align: right;
+}
+
+.twitter > span > p {
+  margin-bottom: 2px;
+}
+ .twitter > a > h4 {
+  font-size: 0.9em;
+  margin-top: 0px;  
+  margin-bottom: 2px;
+  clear: both;
+ }
 
