@@ -70,6 +70,10 @@ body {
   margin-bottom: 40px;
 }
 
+.container-narrow {
+  margin-bottom: 0px;
+}
+
 .item {
   line-height: 1;
   border: 1px  #8585AD solid;
