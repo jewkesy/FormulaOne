@@ -16,12 +16,12 @@
     <tr>
       <th>Name</th>
       <th>Country</th>
-      <th>Details</th>
+<!--       <th>Details</th> -->
     </tr>
     <tr ng-repeat="circuit in circuits.Circuits">
       <td><a ui-sref="viewCircuit({id: circuit.circuitId})">{{circuit.circuitName}}</a></td>
       <td>{{circuit.Location.locality}}, {{circuit.Location.country}}</td>
-      <td><a target="_blank" ng-href="{{circuit.url}}"/>Wiki Link</td>
+<!--       <td><a target="_blank" ng-href="{{circuit.url}}"/>Wiki Link</td> -->
     </tr>
   </table>
 </div>
