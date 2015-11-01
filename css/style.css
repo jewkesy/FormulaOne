@@ -99,6 +99,11 @@ body {
   text-align: center;
 }
 
+.standingPosition {
+  font-size: 2em;
+  text-align: center;
+}
+
 .position {
   font-size: 7em;
   font-weight: bold;
@@ -308,10 +313,24 @@ img.arrow {
 .twitter > span > p {
   margin-bottom: 2px;
 }
+
+.twitter > span > p > img {
+  width: 25px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
  .twitter > a > h4 {
   font-size: 0.9em;
   margin-top: 0px;  
   margin-bottom: 2px;
   clear: both;
  }
+
+.half {
+  width: 50%;
+}
+
+.chart-container {
+
+}
 
