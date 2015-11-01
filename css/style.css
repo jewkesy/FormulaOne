@@ -273,7 +273,7 @@ img.arrow {
 }
 
 .related {
-  width: 96%;
+  width: 100%;
   margin: auto;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -281,8 +281,8 @@ img.arrow {
 }
 
 .twitter {
-  width: 48%;
-  margin: 3px;
+  width: 49.7%;
+  margin: 1px;
   padding: 3px;
    padding-top: 0px;
    padding-left: 0px;

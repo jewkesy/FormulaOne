@@ -4,9 +4,9 @@
 <div ng-show="content_loaded">
   <h3>Latest News</h3>
   <div ng-repeat="article in results">
-  	<div class="article {{article.type}}" ng-if="article.type == 'news'">
+  	<div class="article {{article.type}} img-thumbnail" ng-if="article.type == 'news'">
 	    <a target="_blank" ng-href="{{article.unescapedUrl}}"><h4 ng-bind-html="article.titleNoFormatting"></h4></a>
-	    <img class="img-responsive center-block img-thumbnail" ng-src="{{article.image.url}}" />
+	    <img class="img-responsive center-block" ng-src="{{article.image.url}}" />
 	    <span ng-bind-html="article.content"></span>
 	    <span><b>{{article.publisher}}</b> - <i>{{article.publishedDate}}</i></span>
   	</div>
@@ -15,11 +15,9 @@
 	    <a target="_blank" ng-href="{{article.unescapedUrl}}"><h4 ng-bind-html="article.titleNoFormatting"></h4></a>
 	    <span class="date"><i>{{article.publishedDate}}</i></span>
   	</div>
-    <div class="article {{article.type}}" ng-if="article.type == 'related'">
+    <div class="article {{article.type}} img-thumbnail" ng-if="article.type == 'related'">
 	    <a target="_blank" ng-href="{{article.unescapedUrl}}"><h4 ng-bind-html="article.titleNoFormatting"></h4></a>
 	    <span><b>{{article.publisher}}</b> - <i>{{article.publishedDate}}</i></span>
   	</div>
-
   </div>
-
 </div>
