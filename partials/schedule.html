@@ -17,7 +17,7 @@
   <table class="table table-bordered" ng-hide="hideNextRace">
     <tr>
       <td>Next Race:</td>
-      <td>{{nextRace.raceName}}, {{timeToRace}}</td>
+      <td><a target="_blank" ng-href="{{nextRace.url}}">{{nextRace.raceName}}</a>, {{timeToRace}}</td>
     </tr>
     <tr ng-show="pracForecast_loaded">
       <td>Practice:<br/><i>{{pracForecast.dateText}}<sup>{{pracForecast.dateTextSuper}}</sup></i></td>
