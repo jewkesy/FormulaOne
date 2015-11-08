@@ -377,8 +377,8 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     
     var chartLabels = []
     var chartData = [[],[]]
-    var chartSeries = []
-    chartSeries.push(data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0].Constructor.name)
+    var chartSeries = ['Points', 'Wins']
+    // chartSeries.push(data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0].Constructor.name)
 
     // for (var i = 0; i < data.MRData.StandingsTable.StandingsLists.length; i++){
     for (var i = data.MRData.StandingsTable.StandingsLists.length -1; i>=0; i--){
@@ -393,6 +393,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
     $scope.chartLabels = chartLabels;
     $scope.chartData = chartData;
+    // console.log(chartData)
     $scope.chartSeries = chartSeries;
 
     var width = $window.innerWidth
@@ -478,7 +479,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     return deferred.promise
   }
 
-  $q.all([getRaceResults(), getLapResults()]).then(function(data){
+  $q.all([getRaceResults(), getLapResults(), getPitResults()]).then(function(data){
     // console.log(data)
     var raceDetails = data[0].MRData
 
@@ -497,7 +498,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.results = retVal
 
     $scope.content_loaded = true;
-    buildLapsChart(data[1]);
+    buildLapsChart(data[1], data[2]);
   });
 
   function getPitResults() {
@@ -513,13 +514,47 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
         retVal.chartLabels = []
         retVal.chartSeries = []
         retVal.chartData = []
-        console.log(retVal)
+
+        // console.log(retVal)
+        var pitDetails = retVal.PitStops
+        var pitTimes=[];
+        for (var i = 0; i < pitDetails.length; i++) {
+          // console.log(pitDetails[i])
+          // retVal.chartLabels.push(pitDetails[i].driverId)
+          var pit = pitDetails[i]
+ 
+          var idx = keyExists(pit.driverId, pitTimes)
+          if (idx == -1) {
+            pitTimes.push({
+              key: pit.driverId,
+              code: getDriverCode(pit.driverId, driverList),
+              timings: [{
+                lap: pit.lap,
+                time: pit.duration
+              }]
+            })
+          } else {
+            pitTimes[idx].timings.push({time: pit.duration})
+          }  
+
+        }  
+      // console.log(pitTimes)
+        for (x = 0; x < pitTimes.length; x++) {
+          retVal.chartSeries.push(pitTimes[x].code)
+          var times = []
+          for (y = 0; y < pitTimes[x].timings.length; y++) {
+            times.push(convertToSecs(pitTimes[x].timings[y].time))
+          }
+          retVal.chartData.push(times)
+        }
+
+    
         $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/pits?apiKey=' + config.mongo.apiKey,
           data: JSON.stringify(retVal),
           type: "POST",
           contentType: "application/json" 
         });
-        console.log('pit live')
+        // console.log('pit live')
         return deferred.resolve(retVal)
       });
     } else {
@@ -591,23 +626,29 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
   return deferred.promise
 }
 
-  function buildLapsChart(lapDetails) {
+  function buildLapsChart(lapDetails, pitDetails) {
+    // console.log(lapDetails)
     var width = $window.innerWidth
-    $scope.chartLabels = lapDetails.chartLabels;
+
+    var chartData = [lapDetails.chartData, pitDetails.chartData]
 
     if (width <= 400) {
-      $scope.chartData =  sortAndSplice(lapDetails.chartData, 50);
-      $scope.series =     sortAndSplice(lapDetails.chartSeries, 50);
-      $scope.chartOptions = {legend: true, animation: false, datasetFill: false}
+      // $scope.chartData =  sortAndSplice(lapDetails.chartData, 50);
+      // $scope.series =     sortAndSplice(lapDetails.chartSeries, 50);
+      $scope.chartOptions = {legend: true, scaleUse2Y: false, animation: false, datasetFill: false}
     } else if (width <= 1024) {
-      $scope.chartData =  sortAndSplice(lapDetails.chartData, 50);
-      $scope.series =     sortAndSplice(lapDetails.chartSeries, 50);
-      $scope.chartOptions = {legend: true, animation: false, animationStep: 5, datasetFill: false}
+      // $scope.chartData =  sortAndSplice(lapDetails.chartData, 50);
+      // $scope.series =     sortAndSplice(lapDetails.chartSeries, 50);
+      $scope.chartOptions = {legend: true, scaleUse2Y: false, animation: false, animationStep: 5, datasetFill: false}
     } else {  
-      $scope.chartData = lapDetails.chartData;
-      $scope.series = lapDetails.chartSeries;
-      $scope.chartOptions = {legend: true, animation: false}
+      // $scope.chartData = lapDetails.chartData;
+      // $scope.series = lapDetails.chartSeries;
+      $scope.chartOptions = {legend: true, scaleUse2Y: false, animation: false}
     }
+
+    $scope.chartLabels = lapDetails.chartLabels;
+    $scope.chartData = lapDetails.chartData;
+    $scope.series = lapDetails.chartSeries;
 
     $scope.onClick = function (points, evt) {
       // console.log(points, evt);
