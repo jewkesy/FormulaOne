@@ -1,33 +1,49 @@
-angular.module('formulaOneApp.controllers').controller('DriverListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Driver) {
+angular.module('formulaOneApp.controllers').controller('DriverListController', function($scope, $rootScope, $state, $stateParams, $window, $location, DriverStandings) {
   var currentYear = new Date().getFullYear();
   if (!$stateParams.season || $stateParams.season > currentYear) $stateParams.season = currentYear;
   $rootScope.title = "Formula One Stats .:. " + $stateParams.season + " .:. Driver Standings";
   $scope.season = $stateParams.season;
   $scope.years = getYearRange();
 
-  $scope.data = Driver.standings.get({season: $stateParams.season, series: 'f1' }, function(){
-    // console.log($scope.data)
-    $scope.content_loaded = true;
-    var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
-    $scope.drivers = retVal
+  $scope.data = DriverStandings.mongo.query({ season: $stateParams.season, series: 'f1' }, function(response){
+    if (typeof($scope.data[0]) == 'undefined') {
+      // console.log('undefined')
+      $scope.data = DriverStandings.standings.get({season: $stateParams.season, series: 'f1' }, function(){
+        // console.log($scope.data)
+        $scope.content_loaded = true;
+        var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
+        retVal._id = $stateParams.season
+        retVal.series = 'f1'
 
-    var winDetails = {
-      chartData: [[],[]],
-      chartSeries: [],
-      chartLabels: []
+        retVal.chartData = [[],[]];
+        retVal.chartSeries = [];
+        retVal.chartLabels = [];
+        
+        for (x = 0; x < retVal.DriverStandings.length; x++) {
+          var win = retVal.DriverStandings[x]
+          if (typeof win.Driver.code == 'undefined') win.Driver.code = win.Driver.familyName
+          retVal.chartLabels.push(win.Driver.code)
+          retVal.chartSeries.push(win.Driver.code)
+          retVal.chartData[0].push(win.points)
+          retVal.chartData[1].push(win.wins)
+        }
+        // console.log(retVal)
+        if (new Date().getFullYear().toString() != $stateParams.season) {
+          $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/driverstandings?apiKey=' + config.mongo.apiKey,
+            data: JSON.stringify(retVal),
+            type: "POST",
+            contentType: "application/json" 
+          });
+        }
+
+        buildDriversChart(retVal)
+      });
+    } else {
+      $scope.content_loaded = true;
+      // console.log('defined', $scope.data[0])
+      buildDriversChart($scope.data[0])
     }
-
-    for (x = 0; x < retVal.DriverStandings.length; x++) {
-      var win = retVal.DriverStandings[x]
-      if (typeof win.Driver.code == 'undefined') win.Driver.code = win.Driver.familyName
-      winDetails.chartLabels.push(win.Driver.code)
-      winDetails.chartSeries.push(win.Driver.code)
-      winDetails.chartData[0].push(win.points)
-      winDetails.chartData[1].push(win.wins)
-    }
-
-    buildDriversChart(winDetails)
-  }); //fetch all drivers. Issues a GET to /api/drivers
+  });
 
   $scope.$watch("season", function( value ) {
       if (value >= 1950) {
@@ -41,6 +57,7 @@ angular.module('formulaOneApp.controllers').controller('DriverListController', f
   });
 
   function buildDriversChart(winDetails) {
+    $scope.drivers = winDetails
     // console.log(winDetails.chartLabels, winDetails.chartData, winDetails.chartSeries)
     $scope.chartLabels = winDetails.chartLabels;
     $scope.chartData = winDetails.chartData;

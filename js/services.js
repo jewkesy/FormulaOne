@@ -25,9 +25,6 @@ angular.module('formulaOneApp.services', ['ngResource'])
     };
   }).factory('Driver', function($resource) {
     return {
-      standings: $resource(config.api + ':series/:season/driverStandings.json', {
-        'get': { method: 'GET', cache: true, isArray: true }
-      }),
       driver: $resource(config.api + ':series/drivers/:id.json', {
         'get': { method: 'GET', cache: true, isArray: true }
       }),
@@ -38,6 +35,15 @@ angular.module('formulaOneApp.services', ['ngResource'])
         'get': { method: 'GET', cache: true, isArray: true }
       }),
       mongo: $resource(config.mongo.host + config.mongo.database + '/collections/drivers?q={"_id": ":id", "series": ":series"}&apiKey=' + config.mongo.apiKey + '&callback=CALLBACK', {
+        'query': {method: 'GET', cache: true, isArray: false }
+      })
+    };
+  }).factory('DriverStandings', function($resource) {
+    return {
+      standings: $resource(config.api + ':series/:season/driverStandings.json', {
+        'get': { method: 'GET', cache: true, isArray: true }
+      }),
+      mongo: $resource(config.mongo.host + config.mongo.database + '/collections/driverstandings?q={"_id": ":season", "series": ":series"}&apiKey=' + config.mongo.apiKey + '&callback=CALLBACK', {
         'query': {method: 'GET', cache: true, isArray: false }
       })
     };
