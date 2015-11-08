@@ -7,7 +7,7 @@
 <div ng-hide="no_data" ng-show="content_loaded">
   <h3>{{team.StandingsLists[0].ConstructorStandings[0].Constructor.name}}</h3>
   <img class="img-responsive center-block img-thumbnail" ng-src="{{team.imageUrl}}" />
-
+  <h4>Social Networking</h4>
   <div ng-repeat="article in tweets">
     <div class="article {{article.type}}" ng-if="article.type == 'twitter'">
       <img class="icon" src="./images/icons/icon-twitter.png" /><span ng-bind-html="article.content"></span>
@@ -15,7 +15,8 @@
       <span class="date"><i>{{article.publishedDate}}</i></span>
     </div>
   </div>
-  <h4>Race Wins History</h4>
+  <div class="clear"/>
+  <h4>Race Points &amp; Wins History</h4>
   <div ng-hide="chartLoaded">
     <img width="300px" src="./images/loading.gif">
   </div>

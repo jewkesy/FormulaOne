@@ -276,6 +276,9 @@ img.arrow {
 .article {
 
 }
+div.clear {
+  clear: both;
+}
 
 .news {
   width: 100%;
