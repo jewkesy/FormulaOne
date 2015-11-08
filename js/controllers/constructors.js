@@ -13,8 +13,8 @@ angular.module('formulaOneApp.controllers').controller('ConstructorListControlle
         var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
         retVal._id = $stateParams.season
         retVal.series = 'f1'
-        //console.log(retVal)
-        $scope.teams = retVal //NOTE constructor is a reserved AngularJs name!
+        // console.log(retVal)
+        // $scope.teams = retVal //NOTE constructor is a reserved AngularJs name!
 
         retVal.chartData = [[],[]];
         retVal.chartSeries = [];
@@ -47,6 +47,7 @@ angular.module('formulaOneApp.controllers').controller('ConstructorListControlle
   });
 
   function buildConstructorsChart(winDetails) {
+    $scope.teams = winDetails
     // console.log(winDetails.chartLabels, winDetails.chartData, winDetails.chartSeries)
     $scope.chartLabels = winDetails.chartLabels;
     $scope.chartData = winDetails.chartData;

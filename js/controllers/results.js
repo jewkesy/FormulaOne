@@ -169,10 +169,6 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
     }
   };
 
-  function toTitleCase(str) {
-    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-  }
-
   $scope.$watch("season", function( value ) {
       if (value >= 1950) {
         $state.go('results', {'season': value});
