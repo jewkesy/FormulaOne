@@ -30,6 +30,7 @@ angular.module('formulaOneApp.controllers').controller('NewsController', functio
       getTwitterFeed('@ForceIndiaF1'),
       getTwitterFeed('@Lotus_F1Team'),
       getTwitterFeed('@ToroRossoSpy'),
+      getTwitterFeed('@manorf1team'),
       getTwitterFeed('@SauberF1Team')
     ]).then(function(data) {
 

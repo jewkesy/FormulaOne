@@ -18,5 +18,18 @@ var config = {
         "host": "https://api.mongolab.com/api/1/databases/",
         "database": "formulaonestats",
         "apiKey": "qbjPCckU4aqtUj_i5wyxpwEizWa5Ccp9"
-    }
+    },
+    "twitter": [{
+        "mercedes": "@mercedesamgf1",
+        "ferrari": "@ScuderiaFerrari",
+        "williams": "@WilliamsRacing",
+        "red_bull": "@redbullracing",
+        "force_india": "@ForceIndiaF1",
+        "lotus_f1": "@Lotus_F1Team",
+        "toro_rosso": "@ToroRossoSpy",
+        "sauber": "@SauberF1Team",
+        "mclaren": "@McLarenF1",
+        "manor": "@manorf1team",
+        "marussia": "@marussiaf1team_"
+    }]
 };

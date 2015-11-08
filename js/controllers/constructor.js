@@ -1,4 +1,4 @@
-angular.module('formulaOneApp.controllers').controller('ConstructorViewController', function($scope, $rootScope, $http, $timeout, $stateParams, $window, $location, Constructor) {
+angular.module('formulaOneApp.controllers').controller('ConstructorViewController', function($scope, $rootScope, $http, $timeout, $q, $stateParams, $window, $location, Constructor) {
   $scope.$on('$viewContentLoaded', function(event) {
     $window.ga('send', 'pageview', { page: $location.url() });
   });
@@ -87,6 +87,24 @@ angular.module('formulaOneApp.controllers').controller('ConstructorViewControlle
     $scope.team = retVal
     $scope.content_loaded = true;
   }
+
+  function getTwitterFeed(feed) {
+    var deferred = $q.defer();
+
+    var handle = config.twitter[0][feed]
+    if (!handle) deferred.resolve();
+
+    $http.jsonp(config.googleApi + config.twitterFeed + handle + '&callback=JSON_CALLBACK').success(function(data){
+      var retVal = prepTweets(data.responseData.feed.entries, handle);
+      return deferred.resolve(retVal);
+    });
+    return deferred.promise
+  }
+
+  $q.all([getTwitterFeed($stateParams.id)]).then(function(data) {
+    // console.log(data[0])
+    $scope.tweets = data[0];
+  });
 
   $scope.getConstructorPic = function(constructorName) {
     var url = config.wikiApi + constructorName + "&pithumbsize=" + getImageWidth();
