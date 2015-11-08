@@ -74,6 +74,15 @@ angular.module('formulaOneApp.services', ['ngResource'])
         'query': {method: 'GET', cache: true, isArray: false }
       })
     };
+  }).factory('ConstructorStandings', function($resource) {
+    return {
+      standings: $resource(config.api + ':series/:season/constructorStandings.json?limit=1000', {
+        'get': { method: 'GET', cache: true, isArray: true }
+      }),
+      mongo: $resource(config.mongo.host + config.mongo.database + '/collections/constructorstandings?q={"_id": ":season", "series": ":series"}&apiKey=' + config.mongo.apiKey + '&callback=CALLBACK', {
+        'query': {method: 'GET', cache: true, isArray: false }
+      })
+    };
   }).factory('Result', function($resource) {
     return {
       race: $resource(config.api + ':series/:season/:id/results.json', {
