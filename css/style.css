@@ -216,7 +216,7 @@ ul {
   display: inline-block;
   max-width: 60px;
   height: 60px;
-  padding: 0px 4px;
+  padding: 0px 2px;
   line-height: 1;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -267,6 +267,11 @@ img.arrow {
 .footer {
   background-color: #333;
   height: 40px;
+}
+
+.footerNarrow {
+  background-color: #eee;
+  height: 5px;
 }
 
 .footer a {
