@@ -1,7 +1,10 @@
+<div ng-show="no_data" class="fullscreenCenter">
+  There is no data to display
+</div>
 <div ng-hide="content_loaded" class="fullscreenCenter">
   Just grabbing your data...
 </div>
-<div ng-show="content_loaded">
+<div ng-hide="no_data" ng-show="content_loaded">
   <table class="table drivertable table-striped table-bordered table-condensed">
     <tr>
       <td><h2><span class="lastName">{{driver.familyName}}</span><br/>

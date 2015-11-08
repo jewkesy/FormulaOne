@@ -1,6 +1,9 @@
 <div ng-hide="content_loaded" class="fullscreenCenter">
   Just grabbing your data...
 </div>
+<div ng-show="no_data" class="fullscreenCenter">
+  There is no data to display
+</div>
 <div ng-show="content_loaded">
   <div ng-bind-html="circuit.details"></div>
 </div>

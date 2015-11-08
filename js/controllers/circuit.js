@@ -3,8 +3,10 @@ angular.module('formulaOneApp.controllers').controller('CircuitViewController', 
     $window.ga('send', 'pageview', { page: $location.url() });
   });
   $scope.data = Circuit.circuit.get({ id: $stateParams.id, series: 'f1' }, function(){
-    $scope.content_loaded = true;
+
+    if ($scope.data.MRData.CircuitTable.Circuits == 0) { $scope.content_loaded=true; $scope.no_data=true;return false;}
     var retVal = $scope.data.MRData.CircuitTable.Circuits[0];
+
     $rootScope.title = "Formula One Stats .:. Circuits .:. " + retVal.circuitName;
     $scope.gMapUrl = "https://www.google.co.uk/maps/@52.7055818,-1.7753949,15z";
 
@@ -12,7 +14,7 @@ angular.module('formulaOneApp.controllers').controller('CircuitViewController', 
     wikiUrl = wikiUrl[wikiUrl.length - 1];
 
     retVal.wikiName = wikiUrl;
-
+    $scope.content_loaded = true;
     $scope.getCircuitPic(wikiUrl);
     $scope.getCircuitDetails(wikiUrl);
     $scope.circuit = retVal
