@@ -30,7 +30,7 @@ angular.module('formulaOneApp.controllers').controller('DriverViewController', f
 
   function buildDriver(driver) {
     // console.log(driver)
-    if (driver.MRData.DriverTable.Drivers.length == 0) { $scope.content_loaded=true; $scope.no_data=true;return false;}
+    if (driver.MRData.DriverTable.Drivers.length == 0) { $scope.no_data=true;return false;}
     $scope.content_loaded = true;
     var retVal = driver.MRData.DriverTable.Drivers[0];
 
