@@ -72,6 +72,7 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
         if (daysDifference > 4 && daysDifference <= 16) { //+2 is used to account for day difference
           $scope.weather = Weather.extended.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: daysDifference + 2, units: "metric"}, function(){
             $scope.weatherForecast = $scope.weather.list[(daysDifference + 2) - 1]
+            $scope.weatherForecast.weather[0].description = toTitleCase($scope.weatherForecast.weather[0].description);
             $scope.weatherForecast.desc = "Extended Forecast"
             $scope.weatherForecast.dateText = raceDate.toDateString();;
             $scope.weatherForecast.temp.day = Math.round($scope.weatherForecast.temp.day)
@@ -167,6 +168,10 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
       }
     }
   };
+
+  function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  }
 
   $scope.$watch("season", function( value ) {
       if (value >= 1950) {
