@@ -69,7 +69,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.drivers = retVal
 
     var winDetails = {
-      chartData: [[]],
+      chartData: [[],[]],
       chartSeries: [],
       chartLabels: []
     }
@@ -80,7 +80,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
       winDetails.chartLabels.push(win.Driver.code)
       winDetails.chartSeries.push(win.Driver.code)
       winDetails.chartData[0].push(win.points)
-      // winDetails.chartData[0].push(win.wins)
+      winDetails.chartData[1].push(win.wins)
     }
 
     buildDriversChart(winDetails)
@@ -105,11 +105,11 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
     var width = $window.innerWidth
     if (width <= 400) 
-      $scope.chartOptions = {legend: true, animation: false}
+      $scope.chartOptions = {legend: true, scaleUse2Y: true, animation: false}
     else if (width <= 640)
-      $scope.chartOptions = {legend: true, animation: true, animationStep: 10}
+      $scope.chartOptions = {legend: true, scaleUse2Y: true, animation: true, animationStep: 10}
     else 
-      $scope.chartOptions = {legend: true, animation: true}
+      $scope.chartOptions = {legend: true, scaleUse2Y: true, animation: true}
     
     $scope.onClick = function (points, evt) {
       // console.log(points, evt);
@@ -198,7 +198,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
       $scope.data = Circuit.circuits.get({season: $stateParams.season, series: 'f1' }, function(){
         $scope.content_loaded = true;
         var retVal = $scope.data.MRData
-        console.log(retVal)
+        // console.log(retVal)
         $scope.circuits = retVal.CircuitTable
         retVal._id = $stateParams.season.toString()
         retVal.series = 'f1'
@@ -289,7 +289,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     $scope.teams = retVal //NOTE constructor is a reserved AngularJs name!
 
     var winDetails = {
-      chartData: [[]],
+      chartData: [[],[]],
       chartSeries: [],
       chartLabels: []
     }
@@ -300,7 +300,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
       winDetails.chartLabels.push(win.Constructor.name)
       winDetails.chartSeries.push(win.Constructor.name)
       winDetails.chartData[0].push(win.points)
-      // winDetails.chartData[0].push(win.wins)
+      winDetails.chartData[1].push(win.wins)
     }
 
     buildConstructorsChart(winDetails)
@@ -314,11 +314,11 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
     var width = $window.innerWidth
     if (width <= 400) 
-      $scope.chartOptions = {legend: true, animation: false}
+      $scope.chartOptions = {legend: true, scaleUse2Y: true, animation: false}
     else if (width <= 640)
-      $scope.chartOptions = {legend: true, animation: true, animationStep: 10}
+      $scope.chartOptions = {legend: true, scaleUse2Y: true, animation: true, animationStep: 10}
     else 
-      $scope.chartOptions = {legend: true, animation: true}
+      $scope.chartOptions = {legend: true, scaleUse2Y: true, animation: true}
     
     $scope.onClick = function (points, evt) {
       // console.log(points, evt);
@@ -376,7 +376,7 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
     if (data.MRData.StandingsTable.StandingsLists.length == 0) return false;
     
     var chartLabels = []
-    var chartData = []
+    var chartData = [[],[]]
     var chartSeries = []
     chartSeries.push(data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0].Constructor.name)
 
@@ -385,22 +385,23 @@ angular.module('formulaOneApp.controllers', ['ngSanitize'])
       var score = data.MRData.StandingsTable.StandingsLists[i];
       // console.log(i, score)
       chartLabels.push(score.season)
-      chartData.push(parseInt(score.ConstructorStandings[0].wins,0))
+      chartData[0].push(parseInt(score.ConstructorStandings[0].points,0))
+      chartData[1].push(parseInt(score.ConstructorStandings[0].wins,0))
     }
 
     // console.log(chartLabels, chartData, chartSeries)
 
     $scope.chartLabels = chartLabels;
-    $scope.chartData = [chartData];
+    $scope.chartData = chartData;
     $scope.chartSeries = chartSeries;
 
     var width = $window.innerWidth
     if (width <= 400) 
-      $scope.chartOptions = {legend: true, animation: false}
+      $scope.chartOptions = {legend: true, scaleUse2Y: true, animation: false}
     else if (width <= 640)
-      $scope.chartOptions = {legend: true, animation: true, animationStep: 10}
+      $scope.chartOptions = {legend: true, scaleUse2Y: true, animation: true, animationStep: 10}
     else 
-      $scope.chartOptions = {legend: true, animation: true}
+      $scope.chartOptions = {legend: true, scaleUse2Y: true, animation: true}
     
     $scope.onClick = function (points, evt) {
       // console.log(points, evt);
