@@ -1,4 +1,4 @@
-angular.module('formulaOneApp.controllers').controller('ScheduleListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Schedule, Weather) {
+angular.module('formulaOneApp.controllers').controller('ScheduleListController', function($scope, $rootScope, $state, $stateParams, $window, $location, Schedule, Weather, VisDataSet) {
   var currentYear = new Date().getFullYear();
   if (!$stateParams.season || $stateParams.season > currentYear) $stateParams.season = currentYear;
   $rootScope.title = "Formula One Stats .:. " + $stateParams.season + " .:. Race Schedule";
@@ -31,7 +31,40 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
     }
   });
 
+
+var dataGroups = new VisDataSet(
+  {id: 0, content: 'First', value: 1},
+  {id: 1, content: 'Third', value: 3},
+  {id: 2, content: 'Second', value: 2}
+);
+
+var dataItems = new VisDataSet(
+  {id: 0, group: 0, content: 'item 0', start: new Date(2014, 3, 17), end: new Date(2014, 3, 21)},
+  {id: 1, group: 0, content: 'item 1', start: new Date(2014, 3, 19), end: new Date(2014, 3, 20)},
+  {id: 2, group: 1, content: 'item 2', start: new Date(2014, 3, 16), end: new Date(2014, 3, 24)},
+  {id: 3, group: 1, content: 'item 3', start: new Date(2014, 3, 23), end: new Date(2014, 3, 24)},
+  {id: 4, group: 1, content: 'item 4', start: new Date(2014, 3, 22), end: new Date(2014, 3, 26)},
+  {id: 5, group: 2, content: 'item 5', start: new Date(2014, 3, 24), end: new Date(2014, 3, 27)}
+);
+
+$scope.graphData = {
+  items: dataItems,
+  groups: dataGroups
+};
+
+$scope.graphEvents = {
+  rangechange: $scope.onRangeChange,
+  rangechanged: $scope.onRangeChanged,
+  onload: $scope.onLoaded
+};
+
+  $scope.graphOptions = {
+    height: "200px"
+  };
+
   function buildSchedulePage() {
+
+
     // console.log('Building schedule page')
     $scope.content_loaded = true;
     var retVal = $scope.schedule 

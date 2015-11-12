@@ -1,4 +1,4 @@
-angular.module('formulaOneApp', ['ui.router', 'ngResource', 'formulaOneApp.controllers', 'formulaOneApp.services', 'chart.js', 'iso.directives']);
+angular.module('formulaOneApp', ['ui.router', 'ngResource', 'formulaOneApp.controllers', 'formulaOneApp.services', 'chart.js', 'iso.directives', 'ngVis']);
 
 angular.module('formulaOneApp').config(function($stateProvider) {
   $stateProvider

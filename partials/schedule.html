@@ -11,10 +11,18 @@
         </li>
       </ul>
     </span></h3>
-  <div id="tlSchedule" class="timeline-tgt">
 
-  </div>
+
+    
+
   <table class="table table-bordered" ng-hide="hideNextRace">
+    <!-- <tr>
+      <td colspan="2">
+
+        <vis-graph2d data="graphData" options="graphOptions" events="graphEvents"></vis-graph2d>
+        <vis-timeline data="timelineData" options="timelineOptions" events="graphEvents"></vis-timeline>
+      </td>
+    </tr> -->
     <tr>
       <td>Next Race:</td>
       <td><a target="_blank" ng-href="{{nextRace.url}}">{{nextRace.raceName}}</a>, {{timeToRace}}</td>
@@ -98,12 +106,11 @@
     </tr>
     <tr ng-repeat="race in schedule.Races">
       <td class="round">{{race.round}} </td>
-      <td>{{race.raceName}} (<a target="_blank" ng-href="{{race.url}}">Wiki Link</a>)<br/><a ui-sref="viewCircuit({id: race.Circuit.circuitId})">{{race.Circuit.circuitName}}</a><br/>{{race | formatDateTime}}</td>
+      <td><span>{{race.raceName}}</span> <span class="nobreak"><a ui-sref="viewCircuit({id: race.Circuit.circuitId})">{{race.Circuit.circuitName}}</a></span><br/>{{race | formatDateTime}}</td>
       <td ng-if="race.date == currentDate"><i>Awaiting Results</i></td>
       <td ng-if="race.date > currentDate"><i>Coming Soon</i></td>
-      <td ng-if="race.date < currentDate"><a ui-sref="viewResult({season: season, round: race.round})">Result</td>
+      <td ng-if="race.date < currentDate"><a ui-sref="viewResult({season: season, round: race.round})">Result<br/><a target="_blank" ng-href="{{race.url}}">Wiki</a></td>
     </tr>
     <tr><td colspan="5" class="footerNarrow"></td></tr>
   </table>
 </div>
-

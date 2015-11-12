@@ -103,7 +103,7 @@ body {
 }
 
 .round {
-  font-size: 3em;
+  font-size: 2.2em;
   text-align: center;
 }
 
@@ -356,3 +356,7 @@ div.clear {
   height:50vh;
 }
 
+.nobreak {
+  white-space: nowrap;
+  white-space: pre;
+}
