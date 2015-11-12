@@ -32,35 +32,35 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
   });
 
 
-var dataGroups = new VisDataSet(
-  {id: 0, content: 'First', value: 1},
-  {id: 1, content: 'Third', value: 3},
-  {id: 2, content: 'Second', value: 2}
-);
+// var dataGroups = new VisDataSet(
+//   {id: 0, content: 'First', value: 1},
+//   {id: 1, content: 'Third', value: 3},
+//   {id: 2, content: 'Second', value: 2}
+// );
 
-var dataItems = new VisDataSet(
-  {id: 0, group: 0, content: 'item 0', start: new Date(2014, 3, 17), end: new Date(2014, 3, 21)},
-  {id: 1, group: 0, content: 'item 1', start: new Date(2014, 3, 19), end: new Date(2014, 3, 20)},
-  {id: 2, group: 1, content: 'item 2', start: new Date(2014, 3, 16), end: new Date(2014, 3, 24)},
-  {id: 3, group: 1, content: 'item 3', start: new Date(2014, 3, 23), end: new Date(2014, 3, 24)},
-  {id: 4, group: 1, content: 'item 4', start: new Date(2014, 3, 22), end: new Date(2014, 3, 26)},
-  {id: 5, group: 2, content: 'item 5', start: new Date(2014, 3, 24), end: new Date(2014, 3, 27)}
-);
+// var dataItems = new VisDataSet(
+//   {id: 0, group: 0, content: 'item 0', start: new Date(2014, 3, 17), end: new Date(2014, 3, 21)},
+//   {id: 1, group: 0, content: 'item 1', start: new Date(2014, 3, 19), end: new Date(2014, 3, 20)},
+//   {id: 2, group: 1, content: 'item 2', start: new Date(2014, 3, 16), end: new Date(2014, 3, 24)},
+//   {id: 3, group: 1, content: 'item 3', start: new Date(2014, 3, 23), end: new Date(2014, 3, 24)},
+//   {id: 4, group: 1, content: 'item 4', start: new Date(2014, 3, 22), end: new Date(2014, 3, 26)},
+//   {id: 5, group: 2, content: 'item 5', start: new Date(2014, 3, 24), end: new Date(2014, 3, 27)}
+// );
 
-$scope.graphData = {
-  items: dataItems,
-  groups: dataGroups
-};
+// $scope.graphData = {
+//   items: dataItems,
+//   groups: dataGroups
+// };
 
-$scope.graphEvents = {
-  rangechange: $scope.onRangeChange,
-  rangechanged: $scope.onRangeChanged,
-  onload: $scope.onLoaded
-};
+// $scope.graphEvents = {
+//   rangechange: $scope.onRangeChange,
+//   rangechanged: $scope.onRangeChanged,
+//   onload: $scope.onLoaded
+// };
 
-  $scope.graphOptions = {
-    height: "200px"
-  };
+//   $scope.graphOptions = {
+//     height: "200px"
+//   };
 
   function buildSchedulePage() {
 
@@ -133,6 +133,7 @@ $scope.graphEvents = {
             for (var x = 0; x < list.length; x++) {
               if (list[x].dt >= raceUnixTme) {
                 $scope.weatherForecast = list[x]
+                $scope.weatherForecast.weather[0].description = toTitleCase($scope.weatherForecast.weather[0].description);
                 $scope.weatherForecast.desc = "Current Forecast"
                 var theDate = raceDate.toDateString();
                 $scope.weatherForecast.dateText = theDate.substring(0, theDate.length - 4);
@@ -156,6 +157,7 @@ $scope.graphEvents = {
                   $scope.qualForecast = list[x-8]
                   raceDate.setDate(raceDate.getDate() - 1);
                   var theDate = raceDate.toDateString();
+                  $scope.qualForecast.weather[0].description = toTitleCase($scope.weatherForecast.weather[0].description);
                   $scope.qualForecast.dateText = theDate.substring(0, theDate.length - 4);
                   $scope.qualForecast.temp = {}
                   $scope.qualForecast.temp.day = Math.round($scope.qualForecast.main.temp)
@@ -177,6 +179,7 @@ $scope.graphEvents = {
                   $scope.pracForecast = list[x-16]
                   raceDate.setDate(raceDate.getDate() - 1);
                   var theDate = raceDate.toDateString();
+                  $scope.pracForecast.weather[0].description = toTitleCase($scope.weatherForecast.weather[0].description);
                   $scope.pracForecast.dateText = theDate.substring(0, theDate.length - 4);
                   $scope.pracForecast.temp = {}
                   $scope.pracForecast.temp.day = Math.round($scope.pracForecast.main.temp)
