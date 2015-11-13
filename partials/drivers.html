@@ -40,7 +40,7 @@
       <td>{{driver.Driver.code}}</td>
       <td>{{driver.points}}</td>
       <td>{{driver.wins}}</td>
-      <td><a ui-sref="viewConstructor({id:driver.Constructors[0].constructorId})">{{driver.Constructors[0].name}}</td>
+      <td><img ng-src="./images/flags/{{driver.Constructors[0].nationality}}.png" alt="{{driver.Constructors[0].nationality}}" />  <a ui-sref="viewConstructor({id:driver.Constructors[0].constructorId})">{{driver.Constructors[0].name}}</td>
     </tr>
     <tr><td colspan="6" class="footerNarrow"></td></tr>
   </table>
