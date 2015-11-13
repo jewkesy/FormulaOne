@@ -87,13 +87,13 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
       var raceUnixTme = raceDate.getTime();
       
       if (raceUnixTme >= currDate) {
-
+        
         retVal.Races[i].upcoming = true;
         $scope.nextRace = retVal.Races[i];
 
         var circuit = retVal.Races[i];
         var daysDifference = Math.floor((raceUnixTme - currDate)/1000/60/60/24); 
-
+        buildWeather(daysDifference);
         if (daysDifference == 0) {
           $scope.timeToRace = ' today!'
         } else if (daysDifference == 1) {
@@ -204,6 +204,10 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
       }
     }
   };
+
+  function buildWeather(daysDifference) {
+
+  }
 
   $scope.$watch("season", function( value ) {
       if (value >= 1950) {

@@ -80,4 +80,7 @@ angular.module('formulaOneApp.controllers').controller('ConstructorListControlle
     $window.ga('send', 'pageview', { page: $location.url() });
   });
 
+  $scope.GetClassOverride = function(result) {
+    if (result.positionText == 'E') return 'disqualified'
+  }
 });

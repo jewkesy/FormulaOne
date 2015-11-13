@@ -204,6 +204,7 @@ ul {
 
 .raceForecast {
   border: 1px blue solid;
+  padding: 2px !important;
 }
 
 .raceForecast > div {
@@ -346,7 +347,11 @@ div.clear {
   width: 50%;
 }
 
-.fullscreenCenter{
+.disqualified {
+  background-color: #ff9999;
+}
+
+.fullscreenCenter {
   font-size: 2em;
   margin: auto;
   padding-top: 20%;
