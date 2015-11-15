@@ -1,10 +1,13 @@
 
-<div ng-hide="content_loaded" class="fullscreenCenter">
+<div ng-hide="content_loaded" ng-hide="content_empty" class="fullscreenCenter">
   Just grabbing your data...
+</div>
+<div ng-show="content_empty" class="fullscreenCenter">
+  There is no race data to display
 </div>
 
 
-<div ng-show="content_loaded">
+<div ng-show="content_loaded" ng-hide="content_empty">
 
   <table class="table scheduletable">
     <tr>

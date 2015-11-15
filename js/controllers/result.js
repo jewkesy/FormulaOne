@@ -64,6 +64,7 @@ angular.module('formulaOneApp.controllers').controller('ResultViewController', f
     var pitResults = Result.mongoPits.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {
     if (typeof(pitResults[0]) == 'undefined') {
       pitResults = Result.pits.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
+        if (typeof(retVal) == 'undefined') { $scope.content_empty=true;$scope.content_loaded = true; return deferred.resolve(retVal)}
         var retVal = pitResults.MRData.RaceTable.Races[0]
         
         retVal._id = $stateParams.season + $stateParams.round
@@ -128,6 +129,7 @@ angular.module('formulaOneApp.controllers').controller('ResultViewController', f
     var lapResults = Result.mongoLaps.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {    
     if (typeof(lapResults[0]) == 'undefined') {
       lapResults = Result.laps.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
+        if (typeof(retVal) == 'undefined') { $scope.content_empty=true;$scope.content_loaded = true; return deferred.resolve(retVal)}
         var retVal = lapResults
         if ( typeof(lapResults.MRData.RaceTable.Races[0]) == 'undefined') return;
         $scope.circuits = retVal.CircuitTable

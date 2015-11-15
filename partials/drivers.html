@@ -1,3 +1,7 @@
+<div ng-hide="content_loaded" class="fullscreenCenter">
+  Just grabbing your data...
+</div>
+<div ng-show="content_loaded">
   <h3>Driver Standings<span class="divider"> .:. </span>
     <span class="dropdown">
       <a class="btn btn-default" data-toggle="dropdown" href="/drivers">{{ season }} <b class="caret"></b></a>
@@ -7,11 +11,6 @@
         </li>
       </ul>
     </span></h3>
-    
-  <div ng-hide="content_loaded" class="fullscreenCenter">
-  Just grabbing your data...
-  </div>
-  <div ng-show="content_loaded">
   <canvas id="bar" class="chart chart-bar" data="chartData"
     labels="chartLabels" series="chartSeries" options="chartOptions"
     click="onClick">

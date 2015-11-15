@@ -31,7 +31,7 @@ angular.module('formulaOneApp.controllers').controller('ConstructorViewControlle
   });
 
   function buildConstructorChart(data) {
-    console.log(data)
+    // console.log(data)
     if (data.MRData.StandingsTable.StandingsLists.length == 0) return false;
     
     var chartLabels = []
