@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('formulaOneApp.controllers', ['ngSanitize'])
 
 angular.module('formulaOneApp.controllers')

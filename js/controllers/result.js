@@ -37,7 +37,7 @@ angular.module('formulaOneApp.controllers').controller('ResultViewController', f
     return deferred.promise
   }
 
-  $q.all([getRaceResults(), getLapResults(), getPitResults()]).then(function(data){
+  $q.all([getRaceResults(), getLapResults()]).then(function(data){  //, getPitResults()
     // console.log(data)
     var raceDetails = data[0].MRData
 
@@ -64,9 +64,9 @@ angular.module('formulaOneApp.controllers').controller('ResultViewController', f
     var pitResults = Result.mongoPits.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {
       if (typeof(pitResults[0]) == 'undefined') {
         pitResults = Result.pits.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
-          if (typeof(pitResults) == 'undefined') { $scope.content_empty=true; return deferred.resolve(pitResults)}
+          if (typeof(pitResults) == 'undefined') { return deferred.resolve(pitResults)}
           var retVal = pitResults.MRData.RaceTable.Races[0]
-          if (typeof(retVal) == 'undefined') { $scope.content_empty=true; return deferred.resolve(pitResults)}
+          if (typeof(retVal) == 'undefined') { return deferred.resolve(pitResults)}
           retVal._id = $stateParams.season + $stateParams.round
           retVal.series = 'f1'
 
@@ -125,13 +125,14 @@ angular.module('formulaOneApp.controllers').controller('ResultViewController', f
   }
 
   function getLapResults() {
+    if ($stateParams.season < 2011) return $scope.chartLoaded = true;;
     var deferred = $q.defer();
     var lapResults = Result.mongoLaps.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {    
     if (typeof(lapResults[0]) == 'undefined') {
       lapResults = Result.laps.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
-        if (typeof(lapResults) == 'undefined') { $scope.content_empty=true; return deferred.resolve(lapResults)}
+        if (typeof(lapResults) == 'undefined') {console.log('returning 1'); return deferred.resolve(lapResults)}
         var retVal = lapResults
-        if ( typeof(lapResults.MRData.RaceTable.Races[0]) == 'undefined') { $scope.content_empty=true; return deferred.resolve(retVal)};
+        if ( typeof(lapResults.MRData.RaceTable.Races[0]) == 'undefined') return deferred.resolve(retVal);
         $scope.circuits = retVal.CircuitTable
         retVal._id = $stateParams.season + $stateParams.round
         retVal.series = 'f1'
@@ -187,13 +188,14 @@ angular.module('formulaOneApp.controllers').controller('ResultViewController', f
 }
 
   function buildLapsChart(lapDetails, pitDetails) {
-    // console.log(lapDetails ,pitDetails)
-    if (typeof(lapDetails) == 'undefined' || typeof(pitDetails) == 'undefined') return;
+    // console.log(lapDetails, pitDetails)
+    // if (typeof(lapDetails) == 'undefined' || typeof(pitDetails) == 'undefined') return;
+    if (typeof(lapDetails) == 'undefined') return;
     var width = $window.innerWidth
 
     var chartData = [lapDetails.chartData]
     // var chartData = [lapDetails.chartData, pitDetails.chartData]
-
+  
     if (width <= 400) {
       // $scope.chartData =  sortAndSplice(lapDetails.chartData, 50);
       // $scope.series =     sortAndSplice(lapDetails.chartSeries, 50);
