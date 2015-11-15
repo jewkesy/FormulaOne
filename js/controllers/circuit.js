@@ -36,6 +36,8 @@ angular.module('formulaOneApp.controllers').controller('CircuitViewController', 
     return $http.jsonp(url)
     .success(function(data){
       $.each(data.parse.text, function(i,item){
+        item = item.replace("width:22em", "width:100%")
+
         $scope.circuit.details = $sce.trustAsHtml(parseXWiki(item));
         return;
       });

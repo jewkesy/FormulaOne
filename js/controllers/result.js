@@ -62,65 +62,65 @@ angular.module('formulaOneApp.controllers').controller('ResultViewController', f
   function getPitResults() {
     var deferred = $q.defer();
     var pitResults = Result.mongoPits.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {
-    if (typeof(pitResults[0]) == 'undefined') {
-      pitResults = Result.pits.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
-        if (typeof(pitResults) == 'undefined') { $scope.content_empty=true;$scope.content_loaded = true; return deferred.resolve(pitResults)}
-        var retVal = pitResults.MRData.RaceTable.Races[0]
-        if (typeof(retVal) == 'undefined') { $scope.content_empty=true;$scope.content_loaded = true; return deferred.resolve(pitResults)}
-        retVal._id = $stateParams.season + $stateParams.round
-        retVal.series = 'f1'
+      if (typeof(pitResults[0]) == 'undefined') {
+        pitResults = Result.pits.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
+          if (typeof(pitResults) == 'undefined') { $scope.content_empty=true; return deferred.resolve(pitResults)}
+          var retVal = pitResults.MRData.RaceTable.Races[0]
+          if (typeof(retVal) == 'undefined') { $scope.content_empty=true; return deferred.resolve(pitResults)}
+          retVal._id = $stateParams.season + $stateParams.round
+          retVal.series = 'f1'
 
-        retVal.chartLabels = []
-        retVal.chartSeries = []
-        retVal.chartData = []
+          retVal.chartLabels = []
+          retVal.chartSeries = []
+          retVal.chartData = []
 
-        // console.log(retVal)
-        var pitDetails = retVal.PitStops
-        var pitTimes=[];
-        for (var i = 0; i < pitDetails.length; i++) {
-          // console.log(pitDetails[i])
-          // retVal.chartLabels.push(pitDetails[i].driverId)
-          var pit = pitDetails[i]
- 
-          var idx = keyExists(pit.driverId, pitTimes)
-          if (idx == -1) {
-            pitTimes.push({
-              key: pit.driverId,
-              code: getDriverCode(pit.driverId, driverList),
-              timings: [{
-                lap: pit.lap,
-                time: pit.duration
-              }]
-            })
-          } else {
-            pitTimes[idx].timings.push({time: pit.duration})
+          // console.log(retVal)
+          var pitDetails = retVal.PitStops
+          var pitTimes=[];
+          for (var i = 0; i < pitDetails.length; i++) {
+            // console.log(pitDetails[i])
+            // retVal.chartLabels.push(pitDetails[i].driverId)
+            var pit = pitDetails[i]
+   
+            var idx = keyExists(pit.driverId, pitTimes)
+            if (idx == -1) {
+              pitTimes.push({
+                key: pit.driverId,
+                code: getDriverCode(pit.driverId, driverList),
+                timings: [{
+                  lap: pit.lap,
+                  time: pit.duration
+                }]
+              })
+            } else {
+              pitTimes[idx].timings.push({time: pit.duration})
+            }  
+
           }  
-
-        }  
-      // console.log(pitTimes)
-        for (x = 0; x < pitTimes.length; x++) {
-          retVal.chartSeries.push(pitTimes[x].code)
-          var times = []
-          for (y = 0; y < pitTimes[x].timings.length; y++) {
-            times.push(convertToSecs(pitTimes[x].timings[y].time))
+        // console.log(pitTimes)
+          for (x = 0; x < pitTimes.length; x++) {
+            retVal.chartSeries.push(pitTimes[x].code)
+            var times = []
+            for (y = 0; y < pitTimes[x].timings.length; y++) {
+              times.push(convertToSecs(pitTimes[x].timings[y].time))
+            }
+            retVal.chartData.push(times)
           }
-          retVal.chartData.push(times)
-        }
 
-    
-        $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/pits?apiKey=' + config.mongo.apiKey,
-          data: JSON.stringify(retVal),
-          type: "POST",
-          contentType: "application/json" 
+      
+          $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/pits?apiKey=' + config.mongo.apiKey,
+            data: JSON.stringify(retVal),
+            type: "POST",
+            contentType: "application/json" 
+          });
+          // console.log('pit live')
+          return deferred.resolve(retVal)
         });
-        // console.log('pit live')
-        return deferred.resolve(retVal)
-      });
-    } else {
-      // console.log('pit cache')
-      return deferred.resolve(pitResults[0])
-    }
-  });
+      } else {
+        // console.log('pit cache')
+        return deferred.resolve(pitResults[0])
+      }
+    });
     return deferred.promise
   }
 
@@ -129,9 +129,9 @@ angular.module('formulaOneApp.controllers').controller('ResultViewController', f
     var lapResults = Result.mongoLaps.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {    
     if (typeof(lapResults[0]) == 'undefined') {
       lapResults = Result.laps.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function () {
-        if (typeof(lapResults) == 'undefined') { $scope.content_empty=true;$scope.content_loaded = true; return deferred.resolve(retVal)}
+        if (typeof(lapResults) == 'undefined') { $scope.content_empty=true; return deferred.resolve(lapResults)}
         var retVal = lapResults
-        if ( typeof(lapResults.MRData.RaceTable.Races[0]) == 'undefined') { $scope.content_empty=true;$scope.content_loaded = true; return deferred.resolve(retVal)};
+        if ( typeof(lapResults.MRData.RaceTable.Races[0]) == 'undefined') { $scope.content_empty=true; return deferred.resolve(retVal)};
         $scope.circuits = retVal.CircuitTable
         retVal._id = $stateParams.season + $stateParams.round
         retVal.series = 'f1'
