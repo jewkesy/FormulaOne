@@ -122,7 +122,6 @@ function getRoundRange(noRounds) {
 }
 
 function parseXWiki(text) {
-  console.log(text)
   return text;
   var retVal = text.split('|');
   //console.log(retVal[1])
