@@ -13,7 +13,7 @@ angular.module('formulaOneApp.controllers').controller('CircuitListController', 
         $scope.content_loaded = true;
         var retVal = $scope.data.MRData
         // console.log(retVal)
-        $scope.circuits = retVal.CircuitTable
+        buildPage(retVal.CircuitTable);
         retVal._id = $stateParams.season.toString()
         retVal.series = 'f1'
         // console.log(retVal)
@@ -24,11 +24,14 @@ angular.module('formulaOneApp.controllers').controller('CircuitListController', 
         });
       });
     } else {
-      $scope.content_loaded = true;
-      // console.log('got from cache')
-      $scope.circuits = retVal.CircuitTable
+      buildPage(retVal.CircuitTable)
     }
   })
+
+  function buildPage(data) {
+    $scope.content_loaded = true;
+    $scope.circuits = data;
+  }
 
   $scope.$watch("season", function( value ) {
       if (value >= 1950) {

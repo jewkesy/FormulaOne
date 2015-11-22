@@ -313,7 +313,7 @@ div.clear {
   -webkit-border-bottom-right-radius: 12px;
   -moz-border-radius-bottomright: 12px;
   border-bottom-right-radius: 12px;
-  border: 1px solid #eee;
+  border: 1px solid #e8e8e8;
 }
 .twitter > img.icon {
   float:left;

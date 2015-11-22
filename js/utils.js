@@ -174,3 +174,7 @@ function mergeDriverRaceQualDetails(raceDetails, qualDetails) {
   // TODO look to include qualifying data here
   return raceDetails
 }
+
+function getNationality(country) {
+  
+}
