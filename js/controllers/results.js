@@ -20,14 +20,11 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
           type: "POST",
           contentType: "application/json" 
         });
-
-        $scope.schedule = retVal
-        buildSchedulePage()
+        buildSchedulePage(retVal)
         
       });
     } else {
-      $scope.schedule = retVal
-      buildSchedulePage()
+      buildSchedulePage(retVal)
     }
   });
 
@@ -62,9 +59,9 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
 //     height: "200px"
 //   };
 
-  function buildSchedulePage() {
+  function buildSchedulePage(data) {
 
-
+    $scope.schedule = data
     // console.log('Building schedule page')
     $scope.content_loaded = true;
     var retVal = $scope.schedule 
@@ -222,4 +219,7 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
     $window.ga('send', 'pageview', { page: $location.url() });
   });
 
+  $scope.getFlag = function(country) {
+    return  "./images/flags/" + getNationality(country) + ".png"
+  }
 });

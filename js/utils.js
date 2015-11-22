@@ -176,5 +176,39 @@ function mergeDriverRaceQualDetails(raceDetails, qualDetails) {
 }
 
 function getNationality(country) {
-  
+  var nationality = "";
+  country = country.toLowerCase();
+  if (country == "argentina") return "Argentine"
+  if (country == "australia") return "Australian"
+  if (country == "austria") return "Austrian"
+  if (country == "bahrain") return "Bahrain"
+  if (country == "belgium") return "Belgian"
+  if (country == "brazil") return "Brazilian"
+  if (country == "canada") return "Canadian"
+  if (country == "china") return "Chinese"
+  if (country == "france") return "French"
+  if (country == "germany") return "German"
+  if (country == "hungary") return "Hungarian"
+  if (country == "india") return "India" 
+  if (country == "italy") return "Italian"
+  if (country == "japan") return "Japanese"
+  if (country == "korea") return "SouthKorea" 
+  if (country == "malaysia") return "Malaysian"  
+  if (country == "mexico") return "Mexican"
+  if (country == "monaco") return "Monaco"
+  if (country == "netherlands") return "Dutch"
+  if (country == "portugal") return "Portuguese"  
+  if (country == "russia") return "Russian"
+  if (country == "spain") return "Spanish"
+  if (country == "singapore") return "Singapore"
+  if (country == "south africa") return "South-African"    
+  if (country == "sweden") return "Swedish"  
+  if (country == "turkey") return "Turkey"  
+  if (country == "uae") return "uae"
+  if (country == "usa") return "American"
+  if (country == "uk") return "British"
+  console.log(country)
+
+
+  return nationality;
 }
