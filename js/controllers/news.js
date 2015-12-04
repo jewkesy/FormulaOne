@@ -3,6 +3,7 @@ angular.module('formulaOneApp.controllers').controller('NewsController', functio
 	function getNewsFeed() {
     var deferred = $q.defer();
     $http.jsonp(config.googleNews).success(function(data){
+      if (data.responseStatus == 403) return deferred.resolve(data.responseDetails)
       var retVal = prepNews(data.responseData.results);
       return deferred.resolve(retVal);
     });
