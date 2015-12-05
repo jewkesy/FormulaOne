@@ -10,6 +10,7 @@ var config = {
     "twitterFeed": "https://queryfeed.net/tw?q=",
     "weatherFeed": "http://api.openweathermap.org/data/2.5/",
     "googleApi": "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=",
+    "rss2json": "http://rss2json.com/api.json?rss_url=",
     "picNarrowSize": 320,
     "picThumbSize": 50,
     "picWideSize": 640,

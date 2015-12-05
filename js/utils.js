@@ -2,7 +2,44 @@ function toTitleCase(str) {
   return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 
-function prepNews(content) {
+
+function prepXMLNews(content) {
+   var retVal = []
+   for (var i = 0; i < content.length; i++) {
+    var item = content[i];
+      retVal.push({
+      unescapedUrl: item.link,
+      titleNoFormatting: item.title,
+      image: item.image,
+      content: item.content,
+      publisher: item.publisher,
+      publishedDate: new Date(item.publishedDate).toUTCString(),
+      timestamp: +new Date(item.publishedDate),
+      type: 'news'
+    })
+    if (retVal.length == 1) retVal[0].timestamp = 9999999999999; // to push the main artical back to top
+    if (item.relatedStories) {
+      for (var j = 0; j < item.relatedStories.length; j++) {
+        var rel = item.relatedStories[j];
+        retVal.push({
+          unescapedUrl: rel.unescapedUrl,
+          titleNoFormatting: rel.titleNoFormatting,
+          publisher: rel.publisher,
+          publishedDate: new Date(rel.publishedDate).toUTCString(),
+          timestamp: +new Date(rel.publishedDate),
+          type: 'related'
+        })
+      }
+    }
+  }
+
+  // retVal.sort(timestampSort)
+
+  // console.log(retVal)
+  return retVal
+}
+
+function prepGoogleNews(content) {
   // add a timestamp so that we can sort and merge the news feed
   var retVal = []
   // console.log(content)

@@ -4,7 +4,19 @@ angular.module('formulaOneApp.controllers').controller('NewsController', functio
     var deferred = $q.defer();
     $http.jsonp(config.googleNews).success(function(data){
       if (data.responseStatus == 403) return deferred.resolve(data.responseDetails)
-      var retVal = prepNews(data.responseData.results);
+      var retVal = prepGoogleNews(data.responseData.results);
+      return deferred.resolve(retVal);
+    });
+    return deferred.promise
+  }
+
+  function getNewsXml() {
+    // http://rss.crash.net/crash_f1.xml
+    var deferred = $q.defer();
+    $http.jsonp(config.googleApi + 'http://feeds.bbci.co.uk/sport/0/formula1/rss.xml?edition=uk&callback=JSON_CALLBACK').success(function(data){
+      // console.log(data)
+      if (data.responseStatus == 403) return deferred.resolve(data.responseDetails)
+      var retVal = prepXMLNews(data.responseData.feed.entries);
       return deferred.resolve(retVal);
     });
     return deferred.promise
@@ -12,15 +24,17 @@ angular.module('formulaOneApp.controllers').controller('NewsController', functio
 
   function getTwitterFeed(feed) {
     var deferred = $q.defer();
-
-    $http.jsonp(config.googleApi + config.twitterFeed + feed + '&callback=JSON_CALLBACK').success(function(data){
+    var url = config.googleApi + config.twitterFeed + feed + '&callback=JSON_CALLBACK';
+    // url = "http://rss2json.com/api.json?rss_url=https%3A%2F%2Fnews.ycombinator.com%2Frss"
+    // console.log(url)
+    $http.jsonp(url).success(function(data){
       var retVal = prepTweets(data.responseData.feed.entries, feed);
       return deferred.resolve(retVal);
     });
     return deferred.promise
   }
 
-  $q.all([getNewsFeed(), 
+  $q.all([getNewsXml(),
       getTwitterFeed('@f1'), 
       getTwitterFeed('@McLarenF1'), 
       getTwitterFeed('@mercedesamgf1'), 
@@ -32,7 +46,8 @@ angular.module('formulaOneApp.controllers').controller('NewsController', functio
       getTwitterFeed('@Lotus_F1Team'),
       getTwitterFeed('@ToroRossoSpy'),
       getTwitterFeed('@manorf1team'),
-      getTwitterFeed('@SauberF1Team')
+      getTwitterFeed('@SauberF1Team'),
+      getTwitterFeed('@bbcf1feed')
     ]).then(function(data) {
 
     $scope.content_loaded = true;
