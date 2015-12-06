@@ -24,6 +24,29 @@ function prepYqlSkyNews(content) {
   return retVal;
 }
 
+function prepYqlBBCNews(content) {
+  // console.log(content)
+  var retVal = []
+  for (var i = 0; i < content.length; i++) {
+    var item = content[i].article;
+
+    if (!item.div.div[0].p) break;
+    retVal.push({
+        unescapedUrl: 'http://www.bbc.co.uk' + item.a.href,
+        titleNoFormatting: item.div.div[0].h3.a.span.content,
+        image: {
+          url: item.aside.div.div.div["data-src"].replace('{width}', '480-hidpi')
+        },
+        content: item.div.div[0].p.content,
+        publisher: 'bbc.co.uk/news/',
+        publishedDate: new Date(item.div.div[1].ul.li.span.time["data-timestamp"]*1000).toUTCString(),
+        timestamp: item.div.div[1].ul.li.span.time["data-timestamp"]*1000,
+        type: 'news'
+      })
+  }
+  return retVal
+}
+
 function prepXMLNews(content, publisher) {
    var retVal = []
    for (var i = 0; i < content.length; i++) {

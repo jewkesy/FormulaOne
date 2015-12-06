@@ -22,15 +22,29 @@ angular.module('formulaOneApp.controllers').controller('NewsController', functio
     return deferred.promise
   }
 
-  function getNewsYql() {
+  function getNewsYql(site) {
     var deferred = $q.defer();
-    var url = "https://query.yahooapis.com/v1/public/yql?q=SELECT%20*%20FROM%20data.html.cssselect%20WHERE%20url%3D'http%3A%2F%2Fnews.sky.com%2Fsearch%3Fterm%3Df1%26filter%3D'%20AND%20css%3D'li.results__item'&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=JSON_CALLBACK"
-    $http.jsonp(url).success(function(data){
-      // console.log(data)
-      if (data.responseStatus == 403) return deferred.resolve(data.responseDetails)
-      var retVal = prepYqlSkyNews(data.query.results.results.li);
-      return deferred.resolve(retVal);
-    });
+
+    var url = "https://query.yahooapis.com/v1/public/yql?format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=JSON_CALLBACK&"
+
+    if(site == 'sky') {
+
+      url += "q=SELECT%20*%20FROM%20data.html.cssselect%20WHERE%20url%3D'http%3A%2F%2Fnews.sky.com%2Fsearch%3Fterm%3Df1%26filter%3D'%20AND%20css%3D'li.results__item'"
+      $http.jsonp(url).success(function(data){
+        // console.log(data)
+        if (data.responseStatus == 403) return deferred.resolve(data.responseDetails)
+        var retVal = prepYqlSkyNews(data.query.results.results.li);
+        return deferred.resolve(retVal);
+      });
+    } else if (site == 'bbc') {
+      url += "q=SELECT%20*%20FROM%20data.html.cssselect%20WHERE%20url%3D'http%3A%2F%2Fwww.bbc.co.uk%2Fsport%2Fformula1'%20AND%20css%3D'div.lords__item'"
+      $http.jsonp(url).success(function(data){
+        // console.log(data)
+        if (data.responseStatus == 403) return deferred.resolve(data.responseDetails)
+        var retVal = prepYqlBBCNews(data.query.results.results.div);
+        return deferred.resolve(retVal);
+      });
+    }
     return deferred.promise
   }
 
@@ -47,8 +61,9 @@ angular.module('formulaOneApp.controllers').controller('NewsController', functio
   }
 
   $q.all([
-      getNewsYql(),
-      getNewsXml(),
+      getNewsYql('sky'),
+      getNewsYql('bbc'),
+      // getNewsXml(),
       getTwitterFeed('@f1'), 
       getTwitterFeed('@McLarenF1'), 
       getTwitterFeed('@mercedesamgf1'), 
