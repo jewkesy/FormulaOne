@@ -321,6 +321,10 @@ div.clear {
   margin-bottom: 5px;
 }
 
+.twitter > img.icon_small {
+  width: 15px;
+}
+
 .date {
   font-size: 0.8em;
   width: 100%;

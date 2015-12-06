@@ -66,7 +66,7 @@ function prepXMLNews(content, publisher) {
   return retVal
 }
 
-function prepGoogleNews(content) {
+function prepGoogleNews(content) { // Google has now deactivated this
   // add a timestamp so that we can sort and merge the news feed
   var retVal = []
   // console.log(content)
@@ -108,7 +108,7 @@ function prepGoogleNews(content) {
 }
 
 function prepTweets(content, feed) {
-  // console.log(content)
+  // console.log(content[0])
   var retVal = []
   for (var i = 0; i < content.length; i++) {
     var item = content[i];
@@ -119,6 +119,7 @@ function prepTweets(content, feed) {
     retVal.push({
       feed: feed,
       titleNoFormatting: item.title,
+      pic: 'https://twitter.com/' + feed + '/profile_image?size=bigger',
       unescapedUrl: item.link,
       publisher: 'Twitter ' + feed,
       content: item.content,
