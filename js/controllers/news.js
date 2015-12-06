@@ -16,7 +16,7 @@ angular.module('formulaOneApp.controllers').controller('NewsController', functio
     $http.jsonp(config.googleApi + 'http://feeds.bbci.co.uk/sport/0/formula1/rss.xml?edition=uk&callback=JSON_CALLBACK').success(function(data){
       // console.log(data)
       if (data.responseStatus == 403) return deferred.resolve(data.responseDetails)
-      var retVal = prepXMLNews(data.responseData.feed.entries);
+      var retVal = prepXMLNews(data.responseData.feed.entries, 'bbc.co.uk/news/');
       return deferred.resolve(retVal);
     });
     return deferred.promise
@@ -28,7 +28,7 @@ angular.module('formulaOneApp.controllers').controller('NewsController', functio
     $http.jsonp(url).success(function(data){
       // console.log(data)
       if (data.responseStatus == 403) return deferred.resolve(data.responseDetails)
-      var retVal = prepYqlNews(data.query.results.results.li);
+      var retVal = prepYqlSkyNews(data.query.results.results.li);
       return deferred.resolve(retVal);
     });
     return deferred.promise

@@ -2,8 +2,8 @@ function toTitleCase(str) {
   return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 
-function prepYqlNews(content) {
-  console.log(content)
+function prepYqlSkyNews(content) {
+  // console.log(content)
   var retVal = []
    for (var i = 0; i < content.length; i++) {
     var item = content[i];
@@ -24,7 +24,7 @@ function prepYqlNews(content) {
   return retVal;
 }
 
-function prepXMLNews(content) {
+function prepXMLNews(content, publisher) {
    var retVal = []
    for (var i = 0; i < content.length; i++) {
     var item = content[i];
@@ -33,7 +33,7 @@ function prepXMLNews(content) {
       titleNoFormatting: item.title,
       image: item.image,
       content: item.content,
-      publisher: item.publisher,
+      publisher: publisher,
       publishedDate: new Date(item.publishedDate).toUTCString(),
       timestamp: +new Date(item.publishedDate),
       type: 'news'
