@@ -198,6 +198,8 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
           })
         }
         break;
+      } else {
+        $scope.hideNextRace = true;
       }
     }
   };
