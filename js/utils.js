@@ -2,6 +2,27 @@ function toTitleCase(str) {
   return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 
+function prepYqlNews(content) {
+  console.log(content)
+  var retVal = []
+   for (var i = 0; i < content.length; i++) {
+    var item = content[i];
+      retVal.push({
+        unescapedUrl: item.h2.a.href,
+        titleNoFormatting: item.h2.a.content,
+        image: {
+          url: item.div[0].div.a.img.src.replace('-206x155.jpg', '-589x442.jpg')
+        },
+        content: item.div[1].span[0].content + '...',
+        publisher: item.div[1].span[1].content,
+        publishedDate: item.div[1].span[2].content,
+        timestamp: item.div[1].span[2]["data-updated"]*1000,
+        type: 'news'
+      })
+
+  }
+  return retVal;
+}
 
 function prepXMLNews(content) {
    var retVal = []
@@ -17,25 +38,8 @@ function prepXMLNews(content) {
       timestamp: +new Date(item.publishedDate),
       type: 'news'
     })
-    if (retVal.length == 1) retVal[0].timestamp = 9999999999999; // to push the main artical back to top
-    if (item.relatedStories) {
-      for (var j = 0; j < item.relatedStories.length; j++) {
-        var rel = item.relatedStories[j];
-        retVal.push({
-          unescapedUrl: rel.unescapedUrl,
-          titleNoFormatting: rel.titleNoFormatting,
-          publisher: rel.publisher,
-          publishedDate: new Date(rel.publishedDate).toUTCString(),
-          timestamp: +new Date(rel.publishedDate),
-          type: 'related'
-        })
-      }
-    }
   }
 
-  // retVal.sort(timestampSort)
-
-  // console.log(retVal)
   return retVal
 }
 
