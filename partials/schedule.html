@@ -11,106 +11,107 @@
         </li>
       </ul>
     </span></h3>
+  <div ng-hide="has_content">
+    <p>There is currently no data for your selected season.</p>
+  </div>
+  <div ng-show="has_content">
+    <table class="table table-bordered" ng-hide="hideNextRace">
+      <!-- <tr>
+        <td colspan="2">
 
+          <vis-graph2d data="graphData" options="graphOptions" events="graphEvents"></vis-graph2d>
+          <vis-timeline data="timelineData" options="timelineOptions" events="graphEvents"></vis-timeline>
+        </td>
+      </tr> -->
+      <tr>
+        <td>Next Race:</td>
+        <td><a target="_blank" ng-href="{{nextRace.url}}">{{nextRace.raceName}}</a>, {{timeToRace}}</td>
+      </tr>
+      <tr ng-show="pracForecast_loaded">
+        <td>Practice:<br/><i>{{pracForecast.dateText}}<sup>{{pracForecast.dateTextSuper}}</sup></i></td>
+        <td class="raceForecast">
+          <div class="weatherTile">
+            <img ng-src="{{ pracForecast.icon }}" />
+            <span class="weatherDesc">{{ pracForecast.weather[0].description }}</span>
+          </div>
+          <div class="weatherTile">
+            <span class="tempMax tempTile">Max {{pracForecast.temp.max}}&deg;C</span>
+            <span class="tempMain tempTile">{{pracForecast.temp.day}}&deg;C</span>
+            <span class="tempMin tempTile">Min {{pracForecast.temp.min}}&deg;C</span>
+          </div>
+          <div class="weatherTile">
+             <span class="tempMax tempTile">Wind</span>
+             <img class="arrow" ng-src="{{ pracForecast.WindIcon }}" style="-webkit-transform: rotate({{ pracForecast.deg }}deg); -moz-transform: rotate({{ pracForecast.deg }}deg); -ms-transform: rotate({{ pracForecast.deg }}deg); -o-transform: rotate({{ pracForecast.deg }}deg); transform: rotate({{ pracForecast.deg }}deg);" />
+             <span class="weatherDesc">{{pracForecast.windMph}}mph</span>
+          </div>
+          <div class="weatherTile">
+            <img ng-src="{{ pracForecast.cloud }}" />
+            <span class="weatherDesc">{{ pracForecast.clouds }}% Cloudy</span>
+          </div>
+        </td>
+      </tr>
+      <tr ng-show="qualForecast_loaded">
+        <td>Qualifying:<br/><i>{{qualForecast.dateText}}<sup>{{qualForecast.dateTextSuper}}</sup></i></td>
+        <td class="raceForecast">
+          <div class="weatherTile">
+            <img ng-src="{{ qualForecast.icon }}" />
+            <span class="weatherDesc">{{ qualForecast.weather[0].description }}</span>
+          </div>
+          <div class="weatherTile">
+            <span class="tempMax tempTile">Max {{qualForecast.temp.max}}&deg;C</span>
+            <span class="tempMain tempTile">{{qualForecast.temp.day}}&deg;C</span>
+            <span class="tempMin tempTile">Min {{qualForecast.temp.min}}&deg;C</span>
+          </div>
+          <div class="weatherTile">
+             <span class="tempMax tempTile">Wind</span>
+             <img class="arrow" ng-src="{{ qualForecast.WindIcon }}" style="-webkit-transform: rotate({{ qualForecast.deg }}deg); -moz-transform: rotate({{ qualForecast.deg }}deg); -ms-transform: rotate({{ qualForecast.deg }}deg); -o-transform: rotate({{ qualForecast.deg }}deg); transform: rotate({{ qualForecast.deg }}deg);" />
+             <span class="weatherDesc">{{qualForecast.windMph}}mph</span>
+          </div>
+          <div class="weatherTile">
+            <img ng-src="{{ qualForecast.cloud }}" />
+            <span class="weatherDesc">{{ qualForecast.clouds }}% Cloudy</span>
+          </div>
+        </td>
+      </tr>
+      <tr ng-show="weather_loaded">
+        <td>Weekend Forecast:<br/><i>{{weatherForecast.dateText}}<sup>{{weatherForecast.dateTextSuper}}</sup></i></td>
+        <td class="raceForecast">
+          <div class="weatherTile">
+            <img ng-src="{{ weatherForecast.icon }}" />
+            <span class="weatherDesc">{{ weatherForecast.weather[0].description }}</span>
+          </div>
+          <div class="weatherTile">
+            <span class="tempMax tempTile">Max {{weatherForecast.temp.max}}&deg;C</span>
+            <span class="tempMain tempTile">{{weatherForecast.temp.day}}&deg;C</span>
+            <span class="tempMin tempTile">Min {{weatherForecast.temp.min}}&deg;C</span>
+          </div>
+          <div class="weatherTile">
+             <span class="tempMax tempTile">Wind</span>
+             <img class="arrow" ng-src="{{ weatherForecast.WindIcon }}" style="-webkit-transform: rotate({{ weatherForecast.deg }}deg); -moz-transform: rotate({{ weatherForecast.deg }}deg); -ms-transform: rotate({{ weatherForecast.deg }}deg); -o-transform: rotate({{ weatherForecast.deg }}deg); transform: rotate({{ weatherForecast.deg }}deg);" />
+             <span class="weatherDesc">{{weatherForecast.windMph}}mph</span>
+          </div>
+          <div class="weatherTile">
+            <img ng-src="{{ weatherForecast.cloud }}" />
+            <span class="weatherDesc">{{ weatherForecast.clouds }}% Cloudy</span>
+          </div>
+        </td>
+      </tr>
+    </table>  
 
-    
-
-  <table class="table table-bordered" ng-hide="hideNextRace">
-    <!-- <tr>
-      <td colspan="2">
-
-        <vis-graph2d data="graphData" options="graphOptions" events="graphEvents"></vis-graph2d>
-        <vis-timeline data="timelineData" options="timelineOptions" events="graphEvents"></vis-timeline>
-      </td>
-    </tr> -->
-    <tr>
-      <td>Next Race:</td>
-      <td><a target="_blank" ng-href="{{nextRace.url}}">{{nextRace.raceName}}</a>, {{timeToRace}}</td>
-    </tr>
-    <tr ng-show="pracForecast_loaded">
-      <td>Practice:<br/><i>{{pracForecast.dateText}}<sup>{{pracForecast.dateTextSuper}}</sup></i></td>
-      <td class="raceForecast">
-        <div class="weatherTile">
-          <img ng-src="{{ pracForecast.icon }}" />
-          <span class="weatherDesc">{{ pracForecast.weather[0].description }}</span>
-        </div>
-        <div class="weatherTile">
-          <span class="tempMax tempTile">Max {{pracForecast.temp.max}}&deg;C</span>
-          <span class="tempMain tempTile">{{pracForecast.temp.day}}&deg;C</span>
-          <span class="tempMin tempTile">Min {{pracForecast.temp.min}}&deg;C</span>
-        </div>
-        <div class="weatherTile">
-           <span class="tempMax tempTile">Wind</span>
-           <img class="arrow" ng-src="{{ pracForecast.WindIcon }}" style="-webkit-transform: rotate({{ pracForecast.deg }}deg); -moz-transform: rotate({{ pracForecast.deg }}deg); -ms-transform: rotate({{ pracForecast.deg }}deg); -o-transform: rotate({{ pracForecast.deg }}deg); transform: rotate({{ pracForecast.deg }}deg);" />
-           <span class="weatherDesc">{{pracForecast.windMph}}mph</span>
-        </div>
-        <div class="weatherTile">
-          <img ng-src="{{ pracForecast.cloud }}" />
-          <span class="weatherDesc">{{ pracForecast.clouds }}% Cloudy</span>
-        </div>
-      </td>
-    </tr>
-    <tr ng-show="qualForecast_loaded">
-      <td>Qualifying:<br/><i>{{qualForecast.dateText}}<sup>{{qualForecast.dateTextSuper}}</sup></i></td>
-      <td class="raceForecast">
-        <div class="weatherTile">
-          <img ng-src="{{ qualForecast.icon }}" />
-          <span class="weatherDesc">{{ qualForecast.weather[0].description }}</span>
-        </div>
-        <div class="weatherTile">
-          <span class="tempMax tempTile">Max {{qualForecast.temp.max}}&deg;C</span>
-          <span class="tempMain tempTile">{{qualForecast.temp.day}}&deg;C</span>
-          <span class="tempMin tempTile">Min {{qualForecast.temp.min}}&deg;C</span>
-        </div>
-        <div class="weatherTile">
-           <span class="tempMax tempTile">Wind</span>
-           <img class="arrow" ng-src="{{ qualForecast.WindIcon }}" style="-webkit-transform: rotate({{ qualForecast.deg }}deg); -moz-transform: rotate({{ qualForecast.deg }}deg); -ms-transform: rotate({{ qualForecast.deg }}deg); -o-transform: rotate({{ qualForecast.deg }}deg); transform: rotate({{ qualForecast.deg }}deg);" />
-           <span class="weatherDesc">{{qualForecast.windMph}}mph</span>
-        </div>
-        <div class="weatherTile">
-          <img ng-src="{{ qualForecast.cloud }}" />
-          <span class="weatherDesc">{{ qualForecast.clouds }}% Cloudy</span>
-        </div>
-      </td>
-    </tr>
-    <tr ng-show="weather_loaded">
-      <td>Weekend Forecast:<br/><i>{{weatherForecast.dateText}}<sup>{{weatherForecast.dateTextSuper}}</sup></i></td>
-      <td class="raceForecast">
-        <div class="weatherTile">
-          <img ng-src="{{ weatherForecast.icon }}" />
-          <span class="weatherDesc">{{ weatherForecast.weather[0].description }}</span>
-        </div>
-        <div class="weatherTile">
-          <span class="tempMax tempTile">Max {{weatherForecast.temp.max}}&deg;C</span>
-          <span class="tempMain tempTile">{{weatherForecast.temp.day}}&deg;C</span>
-          <span class="tempMin tempTile">Min {{weatherForecast.temp.min}}&deg;C</span>
-        </div>
-        <div class="weatherTile">
-           <span class="tempMax tempTile">Wind</span>
-           <img class="arrow" ng-src="{{ weatherForecast.WindIcon }}" style="-webkit-transform: rotate({{ weatherForecast.deg }}deg); -moz-transform: rotate({{ weatherForecast.deg }}deg); -ms-transform: rotate({{ weatherForecast.deg }}deg); -o-transform: rotate({{ weatherForecast.deg }}deg); transform: rotate({{ weatherForecast.deg }}deg);" />
-           <span class="weatherDesc">{{weatherForecast.windMph}}mph</span>
-        </div>
-        <div class="weatherTile">
-          <img ng-src="{{ weatherForecast.cloud }}" />
-          <span class="weatherDesc">{{ weatherForecast.clouds }}% Cloudy</span>
-        </div>
-      </td>
-    </tr>
-  </table>  
-
-  <table class="table table-striped table-bordered table-condensed">
-    <tr>
-      <th>Round</th>
-      <th>Name / Circuit / Date</th>
-      <th>Details</th>
-    </tr>
-    <tr ng-repeat="race in schedule.Races">
-      <td class="round">{{race.round}}</td>
-      <td><img ng-src="{{getFlag(race.Circuit.Location.country)}}" alt="{{race.Circuit.Location.country}}" /> <span>{{race.raceName}}</span> <span class="nobreak"><a ui-sref="viewCircuit({id: race.Circuit.circuitId})">{{race.Circuit.circuitName}}</a></span><br/>{{race | formatDateTime}}</td>
-      <td ng-if="race.date == currentDate"><i>Awaiting Results</i></td>
-      <td ng-if="race.date > currentDate"><i>Coming Soon</i></td>
-      <td ng-if="race.date < currentDate"><a ui-sref="viewResult({season: season, round: race.round})">Result<br/><a target="_blank" ng-href="{{race.url}}">Wiki</a></td>
-    </tr>
-    <tr><td colspan="5" class="footerNarrow"></td></tr>
-  </table>
+    <table class="table table-striped table-bordered table-condensed">
+      <tr>
+        <th>Round</th>
+        <th>Name / Circuit / Date</th>
+        <th>Details</th>
+      </tr>
+      <tr ng-repeat="race in schedule.Races">
+        <td class="round">{{race.round}}</td>
+        <td><img ng-src="{{getFlag(race.Circuit.Location.country)}}" alt="{{race.Circuit.Location.country}}" /> <span>{{race.raceName}}</span> <span class="nobreak"><a ui-sref="viewCircuit({id: race.Circuit.circuitId})">{{race.Circuit.circuitName}}</a></span><br/>{{race | formatDateTime}}</td>
+        <td ng-if="race.date == currentDate"><i>Awaiting Results</i></td>
+        <td ng-if="race.date > currentDate"><i>Coming Soon</i></td>
+        <td ng-if="race.date < currentDate"><a ui-sref="viewResult({season: season, round: race.round})">Result<br/><a target="_blank" ng-href="{{race.url}}">Wiki</a></td>
+      </tr>
+      <tr><td colspan="5" class="footerNarrow"></td></tr>
+    </table>
+  </div>
 </div>

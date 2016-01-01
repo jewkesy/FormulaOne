@@ -60,10 +60,13 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
 //   };
 
   function buildSchedulePage(data) {
-
+    // console.log(data)
     $scope.schedule = data
     // console.log('Building schedule page')
     $scope.content_loaded = true;
+    if (data.Races.length == 0) return;
+    $scope.has_content = true;
+
     var retVal = $scope.schedule 
     var today = new Date();
     today.setDate(today.getDate());
