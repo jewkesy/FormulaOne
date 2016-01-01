@@ -11,31 +11,36 @@
         </li>
       </ul>
     </span></h3>
-  <canvas id="bar" class="chart chart-bar" data="chartData"
-    labels="chartLabels" series="chartSeries" options="chartOptions"
-    click="onClick">
-  </canvas>
-  <table class="table table-striped table-bordered table-condensed">
-    <tr>
-      <th>Pos.</th><td>1st</td><td>2nd</td><td>3rd</td><td>4th</td><td>5th</td><td>6th</td><td>7th</td><td>8th</td><td>9th</td><td>10th</td>
-    </tr>
-    <tr>
-      <th>Points</th><td>25</td><td>18</td><td>15</td><td>12</td><td>10</td><td>8</td><td>6</td><td>4</td><td>2</td><td>1</td>
-    </tr>
-  </table>
-  <table class="table table-striped table-bordered table-condensed">
-    <tr>
-      <th>Position</th>
-      <th>Name</th>
-      <th>Points</th>
-      <th>Wins</th>
-    </tr>
-    <tr ng-repeat="team in teams.ConstructorStandings"  class="{{ GetClassOverride(team) }}">
-      <td class="standingPosition">{{team.position}}</td>
-      <td><img ng-src="./images/flags/{{team.Constructor.nationality}}.png" alt="{{team.Constructor.nationality}}" /> <a ui-sref="viewConstructor({id:team.Constructor.constructorId})">{{team.Constructor.name}}</a></td>
-      <td>{{team.points}}</td>
-      <td>{{team.wins}}</td>
-    </tr>
-    <tr><td colspan="4" class="footerNarrow"></td></tr>
-  </table>
+  <div ng-hide="has_content">
+    <p>There is currently no data for your selected season.</p>
+  </div>
+  <div ng-show="has_content">
+    <canvas id="bar" class="chart chart-bar" data="chartData"
+      labels="chartLabels" series="chartSeries" options="chartOptions"
+      click="onClick">
+    </canvas>
+    <table class="table table-striped table-bordered table-condensed">
+      <tr>
+        <th>Pos.</th><td>1st</td><td>2nd</td><td>3rd</td><td>4th</td><td>5th</td><td>6th</td><td>7th</td><td>8th</td><td>9th</td><td>10th</td>
+      </tr>
+      <tr>
+        <th>Points</th><td>25</td><td>18</td><td>15</td><td>12</td><td>10</td><td>8</td><td>6</td><td>4</td><td>2</td><td>1</td>
+      </tr>
+    </table>
+    <table class="table table-striped table-bordered table-condensed">
+      <tr>
+        <th>Position</th>
+        <th>Name</th>
+        <th>Points</th>
+        <th>Wins</th>
+      </tr>
+      <tr ng-repeat="team in teams.ConstructorStandings"  class="{{ GetClassOverride(team) }}">
+        <td class="standingPosition">{{team.position}}</td>
+        <td><img ng-src="./images/flags/{{team.Constructor.nationality}}.png" alt="{{team.Constructor.nationality}}" /> <a ui-sref="viewConstructor({id:team.Constructor.constructorId})">{{team.Constructor.name}}</a></td>
+        <td>{{team.points}}</td>
+        <td>{{team.wins}}</td>
+      </tr>
+      <tr><td colspan="4" class="footerNarrow"></td></tr>
+    </table>
+  </div>
 </div>

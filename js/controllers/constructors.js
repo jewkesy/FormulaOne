@@ -10,6 +10,10 @@ angular.module('formulaOneApp.controllers').controller('ConstructorListControlle
       // console.log('undefined')
       $scope.data = ConstructorStandings.standings.get({season: $stateParams.season, series: 'f1' }, function(){
         $scope.content_loaded = true;
+
+        if ($scope.data.MRData.total == 0) return;
+        $scope.has_content = true;
+
         var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
         retVal._id = $stateParams.season
         retVal.series = 'f1'

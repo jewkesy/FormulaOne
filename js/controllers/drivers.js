@@ -12,13 +12,7 @@ angular.module('formulaOneApp.controllers').controller('DriverListController', f
         // console.log($scope.data)
         $scope.content_loaded = true;
         
-
-        if ($scope.data.MRData.total == 0) {
-
-
-          return;
-        }
-        
+        if ($scope.data.MRData.total == 0) return;
         $scope.has_content = true;
 
         var retVal = $scope.data.MRData.StandingsTable.StandingsLists[0]
