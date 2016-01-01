@@ -11,6 +11,7 @@ angular.module('formulaOneApp.controllers').controller('CircuitListController', 
     if (typeof(retVal) == 'undefined') {
       $scope.data = Circuit.circuits.get({season: $stateParams.season, series: 'f1' }, function(){
         $scope.content_loaded = true;
+
         var retVal = $scope.data.MRData
         // console.log(retVal)
         buildPage(retVal.CircuitTable);
@@ -29,7 +30,10 @@ angular.module('formulaOneApp.controllers').controller('CircuitListController', 
   })
 
   function buildPage(data) {
+    // console.log(data)
     $scope.content_loaded = true;
+    if (data.Circuits.length == 0) return;
+    $scope.has_content = true;
     $scope.circuits = data;
   }
 
