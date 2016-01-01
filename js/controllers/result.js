@@ -14,9 +14,14 @@ angular.module('formulaOneApp.controllers').controller('ResultViewController', f
   function getRaceResults() {
     var deferred = $q.defer();
     var raceResults = Result.mongoResults.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {
+      // console.log(raceResults)
       if (typeof(raceResults[0]) == 'undefined') {
+        // console.log('no details')
         raceResults = Result.race.get({season: $stateParams.season, series: 'f1', id: $stateParams.round }, function() {
+          // console.log(raceResults)
+          if (raceResults.MRData.total == 0) return deferred.resolve(raceResults);
           if (typeof(raceResults.MRData.RaceTable.Races[0]) == 'undefined') return;
+
           var retVal = raceResults
           retVal._id = $stateParams.season + $stateParams.round
           retVal.series = 'f1'
@@ -41,6 +46,12 @@ angular.module('formulaOneApp.controllers').controller('ResultViewController', f
     // console.log(data)
     var raceDetails = data[0].MRData
 
+    if (raceDetails.total == 0) {
+      $scope.content_loaded = true;
+      
+      return;
+    }
+
     $rootScope.title = "Formula One Stats .:. " + $stateParams.season + " .:. Round " + raceDetails.RaceTable.round + " .:. " + raceDetails.RaceTable.Races[0].raceName;
 
     $scope.noRounds = raceDetails.total;
@@ -56,6 +67,7 @@ angular.module('formulaOneApp.controllers').controller('ResultViewController', f
     $scope.results = retVal
 
     $scope.content_loaded = true;
+    $scope.has_content = true;
     buildLapsChart(data[1], data[2]);
   });
 

@@ -1,11 +1,6 @@
-
-<div ng-hide="content_loaded" ng-hide="content_empty" class="fullscreenCenter">
+<div ng-hide="content_loaded" class="fullscreenCenter">
   Just grabbing your data...
 </div>
-<div ng-show="content_empty" class="fullscreenCenter" ng-cloak>
-  There is no race data to display
-</div>
-
 <div ng-show="content_loaded" ng-cloak>
   <table class="table scheduletable">
     <tr>
@@ -18,51 +13,58 @@
             </li>
           </ul>
         </span>
-        <span class="divider">.:.</span> <span class="dropdown">
-          <a class="btn btn-default" data-toggle="dropdown" href="#">Round {{ results.round }} .:. {{ results.Races[0].raceName }} <b class="caret"></b></a>
-          <ul ng-model="roundSelection" class="dropdown-menu" role="menu" aria-labelledby="dropdownRound">
-            <li ng-repeat="round in rounds">
-              <a ng-click="$parent.round = round">Round {{round}} .:. </a>
-            </li>
-          </ul>
-        </span>
+          <span ng-show="has_content" class="divider">.:.</span> <span class="dropdown" ng-show="has_content">
+            <a class="btn btn-default" data-toggle="dropdown" href="#">Round {{ results.round }} .:. {{ results.Races[0].raceName }} <b class="caret"></b></a>
+            <ul ng-model="roundSelection" class="dropdown-menu" role="menu" aria-labelledby="dropdownRound">
+              <li ng-repeat="round in rounds">
+                <a ng-click="$parent.round = round">Round {{round}} .:. </a>
+              </li>
+            </ul>
+          </span>
         </h3>
       </td>
     </tr>
-    <tr><td>{{ results.Races[0].Circuit.circuitName }}, {{ results.Races[0].Circuit.Location.country }} <br/> {{results.Races[0] | formatDateTime}}</td></tr>
+    <tr ng-show="has_content"><td>{{ results.Races[0].Circuit.circuitName }}, {{ results.Races[0].Circuit.Location.country }} <br/> {{results.Races[0] | formatDateTime}}</td></tr>
   </table>
-  
-  <h4>Lap Times (secs)</h4>
-  <div ng-hide="chartLoaded">
-    <img width="300px" src="./images/loading.gif">
-  </div>
-  <canvas id="line" class="chart chart-line" data="chartData"
-    labels="chartLabels" chart-legend="true" series="series" options="chartOptions"
-    click="onClick">
-  </canvas> 
-  
-  <div class="btn-group" opt-kind ok-key="sortBy">
-    <button type="button" class="btn btn-default active" ok-sel="[position]" ok-type="integer">Results</button>
-    <button type="button" class="btn btn-default" ok-sel="[grid]" ok-type="integer">Starting Grid</button>
-    <button type="button" class="btn btn-default" ok-sel="[fastestLap]" ok-type="integer">Fastest Lap</button>
-    <button type="button" class="btn btn-default" ok-sel="[avgSpeed]" ok-type="integer">Avg Speed</button>
+
+
+    <div ng-hide="has_content" class="fullscreenCenter" ng-cloak>
+    <p>There is currently no data for your selected season.</p>
   </div>
 
-  <ul id="isotopeContainer" isotope-container ng-cloak>
-    <li ng-repeat="race in results.Races[0].Results" isotope-item="isotope-item">
-      <div ng-class="{pole: race.position==1}" class="item"><img ng-src="./images/flags/{{race.Driver.nationality}}.png" alt="{{driver.Driver.nationality}}" />
-        <span class="position" position={{race.position}}>{{race.position}}</span>
-        <p class="lastName"><a ui-sref="viewDriver({id:race.Driver.driverId})">{{race.Driver.familyName}}</a></p>
-        <p class="firstName">{{race.Driver.givenName}}</p>
-        <hr/>
-        <p class="lastName centerMe"><a ui-sref="viewConstructor({id:race.Constructor.constructorId})">{{race.Constructor.name}}</a></p>
-        <hr/>
-        <p class="status">{{race.status}}</p>
-        <p class="raceTime">{{race.Time.time || 'DNF'}}</p>
-        <p class="fastestLap" fastestLap={{race.FastestLap.TimeOrder}}>Fastest Lap: {{race.FastestLap.Time.time || 'N/A'}}  ({{race.FastestLap.lap || 'N/A'}})</p>
-        <p class="avgSpeed" avgSpeed={{race.FastestLap.AverageSpeedOrder}}>Avg Speed: {{race.FastestLap.AverageSpeed.speed || 'N/A'}} {{race.FastestLap.AverageSpeed.units}}</p>
-        <p class="grid" grid={{race.grid}}>Grid Position: {{race.grid || 'N/A'}}</p>
-      </div>
-    </li>
-  </ul>
-</div>
+  <div ng-show="has_content" ng-cloak>
+    <h4>Lap Times (secs)</h4>
+    <div ng-hide="chartLoaded">
+      <img width="300px" src="./images/loading.gif">
+    </div>
+    <canvas id="line" class="chart chart-line" data="chartData"
+      labels="chartLabels" chart-legend="true" series="series" options="chartOptions"
+      click="onClick">
+    </canvas> 
+    
+    <div class="btn-group" opt-kind ok-key="sortBy">
+      <button type="button" class="btn btn-default active" ok-sel="[position]" ok-type="integer">Results</button>
+      <button type="button" class="btn btn-default" ok-sel="[grid]" ok-type="integer">Starting Grid</button>
+      <button type="button" class="btn btn-default" ok-sel="[fastestLap]" ok-type="integer">Fastest Lap</button>
+      <button type="button" class="btn btn-default" ok-sel="[avgSpeed]" ok-type="integer">Avg Speed</button>
+    </div>
+
+    <ul id="isotopeContainer" isotope-container ng-cloak>
+      <li ng-repeat="race in results.Races[0].Results" isotope-item="isotope-item">
+        <div ng-class="{pole: race.position==1}" class="item"><img ng-src="./images/flags/{{race.Driver.nationality}}.png" alt="{{driver.Driver.nationality}}" />
+          <span class="position" position={{race.position}}>{{race.position}}</span>
+          <p class="lastName"><a ui-sref="viewDriver({id:race.Driver.driverId})">{{race.Driver.familyName}}</a></p>
+          <p class="firstName">{{race.Driver.givenName}}</p>
+          <hr/>
+          <p class="lastName centerMe"><a ui-sref="viewConstructor({id:race.Constructor.constructorId})">{{race.Constructor.name}}</a></p>
+          <hr/>
+          <p class="status">{{race.status}}</p>
+          <p class="raceTime">{{race.Time.time || 'DNF'}}</p>
+          <p class="fastestLap" fastestLap={{race.FastestLap.TimeOrder}}>Fastest Lap: {{race.FastestLap.Time.time || 'N/A'}}  ({{race.FastestLap.lap || 'N/A'}})</p>
+          <p class="avgSpeed" avgSpeed={{race.FastestLap.AverageSpeedOrder}}>Avg Speed: {{race.FastestLap.AverageSpeed.speed || 'N/A'}} {{race.FastestLap.AverageSpeed.units}}</p>
+          <p class="grid" grid={{race.grid}}>Grid Position: {{race.grid || 'N/A'}}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+ </div>
