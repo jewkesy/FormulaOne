@@ -44,6 +44,7 @@ angular.module('formulaOneApp.controllers').controller('DriverListController', f
       });
     } else {
       $scope.content_loaded = true;
+      $scope.has_content = true;
       // console.log('defined', $scope.data[0])
       buildDriversChart($scope.data[0])
     }
