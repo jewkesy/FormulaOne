@@ -44,8 +44,9 @@ angular.module('formulaOneApp.controllers').controller('ConstructorListControlle
         buildConstructorsChart(retVal)
       });
     } else {
-      // console.log('defined')
+      // console.log($scope.data[0])
       $scope.content_loaded = true;
+      $scope.has_content = true;
       buildConstructorsChart($scope.data[0])
     }
   });
