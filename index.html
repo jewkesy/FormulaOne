@@ -55,6 +55,7 @@
     </script>
   </head>
   <body>
+  <div class="container">
     <header class="navbar-inverse navbar-fixed-top" role="banner">
       <div class="container container-narrow">
         <nav role="navigation" ng-controller="HeaderController">
@@ -79,18 +80,18 @@
               </ul>
             </div>
         </nav>
-      </div>
-    </header>
-    <div class="container bufferTop">
-      <div class="row">
-        <div class="col-sn-12">
-          <div ui-view></div> <!-- This is where our views will load -->
         </div>
+    </header>
+    
+    <div class="row">
+      <div class="col-sn-12">
+        <div ui-view></div> <!-- This is where our views will load -->
       </div>
     </div>
 
+
     <div class="footer navbar-fixed-bottom" ng-controller="FooterController">
-      <div class="container">
+      <div class="container container-narrow">
         <p class="text-muted credit">Created by <a target="_blank" href="http://www.daryljewkes.com">Daryl Jewkes</a> .:. Formula One data from <a target="_blank" href="http://ergast.com/mrd/">Ergast</a> .:. Copyright &copy; {{currentDate | date:'yyyy'}}</p>
       </div>
     </div>

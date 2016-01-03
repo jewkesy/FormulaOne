@@ -4,6 +4,7 @@ html {
 
 body {
   font-family: 'Roboto', sans-serif,  Arial, "Helvetica Condensed", Helvetica, sans-serif;
+  padding-top:30px; margin-top: 30px; margin-bottom: 60px;
 }
 
 
@@ -76,10 +77,6 @@ body {
 
 .container-narrow {
   margin-bottom: 0px;
-}
-
-.bufferTop {
-  margin-top: 40px;
 }
 
 .item {
