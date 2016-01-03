@@ -370,3 +370,7 @@ div.clear {
   white-space: nowrap;
   white-space: pre;
 }
+
+caption {
+  font-size: 24px;
+}
