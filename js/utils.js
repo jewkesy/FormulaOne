@@ -25,12 +25,18 @@ function prepYqlSkyNews(content) {
 }
 
 function prepYqlBBCNews(content) {
-  // console.log(content)
+  console.log(content)
   var retVal = []
   for (var i = 0; i < content.length; i++) {
     var item = content[i].article;
 
     if (!item.div.div[0].p) break;
+
+    // item.div.div[1].ul.li.span.time["data-timestamp"]
+    
+    var timestamp = getTimestamp(item.div.div[1].ul.li)*1000
+    console.log(timestamp)
+    if (!timestamp) break;
     retVal.push({
         unescapedUrl: 'http://www.bbc.co.uk' + item.a.href,
         titleNoFormatting: item.div.div[0].h3.a.span.content,
@@ -39,12 +45,17 @@ function prepYqlBBCNews(content) {
         },
         content: item.div.div[0].p.content,
         publisher: 'bbc.co.uk/news/',
-        publishedDate: new Date(item.div.div[1].ul.li.span.time["data-timestamp"]*1000).toUTCString(),
-        timestamp: item.div.div[1].ul.li.span.time["data-timestamp"]*1000,
+        publishedDate: new Date(timestamp).toUTCString(),
+        timestamp: timestamp,
         type: 'news'
       })
   }
   return retVal
+}
+
+function getTimestamp(elem) {
+  console.log(elem)
+  return elem
 }
 
 function prepXMLNews(content, publisher) {

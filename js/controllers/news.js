@@ -34,6 +34,7 @@ angular.module('formulaOneApp.controllers').controller('NewsController', functio
         // console.log(data)
         if (data.responseStatus == 403) return deferred.resolve(data.responseDetails)
         var retVal = prepYqlSkyNews(data.query.results.results.li);
+      // console.log(retVal)
         return deferred.resolve(retVal);
       });
     } else if (site == 'bbc') {
@@ -62,7 +63,7 @@ angular.module('formulaOneApp.controllers').controller('NewsController', functio
 
   $q.all([
       getNewsYql('sky'),
-      getNewsYql('bbc'),
+      // getNewsYql('bbc'),  // needs work
       // getNewsXml(),
       getTwitterFeed('@f1'), 
       getTwitterFeed('@McLarenF1'), 
