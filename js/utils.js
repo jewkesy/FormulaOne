@@ -257,6 +257,7 @@ function getNationality(country) {
   if (country == "argentina") return "Argentine"
   if (country == "australia") return "Australian"
   if (country == "austria") return "Austrian"
+  if (country == "azerbaijan") return "Azerbaijan"
   if (country == "bahrain") return "Bahrain"
   if (country == "belgium") return "Belgian"
   if (country == "brazil") return "Brazilian"

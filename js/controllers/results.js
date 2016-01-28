@@ -15,11 +15,13 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
         retVal._id = $stateParams.season.toString()
         retVal.series = 'f1'
 
-        $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/schedule?apiKey=' + config.mongo.apiKey,
-          data: JSON.stringify( retVal),
-          type: "POST",
-          contentType: "application/json" 
-        });
+        if (retVal.Races.Length > 0) {
+          $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/schedule?apiKey=' + config.mongo.apiKey,
+            data: JSON.stringify( retVal),
+            type: "POST",
+            contentType: "application/json" 
+          });
+        }
         buildSchedulePage(retVal)
         
       });
