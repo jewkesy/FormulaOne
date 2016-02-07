@@ -63,8 +63,8 @@ angular.module('formulaOneApp.controllers').controller('NewsController', functio
 
   $q.all([
       getNewsYql('sky'),
-      // getNewsYql('bbc'),  // needs work
-      // getNewsXml(),
+      getNewsYql('bbc'), // needs work
+      getNewsXml(),
       getTwitterFeed('@f1'), 
       getTwitterFeed('@McLarenF1'), 
       getTwitterFeed('@mercedesamgf1'), 
