@@ -18,11 +18,13 @@ angular.module('formulaOneApp.controllers').controller('CircuitListController', 
         retVal._id = $stateParams.season.toString()
         retVal.series = 'f1'
         // console.log(retVal)
-        $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/circuits?apiKey=' + config.mongo.apiKey,
-          data: JSON.stringify( retVal),
-          type: "POST",
-          contentType: "application/json" 
-        });
+        if (retVal.CircuitTable.Circuits.length > 0) {
+          $.ajax( { url: config.mongo.host + config.mongo.database + '/collections/circuits?apiKey=' + config.mongo.apiKey,
+            data: JSON.stringify( retVal),
+            type: "POST",
+            contentType: "application/json" 
+          });
+        }
       });
     } else {
       buildPage(retVal.CircuitTable)
