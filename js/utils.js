@@ -34,9 +34,12 @@ function prepYqlBBCNews(content) {
 
     // item.div.div[1].ul.li.span.time["data-timestamp"]
     var timestamp = getTimestamp(item.div.div[1].ul.li)*1000
-    
+
     if (!timestamp) break;
-    // console.log(timestamp)
+    if(typeof item.aside.div.div == 'undefined') break;
+    if(typeof item.aside.div.div.div == 'undefined') break;
+    if(typeof item.aside.div.div.div["data-src"] == 'undefined') break;
+    
     retVal.push({
         unescapedUrl: 'http://www.bbc.co.uk' + item.a.href,
         titleNoFormatting: item.div.div[0].h3.a.span.content,
