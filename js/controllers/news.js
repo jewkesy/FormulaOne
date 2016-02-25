@@ -1,5 +1,7 @@
 angular.module('formulaOneApp.controllers').controller('NewsController', function($scope, $location, $window, $sce, $http, $q, News) {
 
+  $scope.results = []
+
 	function getNewsFeed() {
     var deferred = $q.defer();
     $http.jsonp(config.googleNews).success(function(data){
@@ -32,9 +34,14 @@ angular.module('formulaOneApp.controllers').controller('NewsController', functio
       url += "q=SELECT%20*%20FROM%20data.html.cssselect%20WHERE%20url%3D'http%3A%2F%2Fnews.sky.com%2Fsearch%3Fterm%3Df1%26filter%3D'%20AND%20css%3D'li.results__item'"
       $http.jsonp(url).success(function(data){
         // console.log(data)
+        $scope.content_loaded = true;
         if (data.responseStatus == 403) return deferred.resolve(data.responseDetails)
         var retVal = prepYqlSkyNews(data.query.results.results.li);
       // console.log(retVal)
+     for (var i = 0; i < retVal.length; i++) {
+        $scope.results.push(retVal[i])
+      }
+      // console.log($scope.results )
         return deferred.resolve(retVal);
       });
     } else if (site == 'bbc') {
@@ -56,6 +63,12 @@ angular.module('formulaOneApp.controllers').controller('NewsController', functio
     // console.log(url)
     $http.jsonp(url).success(function(data){
       var retVal = prepTweets(data.responseData.feed.entries, feed);
+      $scope.content_loaded = true;
+      for (var i = 0; i < retVal.length; i++) {
+        $scope.results.push(retVal[i])
+      }
+      
+      // console.log($scope.results )
       return deferred.resolve(retVal);
     });
     return deferred.promise
@@ -80,13 +93,14 @@ angular.module('formulaOneApp.controllers').controller('NewsController', functio
       getTwitterFeed('@bbcf1feed')
     ]).then(function(data) {
 
-    $scope.content_loaded = true;
-    var combined = [];
-    for (var i = 0; i < data.length; i++) {
-      combined = combined.concat(data[i])
-    }
-    var retVal = combined.sort(timestampSort).unique()
-    $scope.results = retVal;
+    // $scope.content_loaded = true;
+    // var combined = [];
+    // for (var i = 0; i < data.length; i++) {
+    //   combined = combined.concat(data[i])
+    // }
+    // var retVal = combined.sort(timestampSort).unique()
+    // $scope.results = retVal;
+     $scope.results.sort(timestampSort).unique()
   });
 
   $location.path('/news');
