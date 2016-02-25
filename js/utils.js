@@ -135,7 +135,7 @@ function prepTweets(content, feed) {
     retVal.push({
       feed: feed,
       titleNoFormatting: item.title,
-      pic: 'https://twitter.com/' + feed + '/profile_image?size=bigger',
+      pic: 'https://twitter.com/' + feed + '/profile_image?size=normal',
       unescapedUrl: item.link,
       publisher: 'Twitter ' + feed,
       content: item.content,
