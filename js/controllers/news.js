@@ -1,5 +1,12 @@
 angular.module('formulaOneApp.controllers').controller('NewsController', function($scope, $location, $window, $sce, $http, $q, News) {
 
+  var isoOptions = {
+    isInitLayout: false,
+    layoutMode: 'masonry'
+  }
+
+  $scope.$emit('iso-option', isoOptions);
+
   $scope.results = []
 
 	function getNewsFeed() {
