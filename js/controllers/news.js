@@ -31,19 +31,19 @@ angular.module('formulaOneApp.controllers').controller('NewsController', functio
     return deferred.promise
   }
 
-  function getNewsYql(site) {
-    var deferred = $q.defer();
+function getNewsYql(site) {
+  var deferred = $q.defer();
 
-    var url = "https://query.yahooapis.com/v1/public/yql?format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=JSON_CALLBACK&"
+  var url = "https://query.yahooapis.com/v1/public/yql?format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=JSON_CALLBACK&"
 
-    if(site == 'sky') {
+  if(site == 'sky') {
 
-      url += "q=SELECT%20*%20FROM%20data.html.cssselect%20WHERE%20url%3D'http%3A%2F%2Fnews.sky.com%2Fsearch%3Fterm%3Df1%26filter%3D'%20AND%20css%3D'li.results__item'"
-      $http.jsonp(url).success(function(data){
-        // console.log(data)
-        $scope.content_loaded = true;
-        if (data.responseStatus == 403) return deferred.resolve(data.responseDetails)
-        var retVal = prepYqlSkyNews(data.query.results.results.li);
+    url += "q=SELECT%20*%20FROM%20data.html.cssselect%20WHERE%20url%3D'http%3A%2F%2Fnews.sky.com%2Fsearch%3Fterm%3Df1%26filter%3D'%20AND%20css%3D'li.results__item'"
+    $http.jsonp(url).success(function(data){
+      // console.log(data)
+      $scope.content_loaded = true;
+      if (data.responseStatus == 403) return deferred.resolve(data.responseDetails)
+      var retVal = prepYqlSkyNews(data.query.results.results.li);
       // console.log(retVal)
      for (var i = 0; i < retVal.length; i++) {
         $scope.results.push(retVal[i])
@@ -97,22 +97,17 @@ angular.module('formulaOneApp.controllers').controller('NewsController', functio
       getTwitterFeed('@ToroRossoSpy'),
       getTwitterFeed('@manorf1team'),
       getTwitterFeed('@SauberF1Team'),
-      getTwitterFeed('@bbcf1feed')
+      getTwitterFeed('@bbcf1feed'),
+      getTwitterFeed('@RenaultSportF1'),
+      getTwitterFeed('@HaasF1Team'),
+      getTwitterFeed('@f1fanatic_co_uk'),
+      getTwitterFeed('@f1fanaticlive')
     ]).then(function(data) {
-
-    // $scope.content_loaded = true;
-    // var combined = [];
-    // for (var i = 0; i < data.length; i++) {
-    //   combined = combined.concat(data[i])
-    // }
-    // var retVal = combined.sort(timestampSort).unique()
-    // $scope.results = retVal;
      $scope.results.sort(timestampSort).unique()
   });
 
   $location.path('/news');
   $scope.$on('$viewContentLoaded', function(event) {
-    // console.log('viewContentLoaded', $location.url())
     $window.ga('send', 'pageview', { page: $location.url() });
   });
 
