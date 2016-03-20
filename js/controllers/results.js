@@ -9,9 +9,11 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
 
   $scope.data = Schedule.mongo.query({season: $stateParams.season, series: 'f1'}, function() {
     var retVal = $scope.data[0]
+    // console.log(retVal)
     if (typeof(retVal) == 'undefined') {
        $scope.data = Schedule.schedule.get({season: $stateParams.season, series: 'f1' }, function(){
         var retVal = $scope.data.MRData.RaceTable
+        // console.log(retVal)
         retVal._id = $stateParams.season.toString()
         retVal.series = 'f1'
 
@@ -64,7 +66,7 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
 
         var circuit = retVal.Races[i];
         var daysDifference = Math.floor((raceUnixTme - currDate)/1000/60/60/24); 
-        buildWeather(daysDifference);
+        // buildWeather(daysDifference);
         if (daysDifference == 0) {
           $scope.timeToRace = ' today!'
         } else if (daysDifference == 1) {
@@ -72,6 +74,16 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
         } else {
           $scope.timeToRace = daysDifference + 1 + ' days away'
         }
+        // console.log(circuit)
+        buildWeather(daysDifference, circuit, raceDate);
+        break;
+      } else {
+        $scope.hideNextRace = true;
+      }
+    }
+  };
+
+  function buildWeather(daysDifference, circuit, raceDate) {
 
         if (daysDifference > 4 && daysDifference <= 16) { //+2 is used to account for day difference
           $scope.weather = Weather.extended.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: daysDifference + 2, units: "metric"}, function(){
@@ -95,9 +107,9 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
         } else {
           $scope.weather = Weather.forecast.get({latitude: circuit.Circuit.Location.lat, longitude: circuit.Circuit.Location.long, days: 0, units: "metric"}, function(){
 
-            pracDate = (new Date(retVal.Races[i].date + 'T' + retVal.Races[i].time)/1000) - (86400*2)
-            qualDate = (new Date(retVal.Races[i].date + 'T' + retVal.Races[i].time)/1000) - 86400
-            raceUnixTme = (new Date(retVal.Races[i].date + 'T' + retVal.Races[i].time)/1000)
+            pracDate = (new Date(circuit.date + 'T' + circuit.time)/1000) - (86400*2)
+            qualDate = (new Date(circuit.date + 'T' + circuit.time)/1000) - 86400
+            raceUnixTme = (new Date(circuit.date + 'T' + circuit.time)/1000)
 
             var list = $scope.weather.list
            
@@ -173,15 +185,6 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
             }
           })
         }
-        break;
-      } else {
-        $scope.hideNextRace = true;
-      }
-    }
-  };
-
-  function buildWeather(daysDifference) {
-
   }
 
   $scope.$watch("season", function( value ) {

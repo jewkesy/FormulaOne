@@ -107,9 +107,9 @@
       <tr ng-repeat="race in schedule.Races">
         <td class="round">{{race.round}}</td>
         <td><img ng-src="{{getFlag(race.Circuit.Location.country)}}" alt="{{race.Circuit.Location.country}}" /> <span>{{race.raceName}}</span> <span class="nobreak"><a ui-sref="viewCircuit({id: race.Circuit.circuitId})">{{race.Circuit.circuitName}}</a></span><br/>{{race | formatDateTime}}</td>
-        <td ng-if="race.date == currentDate"><i>Awaiting Results</i></td>
-        <td ng-if="race.date > currentDate"><i>Coming Soon</i></td>
-        <td ng-if="race.date < currentDate"><a ui-sref="viewResult({season: season, round: race.round})">Result<br/><a target="_blank" ng-href="{{race.url}}">Wiki</a></td>
+        <td ng-if="!race.resultsReady && race.date == currentDate"><i>Awaiting Results</i></td>
+        <td ng-if="!race.resultsReady &&  race.date > currentDate"><i>Coming Soon</i></td>
+        <td ng-if="race.resultsReady"><a ui-sref="viewResult({season: season, round: race.round})">Result<br/><a target="_blank" ng-href="{{race.url}}">Wiki</a></td>
       </tr>
       <tr><td colspan="5" class="footerNarrow"></td></tr>
     </table>
