@@ -61,6 +61,10 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
       
       if (raceUnixTme >= currDate) {
         
+        if (raceUnixTme = currDate) {
+           retVal.Races[i].resultsReady = checkResultsReady();
+        }
+
         retVal.Races[i].upcoming = true;
         $scope.nextRace = retVal.Races[i];
 
@@ -82,6 +86,10 @@ angular.module('formulaOneApp.controllers').controller('ScheduleListController',
       }
     }
   };
+
+  function checkResultsReady() {
+    return true;
+  }
 
   function buildWeather(daysDifference, circuit, raceDate) {
 
