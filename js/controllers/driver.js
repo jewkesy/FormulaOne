@@ -33,7 +33,7 @@ angular.module('formulaOneApp.controllers').controller('DriverViewController', f
     var arrAvgSpeed = [];
     var avgPos = [];
     var avgGrid = [];
-    var probFinishing = [];
+    var probFinishing = 0;
     var spdUnits = ''
     for (var i = 0; i < $scope.driverResults.MRData.RaceTable.Races.length; i++) {
       var x = $scope.driverResults.MRData.RaceTable.Races[i].Results[0];
@@ -43,12 +43,14 @@ angular.module('formulaOneApp.controllers').controller('DriverViewController', f
       }
       avgPos.push(x.position);
       avgGrid.push(x.grid);
+      if (x.status == "Finished") probFinishing++
     }
 
 
     $scope.avgGrid = Math.round(getAvgSum(avgGrid))
     $scope.avgPos = Math.round(getAvgSum(avgPos))
-    $scope.avgSpeed = getAvgSum(arrAvgSpeed).toFixed(3) + ' ' + spdUnits; 
+    $scope.avgSpeed = getAvgSum(arrAvgSpeed).toFixed(3) + ' ' + spdUnits;
+    $scope.probFinish = ((probFinishing/$scope.driverResults.MRData.RaceTable.Races.length) * 100).toFixed(2) + '%'
 
     // console.log($scope.avgSpeed, avgPos, avgGrid, probFinishing)
     // console.log($scope.driverResults)
