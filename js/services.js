@@ -25,7 +25,10 @@ angular.module('formulaOneApp.services', ['ngResource'])
     };
   }).factory('Driver', function($resource) {
     return {
-      driver: $resource(config.api + ':series/drivers/:id.json', {
+      driver: $resource(config.api + ':series/drivers/:id.json?limit=1000', {
+        'get': { method: 'GET', cache: true, isArray: true }
+      }),
+      results: $resource(config.api + ':series/drivers/:id/results.json', {
         'get': { method: 'GET', cache: true, isArray: true }
       }),
       driverStandings: $resource(config.api + ':series/drivers/:id/driverStandings.json', {

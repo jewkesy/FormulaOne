@@ -28,6 +28,10 @@ angular.module('formulaOneApp.controllers').controller('DriverViewController', f
 
   });
 
+  $scope.driverResults = Driver.results.get({ id: $stateParams.id, series: 'f1' }, function(response){
+    console.log($scope.driverResults)
+  });
+
   function buildDriver(driver) {
     // console.log(driver)
     if (driver.MRData.DriverTable.Drivers.length == 0) { $scope.no_data=true;return false;}
