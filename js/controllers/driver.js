@@ -25,12 +25,45 @@ angular.module('formulaOneApp.controllers').controller('DriverViewController', f
       // console.log('got driver from mongo')
       buildDriver($scope.data[0])
     }
-
   });
 
   $scope.driverResults = Driver.results.get({ id: $stateParams.id, series: 'f1' }, function(response){
-    console.log($scope.driverResults)
+    $scope.driverResults.MRData.RaceTable.Races.reverse();
+
+    var arrAvgSpeed = [];
+    var avgPos = [];
+    var avgGrid = [];
+    var probFinishing = [];
+    var spdUnits = ''
+    for (var i = 0; i < $scope.driverResults.MRData.RaceTable.Races.length; i++) {
+      var x = $scope.driverResults.MRData.RaceTable.Races[i].Results[0];
+      if (x.FastestLap && x.FastestLap.AverageSpeed && x.FastestLap.AverageSpeed.speed)  {
+        arrAvgSpeed.push(x.FastestLap.AverageSpeed.speed);
+        if (spdUnits.length == 0) spdUnits = x.FastestLap.AverageSpeed.units
+      }
+      avgPos.push(x.position);
+      avgGrid.push(x.grid);
+    }
+
+
+    $scope.avgGrid = Math.round(getAvgSum(avgGrid))
+    $scope.avgPos = Math.round(getAvgSum(avgPos))
+    $scope.avgSpeed = getAvgSum(arrAvgSpeed).toFixed(3) + ' ' + spdUnits; 
+
+    // console.log($scope.avgSpeed, avgPos, avgGrid, probFinishing)
+    // console.log($scope.driverResults)
   });
+
+  function getAvgSum(arr) {
+    var sum = 0;
+    for( var i = 0; i < arr.length; i++ ){
+        sum += parseInt( arr[i], 10 ); //don't forget to add the base
+    }
+
+    var avg = sum/arr.length;
+    // console.log(avg)
+    return avg
+  }
 
   function buildDriver(driver) {
     // console.log(driver)
