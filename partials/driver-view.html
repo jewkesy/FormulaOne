@@ -46,7 +46,7 @@
             <th>Season</th>
             <th>Round</th>
             <th>Race Name</th>
-            <th>Construstor</th>
+            <th>Constructor</th>
             <th>Grid</th>
             <th>Position</th>
             <th>Status</th>
@@ -54,10 +54,10 @@
             <th>Avg Speed</th>
           </tr>
           <tr ng-repeat="race in driverResults.MRData.RaceTable.Races">
-            <td>{{race.season}}</td>
-            <td>{{race.round}}</td>
-            <td>{{race.raceName}}</td>
-            <td>{{race.Results[0].Constructor.name}}</td>
+            <td><a ui-sref="results({season: race.season})">{{race.season}}</a></td>
+            <td><a ui-sref="viewResult({season: race.season, round: race.round})">{{race.round}}</a></td>
+            <td><a ui-sref="viewCircuit({id: race.Circuit.circuitId})">{{race.raceName}}</a></td>
+            <td><a ui-sref="viewConstructor({id: race.Results[0].Constructor.constructorId})">{{race.Results[0].Constructor.name}}</a></td>
             <td>{{race.Results[0].grid}}</td>
             <td>{{race.Results[0].position}}</td>
             <td>{{race.Results[0].status}}</td>
