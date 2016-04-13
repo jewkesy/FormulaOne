@@ -33,7 +33,7 @@
           <tr>
             <td>{{avgGrid}}</td>
             <td>{{avgPos}}</td>
-            <td>{{avgSpeed}}</td>
+            <td>{{avgSpeed}} / {{avgSpeedMph}}</td>
             <td>{{probFinish}}</td>
           </tr>
         </table>
@@ -62,7 +62,7 @@
             <td>{{race.Results[0].position}}</td>
             <td>{{race.Results[0].status}}</td>
             <td>{{race.Results[0].FastestLap.lap}}</td>
-            <td>{{race.Results[0].FastestLap.AverageSpeed.speed}} {{race.Results[0].FastestLap.AverageSpeed.units}}</td>
+            <td>{{race.Results[0].FastestLap.AverageSpeed.speed}} {{race.Results[0].FastestLap.AverageSpeed.units}}<br/>{{race.Results[0].FastestLap.AverageSpeed.speedMph}}</td>
           </tr>
         </table>
      </td></tr>

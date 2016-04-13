@@ -38,23 +38,38 @@ angular.module('formulaOneApp.controllers').controller('DriverViewController', f
     for (var i = 0; i < $scope.driverResults.MRData.RaceTable.Races.length; i++) {
       var x = $scope.driverResults.MRData.RaceTable.Races[i].Results[0];
       if (x.FastestLap && x.FastestLap.AverageSpeed && x.FastestLap.AverageSpeed.speed)  {
+        x.FastestLap.AverageSpeed.speedMph = convertKphToMph(x.FastestLap.AverageSpeed.speed)
         arrAvgSpeed.push(x.FastestLap.AverageSpeed.speed);
         if (spdUnits.length == 0) spdUnits = x.FastestLap.AverageSpeed.units
       }
+
       avgPos.push(x.position);
       avgGrid.push(x.grid);
       if (x.status == "Finished") probFinishing++
     }
 
-
     $scope.avgGrid = Math.round(getAvgSum(avgGrid))
     $scope.avgPos = Math.round(getAvgSum(avgPos))
     $scope.avgSpeed = getAvgSum(arrAvgSpeed).toFixed(3) + ' ' + spdUnits;
+    $scope.avgSpeedMph = convertKphToMph($scope.avgSpeed);
     $scope.probFinish = ((probFinishing/$scope.driverResults.MRData.RaceTable.Races.length) * 100).toFixed(2) + '%'
 
     // console.log($scope.avgSpeed, avgPos, avgGrid, probFinishing)
     // console.log($scope.driverResults)
   });
+
+  function convertKphToMph(speedKph) {
+    // 1kph= 0.6213712mph
+    var retVal = speedKph.split(' ');
+
+    if (retVal.length == 0 ) return ''
+
+      var speedMph = 0
+      speedMph = retVal[0]*0.6213712 
+
+
+    return speedMph.toFixed(3) + ' mph';
+  }
 
   function getAvgSum(arr) {
     var sum = 0;
