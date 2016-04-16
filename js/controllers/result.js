@@ -138,7 +138,7 @@ angular.module('formulaOneApp.controllers').controller('ResultViewController', f
   }
 
   function getLapResults() {
-    if ($stateParams.season <= 2011) return $scope.chartLoaded = true;
+    if ($stateParams.season < 1996) return $scope.chartLoaded = true;
     var deferred = $q.defer();
     var lapResults = Result.mongoLaps.query({season: $stateParams.season, round: $stateParams.round, series: 'f1'}, function() {    
     if (typeof(lapResults[0]) == 'undefined') {
