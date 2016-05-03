@@ -155,26 +155,25 @@ angular.module('formulaOneApp.controllers').controller('ResultViewController', f
           // console.log('getting page 2')
           var page2 = Result.laps.get({season: $stateParams.season, series: 'f1', id: $stateParams.round, limit: limit, offset: limit }, function () {
             // console.log('got page 2')
-            
-            // console.log(page2.MRData)
+            // console.log(typeof page2.MRData.RaceTable.Races[0])
+            // console.log(typeof page2.MRData.RaceTable.Races[0].Laps)
 
             // need to merge the results where the limit would cut off
 
             // console.log(lapResults.MRData.RaceTable.Races[0].Laps[lapResults.MRData.RaceTable.Races[0].Laps.length-1].number, page2.MRData.RaceTable.Races[0].Laps[0].number)
-
-            if (lapResults.MRData.RaceTable.Races[0].Laps[lapResults.MRData.RaceTable.Races[0].Laps.length-1].number == page2.MRData.RaceTable.Races[0].Laps[0].number) {
-              // for (var i = 0; i < page2.MRData.RaceTable.Races[0].Laps.length; i++) {
-                for (var j  = 0; j < page2.MRData.RaceTable.Races[0].Laps[0].Timings.length; j++) {
-                  lapResults.MRData.RaceTable.Races[0].Laps[lapResults.MRData.RaceTable.Races[0].Laps.length-1].Timings.push(page2.MRData.RaceTable.Races[0].Laps[0].Timings[j])
-                }
-              // }
+            if (typeof page2.MRData.RaceTable.Races[0] != 'undefined') {
+              if (lapResults.MRData.RaceTable.Races[0].Laps[lapResults.MRData.RaceTable.Races[0].Laps.length-1].number == page2.MRData.RaceTable.Races[0].Laps[0].number) {
+                // for (var i = 0; i < page2.MRData.RaceTable.Races[0].Laps.length; i++) {
+                  for (var j  = 0; j < page2.MRData.RaceTable.Races[0].Laps[0].Timings.length; j++) {
+                    lapResults.MRData.RaceTable.Races[0].Laps[lapResults.MRData.RaceTable.Races[0].Laps.length-1].Timings.push(page2.MRData.RaceTable.Races[0].Laps[0].Timings[j])
+                  }
+                // }
+              }
+              // now skip first
+              for (var i = 1; i < page2.MRData.RaceTable.Races[0].Laps.length; i++) {
+                lapResults.MRData.RaceTable.Races[0].Laps.push(page2.MRData.RaceTable.Races[0].Laps[i])
+              }
             }
-
-            // now skip first
-            for (var i = 1; i < page2.MRData.RaceTable.Races[0].Laps.length; i++) {
-              lapResults.MRData.RaceTable.Races[0].Laps.push(page2.MRData.RaceTable.Races[0].Laps[i])
-            }
-
 
             var retVal = lapResults
             // console.log(retVal.MRData.RaceTable.Races[0].Laps)
