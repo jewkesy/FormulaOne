@@ -24,7 +24,7 @@
         </h3>
       </td>
     </tr>
-    <tr ng-show="has_content"><td>{{ results.Races[0].Circuit.circuitName }}, {{ results.Races[0].Circuit.Location.country }} <br/> {{results.Races[0] | formatDateTime}}</td></tr>
+    <tr ng-show="has_content"><td><a ui-sref="viewCircuit({id: results.Races[0].Circuit.circuitId})">{{results.Races[0].Circuit.circuitName}}</a>, {{ results.Races[0].Circuit.Location.country }} <br/> {{results.Races[0] | formatDateTime}}</td></tr>
   </table>
 
 
