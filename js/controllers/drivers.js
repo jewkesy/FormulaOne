@@ -79,6 +79,7 @@ angular.module('formulaOneApp.controllers').controller('DriverListController', f
     $scope.onClick = function (points, evt) {
       // console.log(points, evt);
     };
+    $scope.chartLoaded = true;
     $scope.$on('create', function () {
        $scope.chartLoaded = true;
     });

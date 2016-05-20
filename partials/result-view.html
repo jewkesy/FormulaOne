@@ -27,8 +27,7 @@
     <tr ng-show="has_content"><td><a ui-sref="viewCircuit({id: results.Races[0].Circuit.circuitId})">{{results.Races[0].Circuit.circuitName}}</a>, {{ results.Races[0].Circuit.Location.country }} <br/> {{results.Races[0] | formatDateTime}}</td></tr>
   </table>
 
-
-    <div ng-hide="has_content" class="fullscreenCenter" ng-cloak>
+  <div ng-hide="has_content" class="fullscreenCenter" ng-cloak>
     <p>There is currently no data for your selected season.</p>
   </div>
 
@@ -37,9 +36,9 @@
     <div ng-hide="chartLoaded">
       <img width="300px" src="./images/loading.gif">
     </div>
-    <canvas id="line" class="chart chart-line" data="chartData"
-      labels="chartLabels" chart-legend="true" series="series" options="chartOptions"
-      click="onClick">
+     <canvas id="line" class="chart chart-line" chart-data="chartData"
+      chart-labels="chartLabels" chart-legend="true" chart-series="chartSeries" options="chartOptions"
+      chart-click="onClick">
     </canvas> 
     
     <div class="btn-group" opt-kind ok-key="sortBy">

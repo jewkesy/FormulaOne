@@ -15,10 +15,10 @@
     <p>There is currently no data for your selected season.</p>
   </div>
   <div ng-show="has_content">
-    <canvas id="bar" class="chart chart-bar" data="chartData"
-      labels="chartLabels" series="chartSeries" options="chartOptions"
-      click="onClick">
-    </canvas>
+     <canvas id="bar" class="chart chart-bar" chart-data="chartData"
+      chart-labels="chartLabels" chart-legend="true" chart-series="chartSeries" options="chartOptions"
+      chart-click="onClick">
+    </canvas> 
     
     <table class="table table-striped table-bordered table-condensed">
       <tr>
