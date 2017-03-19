@@ -42,7 +42,9 @@ function getNewsYql(site) {
     $http.jsonp(url).success(function(data){
       // console.log(data)
       $scope.content_loaded = true;
-      if (data.responseStatus == 403) return deferred.resolve(data.responseDetails)
+      if (data.query.count == 0) return deferred.resolve(data);
+      if (data.responseStatus == 403) return deferred.resolve(data.responseDetails);
+        // console.log(data.query.results.results.li)
       var retVal = prepYqlSkyNews(data.query.results.results.li);
       // console.log(retVal)
      for (var i = 0; i < retVal.length; i++) {
@@ -55,6 +57,7 @@ function getNewsYql(site) {
       url += "q=SELECT%20*%20FROM%20data.html.cssselect%20WHERE%20url%3D'http%3A%2F%2Fwww.bbc.co.uk%2Fsport%2Fformula1'%20AND%20css%3D'div.lords__item'"
       $http.jsonp(url).success(function(data){
         // console.log(data)
+        if (data.query.count == 0) return deferred.resolve(data);
         if (data.responseStatus == 403) return deferred.resolve(data.responseDetails)
         var retVal = prepYqlBBCNews(data.query.results.results.div);
         return deferred.resolve(retVal);
@@ -69,6 +72,8 @@ function getNewsYql(site) {
     // url = "http://rss2json.com/api.json?rss_url=https%3A%2F%2Fnews.ycombinator.com%2Frss"
     // console.log(url)
     $http.jsonp(url).success(function(data){
+      // console.log(data)
+      if (data.responseData == null)  return deferred.resolve();
       var retVal = prepTweets(data.responseData.feed.entries, feed);
       $scope.content_loaded = true;
       for (var i = 0; i < retVal.length; i++) {
