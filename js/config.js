@@ -14,7 +14,7 @@ var config = {
     "picNarrowSize": 320,
     "picThumbSize": 50,
     "picWideSize": 640,
-    "defaultYear": 2015,
+    "defaultYear": 2018,
     "mongo": {
         "host": "https://api.mongolab.com/api/1/databases/",
         "database": "formulaonestats",
